@@ -1,0 +1,21 @@
+Package: ramp.falciparum
+Title: A Probabilistic Synthesis of Plasmodium falciparum Infection and Immunity
+Version: 0.1.0
+Authors@R: c(
+      person("John M.", "Henry", email = "jmhenry2206@gmail.com", role = c("aut","cre"), comment = c(ORCID = "0000-0001-8684-2003")),
+       person("David L.", "Smith", email = "smitdave@uw.edu", role = c("aut"), comment = c(ORCID = "0000-0003-4367-3849"))
+    )
+Description: A Probabilistic Synthesis of Plasmodium falciparum Infection and Immunity, a part of RAMP     
+License: GPL (>= 3)
+Encoding: UTF-8
+RoxygenNote: 7.3.1
+URL: https://dd-harp.github.io/ramp.falciparum/
+LazyData: true
+Imports: 
+  stats,
+  deSolve
+Suggests: 
+  knitr, 
+  graphics, 
+  viridisLite
+VignetteBuilder: knitr

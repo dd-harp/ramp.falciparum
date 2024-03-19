@@ -1,0 +1,253 @@
+url: https://dd-harp.github.io/ramp.pf.infection/
+template:
+  bootstrap: 5
+navbar:
+  left:
+  - text: Functions
+    href: reference/index.html
+  - text: Articles
+    menu:
+    - text: FoI
+      href: articles/FoI.html
+  right:
+  - icon: fa-github
+    href: https://github.com/dd-harp/ramp.pf.infection/
+home:
+  sidebar:
+    structure:
+    - links
+    - license
+    - community
+    - citation
+    - authors
+    - dev
+    - custom_news
+    components:
+      custom_news:
+        title: Changelog
+        text: <a href="news/index.html">News</a>
+reference:
+- title: Infection Dynamics
+  desc: |
+    Dynamics of MoI, AoI, and the AoY
+  contents:
+  - zda
+  - truePR
+- subtitle: Multiplicity of Infection (MoI)
+  desc: |
+    Methods to compute the MoI
+  contents:
+  - meanMoI
+  - dMoIda
+  - solveMMinfty
+  - MoIDistPlot
+- subtitle: Age of Infection (AoI)
+  desc: |
+    Methods to compute the AoI density and distribution functions, random numbers, and moments
+  contents:
+  - dAoI
+  - pAoI
+  - rAoI
+  - momentAoI
+- subtitle: Age of the Youngest Infection (AoY)
+  desc: |
+    Methods to compute the AoY density and distribution functions, random numbers, and moments
+  contents:
+  - dAoY
+  - pAoY
+  - pAoY_long
+  - rAoY
+  - momentAoY
+- subtitle: Age of the Youngest of N Infections (AoYN)
+  desc: |
+    Methods to compute the AoYN density and distribution functions & random numbers
+  contents:
+  - dAoYN
+  - pAoYN
+  - rAoYN
+- subtitle: Hybrid Models
+  desc: |
+    Methods to solve hybrid models
+  contents:
+  - dmda
+  - solve_dm
+  - dpda
+  - solve_dpda
+  - dAoIda
+  - solve_dAoI
+  - dAoYda
+  - solve_dAoYda
+- title: Parasite Densities
+  desc: |
+    Expected densities by AoI
+- subtitle: F_mu(alpha)
+  desc: |
+    Expected log10 parasites (mu) from the AoI (alpha)
+  contents:
+  - Fmu
+  - sFmu
+  - Fmu.W
+  - par_Fmu_W
+  - Fmu.base
+  - par_Fmu_base
+  - Fmu.chronic
+  - par_Fmu_chronic
+- subtitle: P(mu)
+  desc: |
+    log10 parasites distributions from mu
+  contents:
+  - d_Omega
+  - p_Omega
+  - q_Omega
+  - r_Omega
+  - par_Omega_beta
+- subtitle: P(mu)
+  desc: |
+    log10 parasites distributions from mu
+  contents:
+  - d_Omega.beta
+  - dbeta1
+  - p_Omega.beta
+  - pbeta1
+  - q_Omega.beta
+  - qbeta1
+  - r_Omega.beta
+  - rbeta1
+  - sigma_mu
+  - sigma_mu.abc
+  - par_sigma_abc
+- subtitle: P(alpha)
+  desc: |
+    log10 parasites from AoI (alpha)
+  contents:
+  - d_alpha2density
+  - p_alpha2density
+  - q_alpha2density
+  - r_alpha2density
+- subtitle: P(a)
+  desc: |
+    Parasite density distributions by host cohort age
+  contents:
+  - d_clone_density
+  - moments_clone_density
+- subtitle: Complex Infections
+  desc: |
+    Expected densities by AoI
+  contents:
+  - parasite_density
+  - d_parasite_density
+  - p_parasite_density
+  - r_parasite_density
+  - moments_parasite_density
+  - rRda
+- subtitle: Convolutions
+  desc: |
+    Other
+  contents:
+  - dDensityPaConvolve2
+  - cdfConvolve2
+  - cdfConvolve2a
+  - cdfConvolve2b
+- title: Sampling
+- subtitle: Generic Functions
+  desc: |
+    Parasite positivity
+  contents:
+  - d_detect
+  - d_counts
+  - p_counts
+  - d_nz_counts_log
+  - p_nz_counts_log
+  - d_nz_counts_log_binned
+  - p_nz_counts_log_binned
+- subtitle: Poisson Sampling
+  contents:
+  - par_pois
+  - d_detect.pois
+  - p_counts.pois
+  - d_counts.pois
+- subtitle: Negative Binomial Sampling
+  contents:
+  - par_nb
+  - d_detect.nb
+  - p_counts.nb
+  - d_counts.nb
+- title: Parasite Detection and Counts
+- subtitle: Observed Prevalence
+  desc: |
+    Detection and observed prevalence
+  contents:
+  - d_detect_mesh
+  - d_clone_detect
+  - d_parasite_detect_moi
+  - d_parasite_detect
+  - FQ
+- subtitle: Observed MoI
+  desc: |
+    Number of Clones Counted
+  contents:
+  - d_moi_count
+- subtitle: Counts
+  desc: |
+    Parasite counts
+  contents:
+  - d_clone_counts
+  - p_clone_counts
+  - mean_clone_counts
+  - d_parasite_counts
+  - p_parasite_counts
+  - mean_parasite_counts
+- title: Force of Infection
+  desc: |
+    Methods to set up FoI trace functions
+  contents:
+  - FoI
+- subtitle: FoI by Age
+  desc: |
+    Specialized methods modify the FoI by Age
+  contents:
+  - ageFoI
+  - ageFoI.flat
+  - par_flatAge
+  - ageFoI.type2
+  - par_type2Age
+- subtitle: FoI by Season
+  desc: |
+    Specialized methods set the seasonal FoI
+  contents:
+  - seasonalFoI
+  - seasonalFoI.exp
+  - par_expSeason
+  - seasonalFoI.flat
+  - par_flatSeason
+  - seasonalFoI.sin
+  - par_sinSeason
+- subtitle: FoI Trends
+  desc: |
+    Specialized methods to set trends in the FoI
+  contents:
+  - trendFoI
+  - trendFoI.flat
+  - par_flatTrend
+- title: Utilities
+  desc: |
+    Other
+  contents:
+  - nzPois
+- title: Immune Tracking Variables
+  desc: |
+    Expected densities by AoI
+  contents:
+  - Wda
+  - Wda.none
+  - par_Wda_none
+  - Wda.delta
+  - par_Wda_delta
+- subtitle: Red Blood Cells
+  desc: |
+    Other
+  contents:
+  - log10RBC
+  - log10RBC.static
+  - par_lRBC_static
+
