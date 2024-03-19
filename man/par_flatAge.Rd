@@ -7,7 +7,7 @@
 par_flatAge()
 }
 \value{
-[list]
+\link{list}
 }
 \description{
 Make a parameter list to dispatch ageFoI.flat

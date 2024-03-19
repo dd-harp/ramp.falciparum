@@ -30,16 +30,16 @@ dDensityPaConvolve2(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{par_RBC}{parameters to compute [log10RBC]}
+\item{par_RBC}{parameters to compute \link{log10RBC}}
 
-\item{par_Fmu}{parameters to compute [Fmu]}
+\item{par_Fmu}{parameters to compute \link{Fmu}}
 
-\item{par_Omega}{parameters to compute [d_Omega]}
+\item{par_Omega}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 }
 \value{
-a [numeric] value
+a \link{numeric} value
 }
 \description{
 The density function for the sum of two infections

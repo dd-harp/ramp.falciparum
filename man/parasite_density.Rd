@@ -30,19 +30,19 @@ parasite_density(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{RBC_par}{parameters to compute [log10RBC]}
+\item{RBC_par}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
-\item{Omega_par}{parameters to compute [d_Omega]}
+\item{Omega_par}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 }
 \value{
-a [numeric] vector of length meshX
+a \link{numeric} vector of length meshX
 }
 \description{
-This function first computes the PDF for simple infections, [d_clone_density], and
+This function first computes the PDF for simple infections, \link{d_clone_density}, and
 then computes the CDF for the full distribution, summed from MoI = 1 up to a large number
 using convolutions.
 }

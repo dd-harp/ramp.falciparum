@@ -2,7 +2,7 @@
 % Please edit documentation in R/Fmu-interface.R
 \name{Fmu}
 \alias{Fmu}
-\title{Compute mean, expected parasite densities `mu` as a function of the age of infection `alpha`}
+\title{Compute mean, expected parasite densities \code{mu} as a function of the age of infection \code{alpha}}
 \usage{
 Fmu(alpha, W, par_Fmu)
 }
@@ -11,11 +11,11 @@ Fmu(alpha, W, par_Fmu)
 
 \item{W}{the immune tracking variables}
 
-\item{par_Fmu}{a [list] that defines a model}
+\item{par_Fmu}{a \link{list} that defines a model}
 }
 \value{
-mean log10 parasite densities, a [numeric] vector of length(alpha)
+mean log10 parasite densities, a \link{numeric} vector of length(alpha)
 }
 \description{
-Compute mean, expected parasite densities `mu` as a function of the age of infection `alpha`
+Compute mean, expected parasite densities \code{mu} as a function of the age of infection \code{alpha}
 }

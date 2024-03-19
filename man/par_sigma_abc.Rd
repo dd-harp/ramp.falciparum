@@ -2,7 +2,7 @@
 % Please edit documentation in R/Omega-beta.R
 \name{par_sigma_abc}
 \alias{par_sigma_abc}
-\title{Parameters to configure [sigma_mu.abc]}
+\title{Parameters to configure \link{sigma_mu.abc}}
 \usage{
 par_sigma_abc(aa = 3.11, bb = 2.14, cc = 1.74)
 }
@@ -14,8 +14,8 @@ par_sigma_abc(aa = 3.11, bb = 2.14, cc = 1.74)
 \item{cc}{a shape parameter}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
-Parameters to configure [sigma_mu.abc]
+Parameters to configure \link{sigma_mu.abc}
 }

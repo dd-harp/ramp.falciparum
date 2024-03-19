@@ -34,18 +34,18 @@ p_parasite_counts(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{RBC_par}{parameters to compute [log10RBC]}
+\item{RBC_par}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
 \item{Omega_par}{parameters defining parasite densities as a function of the mu}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 
 \item{par_sample}{parameters that define a detection function}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
 Compute the distribution of parasite counts in complex infections

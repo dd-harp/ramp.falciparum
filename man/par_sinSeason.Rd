@@ -16,7 +16,7 @@ par_sinSeason(phase = 0, pwr = 1, lift = 0, shift = 0)
 \item{shift}{shift everything up or down}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
 Return a list to configure and dispatch seasonalFoI.sin

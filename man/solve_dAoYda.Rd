@@ -22,7 +22,7 @@ solve_dAoYda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1, n = 8)
 \item{n}{The number of terms to use in \eqn{\phi(r,m)}}
 }
 \value{
-a [data.frame] describing the orbits
+a \link{data.frame} describing the orbits
 }
 \description{
 Solve the system of differential equations to compute the approximate moments of the AoY over time.

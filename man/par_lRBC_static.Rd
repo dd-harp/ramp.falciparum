@@ -2,7 +2,7 @@
 % Please edit documentation in R/RBC.R
 \name{par_lRBC_static}
 \alias{par_lRBC_static}
-\title{Set up parameters for [log10RBC.static]}
+\title{Set up parameters for \link{log10RBC.static}}
 \usage{
 par_lRBC_static(lRBCmax = 13)
 }
@@ -10,8 +10,8 @@ par_lRBC_static(lRBCmax = 13)
 \item{lRBCmax}{the maximum}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
-Set up parameters for [log10RBC.static]
+Set up parameters for \link{log10RBC.static}
 }

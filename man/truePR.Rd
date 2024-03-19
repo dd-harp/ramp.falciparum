@@ -18,7 +18,7 @@ truePR(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 \item{r}{the clearance rate for a simple infection}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
 The true PR is \deqn{p_\tau(a|h) = 1 - e^{-m_\tau(a|h)}}

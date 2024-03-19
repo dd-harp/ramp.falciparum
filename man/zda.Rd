@@ -11,16 +11,16 @@ zda(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 
 \item{a}{host age}
 
-\item{FoIpar}{a compound [list] to compute \eqn{h_\tau(a)}}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
 \item{tau}{the host cohort's birthday}
 
-\item{hhat}{scaling parameter for [FoI]}
+\item{hhat}{scaling parameter for \link{FoI}}
 
 \item{r}{the clearance rate for a simple infection}
 }
 \value{
-a [numeric] vector of length(alpha)
+a \link{numeric} vector of length(alpha)
 }
 \description{
 Given a function describing the FoI (\eqn{h_\tau(a)}), and a parameter
@@ -29,5 +29,5 @@ the density of parasite clones of age \eqn{\alpha} distributed among a cohort of
 age \eqn{a} is \deqn{z_\tau(\alpha, a) = e^{-r \alpha} h_\tau(a-\alpha)}
 }
 \seealso{
-[FoI]
+\link{FoI}
 }

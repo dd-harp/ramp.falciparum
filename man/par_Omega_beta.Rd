@@ -10,7 +10,7 @@ par_Omega_beta(par_sigma = par_sigma_abc())
 \item{par_sigma}{parameters to compute sigma_mu}
 }
 \value{
-a compound [list]
+a compound \link{list}
 }
 \description{
 The quantile function for parasite densities in a simple malaria infection

@@ -14,7 +14,7 @@ cdfConvolve2b(meshX, CDF1, CDF2)
 \item{CDF2}{the CDF for a complex distribution}
 }
 \value{
-a [numeric] vector of length(meshX)
+a \link{numeric} vector of length(meshX)
 }
 \description{
 The density function for the sum of two infections, method a

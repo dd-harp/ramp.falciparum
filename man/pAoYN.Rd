@@ -20,7 +20,7 @@ pAoYN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 \item{r}{the clearance rate of a simple infection}
 }
 \value{
-a [numeric] vector of length a + 1
+a \link{numeric} vector of length a + 1
 }
 \description{
 The youngest of N infections, distribution function

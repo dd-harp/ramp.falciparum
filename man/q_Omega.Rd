@@ -16,7 +16,7 @@ q_Omega(xi, mu, bvm = 13, par_Omega = par_Omega_beta())
 \item{par_Omega}{parameters defining parasite densities as a function of the mu}
 }
 \value{
-a [numeric] vector of length(xi)
+a \link{numeric} vector of length(xi)
 }
 \description{
 The quantile function for parasite densities in a simple malaria infection

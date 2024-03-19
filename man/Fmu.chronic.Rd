@@ -2,7 +2,7 @@
 % Please edit documentation in R/Fmu-chronic.R
 \name{Fmu.chronic}
 \alias{Fmu.chronic}
-\title{Compute expected log10 parasite densities, `mu`, as a function of the age of infection `alpha`}
+\title{Compute expected log10 parasite densities, \code{mu}, as a function of the age of infection \code{alpha}}
 \usage{
 \method{Fmu}{chronic}(alpha, W, par_Fmu)
 }
@@ -11,7 +11,7 @@
 
 \item{W}{the immune tracking variables}
 
-\item{par_Fmu}{a [list] that defines a model}
+\item{par_Fmu}{a \link{list} that defines a model}
 }
 \value{
 mean log10 parasite densities

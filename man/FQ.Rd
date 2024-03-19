@@ -34,18 +34,18 @@ FQ(
 
 \item{svm}{the volume of a blood sample}
 
-\item{par_RBC}{parameters to compute [log10RBC]}
+\item{par_RBC}{parameters to compute \link{log10RBC}}
 
-\item{par_Fmu}{parameters to compute [Fmu]}
+\item{par_Fmu}{parameters to compute \link{Fmu}}
 
-\item{par_Omega}{parameters to compute [d_Omega]}
+\item{par_Omega}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 
 \item{par_sample}{parameters that define a detection function}
 }
 \value{
-a [numeric] vector of length(xi)
+a \link{numeric} vector of length(xi)
 }
 \description{
 The proportion of zero counts in

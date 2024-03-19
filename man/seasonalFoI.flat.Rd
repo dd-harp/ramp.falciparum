@@ -9,10 +9,10 @@
 \arguments{
 \item{t}{the time}
 
-\item{par}{a [list]}
+\item{par}{a \link{list}}
 }
 \value{
-[numeric]
+\link{numeric}
 }
 \description{
 The "no seasonality" function

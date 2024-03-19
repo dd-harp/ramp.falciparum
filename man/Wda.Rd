@@ -15,11 +15,11 @@ Wda(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_none())
 
 \item{hhat}{overrides the value of hbar in par}
 
-\item{par}{parameters in a [list]}
+\item{par}{parameters in a \link{list}}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
-The function dispatches on `class(par)`
+The function dispatches on \code{class(par)}
 }

@@ -24,7 +24,7 @@ rAoYN(R, N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
 \item{alphamin}{the minimum value of the AoI to return}
 }
 \value{
-a [numeric] vector of length R
+a \link{numeric} vector of length R
 }
 \description{
 The youngest of N infections, random numbers

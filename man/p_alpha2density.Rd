@@ -23,14 +23,14 @@ p_alpha2density(
 
 \item{a}{host cohort age}
 
-\item{par_RBC}{parameters to compute [log10RBC]}
+\item{par_RBC}{parameters to compute \link{log10RBC}}
 
-\item{par_Fmu}{parameters to compute [Fmu]}
+\item{par_Fmu}{parameters to compute \link{Fmu}}
 
-\item{par_Omega}{parameters to compute [p_Omega]}
+\item{par_Omega}{parameters to compute \link{p_Omega}}
 }
 \value{
-a [numeric] vector of length(x)
+a \link{numeric} vector of length(x)
 }
 \description{
 The distribution function for parasite densities in a simple malaria infection of age alpha

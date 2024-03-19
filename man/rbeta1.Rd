@@ -12,10 +12,10 @@ rbeta1(n, mu, pSig = par_sigma_abc())
 
 \item{mu}{the mean value for the distribution (0 <= mu <= 1)}
 
-\item{pSig}{parameters to dispatch the S3 function [sigma_mu]}
+\item{pSig}{parameters to dispatch the S3 function \link{sigma_mu}}
 }
 \value{
-a [numeric] vector of length n
+a \link{numeric} vector of length n
 }
 \description{
 The random generation function for the beta distribution, an alternative parameterization

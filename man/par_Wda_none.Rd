@@ -2,13 +2,13 @@
 % Please edit documentation in R/immune_tracking.R
 \name{par_Wda_none}
 \alias{par_Wda_none}
-\title{Make a parameter set for [Wda.none]}
+\title{Make a parameter set for \link{Wda.none}}
 \usage{
 par_Wda_none()
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
-Make a parameter set for [Wda.none]
+Make a parameter set for \link{Wda.none}
 }

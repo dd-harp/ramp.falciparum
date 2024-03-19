@@ -2,7 +2,7 @@
 % Please edit documentation in R/Fmu-immune.R
 \name{par_Fmu_W}
 \alias{par_Fmu_W}
-\title{Set up parameters for [Fmu.W]}
+\title{Set up parameters for \link{Fmu.W}}
 \usage{
 par_Fmu_W(
   peak = 20,
@@ -30,5 +30,5 @@ par_Fmu_W(
 mean log10 parasite densities
 }
 \description{
-Set up parameters for [Fmu.W]
+Set up parameters for \link{Fmu.W}
 }

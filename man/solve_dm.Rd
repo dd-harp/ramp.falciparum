@@ -20,7 +20,7 @@ solve_dm(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
 \item{dt}{The output frequency (in days)}
 }
 \value{
-a [matrix] with the orbits
+a \link{matrix} with the orbits
 }
 \description{
 Solve the hybrid model for the MoI

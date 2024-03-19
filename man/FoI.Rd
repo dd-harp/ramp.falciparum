@@ -9,12 +9,12 @@ FoI(a, FoIpar, tau = 0)
 \arguments{
 \item{a}{host age}
 
-\item{FoIpar}{a compound [list] to compute \eqn{h_\tau(a)}}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
 \item{tau}{the host cohort's birthday}
 }
 \value{
-[numeric]
+\link{numeric}
 }
 \description{
 Given a birth day, \eqn{\tau,} age is related

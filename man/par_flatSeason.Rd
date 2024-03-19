@@ -7,7 +7,7 @@
 par_flatSeason()
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
 Return a list that dispatches seasonalFoI.flat

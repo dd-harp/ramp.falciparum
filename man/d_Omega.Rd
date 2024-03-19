@@ -16,7 +16,7 @@ d_Omega(xi, mu, bvm = 13, par_Omega = par_Omega_beta())
 \item{par_Omega}{parameters to compute parasite densities as a function of mu}
 }
 \value{
-a [numeric] vector of length(xi)
+a \link{numeric} vector of length(xi)
 }
 \description{
 The density function for parasite densities in a simple malaria infection

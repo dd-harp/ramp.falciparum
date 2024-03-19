@@ -36,16 +36,16 @@ rRda(
 
 \item{alphamin}{the minimum value of alpha allowed}
 
-\item{RBC_par}{parameters to compute [log10RBC]}
+\item{RBC_par}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
 \item{Omega_par}{parameters defining parasite densities as a function of the mu}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 }
 \value{
-a R by M [matrix]
+a R by M \link{matrix}
 }
 \description{
 Random generation for M parasite densities in a host cohort with MoI

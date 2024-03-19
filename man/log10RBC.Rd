@@ -9,10 +9,10 @@ log10RBC(a, par)
 \arguments{
 \item{a}{the age of a host cohort}
 
-\item{par}{a [list] of parameters}
+\item{par}{a \link{list} of parameters}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
 Compute log10 of the red blood cell population

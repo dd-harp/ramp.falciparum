@@ -11,12 +11,12 @@ dbeta1(x, mu, pSig = par_sigma_abc())
 
 \item{mu}{the mean value for the distribution (0 <= mu <= 1)}
 
-\item{pSig}{parameters to dispatch the S3 function [sigma_mu]}
+\item{pSig}{parameters to dispatch the S3 function \link{sigma_mu}}
 }
 \value{
-a [numeric] vector of length(x)
+a \link{numeric} vector of length(x)
 }
 \description{
-The beta distribution is parameterized using the mean and a function `sigma_mu` that computes the variance
+The beta distribution is parameterized using the mean and a function \code{sigma_mu} that computes the variance
 as a function of the mean
 }

@@ -9,11 +9,11 @@ ageFoI(a, par)
 \arguments{
 \item{a}{host age}
 
-\item{par}{a [list]}
+\item{par}{a \link{list}}
 }
 \value{
-[numeric]
+\link{numeric}
 }
 \description{
-This method dispatches on `par`.
+This method dispatches on \code{par}.
 }

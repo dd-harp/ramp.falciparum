@@ -16,7 +16,7 @@ dAoIda(a, M, p, FoIpar)
 \item{FoIpar}{parameters that define an FoI function}
 }
 \value{
-the derivatives of the MoI and the AoI as a [list]
+the derivatives of the MoI and the AoI as a \link{list}
 }
 \description{
 The

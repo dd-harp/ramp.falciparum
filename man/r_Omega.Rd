@@ -16,7 +16,7 @@ r_Omega(n, mu, bvm = 13, par_Omega = par_Omega_beta())
 \item{par_Omega}{parameters defining parasite densities as a function of the mu}
 }
 \value{
-a [numeric] vector of length(n)
+a \link{numeric} vector of length(n)
 }
 \description{
 Random generation of parasite densities from a simple malaria infection

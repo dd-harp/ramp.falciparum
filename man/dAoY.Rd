@@ -11,16 +11,16 @@ dAoY(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 
 \item{a}{host age}
 
-\item{FoIpar}{a compound [list] to compute \eqn{h_\tau(a)}}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
 \item{tau}{the host cohort's birthday}
 
-\item{hhat}{scaling parameter for [FoI]}
+\item{hhat}{scaling parameter for \link{FoI}}
 
 \item{r}{the clearance rate for a simple infection}
 }
 \value{
-a [numeric] vector of length(alpha)
+a \link{numeric} vector of length(alpha)
 }
 \description{
 The density function for the age of the youngest infection (AoY)

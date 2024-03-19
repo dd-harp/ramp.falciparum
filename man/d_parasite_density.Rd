@@ -30,18 +30,18 @@ d_parasite_density(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{RBC_par}{parameters to compute [log10RBC]}
+\item{RBC_par}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
-\item{Omega_par}{parameters to compute [d_Omega]}
+\item{Omega_par}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 }
 \value{
-a [numeric] vector of length meshX
+a \link{numeric} vector of length meshX
 }
 \description{
-Call [parasite_density] and return the PDF:
+Call \link{parasite_density} and return the PDF:
 \deqn{f_B(\xi; a, \tau |h) = \log_{10} \left( \sum_{M_\tau(a|h)>0} 10^{P_\tau(a |h)}\right)}
 }

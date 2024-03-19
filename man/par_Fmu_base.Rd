@@ -2,7 +2,7 @@
 % Please edit documentation in R/Fmu-base.R
 \name{par_Fmu_base}
 \alias{par_Fmu_base}
-\title{Set up parameters for [Fmu.base]}
+\title{Set up parameters for \link{Fmu.base}}
 \usage{
 par_Fmu_base(peak = 20, liver = 7, tildeb = 10.3, tildel = 2, Sa = 0.0033)
 }
@@ -18,8 +18,8 @@ par_Fmu_base(peak = 20, liver = 7, tildeb = 10.3, tildel = 2, Sa = 0.0033)
 \item{Sa}{The decline in mu with respect to alpha}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
-Set up parameters for [Fmu.base]
+Set up parameters for \link{Fmu.base}
 }

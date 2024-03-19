@@ -33,16 +33,16 @@ r_parasite_density(
 
 \item{alphamin}{the minimum value of alpha allowed}
 
-\item{RBC_par}{parameters to compute [log10RBC]}
+\item{RBC_par}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
-\item{Omega_par}{parameters to compute [d_Omega]}
+\item{Omega_par}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 }
 \value{
-a [numeric] vector of length N
+a \link{numeric} vector of length N
 }
 \description{
 Random generation for parasite densities in a host cohort

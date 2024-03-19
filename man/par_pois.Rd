@@ -10,7 +10,7 @@ par_pois(s = 6)
 \item{s}{sample volume as log10 RBCs}
 }
 \value{
-par a [list]
+par a \link{list}
 }
 \description{
 Parameters for Poisson sampling

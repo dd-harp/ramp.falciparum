@@ -12,7 +12,7 @@ sigma_mu(mu, par)
 \item{par}{parameters to dispatch and configure the instances}
 }
 \value{
-a [numeric] vector of length(mu)
+a \link{numeric} vector of length(mu)
 }
 \description{
 A function to compute the variance of the beta distrution as a function of the mean.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/immune_tracking.R
 \name{par_Wda_delta}
 \alias{par_Wda_delta}
-\title{Make a parameter set for [Wda.none]}
+\title{Make a parameter set for \link{Wda.none}}
 \usage{
 par_Wda_delta(delta = 0.001)
 }
@@ -10,8 +10,8 @@ par_Wda_delta(delta = 0.001)
 \item{delta}{a decay rate}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
-Make a parameter set for [Wda.none]
+Make a parameter set for \link{Wda.none}
 }

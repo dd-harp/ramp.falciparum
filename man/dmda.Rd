@@ -16,7 +16,7 @@ dmda(a, M, p, FoIpar)
 \item{FoIpar}{parameters that define an FoI function}
 }
 \value{
-the derivatives as a [list]
+the derivatives as a \link{list}
 }
 \description{
 Compute the derivatives for MoI using a hybrid model

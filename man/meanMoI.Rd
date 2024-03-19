@@ -9,7 +9,7 @@ meanMoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 \arguments{
 \item{a}{host age}
 
-\item{FoIpar}{a compound [list] to compute \eqn{h_\tau(a)}}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
 \item{tau}{the host cohort's birthday}
 
@@ -18,7 +18,7 @@ meanMoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 \item{r}{the clearance rate for a simple infection}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
 The mean multiplicity of infection (MoI) is \deqn{m_\tau(a|h) = \int_0^a z_\tau(\alpha, a|h) d \alpha}

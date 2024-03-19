@@ -15,10 +15,10 @@
 
 \item{hhat}{overrides the value of hbar in par}
 
-\item{par}{parameters in a [list]}
+\item{par}{parameters in a \link{list}}
 }
 \value{
-a [numeric] vector of 0's of length(a)
+a \link{numeric} vector of 0's of length(a)
 }
 \description{
 Compute immune tracking variables as a function of host age and exposure

@@ -16,7 +16,7 @@
 \item{par_Omega}{parameters defining parasite densities as a function of the mu}
 }
 \value{
-a [numeric] vector of length(xi)
+a \link{numeric} vector of length(xi)
 }
 \description{
 Modified beta distribution, distribution function

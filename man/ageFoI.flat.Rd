@@ -9,10 +9,10 @@
 \arguments{
 \item{a}{host age}
 
-\item{par}{a [list]}
+\item{par}{a \link{list}}
 }
 \value{
-[numeric]
+\link{numeric}
 }
 \description{
 A function that does not modify the FoI by age

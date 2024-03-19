@@ -9,10 +9,10 @@ trendFoI(t, par)
 \arguments{
 \item{t}{the time}
 
-\item{par}{a [list]}
+\item{par}{a \link{list}}
 }
 \value{
-[numeric]
+\link{numeric}
 }
 \description{
 Add a trend to the FoI trace function

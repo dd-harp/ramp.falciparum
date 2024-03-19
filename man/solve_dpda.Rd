@@ -20,7 +20,7 @@ solve_dpda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
 \item{dt}{The output frequency (in days)}
 }
 \value{
-a [data.frame] with the orbits
+a \link{data.frame} with the orbits
 }
 \description{
 Solve a system of differential equations to compute the true PR and the MoI

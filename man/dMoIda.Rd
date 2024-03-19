@@ -13,10 +13,10 @@ dMoIda(a, M, pars, FoIpar)
 
 \item{pars}{the parameters}
 
-\item{FoIpar}{\eqn{h_\tau(a)}, a [list] formatted to compute [FoI]}
+\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
 }
 \value{
-the derivatives as a [list]
+the derivatives as a \link{list}
 }
 \description{
 This queuing model \eqn{M/M/\infty} tracks the MoI in a cohort of humans
@@ -30,8 +30,8 @@ MoI = i, then
 and for \eqn{i\geq 1}
 \deqn{\frac{d\zeta_i}{da}= h_\tau(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
 
-This function computes the derivatives in a form that can be used by [deSolve::ode].
+This function computes the derivatives in a form that can be used by \link[deSolve:ode]{deSolve::ode}.
 }
 \seealso{
-[solveMMinfty]
+\link{solveMMinfty}
 }

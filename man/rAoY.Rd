@@ -11,7 +11,7 @@ rAoY(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 
 \item{a}{host age}
 
-\item{FoIpar}{a compound [list] to compute \eqn{h_\tau(a)}}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
 \item{tau}{the host cohort's birthday}
 
@@ -22,7 +22,7 @@ rAoY(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 \item{alphamin}{the minimum value of the AoI to return}
 }
 \value{
-a [numeric] vector of length(N)
+a \link{numeric} vector of length(N)
 }
 \description{
 The random generation function for the age of the youngest infection (AoY)

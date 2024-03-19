@@ -14,7 +14,7 @@ par_type2Age(shift = 0.1, A = 1.5, B = 2)
 \item{B}{the age weight for adults}
 }
 \value{
-[list]
+\link{list}
 }
 \description{
 Make a parameter list to dispatch ageFoI.type2

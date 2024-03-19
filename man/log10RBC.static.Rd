@@ -9,10 +9,10 @@
 \arguments{
 \item{a}{the age of a host cohort}
 
-\item{par}{a [list] of parameters}
+\item{par}{a \link{list} of parameters}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
 A static model

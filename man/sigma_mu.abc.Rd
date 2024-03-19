@@ -12,7 +12,7 @@
 \item{par}{parameters to dispatch and configure the instances}
 }
 \value{
-a [numeric] vector of length(mu)
+a \link{numeric} vector of length(mu)
 }
 \description{
 A function that returns constrained values of the variance for the beta distrution as a function of the mean.

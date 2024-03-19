@@ -28,18 +28,18 @@ d_clone_detect(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{par_RBC}{parameters to compute [log10RBC]}
+\item{par_RBC}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
-\item{par_Omega}{parameters to compute [d_Omega]}
+\item{par_Omega}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 
 \item{par_sample}{parameters that define a detection function}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
 Detection of infection given parasitemia

@@ -2,7 +2,7 @@
 % Please edit documentation in R/density_parasites.R
 \name{p_parasite_density}
 \alias{p_parasite_density}
-\title{Call [parasite_density] and return the density vector}
+\title{Call \link{parasite_density} and return the density vector}
 \usage{
 p_parasite_density(
   meshX,
@@ -30,17 +30,17 @@ p_parasite_density(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{RBC_par}{parameters to compute [log10RBC]}
+\item{RBC_par}{parameters to compute \link{log10RBC}}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
-\item{Omega_par}{parameters to compute [d_Omega]}
+\item{Omega_par}{parameters to compute \link{d_Omega}}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 }
 \value{
 a numeric vector of length meshX
 }
 \description{
-Call [parasite_density] and return the density vector
+Call \link{parasite_density} and return the density vector
 }

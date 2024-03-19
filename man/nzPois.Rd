@@ -12,7 +12,7 @@ nzPois(N, moi)
 \item{moi}{the mean moi}
 }
 \value{
-a [numeric] vector of length N
+a \link{numeric} vector of length N
 }
 \description{
 Compute N non-zero values from a Poisson distribution with a given MoI

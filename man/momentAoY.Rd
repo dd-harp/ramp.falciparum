@@ -9,7 +9,7 @@ momentAoY(a, FoIpar, tau = 0, hhat = 1, r = 1/200, n = 1)
 \arguments{
 \item{a}{host age}
 
-\item{FoIpar}{a compound [list] to compute \eqn{h_\tau(a)}}
+\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
 
 \item{tau}{the host cohort's birthday}
 
@@ -20,7 +20,7 @@ momentAoY(a, FoIpar, tau = 0, hhat = 1, r = 1/200, n = 1)
 \item{n}{the moment desired}
 }
 \value{
-a [numeric] vector of length(a)
+a \link{numeric} vector of length(a)
 }
 \description{
 Compute the moments for the AoY density function for a cohort of age a

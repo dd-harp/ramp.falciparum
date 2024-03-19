@@ -12,7 +12,7 @@
 \item{par}{a list}
 }
 \value{
-[numeric]
+\link{numeric}
 }
 \description{
 A generalized sinusoidal seasonal pattern, exponentiated

@@ -7,7 +7,7 @@
 par_flatTrend()
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
 Return a list that dispatches trendFoI.flat

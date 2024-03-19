@@ -30,16 +30,16 @@ mean_clone_counts(
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{Fmu_par}{parameters to compute [Fmu]}
+\item{Fmu_par}{parameters to compute \link{Fmu}}
 
 \item{Omega_par}{parameters defining parasite densities as a function of the mu}
 
-\item{pWda}{parameters to dispatch [Wda]}
+\item{pWda}{parameters to dispatch \link{Wda}}
 
 \item{par_sample}{parameters that define a detection function}
 }
 \value{
-a [list]
+a \link{list}
 }
 \description{
 Compute the mean parasite counts in simple infections
