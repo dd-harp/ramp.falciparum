@@ -10,7 +10,7 @@
 #' @param r the clearance rate for a simple infection
 #' @param RBC_par parameters to compute [log10RBC]
 #' @param Fmu_par parameters to compute [Fmu]
-#' @param Omega_par parameters defining parasite densities as a function of the mu
+#' @param Omega_par parameters defining parasite densities as a function of mu
 #' @param pWda parameters to dispatch [Wda]
 #' @param par_sample parameters that define a detection function
 #'

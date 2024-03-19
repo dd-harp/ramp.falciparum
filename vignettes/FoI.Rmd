@@ -10,7 +10,8 @@ vignette: >
 
 ```{r, include = FALSE}
 library(knitr) 
-library(ramp.pf.infection)
+library(ramp.falciparum)
+library(viridisLite)
 ```
 
 We want to be able to simulate arbitrary patterns of exposure in cohorts as they age, with the ability to compare two cohorts of different ages in the same population. We let $h(t)$ denote the average daily FoI in a population, the hazard rate for infection. Notably, knowing the birth day for a cohort, $\tau,$ we can convert between age and time using the identity $$t = a + \tau.$$  We let $\omega(a)$ be a function that computes a *frailty* term associated with age, so we can write the FoI for any cohort as:
@@ -58,7 +59,7 @@ plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){
 ```
 
 ```{r plotFoI} 
-clrs8b <- viridis::viridis(8, option = "B")
+clrs8b <- viridisLite::inferno(8)
 
 FoIfigure = function(hh=c(8, 4, 2, 1, .5, .2, 0.1)/365, 
                      tau=0, clrs = clrs8b, Tmax=5*365){

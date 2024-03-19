@@ -38,7 +38,7 @@ p_clone_counts(
 
 \item{Fmu_par}{parameters to compute [Fmu]}
 
-\item{Omega_par}{parameters defining parasite densities as a function of the mu}
+\item{Omega_par}{parameters defining parasite densities as a function of mu}
 
 \item{pWda}{parameters to dispatch [Wda]}
 

@@ -1,6 +1,7 @@
 ## ----include = FALSE----------------------------------------------------------
 library(knitr) 
-library(ramp.pf.infection)
+library(ramp.falciparum)
+library(viridisLite)
 
 ## ----plotFoI functions--------------------------------------------------------
 plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){
@@ -14,7 +15,7 @@ plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){
 }
 
 ## ----plotFoI------------------------------------------------------------------
-clrs8b <- viridis::viridis(8, option = "B")
+clrs8b <- viridisLite::inferno(8)
 
 FoIfigure = function(hh=c(8, 4, 2, 1, .5, .2, 0.1)/365, 
                      tau=0, clrs = clrs8b, Tmax=5*365){

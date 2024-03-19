@@ -1,6 +1,4 @@
-url: https://dd-harp.github.io/ramp.pf.infection/
-template:
-  bootstrap: 5
+url: https://dd-harp.github.io/ramp.falciparum/
 navbar:
   left:
   - text: Functions
@@ -11,7 +9,7 @@ navbar:
       href: articles/FoI.html
   right:
   - icon: fa-github
-    href: https://github.com/dd-harp/ramp.pf.infection/
+    href: https://github.com/dd-harp/ramp.falciparum/
 home:
   sidebar:
     structure:
