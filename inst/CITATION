@@ -1,0 +1,15 @@
+citHeader("To cite ramp.falciparum in publications use:")
+
+bibentry(
+  bibtype    = "Unpublished",
+  title    = "A Probabilistic Synthesis of Malaria Epidemiology: 
+Exposure, Infection, Parasite Densities, and Detection",
+  author   = c(
+               person("John M.", "Henry"),
+               person("Austin R.", "Carter"),
+               person("Sean L.", "Wu"),
+               person("David L.", "Smith")
+              ),
+  note = "In Preparation",
+  year     = "2024" 
+)
