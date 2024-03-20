@@ -27,12 +27,13 @@ To put it another way, we can reduce the behavior of these highly complex probab
 
 ## Installation
 
-To install the latest version from GitHub, run the following lines of code in an R session.
+To install and use the latest version from GitHub, run the following lines of code in an R session.
 
 ```
 library(devtools)
 devtools::install_github("dd-harp/ramp.falciparum")
 install.packages("ramp.falciparum")
+library(ramp.falciparum)
 ```
 
 
