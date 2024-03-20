@@ -1,4 +1,4 @@
-# `ramp.falciparum` <br><br> A Probabilistic Approach to Malaria Epidemiology and a Synthesis
+# `ramp.falciparum` <br><br> A Probabilistic Approach to Malaria Epidemiology 
 
 Robust Analytics for Malaria Policy (RAMP) is a platform for using evidence to manage malaria that has the goal of characterizing, quantifying, and propagating uncertainty. The computational part of RAMP includes several software packages, including this one, that is focused on malaria epidemiology. In the core software, we recognize malaria epidemiology as a complex domain that merits a deeper dive.
 Policy advice should be robust to uncertainty, but we need a mathematical framework to describe malaria that could expose to scrutiny the underlying mechanisms, and the patterns that those mechanisms would generate in populations.
