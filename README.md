@@ -1,4 +1,4 @@
-# `ramp.falciparum` <br><br> A Probabilistic Approach to Malaria Epidemiology and Synthesis
+# `ramp.falciparum` <br><br> A Probabilistic Approach to Malaria Epidemiology and a Synthesis
 
 Robust Analytics for Malaria Policy (RAMP) is a platform for using evidence to manage malaria that has the goal of characterizing, quantifying, and propagating uncertainty. The computational part of RAMP includes several software packages, including this one, that is focused on malaria epidemiology. In the core software, we recognize malaria epidemiology as a complex domain that merits a deeper dive.
 Policy advice should be robust to uncertainty, but we need a mathematical framework to describe malaria that could expose to scrutiny the underlying mechanisms, and the patterns that those mechanisms would generate in populations.
@@ -25,7 +25,15 @@ The probabilistic approach is both highly realistic and descriptive, but our goa
 
 To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology. 
 
+## Installation
 
+To install the latest version from GitHub, run the following lines of code in an R session.
+
+```
+library(devtools)
+devtools::install_github("dd-harp/ramp.falciparum")
+install.packages("ramp.falciparum")
+```
 
 
 ## References
