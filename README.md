@@ -1,4 +1,4 @@
-# ramp.falciparum <br><br> A Probabilistic Synthesis of Malaria Epidemiology
+# **ramp.falciparum**: <br> *A Probabilistic Synthesis of Malaria Epidemiology*
 
 Robust Analytics for Malaria Policy (RAMP) is a platform for using evidence to manage malaria that has the goal of characterizing, quantifying, and propagating uncertainty. The computational part of RAMP includes several software packages, including this one, that is focused on malaria epidemiology. In the core software, we recognize malaria epidemiology as a complex domain that merits a deeper dive.
 Policy advice should be robust to uncertainty, but we need a mathematical framework to describe malaria that could expose to scrutiny the underlying mechanisms, and the patterns that those mechanisms would generate in populations.
@@ -13,15 +13,15 @@ We present the computational algorithms that support a probabilistic approach to
 
 The probabilistic approach is both highly realistic and descriptive, but our goal was a synthesis. This synthesis involves a few steps:
 
-1. We define mean MoI, the mean AoI and all its moments, and the probability of detection. 
+1. We develop formula and functions to compute the mean MoI, the mean AoI and all its moments, and the probability of detection. 
 
-2. Hybrid models for the MoI already exist, but we show how this approach can be extended to systems of differential equations that track the mean and higher order moments of the distribution of the AoI. 
+2. Hybrid models for the mean MoI for malaria superinfection were developed by Nåsell (1985)^[Nåsell I (1985). Hybrid Models of Tropical Infections, 1st edition. Springer-Verlag. https://doi.org/10.1007/978-3-662-01609-1], We extend this approach, deeloping systems of differential equations that track the mean and higher order moments of the distribution of the AoI. 
 
 3. We a new random variable describing the age of the youngest infection (AoY). We show how the variable serves as a basis for computing parasite density distributions in complex infections. 
 
-4. We derive a hybrid model with a variable that approximates the mean AoY. 
+4. We derive a hybrid variable for the mean AoY. 
 
-5. We demonstrate that a simple system of ordinary differential equations can be used to in place of the probabilistic models to compute the values of the research metrics. 
+5. We demonstrate that a simple system of ordinary differential equations can be used in place of the random variables for most applications. 
 
 To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology. 
 
