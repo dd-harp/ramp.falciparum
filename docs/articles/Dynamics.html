@@ -171,16 +171,16 @@ y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha
 </li>
 <li>
 <p>We also developed functions to compute the age of the youngest of
-<span class="math inline">\(N\)</span> infections, called AoYN <span class="math display">\[
+<span class="math inline">\(N\)</span> infections, called YoN <span class="math display">\[
 N_\tau(a) \sim
 \min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i
 \sim A_\tau(a)
 \]</span></p>
 <ul>
-<li><p>The distribution function for AoYN, <span class="math inline">\(N_\tau(a)\)</span>, is <span class="math display">\[F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a,
+<li><p>The distribution function for YoN, <span class="math inline">\(N_\tau(a)\)</span>, is <span class="math display">\[F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a,
 \tau))^N\]</span> The following is a summary table of functions to
 compute the MoI, AoI, AoY, and all their moments.</p></li>
-<li><p>The density function for AoYN is found by
+<li><p>The density function for YoN is found by
 differentiating:</p></li>
 </ul>
 </li>
@@ -192,7 +192,7 @@ a, \tau))^{N-1}\frac{f_A(\alpha, a, \tau)}{m_\tau(a)}\]</span></p>
 <h2 id="quick-reference">Quick Reference<a class="anchor" aria-label="anchor" href="#quick-reference"></a>
 </h2>
 <p>The following is a summary table of functions to compute the MoI,
-AoI, AoY, AoYN, and all their moments.</p>
+AoI, AoY, YoN, and all their moments.</p>
 <center>
 <table class="table">
 <colgroup>
@@ -207,7 +207,7 @@ AoI, AoY, AoYN, and all their moments.</p>
 <th align="center">MoI</th>
 <th align="center">AoI</th>
 <th align="center">AoY</th>
-<th align="center">AoYN</th>
+<th align="center">YoN</th>
 </tr></thead>
 <tbody>
 <tr class="odd">
@@ -255,7 +255,7 @@ h)\)</span></td>
 <td align="center">dpois</td>
 <td align="center">dAoI</td>
 <td align="center">dAoY</td>
-<td align="center">dAoYN</td>
+<td align="center">dYoN</td>
 </tr>
 <tr class="even">
 <td>Distribution Function</td>
@@ -273,7 +273,7 @@ h)\)</span></td>
 <td align="center">ppois</td>
 <td align="center">pAoI</td>
 <td align="center">pAoY</td>
-<td align="center">pAoYN</td>
+<td align="center">pYoN</td>
 </tr>
 <tr class="even">
 <td>Random Numbers</td>
@@ -291,7 +291,7 @@ h)\)</span></td>
 <td align="center">rpois</td>
 <td align="center">rAoI</td>
 <td align="center">rAoY</td>
-<td align="center">rAoYN</td>
+<td align="center">rYoN</td>
 </tr>
 <tr class="even">
 <td>Moments</td>

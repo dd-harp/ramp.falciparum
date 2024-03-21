@@ -62,13 +62,13 @@ reference:
   - pAoY_long
   - rAoY
   - momentAoY
-- subtitle: Age of the Youngest of N Infections (AoYN)
+- subtitle: Youngest of N Infections (YoN)
   desc: |
-    Methods to compute the AoYN density and distribution functions & random numbers
+    Methods to compute the YoN density and distribution functions & random numbers
   contents:
-  - dAoYN
-  - pAoYN
-  - rAoYN
+  - dYoN
+  - pYoN
+  - rYoN
 - subtitle: Hybrid Models
   desc: |
     Methods to solve hybrid models
@@ -86,7 +86,7 @@ reference:
     Expected densities by AoI
 - subtitle: F_mu(alpha)
   desc: |
-    Expected log10 parasites (mu) from the AoI (alpha)
+    A function to compute expected log10 parasites (mu) from the AoI (alpha)
   contents:
   - Fmu
   - sFmu
@@ -96,7 +96,7 @@ reference:
   - par_Fmu_base
   - Fmu.chronic
   - par_Fmu_chronic
-- subtitle: P(mu)
+- subtitle: Omega defined
   desc: |
     log10 parasites distributions from mu
   contents:
@@ -104,11 +104,11 @@ reference:
   - p_Omega
   - q_Omega
   - r_Omega
-  - par_Omega_beta
-- subtitle: P(mu)
+- subtitle: Omega.beta
   desc: |
-    log10 parasites distributions from mu
+    A modified beta distribution for log10 parasite distributions
   contents:
+  - par_Omega_beta
   - d_Omega.beta
   - dbeta1
   - p_Omega.beta
@@ -120,7 +120,7 @@ reference:
   - sigma_mu
   - sigma_mu.abc
   - par_sigma_abc
-- subtitle: P(alpha)
+- subtitle: Compute Omega(Fmu(alpha))
   desc: |
     log10 parasites from AoI (alpha)
   contents:
@@ -128,15 +128,15 @@ reference:
   - p_alpha2density
   - q_alpha2density
   - r_alpha2density
-- subtitle: P(a)
+- subtitle: Clone Density
   desc: |
     Parasite density distributions by host cohort age
   contents:
   - d_clone_density
   - moments_clone_density
-- subtitle: Complex Infections
+- subtitle: Parasite Density
   desc: |
-    Expected densities by AoI
+    Compute parasite density distributions as a function of the AoI
   contents:
   - parasite_density
   - d_parasite_density
@@ -153,9 +153,9 @@ reference:
   - cdfConvolve2a
   - cdfConvolve2b
 - title: Sampling
-- subtitle: Generic Functions
+- subtitle: Basic sampling functions
   desc: |
-    Parasite positivity
+    Parasite positivity and counts given log10 parasites
   contents:
   - d_detect
   - d_counts
@@ -191,7 +191,7 @@ reference:
     Number of Clones Counted
   contents:
   - d_moi_count
-- subtitle: Counts
+- subtitle: Parasite Counts
   desc: |
     Parasite counts
   contents:

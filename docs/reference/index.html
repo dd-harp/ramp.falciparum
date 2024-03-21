@@ -139,19 +139,19 @@
         </td>
         <td><p>Compute the moments for the AoY density function for a cohort of age a</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="age-of-the-youngest-of-n-infections-aoyn-">Age of the Youngest of N Infections (AoYN) <a href="#age-of-the-youngest-of-n-infections-aoyn-" class="anchor" aria-hidden="true"></a></h3>
-          <p class="section-desc"></p><p>Methods to compute the AoYN density and distribution functions &amp; random numbers</p>
+          <h3 id="youngest-of-n-infections-yon-">Youngest of N Infections (YoN) <a href="#youngest-of-n-infections-yon-" class="anchor" aria-hidden="true"></a></h3>
+          <p class="section-desc"></p><p>Methods to compute the YoN density and distribution functions &amp; random numbers</p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="dAoYN.html">dAoYN()</a></code> </p>
+          <p><code><a href="dYoN.html">dYoN()</a></code> </p>
         </td>
         <td><p>The youngest of N infections, density function</p></td>
       </tr><tr><td>
-          <p><code><a href="pAoYN.html">pAoYN()</a></code> </p>
+          <p><code><a href="pYoN.html">pYoN()</a></code> </p>
         </td>
         <td><p>The youngest of N infections, distribution function</p></td>
       </tr><tr><td>
-          <p><code><a href="rAoYN.html">rAoYN()</a></code> </p>
+          <p><code><a href="rYoN.html">rYoN()</a></code> </p>
         </td>
         <td><p>The youngest of N infections, random numbers</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
@@ -196,7 +196,7 @@
         </th>
       </tr></tbody><tbody><tr><th colspan="2">
           <h3 id="f-mu-alpha-">F_mu(alpha) <a href="#f-mu-alpha-" class="anchor" aria-hidden="true"></a></h3>
-          <p class="section-desc"></p><p>Expected log10 parasites (mu) from the AoI (alpha)</p>
+          <p class="section-desc"></p><p>A function to compute expected log10 parasites (mu) from the AoI (alpha)</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="Fmu.html">Fmu()</a></code> </p>
@@ -231,7 +231,7 @@
         </td>
         <td><p>Set up parameters for <a href="https://dd-harp.github.io/ramp.falciparum/reference/Fmu.chronic.html">Fmu.chronic</a></p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="p-mu-">P(mu) <a href="#p-mu-" class="anchor" aria-hidden="true"></a></h3>
+          <h3 id="omega-defined">Omega defined <a href="#omega-defined" class="anchor" aria-hidden="true"></a></h3>
           <p class="section-desc"></p><p>log10 parasites distributions from mu</p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -250,15 +250,15 @@
           <p><code><a href="r_Omega.html">r_Omega()</a></code> </p>
         </td>
         <td><p>Random generation of parasite densities from a simple malaria infection</p></td>
-      </tr><tr><td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h3 id="omega-beta">Omega.beta <a href="#omega-beta" class="anchor" aria-hidden="true"></a></h3>
+          <p class="section-desc"></p><p>A modified beta distribution for log10 parasite distributions</p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="par_Omega_beta.html">par_Omega_beta()</a></code> </p>
         </td>
         <td><p>The quantile function for parasite densities in a simple malaria infection</p></td>
-      </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="p-mu-">P(mu) <a href="#p-mu-" class="anchor" aria-hidden="true"></a></h3>
-          <p class="section-desc"></p><p>log10 parasites distributions from mu</p>
-        </th>
-      </tr></tbody><tbody><tr><td>
+      </tr><tr><td>
           <p><code><a href="d_Omega.beta.html">d_Omega(<i>&lt;beta&gt;</i>)</a></code> </p>
         </td>
         <td><p>Modified beta distribution, density function</p></td>
@@ -304,7 +304,7 @@ Title</p></td>
         </td>
         <td><p>Parameters to configure <a href="https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.abc.html">sigma_mu.abc</a></p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="p-alpha-">P(alpha) <a href="#p-alpha-" class="anchor" aria-hidden="true"></a></h3>
+          <h3 id="compute-omega-fmu-alpha-">Compute Omega(Fmu(alpha)) <a href="#compute-omega-fmu-alpha-" class="anchor" aria-hidden="true"></a></h3>
           <p class="section-desc"></p><p>log10 parasites from AoI (alpha)</p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -324,7 +324,7 @@ Title</p></td>
         </td>
         <td><p>The distribution function for parasite densities in a simple malaria infection of age alpha</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="p-a-">P(a) <a href="#p-a-" class="anchor" aria-hidden="true"></a></h3>
+          <h3 id="clone-density">Clone Density <a href="#clone-density" class="anchor" aria-hidden="true"></a></h3>
           <p class="section-desc"></p><p>Parasite density distributions by host cohort age</p>
         </th>
       </tr></tbody><tbody><tr><td>
@@ -336,8 +336,8 @@ Title</p></td>
         </td>
         <td><p>Compute the moments of P_density</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="complex-infections">Complex Infections <a href="#complex-infections" class="anchor" aria-hidden="true"></a></h3>
-          <p class="section-desc"></p><p>Expected densities by AoI</p>
+          <h3 id="parasite-density">Parasite Density <a href="#parasite-density" class="anchor" aria-hidden="true"></a></h3>
+          <p class="section-desc"></p><p>Compute parasite density distributions as a function of the AoI</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="parasite_density.html">parasite_density()</a></code> </p>
@@ -388,8 +388,8 @@ Title</p></td>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="generic-functions">Generic Functions <a href="#generic-functions" class="anchor" aria-hidden="true"></a></h3>
-          <p class="section-desc"></p><p>Parasite positivity</p>
+          <h3 id="basic-sampling-functions">Basic sampling functions <a href="#basic-sampling-functions" class="anchor" aria-hidden="true"></a></h3>
+          <p class="section-desc"></p><p>Parasite positivity and counts given log10 parasites</p>
         </th>
       </tr></tbody><tbody><tr><td>
           <p><code><a href="d_detect.html">d_detect()</a></code> </p>
@@ -496,7 +496,7 @@ Title</p></td>
         </td>
         <td><p>Detection of infection given parasitemia</p></td>
       </tr></tbody><tbody><tr><th colspan="2">
-          <h3 id="counts">Counts <a href="#counts" class="anchor" aria-hidden="true"></a></h3>
+          <h3 id="parasite-counts">Parasite Counts <a href="#parasite-counts" class="anchor" aria-hidden="true"></a></h3>
           <p class="section-desc"></p><p>Parasite counts</p>
         </th>
       </tr></tbody><tbody><tr><td>

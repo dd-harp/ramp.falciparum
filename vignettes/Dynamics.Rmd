@@ -85,36 +85,36 @@ $$
 $$
 y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha 
 $$
-5. We also developed functions to compute the age of the youngest of $N$ infections, called AoYN 
+5. We also developed functions to compute the age of the youngest of $N$ infections, called YoN 
 $$
 N_\tau(a) \sim
 \min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i \sim A_\tau(a) 
 $$
-    + The distribution function for AoYN, $N_\tau(a)$, is 
+    + The distribution function for YoN, $N_\tau(a)$, is 
 $$F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a, \tau))^N$$
 The following is a summary table of functions to compute the MoI, AoI, AoY, and all their moments.
     
-    + The density function for AoYN is found by differentiating:
+    + The density function for YoN is found by differentiating:
     
 $$f_N(\alpha, a, t) \sim N (1-F_A(\alpha, a, \tau))^{N-1}\frac{f_A(\alpha, a, \tau)}{m_\tau(a)}$$
 
 
 ## Quick Reference 
 
-The following is a summary table of functions to compute the MoI, AoI, AoY, AoYN, and all their moments.
+The following is a summary table of functions to compute the MoI, AoI, AoY, YoN, and all their moments.
 
 <center>
-| | MoI | AoI | AoY | AoYN |
+| | MoI | AoI | AoY | YoN |
 | ------ | :---: | :---: | :---: | :---: |
 ` `  | $\zeta$ |  $\alpha$ | $\alpha$ | $\alpha$ | 
 ` ` | $\zeta \geq 0$ |  $0 \leq \alpha \leq a$ | $0 \leq \alpha \leq a$ | $0 \leq \alpha \leq a$ | 
 Random Variable | $M_\tau(\zeta, a, h)$ |  $A_\tau(\alpha, a, h)$ | $Y_\tau(\alpha, a , h)$ | $N_\tau(\alpha, a, h)$| 
 Density Function | $f_M(\zeta, a, h)$ | $f_A(\zeta, a, h)$  | $f_Y(\zeta, a, h)$ |  $f_N(\zeta, a, h)$ | 
-` ` | dpois | dAoI | dAoY | dAoYN |  
+` ` | dpois | dAoI | dAoY | dYoN |  
 Distribution Function | $F_M(\zeta, a, h)$ | $F_A(\zeta, a, h)$  | $F_Y(\zeta, a, h)$ | $F_N(\zeta, a, h)$ | 
-` ` | ppois | pAoI | pAoY | pAoYN | 
+` ` | ppois | pAoI | pAoY | pYoN | 
 Random Numbers  | $\hat M_\tau(\zeta, a, h)$| $\hat A_\tau(\alpha, a, h)$ | $\hat Y_\tau(\alpha, a , h)$ | $\hat N_\tau(\alpha, a , h)$ | 
-` ` | rpois | rAoI | rAoY | rAoYN | 
+` ` | rpois | rAoI | rAoY | rYoN | 
 Moments | $m_\tau(a, h)$ |  $x_n(a, \tau, h)$ | $y_n(a, \tau, h)$ |
 ` ` | meanMoI | momentAoI | momentAoY | 
 </center>
