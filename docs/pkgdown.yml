@@ -2,8 +2,11 @@ pandoc: 3.1.1
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  Dynamics: Dynamics.html
   FoI: FoI.html
-last_built: 2024-03-20T20:15Z
+  Hybrid: Hybrid.html
+  MoI: MoI.html
+last_built: 2024-03-21T05:38Z
 urls:
   reference: https://dd-harp.github.io/ramp.falciparum/reference
   article: https://dd-harp.github.io/ramp.falciparum/articles

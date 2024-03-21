@@ -17,6 +17,7 @@ Imports:
 Suggests: 
   knitr,
   graphics,
+  viridis,
   viridisLite
 VignetteBuilder: knitr
 URL: https://dd-harp.github.io/ramp.falciparum/

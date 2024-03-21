@@ -1,7 +1,8 @@
-## ----include = FALSE----------------------------------------------------------
+## ----include=FALSE------------------------------------------------------------
 library(knitr) 
 library(ramp.falciparum)
-library(viridisLite)
+suppressWarnings(library(viridis))
+suppressMessages(library(viridisLite))
 
 ## ----plotFoI functions--------------------------------------------------------
 plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){

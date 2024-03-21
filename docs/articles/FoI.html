@@ -52,6 +52,15 @@
 <li>
       <a href="../articles/FoI.html">FoI</a>
     </li>
+    <li>
+      <a href="../articles/Dynamics.html">Infection Dynamics</a>
+    </li>
+    <li>
+      <a href="../articles/MoI.html">MoI</a>
+    </li>
+    <li>
+      <a href="../articles/Hybrid.html">Hybrid</a>
+    </li>
   </ul>
 </li>
       </ul>
@@ -94,15 +103,17 @@ population, the hazard rate for infection. Notably, knowing the birth
 day for a cohort, <span class="math inline">\(\tau,\)</span> we can
 convert between age and time using the identity <span class="math display">\[t = a + \tau.\]</span> We let <span class="math inline">\(\omega(a)\)</span> be a function that computes a
 <em>frailty</em> term associated with age, so we can write the FoI for
-any cohort as: <span class="math display">\[h_\tau(a) = \omega(a)
-h(t-\tau).\]</span></p>
+any cohort as: <span class="math display">\[h_\tau(a) = \omega(a) h(a)
+=  \omega(a) h(t-\tau).\]</span></p>
 <p>We begin by constructing functions, <span class="math inline">\(h(t),\)</span> to pressure test our models. We
 assume exposure has a seasonal pattern, <span class="math inline">\(S(t)\)</span>, and a temporal trend, <span class="math inline">\(T(t)\)</span>, and <span class="math display">\[h(t) = \bar h \cdot S(t) \cdot T(t).\]</span></p>
 <p>Motivated by the evidence for age-dependent exposure, the rate of
 exposure in a cohort is assumed to change with age. We use the
 age-weighting function, <span class="math inline">\(\omega(a)\)</span>,
-consistent with the available evidence from both anopheline [1-2] and
-aedine [3] mosquitoes. Each cohort is indexed by its birth day, <span class="math inline">\(\tau\)</span>. The FoI at age <span class="math inline">\(a\)</span> for the cohort born on day <span class="math inline">\(\tau\)</span>, which is at time <span class="math inline">\(t=a+\tau\)</span>, is defined for <span class="math inline">\(a&gt;0\)</span>:</p>
+consistent with the available evidence from both anopheline and aedine
+mosquitoes (Port GR, <em>et al.</em>, 1980;<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>, Carnevale P, <em>et
+al.</em>, 1978;<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>, Liebman KA, <em>et al.</em>, 2014<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a>) . Each
+cohort is indexed by its birth day, <span class="math inline">\(\tau\)</span>. The FoI at age <span class="math inline">\(a\)</span> for the cohort born on day <span class="math inline">\(\tau\)</span>, which is at time <span class="math inline">\(t=a+\tau\)</span>, is defined for <span class="math inline">\(a&gt;0\)</span>:</p>
 <p><span class="math display">\[\begin{equation}
 h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau)
 \end{equation}\]</span></p>
@@ -155,18 +166,21 @@ relative to the mean population FoI</p></li>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<ol style="list-style-type: decimal">
-<li><p>G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of
-host size to feeding by mosquitoes of the Anopheles Gambiae Giles
-complex (Diptera: Culicidae). Bulletin of Entomological Research 70,
-133–144 (1980).</p></li>
-<li><p>P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J.
-Lancien, [The aggressiveness of Anopheles gambiae A in relation to the
-age and sex of the human subjects]. Bull. World Health Organ. 56,
-147–154 (1978).</p></li>
-<li><p>K. A. Liebman, et al., Determinants of Heterogeneous Blood
-Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl. Trop.
-Dis. 8, e2702 (2014).</p></li>
+</div>
+<div class="footnotes footnotes-end-of-document">
+<hr>
+<ol>
+<li id="fn1"><p>G. R. Port, P. F. L. Boreham, J. H. Bryan, The
+relationship of host size to feeding by mosquitoes of the Anopheles
+Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological
+Research 70, 133–144 (1980).<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
+<li id="fn2"><p>P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont,
+J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to
+the age and sex of the human subjects]. Bull. World Health Organ. 56,
+147–154 (1978).<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
+<li id="fn3"><p>K. A. Liebman, et al., Determinants of Heterogeneous
+Blood Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl.
+Trop. Dis. 8, e2702 (2014).<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
   </div>

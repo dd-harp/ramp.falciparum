@@ -8,18 +8,19 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, include=FALSE}
 library(knitr) 
 library(ramp.falciparum)
-library(viridisLite)
-```
+suppressWarnings(library(viridis))
+suppressMessages(library(viridisLite))
+``` 
 
 We want to be able to simulate arbitrary patterns of exposure in cohorts as they age, with the ability to compare two cohorts of different ages in the same population. We let $h(t)$ denote the average daily FoI in a population, the hazard rate for infection. Notably, knowing the birth day for a cohort, $\tau,$ we can convert between age and time using the identity $$t = a + \tau.$$  We let $\omega(a)$ be a function that computes a *frailty* term associated with age, so we can write the FoI for any cohort as:
-$$h_\tau(a) = \omega(a) h(t-\tau).$$ 
+$$h_\tau(a) = \omega(a) h(a) =  \omega(a) h(t-\tau).$$ 
 
 We begin by constructing functions, $h(t),$ to pressure test our models. We assume exposure has a seasonal pattern, $S(t)$, and a temporal trend, $T(t)$, and $$h(t) = \bar h \cdot S(t) \cdot T(t).$$ 
 
-Motivated by the evidence for age-dependent exposure, the rate of exposure in a cohort is assumed to change with age. We use the age-weighting function, $\omega(a)$, consistent with the available evidence from both anopheline [1-2] and aedine [3] mosquitoes. Each cohort is indexed by its birth day, $\tau$. The FoI at age $a$ for the cohort born on day $\tau$, which is at time $t=a+\tau$, is defined for $a>0$: 
+Motivated by the evidence for age-dependent exposure, the rate of exposure in a cohort is assumed to change with age. We use the age-weighting function, $\omega(a)$, consistent with the available evidence from both anopheline and aedine mosquitoes (Port GR, *et al.*, 1980;^[G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of host size to feeding by mosquitoes of the Anopheles Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological Research 70, 133–144 (1980).], Carnevale P, *et al.*, 1978;^[P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to the age and sex of the human subjects]. Bull. World Health Organ. 56, 147–154 (1978).], Liebman KA, *et al.*, 2014^[K. A. Liebman, et al., Determinants of Heterogeneous Blood Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl. Trop. Dis. 8, e2702 (2014).]) . Each cohort is indexed by its birth day, $\tau$. The FoI at age $a$ for the cohort born on day $\tau$, which is at time $t=a+\tau$, is defined for $a>0$: 
 
 \begin{equation}
 h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau) 
@@ -75,10 +76,4 @@ FoIfigure()
 ```
 
 ## References
-
-1. G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of host size to feeding by mosquitoes of the Anopheles Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological Research 70, 133–144 (1980).
-
-2. P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to the age and sex of the human subjects]. Bull. World Health Organ. 56, 147–154 (1978).
-
-3. K. A. Liebman, et al., Determinants of Heterogeneous Blood Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl. Trop. Dis. 8, e2702 (2014).
 

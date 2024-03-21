@@ -7,6 +7,12 @@ navbar:
     menu:
     - text: FoI
       href: articles/FoI.html
+    - text: Infection Dynamics
+      href: articles/Dynamics.html
+    - text: MoI
+      href: articles/MoI.html
+    - text: Hybrid
+      href: articles/Hybrid.html
   right:
   - icon: fa-github
     href: https://github.com/dd-harp/ramp.falciparum/
