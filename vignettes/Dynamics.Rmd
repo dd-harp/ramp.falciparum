@@ -418,7 +418,7 @@ The density function is computed with the function `dAoY.`
 f_Y = dAoY(a3years, 3*365, foiP3)
 ```
 
-We can compare $f_Y(\alpha)$ (in black) to $f_A(alpha)$ (in grey). 
+We can compare $f_Y(\alpha)$ (in black) to $f_A(\alpha)$ (in grey). 
 
 ```{r, fig.height=3.5, fig.width=6, echo=F, eval=T}
 par(mar = c(5,4,1,1))
