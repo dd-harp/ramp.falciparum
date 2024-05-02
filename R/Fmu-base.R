@@ -11,8 +11,6 @@ Fmu.base = function(alpha, W, par_Fmu){with(par_Fmu,{
   B = tildel + (tildeb-tildel)*exp(-(Sa*(alpha-peak)))
   ix = which(alpha<peak)
   if(length(ix>0)) B[ix] = tildel+(tildeb-tildel)*alpha[ix]/peak
-  #  ix = which(alpha<liver)
-  #  if(length(ix>0)) B[ix] = sqrt(-1)
   B
 })}
 
