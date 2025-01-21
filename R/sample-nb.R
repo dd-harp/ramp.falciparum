@@ -7,7 +7,7 @@
 #' @return binary detection result
 #' @export
 #'
-par_nb = function(sz=0.31, s=6){
+par_nb = function(sz=0.20946, s=6){
   par = list()
   class(par) <- "nb"
   par$sz=sz

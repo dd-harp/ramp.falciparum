@@ -8,7 +8,7 @@ Authors@R: c(
 Description: RAMP is a set of tools developed to support malaria policies. This program -- ramp.falciparum -- takes a deep dive into malaria epidemiology, defined in the narrow sense to include exposure to infectious mosquitoes, infection, and all that follows. We extend some previous work looking at the multiplicity of infection (MoI) developing random variables describing the age of infection (AoI), parasite densities, and detection. 
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Roxygen: list(markdown = TRUE)
 LazyData: true
 Imports: 
