@@ -4,7 +4,7 @@
 \alias{par_nb}
 \title{Parameters for negative binomial sampling}
 \usage{
-par_nb(sz = 0.31, s = 6)
+par_nb(sz = 0.20946, s = 6)
 }
 \arguments{
 \item{sz}{the negative binomial size parameter}
