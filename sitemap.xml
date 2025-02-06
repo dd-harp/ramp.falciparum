@@ -24,6 +24,7 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/cdfConvolve2.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/cdfConvolve2a.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/cdfConvolve2b.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/counts_MLE.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dAoI.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dAoIda.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dAoY.html</loc></url>
@@ -55,6 +56,8 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dmda.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dpda.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/index.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/llik_count.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/llik_counts.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.static.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/meanMoI.html</loc></url>
