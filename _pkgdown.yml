@@ -254,4 +254,10 @@ reference:
   - log10RBC
   - log10RBC.static
   - par_lRBC_static
-
+- title: MLE
+  desc: |
+    Methods for maximum likelihood estimation
+  contents:
+  - llik_count
+  - llik_counts
+  - counts_MLE

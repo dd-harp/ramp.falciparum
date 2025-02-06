@@ -4,7 +4,7 @@
 \alias{par_sigma_abc}
 \title{Parameters to configure \link{sigma_mu.abc}}
 \usage{
-par_sigma_abc(aa = 4.9651, bb = 0.2849, cc = 1)
+par_sigma_abc(aa = 4.9651, bb = 0.02849, cc = 1)
 }
 \arguments{
 \item{aa}{a shape parameter}
