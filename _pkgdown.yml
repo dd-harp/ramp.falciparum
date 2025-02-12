@@ -261,3 +261,5 @@ reference:
   - llik_count
   - llik_counts
   - counts_MLE
+  - llik_counts_sz
+  - counts_MLE_sz
