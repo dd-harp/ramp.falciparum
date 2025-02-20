@@ -182,7 +182,7 @@ sigma_mu.abc = function(mu, par){with(par,{
 #' @return a [list]
 #' @export
 #'
-par_sigma_abc = function(aa=4.9651, bb=0.02849, cc=1){
+par_sigma_abc = function(aa=3.5, bb=0.85, cc=1){
   par = list()
   class(par) <- "abc"
   par$aa=aa

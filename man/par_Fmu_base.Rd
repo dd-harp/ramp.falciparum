@@ -4,13 +4,7 @@
 \alias{par_Fmu_base}
 \title{Set up parameters for \link{Fmu.base}}
 \usage{
-par_Fmu_base(
-  peak = 20,
-  liver = 7,
-  tildeb = 10.36913,
-  tildel = 2,
-  Sa = 0.002483857
-)
+par_Fmu_base(peak = 20, liver = 7, tildeb = 10, tildel = 2, Sa = 0.003)
 }
 \arguments{
 \item{peak}{The age of infection (in days) when parasite densities peak}

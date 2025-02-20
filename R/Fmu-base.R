@@ -25,7 +25,7 @@ Fmu.base = function(alpha, W, par_Fmu){with(par_Fmu,{
 #' @return a [list]
 #' @export
 #'
-par_Fmu_base = function(peak=20, liver=7, tildeb=10.36913, tildel=2, Sa=0.002483857){
+par_Fmu_base = function(peak=20, liver=7, tildeb=10, tildel=2, Sa=0.003){
   par = list()
   class(par) <- "base"
   par$peak=peak
