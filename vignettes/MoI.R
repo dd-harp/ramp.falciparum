@@ -1,5 +1,6 @@
 ## -----------------------------------------------------------------------------
-library(ramp.falciparum)
+devtools::load_all()
+#library(ramp.falciparum)
 library(deSolve)
 library(knitr)
 
@@ -11,8 +12,8 @@ foiP3 = list(hbar = 5/365,
              trendPar = par_flatTrend())
 
 ## ----fig.height=4, fig.width=7, echo=F, eval=F--------------------------------
-#  plot(aa, FoI(aa, foiP3), type = "l",
-#       xlab = "a - age (in days)", ylab = expression(FoI[tau](a)))
+# plot(aa, FoI(aa, foiP3), type = "l",
+#      xlab = "a - age (in days)", ylab = expression(FoI[tau](a)))
 
 ## -----------------------------------------------------------------------------
 MMinf <- solveMMinfty(5/365, foiP3, Amax=1095)

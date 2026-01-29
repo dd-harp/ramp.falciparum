@@ -10,7 +10,8 @@ vignette: >
 
 
 ```{r}
-library(ramp.falciparum)
+devtools::load_all()
+#library(ramp.falciparum)
 library(deSolve)
 library(knitr)
 ```
