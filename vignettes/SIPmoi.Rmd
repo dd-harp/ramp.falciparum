@@ -1,0 +1,95 @@
+---
+title: "The SIP Hybrid Model"
+subtitle: "Comparing Methods"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The SIP Hybrid Model}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+This describes a queuing model `SIP-moi`
+
+> see `SIP.R` 
+
+
+```{r}
+devtools::load_all()
+```
+
+The system we are interested in modeling describes chemoprotected ($P$) and susceptible ($S$) populations. 
+
+\begin{equation}
+    \begin{array}{rl}
+    \frac{dP}{da} &= - \eta P + (h \rho + \xi) \left( S + I \right) + \sigma I  -\mu P\\ 
+    \frac{dS}{da} &= \eta P - r I_1  - (h + \mu + \xi) S
+    \end{array}
+\end{equation}
+
+We track the number infected with $i$ types, $I_i.$
+
+\begin{equation}
+    \begin{array}{rl}
+    \frac{dI_1}{da} &=  2r I_2  + h (1-\rho) S - (r + h + \sigma + \xi + \mu ) I_1 \\ 
+    \frac{dI_2}{da} &=  3r I_3 + h (1-\rho) I_1 - (2r + h + \sigma + \xi + \mu) I_2 \\ 
+    \end{array}
+\end{equation}
+
+The implementation truncates the infinite system, choosing a largest MoI, $n$: 
+
+\begin{equation}
+\frac{dI_n}{da} = h (1-\rho) I_{n-1} - (n r + h \rho + \sigma + \xi+ \mu) I_n
+\end{equation}
+
+
+We let $$m = \sum_i \frac{I_i}H$$ denote the mean MoI in the population. We can show that
+$$ 
+\frac{\textstyle{dm}}{\textstyle{da}} = h(1-\rho) s - \left(r + \rho h + \sigma + \xi  \right)  m
+$$
+The function `solveSIPmoi`:
+
++ calls `d_SIPmoi_da` which computes all the derivaves for $S$, $I$, $P$, and $m$
+
++ computes $m$ from $I$ 
+
+```{r, fig.width=7}
+foiP1 = list(hbar = 1, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend())
+out <- solveSIPmoi(2/365, mu=0, rho=0, foiP1, Amax=5*365)
+```
+
+We note that the variable $m$ matches the MoI computed from $I$: 
+
+```{r, fig.width=7}
+with(out, plot(age, moi, type ="l"))
+with(out, lines(age, m, col = "red", lty=2))
+```
+
+The change in prevalence with respect to age is: 
+
+```{r, fig.width=7}
+with(out, plot(age, x, type ="l"))
+```
+```{r, fig.height=4, fig.width=7}
+with(out, plot(age, 0.005*dnbinom(1,mu=m, size=cv)/x, col = "red", type = "l", ylim = c(0, 0.0055), ylab = expression(F[r](m))))
+with(out, lines(age, Fr, type ="l"))
+```
+
+
+
+```{r, fig.width=7}
+with(out, plot(age, cv, type ="l"))
+```
+
+
+```{r, fig.width=7}
+with(out, plot(age, var, type ="l"))
+```
+
+
+```{r, fig.width=7}
+with(out, plot(1:N+0, II[730,], type ="h", lwd=2, xlab="MoI", ylim = c(0,1000)))
+with(out, lines(1:N+0.1, II[1095,], type ="h", lwd=2))
+with(out, lines(1:N+0.2, II[1460,], type ="h", lwd=2))
+```
+
+
