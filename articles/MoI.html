@@ -96,7 +96,7 @@
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://desolve.r-forge.r-project.org/" class="external-link">deSolve</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/" class="external-link">deSolve</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://yihui.org/knitr/" class="external-link">knitr</a></span><span class="op">)</span></span></code></pre></div>
 <p>In 1950, George Maccdonald published a model of malaria
 superinfection (Macdonald G, 1950)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. He was trying to understand how reexposure
@@ -162,7 +162,7 @@ changes over time.</p>
 <p>For those who are infected (with
 MoI<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>=</mo><mi>i</mi></mrow><annotation encoding="application/x-tex">=i</annotation></semantics></math>),
 the dynamics are:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><msub><mi>ζ</mi><mi>i</mi></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>h</mi><msub><mi>ζ</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>r</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>ζ</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mrow><mo stretchy="true" form="prefix">(</mo><mi>r</mi><mo>+</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><msub><mi>ζ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\frac{d \zeta_i}{dt} = h \zeta_{i-1} + r(i+1) \zeta_{i+1} - (r+h) \zeta_i</annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><msub><mi>ζ</mi><mi>i</mi></msub></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>h</mi><msub><mi>ζ</mi><mrow><mi>i</mi><mo>−</mo><mn>1</mn></mrow></msub><mo>+</mo><mi>r</mi><mo stretchy="false" form="prefix">(</mo><mi>i</mi><mo>+</mo><mn>1</mn><mo stretchy="false" form="postfix">)</mo><msub><mi>ζ</mi><mrow><mi>i</mi><mo>+</mo><mn>1</mn></mrow></msub><mo>−</mo><mo stretchy="false" form="prefix">(</mo><mi>r</mi><mo>+</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>ζ</mi><mi>i</mi></msub></mrow><annotation encoding="application/x-tex">\frac{d \zeta_i}{dt} = h \zeta_{i-1} + r(i+1) \zeta_{i+1} - (r+h) \zeta_i</annotation></semantics></math>
 The software in <code>ramp.falciparum</code> includes functions to set
 up and solve the queuing model
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>/</mi><mi>M</mi><mi>/</mi><mi>∞</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">M/M/\infty.</annotation></semantics></math></p>
@@ -202,7 +202,7 @@ would remain Poisson forever.</p>
 <h2 id="the-random-variables-approach">The Random Variables Approach<a class="anchor" aria-label="anchor" href="#the-random-variables-approach"></a>
 </h2>
 <p>Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">z(\alpha, a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z(\alpha, a)</annotation></semantics></math>
 denote the density of parasite cohorts of age
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 in a host cohort of age
@@ -213,11 +213,11 @@ Since infections in
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>M</mi><mi>/</mi><mi>M</mi><mi>/</mi><mi>∞</mi></mrow><annotation encoding="application/x-tex">M/M/\infty</annotation></semantics></math>
 are independent, we can track the dynamics for the AoI of all parasite
 cohorts with the equation,</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><mi>z</mi></mrow><mrow><mi>∂</mi><mi>a</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>∂</mi><mi>z</mi></mrow><mrow><mi>∂</mi><mi>α</mi></mrow></mfrac><mo>=</mo><mo>−</mo><mi>r</mi><mi>z</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">\begin{equation}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><mi>z</mi></mrow><mrow><mi>∂</mi><mi>a</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>∂</mi><mi>z</mi></mrow><mrow><mi>∂</mi><mi>α</mi></mrow></mfrac><mo>=</mo><mi>−</mi><mi>r</mi><mi>z</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">\begin{equation}
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - rz, 
 \end{equation}</annotation></semantics></math></p>
 <p>with the boundary condition
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>,</mo><mn>0</mn><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>h</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">z_\tau(a,0)=h_\tau(a).</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mn>0</mn><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>h</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">z_\tau(a,0)=h_\tau(a).</annotation></semantics></math>
 We note that the age of the host birth cohort sets an upper limit for
 the parasite cohort, so
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>&lt;</mo><mi>α</mi><mo>&lt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">0 &lt; \alpha &lt; a</annotation></semantics></math>.
@@ -226,13 +226,13 @@ The solution, which describes density of infections of age
 in a host cohort of age
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>,
 is given by the formula:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>h</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>e</mi><mrow><mo>−</mo><mi>r</mi><mi>α</mi></mrow></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>h</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo>−</mo><mi>α</mi><mo stretchy="true" form="postfix">)</mo></mrow><msup><mi>e</mi><mrow><mi>−</mi><mi>r</mi><mi>α</mi></mrow></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
 z_\tau(\alpha, a | h) = h_\tau \left(a-\alpha\right) e^{-r \alpha}.
 \label{zda}
 \end{equation}</annotation></semantics></math></p>
 <p>From these equations, we derive random variables describing the MoI,
 the AoI, and the AoY, noting that the mean MoI is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msub><mi>z</mi><mi>τ</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
 m_\tau(a | h) = \int_0^a z_\tau(\alpha, a |h) d \alpha 
 \end{equation}</annotation></semantics></math></p>
 <p>In <code>ramp.falciparum,</code> this is computed with the function
@@ -262,31 +262,31 @@ is the mean of a Poisson, the prevalence of infection can be computed
 directly from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>.
 It is the complement of the zero term from a Poisson:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><mtext mathvariant="normal">Pois</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>ζ</mi><mo>=</mo><mn>0</mn><mo>;</mo><mi>m</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>m</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow></msup></mrow><annotation encoding="application/x-tex">p(t) = 1-\mbox{Pois}(\zeta =0; m(t)) = 1 - e^{-m(t)}</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><mtext mathvariant="normal">Pois</mtext><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>=</mo><mn>0</mn><mo>;</mo><mi>m</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>m</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">p(t) = 1-\mbox{Pois}(\zeta =0; m(t)) = 1 - e^{-m(t)}</annotation></semantics></math></p>
 <p>It is, nevertheless, sometimes useful to know the clearance rate, a
 transition from MoI = 1 to MoI=0. Clearance from the infected class can
 only occur if a person is infected with an MoI of one, and if that
 infection clears:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>r</mi><mfrac><mrow><mtext mathvariant="normal">Pr</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>ζ</mi><mo>=</mo><mn>1</mn><mo>;</mo><mi>m</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow><mrow><mtext mathvariant="normal">Pr</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>ζ</mi><mo>&gt;</mo><mn>0</mn><mo>;</mo><mi>m</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">)</mo></mrow></mrow></mfrac><mo>=</mo><mi>r</mi><mfrac><mrow><mi>m</mi><msup><mi>e</mi><mrow><mo>−</mo><mi>m</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>m</mi></mrow></msup></mrow></mfrac><mo>=</mo><mi>r</mi><mfrac><mi>m</mi><mrow><msup><mi>e</mi><mrow><mo>−</mo><mi>m</mi></mrow></msup><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>R</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>r</mi><mfrac><mrow><mtext mathvariant="normal">Pr</mtext><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>=</mo><mn>1</mn><mo>;</mo><mi>m</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><mrow><mtext mathvariant="normal">Pr</mtext><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>&gt;</mo><mn>0</mn><mo>;</mo><mi>m</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mo>=</mo><mi>r</mi><mfrac><mrow><mi>m</mi><msup><mi>e</mi><mrow><mi>−</mi><mi>m</mi></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>m</mi></mrow></msup></mrow></mfrac><mo>=</mo><mi>r</mi><mfrac><mi>m</mi><mrow><msup><mi>e</mi><mrow><mi>−</mi><mi>m</mi></mrow></msup><mo>−</mo><mn>1</mn></mrow></mfrac></mrow><annotation encoding="application/x-tex">
 R(m) = r \frac{\mbox{Pr}(\zeta=1; m(t))}{\mbox{Pr}(\zeta&gt;0; m(t))} = r \frac{m e^{-m}}{1-e^{-m}}  = r \frac{m}{e^{-m}-1}
 </annotation></semantics></math></p>
 <p>The change in prevalence is thus described by the equation:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>h</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>−</mo><mi>R</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>m</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>p</mi></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>−</mo><mi>R</mi><mo stretchy="false" form="prefix">(</mo><mi>m</mi><mo stretchy="false" form="postfix">)</mo><mi>p</mi></mrow><annotation encoding="application/x-tex">
 \frac{dp}{dt} = h(1-p)-R(m)p 
 </annotation></semantics></math></p>
 <p>While this is interesting, and while it solves the problem of
 modeling clearance under superinfection, the equation depends on
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>.
 Since we can compute
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">p(t)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>p</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">p(t)</annotation></semantics></math>
 directly from
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>t</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">m(t)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>m</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m(t)</annotation></semantics></math>,
 the equation for prevalence is completely redundant.</p>
 <p>On the other hand, if we wanted a model for prevalence that did not
 use
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>,
 we could rewrite the equation:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>h</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>r</mi><mo>ln</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mfrac><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>p</mi></mfrac></mrow><annotation encoding="application/x-tex">
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mi>p</mi></mrow><mrow><mi>d</mi><mi>t</mi></mrow></mfrac><mo>=</mo><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mo>+</mo><mi>r</mi><mrow><mi mathvariant="normal">ln</mi><mo>⁡</mo></mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo><mfrac><mrow><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><mi>p</mi><mo stretchy="false" form="postfix">)</mo></mrow><mi>p</mi></mfrac></mrow><annotation encoding="application/x-tex">
 \frac{dp}{dt} = h(1-p) + r \ln (1-p) \frac{(1-p) }{p}
 </annotation></semantics></math></p>
 </div>
@@ -325,7 +325,7 @@ edition. Berlin: Springer-Verlag; 1985. <a href="https://doi.org/10.1007/978-3-6
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
       </footer>
