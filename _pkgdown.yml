@@ -31,6 +31,25 @@ home:
         title: Changelog
         text: <a href="news/index.html">News</a>
 reference:
+- title: Superinfection Dynamics
+  desc: |
+    Queuing models for malaria
+  contents:
+  - MMinfinity
+  - SquIP
+  - SquIPz
+- subtitle: Solve a queuing model
+  desc: Solve the equations
+  contents:
+  - solveMMinfty
+  - solve_SquIP
+  - solve_SquIPz
+- title: Enhanced Compartmental Models
+  desc: |
+    Queuing models for malaria
+  contents:
+  - SIPm
+  - solve_SIPm
 - title: Infection Dynamics
   desc: |
     Dynamics of MoI, AoI, and the AoY
@@ -42,8 +61,6 @@ reference:
     Methods to compute the MoI
   contents:
   - meanMoI
-  - dMoIda
-  - solveMMinfty
   - MoIDistPlot
 - subtitle: Age of Infection (AoI)
   desc: |

@@ -134,6 +134,7 @@ NULL
 #' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
 #'
 #' @return the derivatives as a [list]
+#' @keywords internal
 #' @seealso [solveMMinfty]
 #' @export
 dSIPm = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{

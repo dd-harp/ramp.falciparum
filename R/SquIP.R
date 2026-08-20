@@ -138,6 +138,7 @@ NULL
 #' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
 #'
 #' @return the derivatives as a [list]
+#' @keywords internal
 #' @seealso [solveMMinfty]
 #' @export
 #'
@@ -221,7 +222,7 @@ dSquIP = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #'
 #' @seealso [SquIP]
 #' @export
-solve_SquIP = function(h, FoIpar, tau=0,
+solve_SquIP = function(h,  FoIpar, tau=0,
                        r=1/200,
                        rho=.2,
                        sigma = 1/365,
@@ -249,6 +250,7 @@ solve_SquIP = function(h, FoIpar, tau=0,
 #' @param out the orbits
 #'
 #' @returns a named list
+#' @keywords internal
 #' @export
 parse_SquIP = function(pars, out){
   vars = out[,-1]

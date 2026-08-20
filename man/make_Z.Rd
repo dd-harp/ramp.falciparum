@@ -21,3 +21,4 @@ Make the Z matrix
 dd = function(x){dpois(x,.2)}
 make_Z(dd, 20)
 }
+\keyword{internal}

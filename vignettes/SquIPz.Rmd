@@ -147,118 +147,143 @@ The dynamics of the hybrid variables, $I,$ $m_1,$ and $m_2$ are verified by solv
 
 # Derivations
 
-## Infected
 
-We can derive the equation for $dI/da$ by collecting terms: 
+
+
+## Change of Variables
+
+$$
+\begin{array}{ccc}
+I &=   & \sum_i I_i  \\[6pt]
+m &=    & \sum_i i I_i /H\\[6pt]
+m_2 &=    & \sum_i i^2 I_i /H\\
+\end{array}.$$
+
+### Infected
 
 $$\frac{dI}{da} =\begin{array}{l} 
-h(1-\rho)\left( S + \sum_i I_i \right) - h \sum_i I_i\\
-\sum_i -ri I_i + (i+1) r I_{i+1} \\ 
-- \sum_i \left(\sigma + \xi + \mu\right) I_i  \\
+h(1-\rho) S \sum_i z_i \\
+- \sum_i \left(h +\sigma + \xi + \mu\right) I_i  \\
+- r I_1 - \sum_i -ri I_i + (i+1) r I_{i+1} \\ 
++ h(1-\rho)\sum_i \sum_{j<i} I_{i-j} z_j\\
+\end{array}$$
+We can use some identities to simplify a lot: 
+
+$$\frac{dI}{da} =\begin{array}{l} 
+h(1-\rho) S - \left(h + \sigma + \xi + \mu\right) I - r_1 I_1\\
+- h(1-\rho)\sum_i \sum_{j<i} I_{i-j} z_j\\
+\end{array}$$
+but $$\sum_i \sum_{j<i} I_{i-j} z_j = \sum_i \sum_j z_j I_i = I$$
+so 
+$$\frac{dI}{da} =
+h(1-\rho) S - \left(h \rho + \sigma + \xi + \mu\right) I - r_1 I_1
+$$
+
+
+## Mean MoI
+
+$$\frac{dm}{da} =\begin{array}{l} 
+h(1-\rho) S \sum_i i z_i/H\\
+- \sum_i \left(h +\sigma + \xi + \mu\right) i I_i /H \\
+\sum_i i \left((i+1)r I_{i+1} - r_i I_i \right) /H \\ 
++ h(1-\rho)\sum_i \sum_{j<i} i I_{i-j} z_j\\
 \end{array}$$
 
-Since most things cancel, we simply get: 
-
-$$\frac{dI}{da} = h(1-\rho) S - r_1 I_1 - (\rho h + \xi + \sigma + \mu) I $$
-
-## MoI Distribution, First Moment
-
-
-The dynamics of $m_1$ are given by: 
-
+### $r$ terms
+For the terms involving $r$, we want to simplify 
 $$
-\frac{\textstyle{dm_1}}{\textstyle{da}} = H^{-1} \sum_i i \frac{dI_i}{dt} - H^{-2} \sum_i i I_i \frac{d H}{da} 
+\sum_i i \left((i+1) r I_{i+1} - r i I_i \right) 
 $$
-Several of the terms can be handled all at once: 
-$$
-\frac 1 H
-\sum_{i\geq 1}   i (\sigma + \xi + h + \mu) I_i = (\sigma + \xi + h + \mu) m_1  
-$$
-
-
-**Natural Clearance** --- For the terms involving $r$ -- we can see a pattern by looking at the terms one by one. For example, from $dI_2/dt$ we add $2 (3rI_3)$, but from $dI_3/dt,$ we subtract $3(3rI_3)$ leaving us with $-3rI_3.$ In general, we get:
-$$
-\begin{array}{rl}
-\frac{1}{H} \sum_{i\geq 1} i \left( -  i r I_i + (i+1) r I_{i+1} \right)
-&= - \sum_i r i I_i/H \\
-&= -  r m_1 
-\end{array}
-$$
-
-**Exposure** ---
-For the terms involving exposure,  $h.$ We note that 
+In long form, this is just
 $$
 \begin{array}{l}
-\frac{1}H \left[h (1-\rho) S  + \sum_{i\geq 1} (i+1) \left( h (1-\rho) I_i  \right) \right] \\ = h (1-\rho) \left(S + I + \sum_i i I_i \right) / H  \\ = h(1-\rho)\left(\frac{S+I}H + m_1\right) 
+1\left(-r I_1 + 2r I_2 \right) \\ 
+2 \left(-2r I_2 + 3r I_3\right) \\
+3 \left(-3r I_3 + 4r I_4\right) \\
 \end{array}
 $$
-
-**Demography** --- 
-
-Now, we compute $dH/da$ terms, we get: 
-
-$$
-- H^{-2} \sum_i iI_i \frac{dH}{da} = \frac{\sum_i i I_i \mu H}{H^2} = \mu m_1 
-$$
-Putting it all together, we get that 
-$$
-\frac{\textstyle{dm_1}}{\textstyle{da}} = h(1-\rho) \frac{S+I}H - \left(r + \rho h + \sigma + \xi + \mu \right)  m_1  + \mu m_1
-$$
-or 
-\begin{equation}
-\frac{\textstyle{dm_1}}{\textstyle{da}} = 
-h(1-\rho)\left(1 -  \frac{P}H \right) - \left(r + \rho h + \sigma + \xi  \right)  m_1  
-\end{equation}
-
-## MoI Distribution, Second Moment
+but this simplifies to 
+$$-r I_1 - 2r I_2 - 3r I_3 - \ldots = -rm  $$
 
 
-The second, non-central moment of the distribution of the MoI ($m_2$) is:
-$$
-m_2 = \frac{\textstyle{\sum_i i^2 I_i}}H
-$$
-As before, we compute:
-$$
-\frac{\textstyle{dm_2}}{\textstyle{da}} = H^{-1} \sum_i i^2 \frac{dI_i}{dt} - H^{-2} \sum_i i^2 I_i \frac{d H}{da} 
-$$
-We collect all the simple terms: 
-$$
-\frac{1}{H} \sum_{i\geq 1}   i^2 (\sigma + \xi + h + \mu) I_i = (\sigma + \xi + h + \mu) m_2
-$$
+$$\frac{dm}{da} =\begin{array}{l} 
+h(1-\rho) S \hat z/H\\
+- \sum_i \left(h +\sigma + \xi + \mu\right) m \\
+- r I_1 + \sum_i \left((i+1) r (i+1) I_{i+1} - r_i I_i \right) /H \\ 
++ h(1-\rho)\sum_i \sum_{j<i} i I_{i-j} z_j\\
+\end{array}$$
 
-**Natural Clearance** --- The terms involving $r$ are: 
-$$
-\begin{array}{l}
-\frac{1}{H} \sum_{i\geq 1} i^2 \left( - i r I_i + (i+1) r I_{i+1} \right) \\
-= \sum_i  r (i^3 - i(i-1)^2 I_i / H\\
-= \sum_i  r (-2i^2 + 1) I_i / H\\
-=  - 2r m_2 + r m 
+### $h$ terms
+
+$$h(1-\rho)\sum_i \sum_{j<i} i^2 I_{i-j} z_j$$
+In long form, summing from $I_i$ we get 
+$$\begin{array}{c|l}
+I_1 & - h I_1 + h (1-\rho) I_1 \left(2 z_1 + 3 z_2 + 4 z_3 + \ldots\right) \\
+I_2 & - 2^2 h I_2 + h (1-\rho) I_2 \left(3^2 z_1 + 4^2 z_2 + 5^2 z_3 + \ldots\right) \\
+\vdots & \vdots \\
+I_i & - i^2 h I_i + h (1-\rho) I_i \left((i+1)^2 z_1 + (i+2)^2 z_2 + \ldots \right)
 \end{array}
 $$
-
-**Exposure** --- 
-The terms with $h (1-\rho)$ are:
-
+but since  
 $$
-\begin{array}{c}
-\frac{h (1-\rho)}H \left( S + \sum_{i\geq 1} (i+1)^2  I_i  \right) \\ 
-= h(1-\rho) \left[ \left(\frac{S + I}H\right)  + 2m + m_2 \right] \\
+\sum_j (i+j) z_j = \sum_j i z_j + \sum_j j z_j =  i  + \hat z 
+$$
+
+We can rewrite all this above as: 
+$$\begin{array}{c|l}
+I_1 & - h I_1 + h (1-\rho) I_1 \left(1 + \hat z\right) \\
+I_2 & - 2 h I_2 + h (1-\rho) I_2 \left(2 + \hat z\right) \\
+\vdots & \vdots \\
+I_i & - i h I_i + h (1-\rho) I_i \left(i + \hat z \right)
 \end{array}
 $$
-and finally 
+now dividing by $H,$ we get 
+$$ \frac{dm}{da} = - h m + h (1-\rho)m + h(1-\rho)\hat z \frac{S+I}{H} + \mbox{terms not involving } h$$
+
+## MoI, Second Moment
+
+$$\frac{dm}{da} =\begin{array}{l} 
+h(1-\rho) S \sum_i i^2 z_i/H\\
+- \sum_i \left(h +\sigma + \xi + \mu\right) i^2 I_i /H \\
+\sum_i i^2 \left((i+1)r I_{i+1} - r_i I_i \right) /H \\ 
++ h(1-\rho)\sum_i \sum_{j<i} i^2 I_{i-j} z_j\\
+\end{array}$$
+
+### $h$ terms
+
+$$h(1-\rho)\sum_i \sum_{j<i} i I_{i-j} z_j$$
+In long form, summing from $I_i$ we get 
+$$\begin{array}{c|l}
+I_1 & - h I_1 + h (1-\rho) I_1 \left(2^2 z_1 + 3^2 z_2 + 4^2 z_3 + \ldots\right) \\
+I_2 & - 2^2 h I_2 + h (1-\rho) I_2 \left(3^2 z_1 + 4^2 z_2 + 5^2 z_3 + \ldots\right) \\
+\vdots & \vdots \\
+I_i & - i^2 h I_i + h (1-\rho) I_i \left((i+1)^2z_1 + (i+2)^2 z_2 + \ldots \right)
+\end{array}
 $$
-- H^{-2} \sum_i i^2 I_i \frac{dH}{da} = \frac{\sum_i i^2 I_i \mu H}{H^2} = \mu m_2 
+but since  
 $$
-so we get 
+\sum_j (i+j)^2 z_j = \sum_j i^2 z_j + \sum_j 2 i j z_j + \sum_j j^2 z_j =  i^2  + 2 i \hat z + \hat z_2
 $$
-\frac{\textstyle{dm_2}}{\textstyle{da}} = h(1-\rho)\left(1-\frac{P}H + 2m\right) - \left(2r + \rho h + \sigma + \xi \right)  m_2 + rm 
+
+We can rewrite all this above as: 
+$$\begin{array}{c|l}
+I_1 & - h I_1 + h (1-\rho) I_1 \left(1 + 1 \cdot 2  \hat z + \hat z_2\right) \\
+I_2 & - 2^2 h I_2 + h (1-\rho) I_2 \left(2^2 + 2 \cdot 2 \hat z + \hat z_2 \right) \\
+\vdots & \vdots \\
+I_i & - i^2 h I_i + h (1-\rho) I_i \left(i^2 + i \cdot 2 \hat z + \hat z_2 \right)
+\end{array}
 $$
+now dividing by $H,$ we get 
+$$ \frac{dm_2}{da} = - h m_2 + h (1-\rho)\left(m_2 + 2 \hat z m + \hat z_2 \frac I H \right) +   h (1-\rho) \hat z_2 \frac{S}{H} + \mbox{terms not involving } h$$
+
+The old correct formula was:
+$$\frac{dm_2}{da} = h(1-\rho)\hat z \left(\frac{S + I}H + 2 m \right) - (2r + h\rho + \sigma + \xi)m_2 + r m $$
+
 
 ## Numerical Verification
 
 ```{r}
 library(ramp.falciparum)
-devtools::load_all()
 ```
 
 

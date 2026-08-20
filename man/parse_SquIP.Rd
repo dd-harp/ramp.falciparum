@@ -17,3 +17,4 @@ a named list
 \description{
 Parse SquIP
 }
+\keyword{internal}

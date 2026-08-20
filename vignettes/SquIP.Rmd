@@ -146,7 +146,6 @@ The dynamics of the hybrid variables, $I,$ $m_1,$ and $m_2$ are verified by solv
 
 ```{r}
 library(ramp.falciparum)
-devtools::load_all()
 ```
 
 

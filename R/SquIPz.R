@@ -132,6 +132,7 @@ NULL
 #' @param Z the MoE matrix
 #'
 #' @return the derivatives as a [list]
+#' @keywords internal
 #' @seealso [solveMMinfty]
 #' @export
 #'
@@ -247,6 +248,7 @@ solve_SquIPz = function(h, FoIpar, F_moe, tau=0,
 #' @param N the maximum MoI
 #'
 #' @returns a [matrix]
+#' @keywords internal
 #' @export
 #'
 #' @examples

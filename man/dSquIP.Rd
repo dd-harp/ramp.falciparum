@@ -29,3 +29,4 @@ It also computes the derivatives for the hybrid variables \eqn{m_1} and \eqn{m_2
 
 \link{solveMMinfty}
 }
+\keyword{internal}

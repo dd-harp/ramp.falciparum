@@ -1,6 +1,5 @@
 ## -----------------------------------------------------------------------------
 library(ramp.falciparum)
-devtools::load_all()
 
 ## -----------------------------------------------------------------------------
 F_z = function(x, mu=1, size=2){return(dnbinom(x,mu=mu, size=size)/(1-dnbinom(0,mu=mu,size=size)))}

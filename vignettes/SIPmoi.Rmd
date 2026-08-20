@@ -14,7 +14,7 @@ This describes a queuing model `SquIP`
 
 
 ```{r}
-devtools::load_all()
+library(ramp.falciparum)
 ```
 
 ## SquIP: The Master Equations
@@ -76,7 +76,7 @@ The implementation truncates the infinite system, choosing a largest MoI, $n$:
 In this implementation, the function `solve_SquIP` solves the equations and then it 
 computes the first two moments of the distribution: 
 
-$$m = \frac 1 H \sum_i i I_i$$ 
+$$m_1 = \frac 1 H \sum_i i I_i$$ 
 
 and 
 
@@ -129,7 +129,7 @@ with(q_out, lines(age, mm2, lty=2, col = "yellow"))
     \end{array}
 \end{equation}
 
-We compute $m$ and $m_2$ as before, and we let
+We compute $m_1$ and $m_2$ as before, and we let
 
 $$F_r = r \frac{\mbox{dnbinom}(1, m, \mbox{size} = \phi)}{1-\mbox{dnbinom}(0, m, \mbox{size} =\phi))}\left(1-\frac P H \right)$$
 

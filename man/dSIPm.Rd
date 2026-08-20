@@ -37,3 +37,4 @@ This function computes the derivatives in a form that can be used by \link[deSol
 \seealso{
 \link{solveMMinfty}
 }
+\keyword{internal}
