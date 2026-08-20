@@ -1,14 +1,14 @@
 ---
-title: "The SIP Hybrid Model"
+title: "SIPm"
 subtitle: "Comparing Methods"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The SIP Hybrid Model}
+  %\VignetteIndexEntry{SIPm}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-This describes a queuing model `SIP-moi`
+This describes a queuing model `SquIP`
 
 > see `SIP.R` 
 
@@ -17,12 +17,42 @@ This describes a queuing model `SIP-moi`
 devtools::load_all()
 ```
 
-The system we are interested in modeling describes chemoprotected ($P$) and susceptible ($S$) populations. 
+## SquIP: The Master Equations
+
+`SquIP` is an infinite system of differential equations describing the dynamics of the distribution of the MoI in a cohort of humans as it ages. 
+
+The system has three classes of variable: 
+
++ $S$ describes the density of susceptible individuals 
+
++ $P$ describes the density of chemo-protected individuals
+
++ $I_i$ describes the density of individuals infected with exactly $i$ parasite types
+
+The model has several parameters that could vary with respect to age: 
+
++ $\mu$ is the death rate of the cohort with respect to age
+
++ $h$ is the force of infection (FoI), the rate that infections occur
+
++ $r$ is the rate that each clone clears, and we assume that each parasite clone clears independently of the others at a constant rate, regardless of the age of the clone
+
++ $\rho$ is the fraction of incident infections that are treated and cured
+
++ $\xi$ is the rate that people take drugs and cure infections without regard to whether they are infected 
+
++ $\sigma$ is the rate that people take drugs and cure infections because they are infected, so that anyone who is infected would cure infections at the rate $\sigma + \xi$
+
++ $\eta$ is the rate that chemoprotection is lost after curing an infection
+
+### Dynamics
+
+The dynamics of susceptible and chemoprotected individuals are:
 
 \begin{equation}
     \begin{array}{rl}
     \frac{dP}{da} &= - \eta P + (h \rho + \xi) \left( S + I \right) + \sigma I  -\mu P\\ 
-    \frac{dS}{da} &= \eta P - r I_1  - (h + \mu + \xi) S
+    \frac{dS}{da} &= \eta P + r I_1  - (h + \mu + \xi) S
     \end{array}
 \end{equation}
 
@@ -32,6 +62,7 @@ We track the number infected with $i$ types, $I_i.$
     \begin{array}{rl}
     \frac{dI_1}{da} &=  2r I_2  + h (1-\rho) S - (r + h + \sigma + \xi + \mu ) I_1 \\ 
     \frac{dI_2}{da} &=  3r I_3 + h (1-\rho) I_1 - (2r + h + \sigma + \xi + \mu) I_2 \\ 
+    \frac{dI_i}{da} &=  ir I_i + h (1-\rho) I_{i-1} - (ir + h + \sigma + \xi + \mu) I_i \\ 
     \end{array}
 \end{equation}
 
@@ -42,54 +73,94 @@ The implementation truncates the infinite system, choosing a largest MoI, $n$:
 \end{equation}
 
 
-We let $$m = \sum_i \frac{I_i}H$$ denote the mean MoI in the population. We can show that
-$$ 
-\frac{\textstyle{dm}}{\textstyle{da}} = h(1-\rho) s - \left(r + \rho h + \sigma + \xi  \right)  m
-$$
-The function `solveSIPmoi`:
+In this implementation, the function `solve_SquIP` solves the equations and then it 
+computes the first two moments of the distribution: 
 
-+ calls `d_SIPmoi_da` which computes all the derivaves for $S$, $I$, $P$, and $m$
+$$m = \frac 1 H \sum_i i I_i$$ 
+
+and 
+
+$$m_2 = \frac 1 H \sum_i i^2 I_i$$ 
+
+In `SIPm` (below), we derive equations to compute $dm/da$ and $d m_2 /da.$ 
+
+denote the mean MoI in the population. We can show that
+
+$$ 
+\frac{\textstyle{dm}}{\textstyle{da}} = h(1-\rho)\left(1-\frac{P}{H} \right) - \left(r + \rho h + \sigma + \xi  \right)  m
+$$
+We also compute the 2nd moment: 
+
+$$ 
+\frac{\textstyle{dm_2}}{\textstyle{da}} = h(1-\rho)\left(1-\frac{P}{H} + 2m\right) - \left(2r + \rho h + \sigma + \xi  \right)  m_2 + r m
+$$
+
+The function `solveSIPqueue`:
+
++ calls `d_SIPqueue_da` which computes all the derivaves for $S$, $I$, $P$, and $m$
 
 + computes $m$ from $I$ 
 
-```{r, fig.width=7}
+```{r, fig.width=7, eval=F}
 foiP1 = list(hbar = 1, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend())
-out <- solveSIPmoi(2/365, mu=0, rho=0, foiP1, Amax=5*365)
+q_out <- solve_SquIP(8/365, sigma=2/365, xi=0, foiP1, Amax=5*365)
 ```
 
+For verification, the variable $m$ is computed two ways 
 We note that the variable $m$ matches the MoI computed from $I$: 
-
-```{r, fig.width=7}
-with(out, plot(age, moi, type ="l"))
-with(out, lines(age, m, col = "red", lty=2))
+```{r, fig.width=7, fig.height=4, eval=F}
+with(q_out, plot(age, m, type = "l"))
+with(q_out, lines(age, mm, lty=2, col = "yellow"))
 ```
 
-The change in prevalence with respect to age is: 
-
-```{r, fig.width=7}
-with(out, plot(age, x, type ="l"))
-```
-```{r, fig.height=4, fig.width=7}
-with(out, plot(age, 0.005*dnbinom(1,mu=m, size=cv)/x, col = "red", type = "l", ylim = c(0, 0.0055), ylab = expression(F[r](m))))
-with(out, lines(age, Fr, type ="l"))
+```{r, fig.width=7, fig.height=4,eval=F}
+with(q_out, plot(age, m2, type = "l", ylim = range(m2, mm2)))
+with(q_out, lines(age, mm2, lty=2, col = "yellow"))
 ```
 
 
+## Approximating Equations 
 
-```{r, fig.width=7}
-with(out, plot(age, cv, type ="l"))
+\begin{equation}
+    \begin{array}{rl}
+    \frac{dP}{da} &= - \eta P + (h \rho + \xi) \left( S + I \right) + \sigma I  -\mu P\\ 
+    \frac{dS}{da} &= \eta P + F_r(m, m_2) I  - (h + \mu + \xi) S \\
+    \frac{dI}{da} &= h(1-\rho) S - F_r((m, m_2)) I  - (h \rho + \sigma + \xi) S - \mu S
+    \end{array}
+\end{equation}
+
+We compute $m$ and $m_2$ as before, and we let
+
+$$F_r = r \frac{\mbox{dnbinom}(1, m, \mbox{size} = \phi)}{1-\mbox{dnbinom}(0, m, \mbox{size} =\phi))}\left(1-\frac P H \right)$$
+
+where 
+$$\phi = \frac{m^2}{m_2-m^2-m}$$
+
+
+```{r, fig.width=7, fig.height=4, eval=F}
+m_out <- solveSIPm(8/365, sigma=2/365, xi=0, foiP1, Amax=5*365)
+with(m_out, plot(age, S, ylim = c(0,1000), type = "l"))
+with(m_out, lines(age, I))
+with(m_out, lines(age, P))
+with(q_out, lines(age, S, col = "yellow", lty=2))
+with(q_out, lines(age, I, col = "yellow", lty=2))
+with(q_out, lines(age, P, col = "yellow", lty=2))
+```
+```{r, fig.width=7, fig.height=4, eval=F}
+with(q_out, plot(age, Fr, type = "l", ylim = c(0, 0.005)))
+with(m_out, lines(age, c(.005, Fr), col = "red"))
 ```
 
 
-```{r, fig.width=7}
-with(out, plot(age, var, type ="l"))
+
+```{r, fig.width=7, fig.height=4, eval=F}
+with(m_out, plot(age, m, type = "l"))
+with(q_out, lines(age, m, lty=2, col = "yellow"))
 ```
 
-
-```{r, fig.width=7}
-with(out, plot(1:N+0, II[730,], type ="h", lwd=2, xlab="MoI", ylim = c(0,1000)))
-with(out, lines(1:N+0.1, II[1095,], type ="h", lwd=2))
-with(out, lines(1:N+0.2, II[1460,], type ="h", lwd=2))
+```{r, fig.width=7, fig.height=4, eval=F}
+with(m_out, plot(age, m2, type = "l"))
+with(q_out, lines(age, m2, lty=2, col = "yellow"))
 ```
 
 

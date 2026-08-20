@@ -12,7 +12,7 @@
 
 
 
-<title>The SIP Hybrid Model</title>
+<title>SIPm</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -337,24 +337,62 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 
 
 
-<h1 class="title toc-ignore">The SIP Hybrid Model</h1>
+<h1 class="title toc-ignore">SIPm</h1>
 <h3 class="subtitle">Comparing Methods</h3>
 
 
 
-<p>This describes a queuing model <code>SIP-moi</code></p>
+<p>This describes a queuing model <code>SquIP</code></p>
 <blockquote>
 <p>see <code>SIP.R</code></p>
 </blockquote>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">load_all</span>()</span></code></pre></div>
 <pre><code>## ℹ Loading ramp.falciparum</code></pre>
-<p>The system we are interested in modeling describes chemoprotected
-(<span class="math inline">\(P\)</span>) and susceptible (<span class="math inline">\(S\)</span>) populations.</p>
+<div id="squip-the-master-equations" class="section level2">
+<h2>SquIP: The Master Equations</h2>
+<p><code>SquIP</code> is an infinite system of differential equations
+describing the dynamics of the distribution of the MoI in a cohort of
+humans as it ages.</p>
+<p>The system has three classes of variable:</p>
+<ul>
+<li><p><span class="math inline">\(S\)</span> describes the density of
+susceptible individuals</p></li>
+<li><p><span class="math inline">\(P\)</span> describes the density of
+chemo-protected individuals</p></li>
+<li><p><span class="math inline">\(I_i\)</span> describes the density of
+individuals infected with exactly <span class="math inline">\(i\)</span>
+parasite types</p></li>
+</ul>
+<p>The model has several parameters that could vary with respect to
+age:</p>
+<ul>
+<li><p><span class="math inline">\(\mu\)</span> is the death rate of the
+cohort with respect to age</p></li>
+<li><p><span class="math inline">\(h\)</span> is the force of infection
+(FoI), the rate that infections occur</p></li>
+<li><p><span class="math inline">\(r\)</span> is the rate that each
+clone clears, and we assume that each parasite clone clears
+independently of the others at a constant rate, regardless of the age of
+the clone</p></li>
+<li><p><span class="math inline">\(\rho\)</span> is the fraction of
+incident infections that are treated and cured</p></li>
+<li><p><span class="math inline">\(\xi\)</span> is the rate that people
+take drugs and cure infections without regard to whether they are
+infected</p></li>
+<li><p><span class="math inline">\(\sigma\)</span> is the rate that
+people take drugs and cure infections because they are infected, so that
+anyone who is infected would cure infections at the rate <span class="math inline">\(\sigma + \xi\)</span></p></li>
+<li><p><span class="math inline">\(\eta\)</span> is the rate that
+chemoprotection is lost after curing an infection</p></li>
+</ul>
+<div id="dynamics" class="section level3">
+<h3>Dynamics</h3>
+<p>The dynamics of susceptible and chemoprotected individuals are:</p>
 <p><span class="math display">\[\begin{equation}
     \begin{array}{rl}
     \frac{dP}{da} &amp;= - \eta P + (h \rho + \xi) \left( S + I \right)
 + \sigma I  -\mu P\\
-    \frac{dS}{da} &amp;= \eta P - r I_1  - (h + \mu + \xi) S
+    \frac{dS}{da} &amp;= \eta P + r I_1  - (h + \mu + \xi) S
     \end{array}
 \end{equation}\]</span></p>
 <p>We track the number infected with <span class="math inline">\(i\)</span> types, <span class="math inline">\(I_i.\)</span></p>
@@ -364,6 +402,8 @@ code > span.er { color: #a61717; background-color: #e3d2d2; }
 \xi + \mu ) I_1 \\
     \frac{dI_2}{da} &amp;=  3r I_3 + h (1-\rho) I_1 - (2r + h + \sigma +
 \xi + \mu) I_2 \\
+    \frac{dI_i}{da} &amp;=  ir I_i + h (1-\rho) I_{i-1} - (ir + h +
+\sigma + \xi + \mu) I_i \\
     \end{array}
 \end{equation}\]</span></p>
 <p>The implementation truncates the infinite system, choosing a largest
@@ -372,6 +412,71 @@ MoI, <span class="math inline">\(n\)</span>:</p>
 \frac{dI_n}{da} = h (1-\rho) I_{n-1} - (n r + h \rho + \sigma + \xi+
 \mu) I_n
 \end{equation}\]</span></p>
+<p>In this implementation, the function <code>solve_SquIP</code> solves
+the equations and then it computes the first two moments of the
+distribution:</p>
+<p><span class="math display">\[m = \frac 1 H \sum_i i I_i\]</span></p>
+<p>and</p>
+<p><span class="math display">\[m_2 = \frac 1 H \sum_i i^2
+I_i\]</span></p>
+<p>In <code>SIPm</code> (below), we derive equations to compute <span class="math inline">\(dm/da\)</span> and <span class="math inline">\(d
+m_2 /da.\)</span></p>
+<p>denote the mean MoI in the population. We can show that</p>
+<p><span class="math display">\[
+\frac{\textstyle{dm}}{\textstyle{da}} = h(1-\rho)\left(1-\frac{P}{H}
+\right) - \left(r + \rho h + \sigma + \xi  \right)  m
+\]</span> We also compute the 2nd moment:</p>
+<p><span class="math display">\[
+\frac{\textstyle{dm_2}}{\textstyle{da}} = h(1-\rho)\left(1-\frac{P}{H} +
+2m\right) - \left(2r + \rho h + \sigma + \xi  \right)  m_2 + r m
+\]</span></p>
+<p>The function <code>solveSIPqueue</code>:</p>
+<ul>
+<li><p>calls <code>d_SIPqueue_da</code> which computes all the derivaves
+for <span class="math inline">\(S\)</span>, <span class="math inline">\(I\)</span>, <span class="math inline">\(P\)</span>, and <span class="math inline">\(m\)</span></p></li>
+<li><p>computes <span class="math inline">\(m\)</span> from <span class="math inline">\(I\)</span></p></li>
+</ul>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>foiP1 <span class="ot">=</span> <span class="fu">list</span>(<span class="at">hbar =</span> <span class="dv">1</span>, <span class="at">agePar =</span> <span class="fu">par_flatAge</span>(), <span class="at">seasonPar =</span> <span class="fu">par_flatSeason</span>(), <span class="at">trendPar =</span> <span class="fu">par_flatTrend</span>())</span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>q_out <span class="ot">&lt;-</span> <span class="fu">solve_SquIP</span>(<span class="dv">8</span><span class="sc">/</span><span class="dv">365</span>, <span class="at">sigma=</span><span class="dv">2</span><span class="sc">/</span><span class="dv">365</span>, <span class="at">xi=</span><span class="dv">0</span>, foiP1, <span class="at">Amax=</span><span class="dv">5</span><span class="sc">*</span><span class="dv">365</span>)</span></code></pre></div>
+<p>For verification, the variable <span class="math inline">\(m\)</span>
+is computed two ways We note that the variable <span class="math inline">\(m\)</span> matches the MoI computed from <span class="math inline">\(I\)</span>:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">plot</span>(age, m, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, mm, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">plot</span>(age, m2, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylim =</span> <span class="fu">range</span>(m2, mm2)))</span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, mm2, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>))</span></code></pre></div>
+</div>
+</div>
+<div id="approximating-equations" class="section level2">
+<h2>Approximating Equations</h2>
+<p><span class="math display">\[\begin{equation}
+    \begin{array}{rl}
+    \frac{dP}{da} &amp;= - \eta P + (h \rho + \xi) \left( S + I \right)
++ \sigma I  -\mu P\\
+    \frac{dS}{da} &amp;= \eta P + F_r(m, m_2) I  - (h + \mu + \xi) S \\
+    \frac{dI}{da} &amp;= h(1-\rho) S - F_r((m, m_2)) I  - (h \rho +
+\sigma + \xi) S - \mu S
+    \end{array}
+\end{equation}\]</span></p>
+<p>We compute <span class="math inline">\(m\)</span> and <span class="math inline">\(m_2\)</span> as before, and we let</p>
+<p><span class="math display">\[F_r = r \frac{\mbox{dnbinom}(1, m,
+\mbox{size} = \phi)}{1-\mbox{dnbinom}(0, m, \mbox{size}
+=\phi))}\left(1-\frac P H \right)\]</span></p>
+<p>where <span class="math display">\[\phi =
+\frac{m^2}{m_2-m^2-m}\]</span></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a>m_out <span class="ot">&lt;-</span> <span class="fu">solveSIPm</span>(<span class="dv">8</span><span class="sc">/</span><span class="dv">365</span>, <span class="at">sigma=</span><span class="dv">2</span><span class="sc">/</span><span class="dv">365</span>, <span class="at">xi=</span><span class="dv">0</span>, foiP1, <span class="at">Amax=</span><span class="dv">5</span><span class="sc">*</span><span class="dv">365</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" tabindex="-1"></a><span class="fu">with</span>(m_out, <span class="fu">plot</span>(age, S, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>,<span class="dv">1000</span>), <span class="at">type =</span> <span class="st">&quot;l&quot;</span>))</span>
+<span id="cb6-3"><a href="#cb6-3" tabindex="-1"></a><span class="fu">with</span>(m_out, <span class="fu">lines</span>(age, I))</span>
+<span id="cb6-4"><a href="#cb6-4" tabindex="-1"></a><span class="fu">with</span>(m_out, <span class="fu">lines</span>(age, P))</span>
+<span id="cb6-5"><a href="#cb6-5" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, S, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>))</span>
+<span id="cb6-6"><a href="#cb6-6" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, I, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>))</span>
+<span id="cb6-7"><a href="#cb6-7" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, P, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>, <span class="at">lty=</span><span class="dv">2</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">plot</span>(age, Fr, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>, <span class="at">ylim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="fl">0.005</span>)))</span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a><span class="fu">with</span>(m_out, <span class="fu">lines</span>(age, <span class="fu">c</span>(.<span class="dv">005</span>, Fr), <span class="at">col =</span> <span class="st">&quot;red&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="fu">with</span>(m_out, <span class="fu">plot</span>(age, m, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>))</span>
+<span id="cb8-2"><a href="#cb8-2" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, m, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="fu">with</span>(m_out, <span class="fu">plot</span>(age, m2, <span class="at">type =</span> <span class="st">&quot;l&quot;</span>))</span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a><span class="fu">with</span>(q_out, <span class="fu">lines</span>(age, m2, <span class="at">lty=</span><span class="dv">2</span>, <span class="at">col =</span> <span class="st">&quot;yellow&quot;</span>))</span></code></pre></div>
+</div>
 
 
 
