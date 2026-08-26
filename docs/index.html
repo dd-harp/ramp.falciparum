@@ -19,7 +19,7 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
-    
+
 
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -42,7 +42,7 @@
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
-     
+
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
@@ -68,7 +68,7 @@
 <li>
   <a href="https://github.com/dd-harp/ramp.falciparum/" class="external-link">
     <span class="fa fa-github"></span>
-     
+
   </a>
 </li>
       </ul>
@@ -79,7 +79,7 @@
 </div>
 <!--/.navbar -->
 
-      
+
 
       </header><div class="row">
   <div class="contents col-md-9">
@@ -88,6 +88,37 @@
 <div class="page-header"><h1 id="rampfalciparum----a-probabilistic-approach-to-malaria-epidemiology">
 <code>ramp.falciparum</code> <br><br> A Probabilistic Approach to Malaria Epidemiology<a class="anchor" aria-label="anchor" href="#rampfalciparum----a-probabilistic-approach-to-malaria-epidemiology"></a>
 </h1></div>
+<div class="section level2">
+<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+</h2>
+<p>To install the latest version of <code>ramp.falciparum</code> from GitHub, run the following lines of code in an R session. We also recommend loading the supporting package <code>ramp.trace</code></p>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dd-harp/ramp.falciparum"</span><span class="op">)</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dd-harp/ramp.trace"</span><span class="op">)</span></span></code></pre>
+<p>Then load them:</p>
+<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.trace/" class="external-link">ramp.trace</a></span><span class="op">)</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="falciparum-malaria">Falciparum Malaria<a class="anchor" aria-label="anchor" href="#falciparum-malaria"></a>
+</h2>
+<p>The health burden of falciparum malaria – human malaria caused by <em>Plasmodium falciparum</em> – is enormous, so there is a need to understand malaria epidemiology well enough to guide development of policies. The epidemiology of falciparum malaria is also complex: the basic features of malaria include:</p>
+<ul>
+<li><p>Simple malaria infections have a complex <strong>time course:</strong> an acute growth phase (lasting up to a month) is followed by a chronic phase that lasts for months (on average). Over the time-course of infection, parasite densities fluctuate enormously. The toolbox for handling infections includes stage-of-infection, age-of-infection, within-host models, and probability theory.</p></li>
+<li><p>The rate of exposure to malaria often exceeds the slow rate that infections clear, so <strong>superinfection</strong> is common. <em>Queuing theory</em> has been the main toolbox: these are compartmental models that sub-divide infection into an infinite number of states – the multiplicity of infection (MoI) – and that explore the dynamics of the MoI. Here, we will also develop <em>hybrid variables</em> that model MoI distributions.</p></li>
+<li><p>Infections can be <strong>treated and cured</strong> with anti-malarial drugs, and treatment is often followed by a short period of <strong>chemo-protection.</strong> This raises questions about the adherence to the prescribed drug-regimens, and the evolution of drug resistance.</p></li>
+<li><p><strong>Infectiousness</strong> – the probability a mosquito becomes infected after blood feeding on a human – is related to gametocyte densities and development of <em>transmission-blocking immunity.</em></p></li>
+<li><p><strong>Disease</strong> and the health burden of malaria is enormous; while there has been an inordinate focus on fever, the primary concerns are **</p></li>
+<li><p><strong>Immunity</strong> and its effects on infection, infectiousness, and disease;</p></li>
+<li><p>To understand malaria in populations, we must measure it. To be useful, it must be possible to relate the <em>true prevalence</em> of malaria to the prevalence that would be observed, the probability of <strong>detection</strong> by various <strong>diagnostics.</strong></p></li>
+<li><p>If these models are to be used for policy, then it is essential to have outputs by <strong>age.</strong></p></li>
+</ul>
+<p>All these are quantitative phenomena are interrelated, and there is probably no sensible way of describing them that does not involve mathematics. Each one of these facets of malaria has been addressed in mathematical models, but it has proven difficult to formulate a synthesis.</p>
+<p>This website holds code that implements mathematical models of malaria epidemiology. The goal is to provide a single repository for mathematical models, and to develop some models of malaria that are useful for research and policy. In some cases, the documentation includes some mathematical derivations.</p>
+</div>
+<div class="section level2">
+<h2 id="robust-analytics">Robust Analytics<a class="anchor" aria-label="anchor" href="#robust-analytics"></a>
+</h2>
 <p>Policy advice should be robust to uncertainty. To build rigor around the idea of robustness in policy, we recognized the need for a bespoke inferential framework designed for malaria analytics, which gave rise to <strong>RAMP</strong> (Robust Analytics for Malaria Policy). An important goal of RAMP was to build an integrated computational environment to support a range of activities, including conventional statistical analysis and methods to characterize, quantify, and propagate uncertainty. As RAMP took shape, RAMP software was being developed to implemented the principles in a stable computational form to facilitate the transformation of data into robust policy advice. Today, core RAMP software includes several R packages (see <a href="https://dd-harp.github.io/ramp.malaria/" class="external-link">ramp.malaria</a>) to deal with malaria epidemiology, transmission dynamics, and control in the broad sense. The <a href="https://dd-harp.github.io/ramp.library/" class="external-link">ramp.library</a> includes reusable code for one of several models of human malaria infection and immuno-epidemiology.</p>
 <p>We recognized that the complex epidemiology of malaria - defined in the narrow sense to include only parasite infection in humans and processes affecting human health or parasite transmission - merits a deeper dive. Given the complexity of malaria, we needed a mathematical framework for malaria epidemiology that could expose to scrutiny the relationship between processes and patterns in human populations exposed to malaria parasites as they age, with different intensities and with different seasonal patterns. This software package, <strong><code>ramp.falciparum,</code></strong> implements a new computational approach to malaria epidemiology (in that narrow sense) using random variables. These methods are highly mimetic, but computationally intensive and difficult to apply. To address these limitations, we use hybrid variables to build a bridge from this probabilistic approach to a set of simpler approximating models.</p>
 <p>The epidemiology of <em>Plasmodium falciparum</em> malaria presents a unique set of challenges due to the complex dynamics of infection, immunity, disease and infectiousness as well as treatment and chemo-protection, diagnostics and detection. Malaria can be measured in a dozen different ways, but it has been difficult to present a simple synthesis of malaria infection and disease in terms of the metrics that are commonly used in research and clinical surveillance. An important metric is the <em>Plasmodium falciparum</em> parasite rate, or <em>Pf</em>PR, defined as the average prevalence of malaria taken from a cross-sectional survey. Another metric, often measured as a covariate in research studies, is a parasite count, the number of parasites in a blood slide field counted by a light microscopist. In an old data set, collected during malariotherapy, parasite counts fluctuated substantially over the time course of an infection, but they were strongly statistically correlated with the <em>age of infection</em> or AoI (Henry JM, <em>et al.</em>, 2022)<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. In malaria, the <em>Pf</em>PR in several old studies had a characteristic shape when plotted against age. Parasite densities have been used in research settings as both a diagnostic criterion and as a correlate of disease. Malaria epidemiology exhibits patterns that differ by diagnostic method, by season, by sex, and by location.</p>
@@ -102,14 +133,6 @@
 <li><p>We demonstrate that a simple system of ordinary differential equations can be used in place of the random variables for most applications.</p></li>
 </ol>
 <p>To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology.</p>
-<div class="section level2">
-<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
-</h2>
-<p>To install and use the latest version from GitHub, run the following lines of code in an R session.</p>
-<pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dd-harp/ramp.falciparum"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"ramp.falciparum"</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
@@ -146,8 +169,8 @@
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>John M. Henry <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8684-2003" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>David L. Smith <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4367-3849" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>John M. Henry <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0001-8684-2003" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
+<li>David L. Smith <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-4367-3849" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a>  </li>
 </ul>
 </div>
 
@@ -171,16 +194,16 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
       </footer>
 </div>
 
-  
 
 
-  
+
+
 
   </body>
 </html>

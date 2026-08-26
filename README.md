@@ -1,4 +1,52 @@
-# `ramp.falciparum` <br><br> A Probabilistic Approach to Malaria Epidemiology 
+# `ramp.falciparum` <br><br> A Deep Dive into Malaria Epidemiology
+
+## Install
+
+To install the latest version of `ramp.falciparum` from GitHub, run the following lines of code in an R session. We also recommend loading the supporting package `ramp.func`
+
+```
+library(devtools)
+devtools::install_github("dd-harp/ramp.falciparum")
+devtools::install_github("dd-harp/ramp.func")
+```
+Then load them: 
+```
+library(ramp.falciparum)
+library(ramp.func)
+```
+
+## Falciparum Malaria 
+
+The health burden of falciparum malaria -- human malaria caused by *Plasmodium falciparum* -- is enormous, 
+so there is a need to understand malaria epidemiology well enough to guide development of policies.
+The epidemiology of falciparum malaria is also complex: the basic features of malaria include: 
+
++ Simple malaria infections have a complex **time course:** an acute growth phase (lasting up to a month) is followed by a chronic phase that lasts for months (on average). Over the time-course of infection, parasite densities fluctuate enormously. The toolbox for handling infections includes stage-of-infection, age-of-infection, within-host models, and probability theory. 
+
++ The rate of exposure to malaria often exceeds the slow rate that infections clear, so **superinfection** is common. *Queuing theory* has been the main toolbox: these are compartmental models that sub-divide infection into an infinite number of states -- the multiplicity of infection (MoI) -- and that explore the dynamics of the MoI. Here, we will also develop *hybrid variables* that model MoI distributions. 
+
++ Infections can be **treated and cured** with anti-malarial drugs, and treatment is often followed by a short period of **chemo-protection.** This raises questions about the adherence to the prescribed drug-regimens, and the evolution of drug resistance. 
+
++ **Infectiousness** -- the probability a mosquito becomes infected after blood feeding on a human -- is related to gametocyte densities and development of *transmission-blocking immunity.*  
+
++ **Disease** and the health burden of malaria is enormous; while there has been an inordinate focus on fever, the primary concerns are **
+
++ **Immunity** and its effects on infection, infectiousness, and disease; 
+
++ To understand malaria in populations, we must measure it. To be useful, it must be possible to relate the *true prevalence* of malaria to the prevalence that would be observed, the probability of **detection** by various **diagnostics.** 
+
++ If these models are to be used for policy, then it is essential to have outputs by **age.** 
+
+All these are quantitative phenomena are interrelated, and there is probably no sensible way of describing them that does not involve mathematics.
+Each one of these facets of malaria has been addressed in mathematical models, but it has proven difficult to formulate a synthesis.
+
+
+This website holds code that implements mathematical models of malaria epidemiology.
+The goal is to provide a single repository for mathematical models, and to develop some models of malaria that are useful for research and policy.
+In some cases, the documentation includes some mathematical derivations.
+
+
+## Robust Analytics 
 
 Policy advice should be robust to uncertainty. To build rigor around the idea of robustness in policy, we recognized the need for a bespoke inferential framework designed for malaria analytics, which gave rise to **RAMP**
 (Robust Analytics for Malaria Policy). An important goal of RAMP was to build an integrated computational environment to support a range of activities, including conventional statistical analysis and methods to characterize, quantify, and propagate uncertainty.
@@ -29,16 +77,6 @@ The probabilistic approach is both highly realistic and descriptive, but our goa
 
 To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology. 
 
-## Installation
-
-To install and use the latest version from GitHub, run the following lines of code in an R session.
-
-```
-library(devtools)
-devtools::install_github("dd-harp/ramp.falciparum")
-install.packages("ramp.falciparum")
-library(ramp.falciparum)
-```
 
 
 ## References

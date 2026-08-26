@@ -1,13 +1,16 @@
-pandoc: '3.2'
-pkgdown: 2.0.9
+pandoc: '3.9'
+pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
   Dynamics: Dynamics.html
   FoI: FoI.html
   Hybrid: Hybrid.html
   MoI: MoI.html
-last_built: 2025-02-12T06:04Z
+  SIPmoi: SIPmoi.html
+  SquIP: SquIP.html
+  SquIPz: SquIPz.html
+  Superinfection: Superinfection.html
+last_built: 2026-08-24T17:13Z
 urls:
   reference: https://dd-harp.github.io/ramp.falciparum/reference
   article: https://dd-harp.github.io/ramp.falciparum/articles
-
