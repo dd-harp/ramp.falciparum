@@ -9,11 +9,11 @@ dSIPm(a, y, pars, FoIpar)
 \arguments{
 \item{a}{the host age}
 
+\item{y}{the state variables}
+
 \item{pars}{the parameters}
 
 \item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
-
-\item{M}{the state variables}
 }
 \value{
 the derivatives as a \link{list}

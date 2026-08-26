@@ -7,9 +7,9 @@
 make_Z(d_pmf, N)
 }
 \arguments{
-\item{N}{the maximum MoI}
+\item{d_pmf}{the density distribution for a probability mass function}
 
-\item{F_moe}{the density distribution for a probability mass function}
+\item{N}{the maximum MoI}
 }
 \value{
 a \link{matrix}

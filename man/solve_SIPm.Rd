@@ -34,6 +34,12 @@ solve_SIPm(
 
 \item{xi}{background drug taking}
 
+\item{eta}{loss of chemoprotection}
+
+\item{mu}{population death rate}
+
+\item{H}{population size}
+
 \item{Amax}{The maximum runtime (in days)}
 
 \item{dt}{The output frequency (in days)}

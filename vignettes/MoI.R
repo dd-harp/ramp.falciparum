@@ -1,6 +1,5 @@
 ## -----------------------------------------------------------------------------
-devtools::load_all()
-#library(ramp.falciparum)
+library(ramp.falciparum)
 library(deSolve)
 library(knitr)
 

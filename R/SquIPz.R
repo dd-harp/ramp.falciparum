@@ -200,16 +200,19 @@ dSquIPz = function(a, y, pars, FoIpar, Z){with(as.list(c(y,pars)),{
 #' + `N` --- The truncation parameter
 #' + `out` --- The matrix returned by `deSolve`
 #'
-#'
 #' @param h the force of infection
 #' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param F_moe a probability moment function for the multiplicity of exposure
+#' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #' @param rho the fraction of incident cases that gets treted
 #' @param sigma treatment rate for infected individuals
 #' @param xi background drug taking
-#' @param tau the cohort birthday
+#' @param eta loss of chemoprotection
+#' @param mu population death rate
+#' @param H the cohort size
 #' @param Amax The maximum runtime (in days)
-#' @param da The output frequency (in days)
+#' @param da The output interval (in days)
 #' @param N truncation parameter (maximum MoI): if `NULL`, then set by rule
 #'
 #' @return a named [list] of parsed outputs
@@ -244,7 +247,7 @@ solve_SquIPz = function(h, FoIpar, F_moe, tau=0,
 
 #' Make the Z matrix
 #'
-#' @param F_moe the density distribution for a probability mass function
+#' @param d_pmf the density distribution for a probability mass function
 #' @param N the maximum MoI
 #'
 #' @returns a [matrix]

@@ -129,7 +129,7 @@ NULL
 #' This function computes the derivatives in a form that can be used by [deSolve::ode].
 #'
 #' @param a the host age
-#' @param M the state variables
+#' @param y the state variables
 #' @param pars the parameters
 #' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
 #'
@@ -182,6 +182,9 @@ dSIPm = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #' @param rho the fraction of incident cases that gets treted
 #' @param sigma treatment rate for infected individuals
 #' @param xi background drug taking
+#' @param eta loss of chemoprotection
+#' @param mu population death rate
+#' @param H population size
 #' @param tau the cohort birthday
 #' @param Amax The maximum runtime (in days)
 #' @param dt The output frequency (in days)

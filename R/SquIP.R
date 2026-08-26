@@ -206,16 +206,18 @@ dSquIP = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #' + `N` --- The truncation parameter
 #' + `out` --- The matrix returned by `deSolve`
 #'
-#'
 #' @param h the force of infection
 #' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param tau the cohort birthday
 #' @param r the clearance rate for a simple infection
 #' @param rho the fraction of incident cases that gets treted
 #' @param sigma treatment rate for infected individuals
 #' @param xi background drug taking
-#' @param tau the cohort birthday
+#' @param eta loss of chemoprotection
+#' @param mu population death rate
+#' @param H cohort size
 #' @param Amax The maximum runtime (in days)
-#' @param da The output frequency (in days)
+#' @param da The output interval (in days)
 #' @param N truncation parameter (maximum MoI): if `NULL`, then set by rule
 #'
 #' @return a named [list] of parsed outputs

@@ -478,93 +478,129 @@ and using the formulas to compute their values.</p>
 </div>
 <div id="derivations" class="section level1">
 <h1>Derivations</h1>
-<div id="infected" class="section level2">
-<h2>Infected</h2>
-<p>We can derive the equation for <span class="math inline">\(dI/da\)</span> by collecting terms:</p>
+<div id="change-of-variables" class="section level2">
+<h2>Change of Variables</h2>
+<p><span class="math display">\[
+\begin{array}{ccc}
+I &amp;=   &amp; \sum_i I_i  \\[6pt]
+m &amp;=    &amp; \sum_i i I_i /H\\[6pt]
+m_2 &amp;=    &amp; \sum_i i^2 I_i /H\\
+\end{array}.\]</span></p>
+<div id="infected" class="section level3">
+<h3>Infected</h3>
 <p><span class="math display">\[\frac{dI}{da} =\begin{array}{l}
-h(1-\rho)\left( S + \sum_i I_i \right) - h \sum_i I_i\\
-\sum_i -ri I_i + (i+1) r I_{i+1} \\
-- \sum_i \left(\sigma + \xi + \mu\right) I_i  \\
+h(1-\rho) S \sum_i z_i \\
+- \sum_i \left(h +\sigma + \xi + \mu\right) I_i  \\
+- r I_1 - \sum_i -ri I_i + (i+1) r I_{i+1} \\
++ h(1-\rho)\sum_i \sum_{j&lt;i} I_{i-j} z_j\\
+\end{array}\]</span> We can use some identities to simplify a lot:</p>
+<p><span class="math display">\[\frac{dI}{da} =\begin{array}{l}
+h(1-\rho) S - \left(h + \sigma + \xi + \mu\right) I - r_1 I_1\\
+- h(1-\rho)\sum_i \sum_{j&lt;i} I_{i-j} z_j\\
+\end{array}\]</span> but <span class="math display">\[\sum_i
+\sum_{j&lt;i} I_{i-j} z_j = \sum_i \sum_j z_j I_i = I\]</span> so <span class="math display">\[\frac{dI}{da} =
+h(1-\rho) S - \left(h \rho + \sigma + \xi + \mu\right) I - r_1 I_1
+\]</span></p>
+</div>
+</div>
+<div id="mean-moi" class="section level2">
+<h2>Mean MoI</h2>
+<p><span class="math display">\[\frac{dm}{da} =\begin{array}{l}
+h(1-\rho) S \sum_i i z_i/H\\
+- \sum_i \left(h +\sigma + \xi + \mu\right) i I_i /H \\
+\sum_i i \left((i+1)r I_{i+1} - r_i I_i \right) /H \\
++ h(1-\rho)\sum_i \sum_{j&lt;i} i I_{i-j} z_j\\
 \end{array}\]</span></p>
-<p>Since most things cancel, we simply get:</p>
-<p><span class="math display">\[\frac{dI}{da} = h(1-\rho) S - r_1 I_1 -
-(\rho h + \xi + \sigma + \mu) I \]</span></p>
-</div>
-<div id="moi-distribution-first-moment" class="section level2">
-<h2>MoI Distribution, First Moment</h2>
-<p>The dynamics of <span class="math inline">\(m_1\)</span> are given
-by:</p>
-<p><span class="math display">\[
-\frac{\textstyle{dm_1}}{\textstyle{da}} = H^{-1} \sum_i i
-\frac{dI_i}{dt} - H^{-2} \sum_i i I_i \frac{d H}{da}
-\]</span> Several of the terms can be handled all at once: <span class="math display">\[
-\frac 1 H
-\sum_{i\geq 1}   i (\sigma + \xi + h + \mu) I_i = (\sigma + \xi + h +
-\mu) m_1  
-\]</span></p>
-<p><strong>Natural Clearance</strong> — For the terms involving <span class="math inline">\(r\)</span> – we can see a pattern by looking at
-the terms one by one. For example, from <span class="math inline">\(dI_2/dt\)</span> we add <span class="math inline">\(2 (3rI_3)\)</span>, but from <span class="math inline">\(dI_3/dt,\)</span> we subtract <span class="math inline">\(3(3rI_3)\)</span> leaving us with <span class="math inline">\(-3rI_3.\)</span> In general, we get: <span class="math display">\[
-\begin{array}{rl}
-\frac{1}{H} \sum_{i\geq 1} i \left( -  i r I_i + (i+1) r I_{i+1} \right)
-&amp;= - \sum_i r i I_i/H \\
-&amp;= -  r m_1
-\end{array}
-\]</span></p>
-<p><strong>Exposure</strong> — For the terms involving exposure, <span class="math inline">\(h.\)</span> We note that <span class="math display">\[
+<div id="r-terms" class="section level3">
+<h3><span class="math inline">\(r\)</span> terms</h3>
+<p>For the terms involving <span class="math inline">\(r\)</span>, we
+want to simplify <span class="math display">\[
+\sum_i i \left((i+1) r I_{i+1} - r i I_i \right)
+\]</span> In long form, this is just <span class="math display">\[
 \begin{array}{l}
-\frac{1}H \left[h (1-\rho) S  + \sum_{i\geq 1} (i+1) \left( h (1-\rho)
-I_i  \right) \right] \\ = h (1-\rho) \left(S + I + \sum_i i I_i \right)
-/ H  \\ = h(1-\rho)\left(\frac{S+I}H + m_1\right)
+1\left(-r I_1 + 2r I_2 \right) \\
+2 \left(-2r I_2 + 3r I_3\right) \\
+3 \left(-3r I_3 + 4r I_4\right) \\
 \end{array}
-\]</span></p>
-<p><strong>Demography</strong> —</p>
-<p>Now, we compute <span class="math inline">\(dH/da\)</span> terms, we
-get:</p>
-<p><span class="math display">\[
-- H^{-2} \sum_i iI_i \frac{dH}{da} = \frac{\sum_i i I_i \mu H}{H^2} =
-\mu m_1
-\]</span> Putting it all together, we get that <span class="math display">\[
-\frac{\textstyle{dm_1}}{\textstyle{da}} = h(1-\rho) \frac{S+I}H -
-\left(r + \rho h + \sigma + \xi + \mu \right)  m_1  + \mu m_1
-\]</span> or <span class="math display">\[\begin{equation}
-\frac{\textstyle{dm_1}}{\textstyle{da}} =
-h(1-\rho)\left(1 -  \frac{P}H \right) - \left(r + \rho h + \sigma +
-\xi  \right)  m_1  
-\end{equation}\]</span></p>
+\]</span> but this simplifies to <span class="math display">\[-r I_1 -
+2r I_2 - 3r I_3 - \ldots = -rm  \]</span></p>
+<p><span class="math display">\[\frac{dm}{da} =\begin{array}{l}
+h(1-\rho) S \hat z/H\\
+- \sum_i \left(h +\sigma + \xi + \mu\right) m \\
+- r I_1 + \sum_i \left((i+1) r (i+1) I_{i+1} - r_i I_i \right) /H \\
++ h(1-\rho)\sum_i \sum_{j&lt;i} i I_{i-j} z_j\\
+\end{array}\]</span></p>
 </div>
-<div id="moi-distribution-second-moment" class="section level2">
-<h2>MoI Distribution, Second Moment</h2>
-<p>The second, non-central moment of the distribution of the MoI (<span class="math inline">\(m_2\)</span>) is: <span class="math display">\[
-m_2 = \frac{\textstyle{\sum_i i^2 I_i}}H
-\]</span> As before, we compute: <span class="math display">\[
-\frac{\textstyle{dm_2}}{\textstyle{da}} = H^{-1} \sum_i i^2
-\frac{dI_i}{dt} - H^{-2} \sum_i i^2 I_i \frac{d H}{da}
-\]</span> We collect all the simple terms: <span class="math display">\[
-\frac{1}{H} \sum_{i\geq 1}   i^2 (\sigma + \xi + h + \mu) I_i = (\sigma
-+ \xi + h + \mu) m_2
-\]</span></p>
-<p><strong>Natural Clearance</strong> — The terms involving <span class="math inline">\(r\)</span> are: <span class="math display">\[
-\begin{array}{l}
-\frac{1}{H} \sum_{i\geq 1} i^2 \left( - i r I_i + (i+1) r I_{i+1}
-\right) \\
-= \sum_i  r (i^3 - i(i-1)^2 I_i / H\\
-= \sum_i  r (-2i^2 + 1) I_i / H\\
-=  - 2r m_2 + r m
+<div id="h-terms" class="section level3">
+<h3><span class="math inline">\(h\)</span> terms</h3>
+<p><span class="math display">\[h(1-\rho)\sum_i \sum_{j&lt;i} i^2
+I_{i-j} z_j\]</span> In long form, summing from <span class="math inline">\(I_i\)</span> we get <span class="math display">\[\begin{array}{c|l}
+I_1 &amp; - h I_1 + h (1-\rho) I_1 \left(2 z_1 + 3 z_2 + 4 z_3 +
+\ldots\right) \\
+I_2 &amp; - 2^2 h I_2 + h (1-\rho) I_2 \left(3^2 z_1 + 4^2 z_2 + 5^2 z_3
++ \ldots\right) \\
+\vdots &amp; \vdots \\
+I_i &amp; - i^2 h I_i + h (1-\rho) I_i \left((i+1)^2 z_1 + (i+2)^2 z_2 +
+\ldots \right)
 \end{array}
+\]</span> but since<br />
+<span class="math display">\[
+\sum_j (i+j) z_j = \sum_j i z_j + \sum_j j z_j =  i  + \hat z
 \]</span></p>
-<p><strong>Exposure</strong> — The terms with <span class="math inline">\(h (1-\rho)\)</span> are:</p>
-<p><span class="math display">\[
-\begin{array}{c}
-\frac{h (1-\rho)}H \left( S + \sum_{i\geq 1} (i+1)^2  I_i  \right) \\
-= h(1-\rho) \left[ \left(\frac{S + I}H\right)  + 2m + m_2 \right] \\
+<p>We can rewrite all this above as: <span class="math display">\[\begin{array}{c|l}
+I_1 &amp; - h I_1 + h (1-\rho) I_1 \left(1 + \hat z\right) \\
+I_2 &amp; - 2 h I_2 + h (1-\rho) I_2 \left(2 + \hat z\right) \\
+\vdots &amp; \vdots \\
+I_i &amp; - i h I_i + h (1-\rho) I_i \left(i + \hat z \right)
 \end{array}
-\]</span> and finally <span class="math display">\[
-- H^{-2} \sum_i i^2 I_i \frac{dH}{da} = \frac{\sum_i i^2 I_i \mu H}{H^2}
-= \mu m_2
-\]</span> so we get <span class="math display">\[
-\frac{\textstyle{dm_2}}{\textstyle{da}} = h(1-\rho)\left(1-\frac{P}H +
-2m\right) - \left(2r + \rho h + \sigma + \xi \right)  m_2 + rm
+\]</span> now dividing by <span class="math inline">\(H,\)</span> we get
+<span class="math display">\[ \frac{dm}{da} = - h m + h (1-\rho)m +
+h(1-\rho)\hat z \frac{S+I}{H} + \mbox{terms not involving }
+h\]</span></p>
+</div>
+</div>
+<div id="moi-second-moment" class="section level2">
+<h2>MoI, Second Moment</h2>
+<p><span class="math display">\[\frac{dm}{da} =\begin{array}{l}
+h(1-\rho) S \sum_i i^2 z_i/H\\
+- \sum_i \left(h +\sigma + \xi + \mu\right) i^2 I_i /H \\
+\sum_i i^2 \left((i+1)r I_{i+1} - r_i I_i \right) /H \\
++ h(1-\rho)\sum_i \sum_{j&lt;i} i^2 I_{i-j} z_j\\
+\end{array}\]</span></p>
+<div id="h-terms-1" class="section level3">
+<h3><span class="math inline">\(h\)</span> terms</h3>
+<p><span class="math display">\[h(1-\rho)\sum_i \sum_{j&lt;i} i I_{i-j}
+z_j\]</span> In long form, summing from <span class="math inline">\(I_i\)</span> we get <span class="math display">\[\begin{array}{c|l}
+I_1 &amp; - h I_1 + h (1-\rho) I_1 \left(2^2 z_1 + 3^2 z_2 + 4^2 z_3 +
+\ldots\right) \\
+I_2 &amp; - 2^2 h I_2 + h (1-\rho) I_2 \left(3^2 z_1 + 4^2 z_2 + 5^2 z_3
++ \ldots\right) \\
+\vdots &amp; \vdots \\
+I_i &amp; - i^2 h I_i + h (1-\rho) I_i \left((i+1)^2z_1 + (i+2)^2 z_2 +
+\ldots \right)
+\end{array}
+\]</span> but since<br />
+<span class="math display">\[
+\sum_j (i+j)^2 z_j = \sum_j i^2 z_j + \sum_j 2 i j z_j + \sum_j j^2 z_j
+=  i^2  + 2 i \hat z + \hat z_2
 \]</span></p>
+<p>We can rewrite all this above as: <span class="math display">\[\begin{array}{c|l}
+I_1 &amp; - h I_1 + h (1-\rho) I_1 \left(1 + 1 \cdot 2  \hat z + \hat
+z_2\right) \\
+I_2 &amp; - 2^2 h I_2 + h (1-\rho) I_2 \left(2^2 + 2 \cdot 2 \hat z +
+\hat z_2 \right) \\
+\vdots &amp; \vdots \\
+I_i &amp; - i^2 h I_i + h (1-\rho) I_i \left(i^2 + i \cdot 2 \hat z +
+\hat z_2 \right)
+\end{array}
+\]</span> now dividing by <span class="math inline">\(H,\)</span> we get
+<span class="math display">\[ \frac{dm_2}{da} = - h m_2 + h
+(1-\rho)\left(m_2 + 2 \hat z m + \hat z_2 \frac I H \right) +   h
+(1-\rho) \hat z_2 \frac{S}{H} + \mbox{terms not involving }
+h\]</span></p>
+<p>The old correct formula was: <span class="math display">\[\frac{dm_2}{da} = h(1-\rho)\hat z \left(\frac{S +
+I}H + 2 m \right) - (2r + h\rho + \sigma + \xi)m_2 + r m \]</span></p>
+</div>
 </div>
 <div id="numerical-verification" class="section level2">
 <h2>Numerical Verification</h2>

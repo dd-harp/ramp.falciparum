@@ -26,6 +26,8 @@ solve_SquIPz(
 
 \item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
 
+\item{F_moe}{a probability moment function for the multiplicity of exposure}
+
 \item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
@@ -36,9 +38,15 @@ solve_SquIPz(
 
 \item{xi}{background drug taking}
 
+\item{eta}{loss of chemoprotection}
+
+\item{mu}{population death rate}
+
+\item{H}{the cohort size}
+
 \item{Amax}{The maximum runtime (in days)}
 
-\item{da}{The output frequency (in days)}
+\item{da}{The output interval (in days)}
 
 \item{N}{truncation parameter (maximum MoI): if \code{NULL}, then set by rule}
 }

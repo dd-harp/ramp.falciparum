@@ -1,18 +1,18 @@
-# `ramp.falciparum` <br><br> A Probabilistic Approach to Malaria Epidemiology
+# `ramp.falciparum` <br><br> A Deep Dive into Malaria Epidemiology
 
 ## Install
 
-To install the latest version of `ramp.falciparum` from GitHub, run the following lines of code in an R session. We also recommend loading the supporting package `ramp.trace`
+To install the latest version of `ramp.falciparum` from GitHub, run the following lines of code in an R session. We also recommend loading the supporting package `ramp.func`
 
 ```
 library(devtools)
 devtools::install_github("dd-harp/ramp.falciparum")
-devtools::install_github("dd-harp/ramp.trace")
+devtools::install_github("dd-harp/ramp.func")
 ```
 Then load them: 
 ```
 library(ramp.falciparum)
-library(ramp.trace)
+library(ramp.func)
 ```
 
 ## Falciparum Malaria 

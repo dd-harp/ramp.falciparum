@@ -414,7 +414,8 @@ MoI, <span class="math inline">\(n\)</span>:</p>
 <p>In this implementation, the function <code>solve_SquIP</code> solves
 the equations and then it computes the first two moments of the
 distribution:</p>
-<p><span class="math display">\[m = \frac 1 H \sum_i i I_i\]</span></p>
+<p><span class="math display">\[m_1 = \frac 1 H \sum_i i
+I_i\]</span></p>
 <p>and</p>
 <p><span class="math display">\[m_2 = \frac 1 H \sum_i i^2
 I_i\]</span></p>
@@ -456,7 +457,7 @@ is computed two ways We note that the variable <span class="math inline">\(m\)</
 \sigma + \xi) S - \mu S
     \end{array}
 \end{equation}\]</span></p>
-<p>We compute <span class="math inline">\(m\)</span> and <span class="math inline">\(m_2\)</span> as before, and we let</p>
+<p>We compute <span class="math inline">\(m_1\)</span> and <span class="math inline">\(m_2\)</span> as before, and we let</p>
 <p><span class="math display">\[F_r = r \frac{\mbox{dnbinom}(1, m,
 \mbox{size} = \phi)}{1-\mbox{dnbinom}(0, m, \mbox{size}
 =\phi))}\left(1-\frac P H \right)\]</span></p>
