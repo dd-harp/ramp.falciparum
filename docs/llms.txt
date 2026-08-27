@@ -1,0 +1,685 @@
+`ramp.falciparum`\
+\
+A Deep Dive into Falciparum Malaria Epidemiology
+================================================
+
+## Install
+
+To install the latest version of `ramp.falciparum` from GitHub, run the
+following lines of code in an R session. We also recommend loading the
+supporting package `ramp.func`
+
+    library(devtools)
+    devtools::install_github("dd-harp/ramp.falciparum")
+    devtools::install_github("dd-harp/ramp.func")
+
+Then load them:
+
+    library(ramp.falciparum)
+    library(ramp.func)
+
+## Falciparum Malaria
+
+The health burden of falciparum malaria – human malaria caused by
+*Plasmodium falciparum* – is enormous, so there is a need to understand
+malaria epidemiology well enough to guide development of policies. The
+epidemiology of falciparum malaria is also complex: the basic features
+of malaria include:
+
+- **Exposure** — the number of infectious bites, per person, per day
+  varies geographically, seasonally, across years, and within a
+  population by age and other factors.
+
+- **Time Course of Infection** — simple malaria infections have a
+  complex **time course:** an acute growth phase (lasting up to a month)
+  is followed by a chronic phase that lasts for months (on average).
+  Over the time-course of infection, parasite densities fluctuate
+  enormously. The toolbox for handling infections includes
+  stage-of-infection, age-of-infection, within-host models, and
+  probability theory.
+
+- **Superinfection** — the rate of exposure to malaria often exceeds the
+  slow rate that infections clear, so **superinfection** is common.
+  *Queuing theory* has been the main toolbox: these are compartmental
+  models that sub-divide infection into an infinite number of states –
+  the multiplicity of infection (MoI) – and that explore the dynamics of
+  the MoI. Here, we will also develop *hybrid variables* that model MoI
+  distributions.
+
+- **Antimalarial Drugs** — Infections can be **treated and cured** with
+  anti-malarial drugs, and treatment is often followed by a short period
+  of **chemo-protection.** This raises questions about the adherence to
+  the prescribed drug-regimens, and the evolution of drug resistance.
+
+- **Infectiousness** – the probability a mosquito becomes infected after
+  blood feeding on a human – is related to gametocyte densities and
+  development of *transmission-blocking immunity.*
+
+- **Disease** — malaria is a disease of humans with an enormous health
+  burden; while there has been an inordinate focus on fever, the primary
+  concerns are \*\*
+
+- **Immunity** — and its effects on infection, infectiousness, and
+  disease;
+
+- **Diagnostics and Detection** — to understand malaria in populations,
+  we must measure it. To be useful, it must be possible to relate the
+  *true prevalence* of malaria to the prevalence that would be observed,
+  the probability of **detection** by various **diagnostics.**
+
+- **Demography** — If these models are to be used for policy, then it is
+  essential to account for human demography and to consider **age.**
+
+All these are quantitative phenomena are interrelated, and there is
+probably no sensible way of describing them that does not involve
+mathematics. Each one of these facets of malaria has been addressed in
+mathematical models, but it has proven difficult to formulate a
+synthesis.
+
+This website holds code that implements mathematical models of malaria
+epidemiology. The goal is to provide a single repository for
+mathematical models, and to develop some models of malaria that are
+useful for research and policy. In some cases, the documentation
+includes some mathematical derivations.
+
+## Robust Analytics
+
+Policy advice should be robust to uncertainty. To build rigor around the
+idea of robustness in policy, we recognized the need for a bespoke
+inferential framework designed for malaria analytics, which gave rise to
+**RAMP** (Robust Analytics for Malaria Policy). An important goal of
+RAMP was to build an integrated computational environment to support a
+range of activities, including conventional statistical analysis and
+methods to characterize, quantify, and propagate uncertainty. As RAMP
+took shape, RAMP software was being developed to implemented the
+principles in a stable computational form to facilitate the
+transformation of data into robust policy advice. Today, core RAMP
+software includes several R packages (see
+[ramp.malaria](https://dd-harp.github.io/ramp.malaria/)) to deal with
+malaria epidemiology, transmission dynamics, and control in the broad
+sense. The [ramp.library](https://dd-harp.github.io/ramp.library/)
+includes reusable code for one of several models of human malaria
+infection and immuno-epidemiology.
+
+We recognized that the complex epidemiology of malaria - defined in the
+narrow sense to include only parasite infection in humans and processes
+affecting human health or parasite transmission - merits a deeper dive.
+Given the complexity of malaria, we needed a mathematical framework for
+malaria epidemiology that could expose to scrutiny the relationship
+between processes and patterns in human populations exposed to malaria
+parasites as they age, with different intensities and with different
+seasonal patterns. This software package, **`ramp.falciparum,`**
+implements a new computational approach to malaria epidemiology (in that
+narrow sense) using random variables. These methods are highly mimetic,
+but computationally intensive and difficult to apply. To address these
+limitations, we use hybrid variables to build a bridge from this
+probabilistic approach to a set of simpler approximating models.
+
+The epidemiology of *Plasmodium falciparum* malaria presents a unique
+set of challenges due to the complex dynamics of infection, immunity,
+disease and infectiousness as well as treatment and chemo-protection,
+diagnostics and detection. Malaria can be measured in a dozen different
+ways, but it has been difficult to present a simple synthesis of malaria
+infection and disease in terms of the metrics that are commonly used in
+research and clinical surveillance. An important metric is the
+*Plasmodium falciparum* parasite rate, or *Pf*PR, defined as the average
+prevalence of malaria taken from a cross-sectional survey. Another
+metric, often measured as a covariate in research studies, is a parasite
+count, the number of parasites in a blood slide field counted by a light
+microscopist. In an old data set, collected during malariotherapy,
+parasite counts fluctuated substantially over the time course of an
+infection, but they were strongly statistically correlated with the *age
+of infection* or AoI (Henry JM, *et al.*, 2022)[^1]. In malaria, the
+*Pf*PR in several old studies had a characteristic shape when plotted
+against age. Parasite densities have been used in research settings as
+both a diagnostic criterion and as a correlate of disease. Malaria
+epidemiology exhibits patterns that differ by diagnostic method, by
+season, by sex, and by location.
+
+With so many interacting factors, it has been a challenge to develop
+model that could deal with everything all at once. One approach to
+studying malaria infection has been to develop mechanistic models for
+the dynamics of malaria infection within a single host. The most
+prominent models of this type are OpenMalaria and eMod, but there have
+been several others. These computational models made it possible to
+develope comprehensive individual-based simulation models, or IBMs, for
+malaria policy. While these approaches have been able to replicate the
+patterns, the outputs of the models are usually just as complex as the
+data collected in field studies. A synthesis of malaria epidemiology has
+proven elusive.
+
+We present the computational algorithms that support a probabilistic
+approach to malaria epidemiology. We start with a semi-Markovian model
+of malaria exposure and infection, whose states are represented by
+random variables that describe the multiplicity of infection (MoI) in a
+host and the age of infection (AoI). Assuming that parasite densities
+can be predicted by the AoI in a statistical sense, we can compute
+probability distribution functions describing parasite densities,
+parasite counts, and detection in an individual chosen at random from
+the population. From this, we present a model for parasite detection and
+parasite counts. This same approach has been extended to predict
+disease, immunity, treatment with anti-malarial drugs, and a brief
+period of chemo-protection.
+
+The probabilistic approach is both highly realistic and descriptive, but
+our goal was a synthesis. This synthesis involves a few steps:
+
+1.  We develop formula and functions to compute the mean MoI, the mean
+    AoI and all its moments, and the probability of detection.
+
+2.  Hybrid models for the mean MoI for malaria superinfection were
+    developed by Nåsell (1985)[^2], We extend this approach, developing
+    systems of differential equations that track the mean and higher
+    order moments of the distribution of the AoI.
+
+3.  We a new random variable describing the age of the youngest
+    infection (AoY). We show how the variable serves as a basis for
+    computing parasite density distributions in complex infections.
+
+4.  We derive a hybrid variable for the mean AoY.
+
+5.  We demonstrate that a simple system of ordinary differential
+    equations can be used in place of the random variables for most
+    applications.
+
+To put it another way, we can reduce the behavior of these highly
+complex probabilistic systems to a simple system of equations that has a
+high degree of accuracy. The computational and conceptual simplicity of
+hybrid models have some simplicity over compartmental models and
+stochastic individual-based models, and with the supporting
+probabilistic framework, provide a sound basis for a synthesis of
+observational malaria epidemiology.
+
+## References
+
+[^1]: Henry JM, Carter A & Smith DL (2022) Infection age as a predictor
+    of epidemiological metrics for malaria. Malar J 21; 117,
+    <https://doi.org/10.1186/s12936-022-04134-5>
+
+[^2]: Nåsell I (1985). Hybrid Models of Tropical Infections, 1st
+    edition. Springer-Verlag.
+    <https://doi.org/10.1007/978-3-662-01609-1>
+
+# Package index
+
+## Superinfection Dynamics
+
+Queuing models for malaria
+
+- [`MMinfinity`](https://dd-harp.github.io/ramp.falciparum/reference/MMinfinity.md)
+  : MMinfinity
+- [`SquIP`](https://dd-harp.github.io/ramp.falciparum/reference/SquIP.md)
+  : SquIP
+- [`SquIPz`](https://dd-harp.github.io/ramp.falciparum/reference/SquIPz.md)
+  : SquIPz
+
+### Solve a queuing model
+
+Solve the equations
+
+- [`solveMMinfty()`](https://dd-harp.github.io/ramp.falciparum/reference/solveMMinfty.md)
+  : Solve the queuing model \\M/M/\infty\\
+- [`solve_SquIP()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_SquIP.md)
+  : Solve SquIP
+- [`solve_SquIPz()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_SquIPz.md)
+  : Solve SquIP
+
+## Enhanced Compartmental Models
+
+Queuing models for malaria
+
+- [`SIPm`](https://dd-harp.github.io/ramp.falciparum/reference/SIPm.md)
+  : SIPm
+- [`solve_SIPm()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_SIPm.md)
+  : Solve the queuing model \\M/M/\infty\\
+
+## Infection Dynamics
+
+Dynamics of MoI, AoI, and the AoY
+
+- [`zda()`](https://dd-harp.github.io/ramp.falciparum/reference/zda.md)
+  : Compute infection density in a cohort of humans, \\z\_\tau(\alpha, a
+  \|h)\\
+- [`truePR()`](https://dd-harp.github.io/ramp.falciparum/reference/truePR.md)
+  : Compute the true PR in a cohort as a function of age and exposure
+
+### Multiplicity of Infection (MoI)
+
+Methods to compute the MoI
+
+- [`meanMoI()`](https://dd-harp.github.io/ramp.falciparum/reference/meanMoI.md)
+  : The mean MoI in a host cohort of age \\a\\
+- [`MoIDistPlot()`](https://dd-harp.github.io/ramp.falciparum/reference/MoIDistPlot.md)
+  : Plot the output of solveMMinfty
+
+### Age of Infection (AoI)
+
+Methods to compute the AoI density and distribution functions, random
+numbers, and moments
+
+- [`dAoI()`](https://dd-harp.github.io/ramp.falciparum/reference/dAoI.md)
+  : Compute the density function for AoI
+- [`pAoI()`](https://dd-harp.github.io/ramp.falciparum/reference/pAoI.md)
+  : Compute the distribution function for AoI
+- [`rAoI()`](https://dd-harp.github.io/ramp.falciparum/reference/rAoI.md)
+  : Random numbers for the AoI
+- [`momentAoI()`](https://dd-harp.github.io/ramp.falciparum/reference/momentAoI.md)
+  : Compute the moments for the AoI density function for a cohort of age
+  a
+
+### Age of the Youngest Infection (AoY)
+
+Methods to compute the AoY density and distribution functions, random
+numbers, and moments
+
+- [`dAoY()`](https://dd-harp.github.io/ramp.falciparum/reference/dAoY.md)
+  : The density function for the age of the youngest infection (AoY)
+- [`pAoY()`](https://dd-harp.github.io/ramp.falciparum/reference/pAoY.md)
+  : The distribution function for the age of the youngest infection
+  (AoY)
+- [`pAoY_long()`](https://dd-harp.github.io/ramp.falciparum/reference/pAoY_long.md)
+  : Alternative method for computing the distribution function for the
+  age of the youngest infection (AoY)
+- [`rAoY()`](https://dd-harp.github.io/ramp.falciparum/reference/rAoY.md)
+  : The random generation function for the age of the youngest infection
+  (AoY)
+- [`momentAoY()`](https://dd-harp.github.io/ramp.falciparum/reference/momentAoY.md)
+  : Compute the moments for the AoY density function for a cohort of age
+  a
+
+### Youngest of N Infections (YoN)
+
+Methods to compute the YoN density and distribution functions & random
+numbers
+
+- [`dYoN()`](https://dd-harp.github.io/ramp.falciparum/reference/dYoN.md)
+  : The youngest of N infections, density function
+- [`pYoN()`](https://dd-harp.github.io/ramp.falciparum/reference/pYoN.md)
+  : The youngest of N infections, distribution function
+- [`rYoN()`](https://dd-harp.github.io/ramp.falciparum/reference/rYoN.md)
+  : The youngest of N infections, random numbers
+
+### Hybrid Models
+
+Methods to solve hybrid models
+
+- [`dmda()`](https://dd-harp.github.io/ramp.falciparum/reference/dmda.md)
+  : Compute the derivatives for MoI using a hybrid model
+- [`solve_dm()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_dm.md)
+  : Solve the hybrid model for the MoI
+- [`dpda()`](https://dd-harp.github.io/ramp.falciparum/reference/dpda.md)
+  : Compute the derivatives for MoI and true PR
+- [`solve_dpda()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_dpda.md)
+  : Solve a system of differential equations to compute the true PR and
+  the MoI
+- [`dAoIda()`](https://dd-harp.github.io/ramp.falciparum/reference/dAoIda.md)
+  : Compute the derivatives of the AoI moments dynamically
+- [`solve_dAoI()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_dAoI.md)
+  : Solve the system of differential equations to compute the moments of
+  the AoI over time.
+- [`dAoYda()`](https://dd-harp.github.io/ramp.falciparum/reference/dAoYda.md)
+  : Compute the derivatives of the approximate moments of the AoY
+  dynamically
+- [`solve_dAoYda()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_dAoYda.md)
+  : Solve the system of differential equations to compute the
+  approximate moments of the AoY over time.
+
+## Parasite Densities
+
+Expected densities by AoI
+
+### F_mu(alpha)
+
+A function to compute expected log10 parasites (mu) from the AoI (alpha)
+
+- [`Fmu()`](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.md)
+  :
+
+  Compute mean, expected parasite densities `mu` as a function of the
+  age of infection `alpha`
+
+- [`sFmu()`](https://dd-harp.github.io/ramp.falciparum/reference/sFmu.md)
+  :
+
+  Compute mean, expected parasite densities `mu` for multiple values of
+  the age of infection `alpha`
+
+- [`Fmu(`*`<W>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.W.md)
+  :
+
+  Compute expected log10 parasite densities, `mu`, as a function of the
+  age of infection `alpha`
+
+- [`par_Fmu_W()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Fmu_W.md)
+  : Set up parameters for Fmu.W
+
+- [`Fmu(`*`<base>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.base.md)
+  :
+
+  Compute expected log10 parasite densities, `mu`, as a function of the
+  age of infection `alpha`
+
+- [`par_Fmu_base()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Fmu_base.md)
+  : Set up parameters for Fmu.base
+
+- [`Fmu(`*`<chronic>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.chronic.md)
+  :
+
+  Compute expected log10 parasite densities, `mu`, as a function of the
+  age of infection `alpha`
+
+- [`par_Fmu_chronic()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Fmu_chronic.md)
+  : Set up parameters for Fmu.chronic
+
+### Omega defined
+
+log10 parasites distributions from mu
+
+- [`d_Omega()`](https://dd-harp.github.io/ramp.falciparum/reference/d_Omega.md)
+  : The density function for parasite densities in a simple malaria
+  infection
+- [`p_Omega()`](https://dd-harp.github.io/ramp.falciparum/reference/p_Omega.md)
+  : The density function for parasite densities as a function of the
+  mean
+- [`q_Omega()`](https://dd-harp.github.io/ramp.falciparum/reference/q_Omega.md)
+  : The quantile function for parasite densities in a simple malaria
+  infection
+- [`r_Omega()`](https://dd-harp.github.io/ramp.falciparum/reference/r_Omega.md)
+  : Random generation of parasite densities from a simple malaria
+  infection
+
+### Omega.beta
+
+A modified beta distribution for log10 parasite distributions
+
+- [`par_Omega_beta()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Omega_beta.md)
+  : The quantile function for parasite densities in a simple malaria
+  infection
+- [`d_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/d_Omega.beta.md)
+  : Modified beta distribution, density function
+- [`dbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/dbeta1.md)
+  : Density function for the beta distribution, an alternative
+  parameterization
+- [`p_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/p_Omega.beta.md)
+  : Modified beta distribution, distribution function
+- [`pbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/pbeta1.md)
+  : Disribution function for the beta distribution, an alternative
+  parameterization
+- [`q_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/q_Omega.beta.md)
+  : Modified beta distribution, distribution function
+- [`qbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/qbeta1.md)
+  : The quantile function for the beta distribution, an alternative
+  parameterization
+- [`r_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/r_Omega.beta.md)
+  : Modified beta distribution, random numbers
+- [`rbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/rbeta1.md)
+  : The random generation function for the beta distribution, an
+  alternative parameterization Title
+- [`sigma_mu()`](https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.md)
+  : A function to compute the variance of the beta distrution as a
+  function of the mean.
+- [`sigma_mu(`*`<abc>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.abc.md)
+  : A function that returns constrained values of the variance for the
+  beta distrution as a function of the mean.
+- [`par_sigma_abc()`](https://dd-harp.github.io/ramp.falciparum/reference/par_sigma_abc.md)
+  : Parameters to configure sigma_mu.abc
+
+### Compute Omega(Fmu(alpha))
+
+log10 parasites from AoI (alpha)
+
+- [`d_alpha2density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_alpha2density.md)
+  : The density function for parasite densities in a simple malaria
+  infection of age alpha
+- [`p_alpha2density()`](https://dd-harp.github.io/ramp.falciparum/reference/p_alpha2density.md)
+  : The distribution function for parasite densities in a simple malaria
+  infection of age alpha
+- [`q_alpha2density()`](https://dd-harp.github.io/ramp.falciparum/reference/q_alpha2density.md)
+  : The quantile function for parasite densities in a simple malaria
+  infection of age alpha
+- [`r_alpha2density()`](https://dd-harp.github.io/ramp.falciparum/reference/r_alpha2density.md)
+  : The distribution function for parasite densities in a simple malaria
+  infection of age alpha
+
+### Clone Density
+
+Parasite density distributions by host cohort age
+
+- [`d_clone_density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_clone_density.md)
+  : Compute \\P\_\tau(a \|h)\\
+- [`moments_clone_density()`](https://dd-harp.github.io/ramp.falciparum/reference/moments_clone_density.md)
+  : Compute the moments of P_density
+
+### Parasite Density
+
+Compute parasite density distributions as a function of the AoI
+
+- [`parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/parasite_density.md)
+  : Compute \\B\_\tau(a \| h)\\
+- [`d_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_parasite_density.md)
+  : Compute the distribution function for \\B\_\tau(a)\\
+- [`p_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/p_parasite_density.md)
+  : Call parasite_density and return the density vector
+- [`r_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/r_parasite_density.md)
+  : Random generation for parasite densities in a host cohort
+- [`moments_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/moments_parasite_density.md)
+  : Compute the moments of P_density
+- [`rRda()`](https://dd-harp.github.io/ramp.falciparum/reference/rRda.md)
+  : Random generation for M parasite densities in a host cohort with MoI
+
+### Convolutions
+
+Other
+
+- [`dDensityPaConvolve2()`](https://dd-harp.github.io/ramp.falciparum/reference/dDensityPaConvolve2.md)
+  : The density function for the sum of two infections
+- [`cdfConvolve2()`](https://dd-harp.github.io/ramp.falciparum/reference/cdfConvolve2.md)
+  : The density function for the sum of two infections
+- [`cdfConvolve2a()`](https://dd-harp.github.io/ramp.falciparum/reference/cdfConvolve2a.md)
+  : The density function for the sum of two infections, method b
+- [`cdfConvolve2b()`](https://dd-harp.github.io/ramp.falciparum/reference/cdfConvolve2b.md)
+  : The density function for the sum of two infections, method a
+
+## Sampling
+
+### Basic sampling functions
+
+Parasite positivity and counts given log10 parasites
+
+- [`d_detect()`](https://dd-harp.github.io/ramp.falciparum/reference/d_detect.md)
+  : The probability of detecting parasites
+- [`d_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/d_counts.md)
+  : The PDF for counting \\x\\ parasites
+- [`p_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/p_counts.md)
+  : The CDF for counting \\x\\ parasites
+- [`d_nz_counts_log()`](https://dd-harp.github.io/ramp.falciparum/reference/d_nz_counts_log.md)
+  : The PDF for non-zero counts, \\\log\_{10}\\ transformed
+- [`p_nz_counts_log()`](https://dd-harp.github.io/ramp.falciparum/reference/p_nz_counts_log.md)
+  : The CDF for non-zero counts, \\\log\_{10}\\ transformed
+- [`d_nz_counts_log_binned()`](https://dd-harp.github.io/ramp.falciparum/reference/d_nz_counts_log_binned.md)
+  : The binned PDF for non-zero counts, \\\log\_{10}\\ transformed
+- [`p_nz_counts_log_binned()`](https://dd-harp.github.io/ramp.falciparum/reference/p_nz_counts_log_binned.md)
+  : The binned PDF for non-zero counts, \\\log\_{10}\\ transformed
+
+### Poisson Sampling
+
+- [`par_pois()`](https://dd-harp.github.io/ramp.falciparum/reference/par_pois.md)
+  : Parameters for Poisson sampling
+- [`d_detect(`*`<pois>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/d_detect.pois.md)
+  : Detection of infection given parasitemia
+- [`p_counts(`*`<pois>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/p_counts.pois.md)
+  : Detection of infection given parasitemia
+- [`d_counts(`*`<pois>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/d_counts.pois.md)
+  : Detection of infection given parasitemia
+
+### Negative Binomial Sampling
+
+- [`par_nb()`](https://dd-harp.github.io/ramp.falciparum/reference/par_nb.md)
+  : Parameters for negative binomial sampling
+- [`d_detect(`*`<nb>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/d_detect.nb.md)
+  : Detection of infection given parasitemia
+- [`p_counts(`*`<nb>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/p_counts.nb.md)
+  : Detection of infection given parasitemia
+- [`d_counts(`*`<nb>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/d_counts.nb.md)
+  : Negative binomial PDF for raw parasite counts
+
+## Parasite Detection and Counts
+
+### Observed Prevalence
+
+Detection and observed prevalence
+
+- [`d_detect_mesh()`](https://dd-harp.github.io/ramp.falciparum/reference/d_detect_mesh.md)
+  : Detection of infection given parasitemia
+- [`d_clone_detect()`](https://dd-harp.github.io/ramp.falciparum/reference/d_clone_detect.md)
+  : Detection of infection given parasitemia
+- [`d_parasite_detect_moi()`](https://dd-harp.github.io/ramp.falciparum/reference/d_parasite_detect_moi.md)
+  : Detection of infection given parasitemia
+- [`d_parasite_detect()`](https://dd-harp.github.io/ramp.falciparum/reference/d_parasite_detect.md)
+  : Detection of infection given parasitemia
+- [`FQ()`](https://dd-harp.github.io/ramp.falciparum/reference/FQ.md) :
+  The proportion of zero counts in
+
+### Observed MoI
+
+Number of Clones Counted
+
+- [`d_moi_count()`](https://dd-harp.github.io/ramp.falciparum/reference/d_moi_count.md)
+  : Detection of infection given parasitemia
+
+### Parasite Counts
+
+Parasite counts
+
+- [`d_clone_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/d_clone_counts.md)
+  : Compute the density of parasite counts for simple infections
+- [`p_clone_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/p_clone_counts.md)
+  : Compute the distribution of parasite counts for simple infections
+- [`mean_clone_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/mean_clone_counts.md)
+  : Compute the mean parasite counts in simple infections
+- [`d_parasite_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/d_parasite_counts.md)
+  : Compute the density of parasite counts in complex infections
+- [`p_parasite_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/p_parasite_counts.md)
+  : Compute the distribution of parasite counts in complex infections
+- [`mean_parasite_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/mean_parasite_counts.md)
+  : Compute the mean parasite counts in complex infections
+
+## Force of Infection
+
+Methods to set up FoI trace functions
+
+- [`FoI()`](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  : Force of Infection, \\h\_\tau(a)\\
+
+### FoI by Age
+
+Specialized methods modify the FoI by Age
+
+- [`ageFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.md)
+  : Functions to modify the FoI by age
+- [`ageFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.flat.md)
+  : A function that does not modify the FoI by age
+- [`par_flatAge()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatAge.md)
+  : Make a parameter list to dispatch ageFoI.flat
+- [`ageFoI(`*`<type2>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.type2.md)
+  : A function that does not modify the FoI by age
+- [`par_type2Age()`](https://dd-harp.github.io/ramp.falciparum/reference/par_type2Age.md)
+  : Make a parameter list to dispatch ageFoI.type2
+
+### FoI by Season
+
+Specialized methods set the seasonal FoI
+
+- [`seasonalFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.md)
+  : Add a seasonal pattern to the FoI trace function
+- [`seasonalFoI(`*`<exp>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.exp.md)
+  : A generalized sinusoidal seasonal pattern, exponentiated
+- [`par_expSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_expSeason.md)
+  : Return a list to dispatch seasonalFoI.exp
+- [`seasonalFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.flat.md)
+  : The "no seasonality" function
+- [`par_flatSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatSeason.md)
+  : Return a list that dispatches seasonalFoI.flat
+- [`seasonalFoI(`*`<sin>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.sin.md)
+  : A generalized sinusoidal seasonal pattern
+- [`par_sinSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_sinSeason.md)
+  : Return a list to configure and dispatch seasonalFoI.sin
+
+### FoI Trends
+
+Specialized methods to set trends in the FoI
+
+- [`trendFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/trendFoI.md)
+  : Add a trend to the FoI trace function
+- [`trendFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/trendFoI.flat.md)
+  : The "no trend" function
+- [`par_flatTrend()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatTrend.md)
+  : Return a list that dispatches trendFoI.flat
+
+## Utilities
+
+Other
+
+- [`nzPois()`](https://dd-harp.github.io/ramp.falciparum/reference/nzPois.md)
+  : Compute N non-zero values from a Poisson distribution with a given
+  MoI
+
+## Immune Tracking Variables
+
+Expected densities by AoI
+
+- [`Wda()`](https://dd-harp.github.io/ramp.falciparum/reference/Wda.md)
+  : Compute immune tracking variables as a function of host age and
+  exposure
+- [`Wda(`*`<none>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Wda.none.md)
+  : Compute immune tracking variables as a function of host age and
+  exposure
+- [`par_Wda_none()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Wda_none.md)
+  : Make a parameter set for Wda.none
+- [`Wda(`*`<delta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Wda.delta.md)
+  : Compute immune tracking variables as a function of host age and
+  exposure
+- [`par_Wda_delta()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Wda_delta.md)
+  : Make a parameter set for Wda.none
+
+### Red Blood Cells
+
+Other
+
+- [`log10RBC()`](https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.md)
+  : Compute log10 of the red blood cell population
+- [`log10RBC(`*`<static>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.static.md)
+  : Compute log10 of the red blood cell population
+- [`par_lRBC_static()`](https://dd-harp.github.io/ramp.falciparum/reference/par_lRBC_static.md)
+  : Set up parameters for log10RBC.static
+
+## MLE
+
+Methods for maximum likelihood estimation
+
+- [`llik_count()`](https://dd-harp.github.io/ramp.falciparum/reference/llik_count.md)
+  : Compute the likelihood for a single parasite count datum
+- [`llik_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/llik_counts.md)
+  : Compute the log likelihood for a set of parasites counts data
+- [`counts_MLE()`](https://dd-harp.github.io/ramp.falciparum/reference/counts_MLE.md)
+  : Compute the MLE for parasite counts data
+- [`llik_counts_sz()`](https://dd-harp.github.io/ramp.falciparum/reference/llik_counts_sz.md)
+  : Compute the log likelihood for a set of parasites counts data
+- [`counts_MLE_sz()`](https://dd-harp.github.io/ramp.falciparum/reference/counts_MLE_sz.md)
+  : Compute the MLE for parasite counts data
+
+# Articles
+
+### All vignettes
+
+- [Random Variables for Parasite Infection
+  Dynamics](https://dd-harp.github.io/ramp.falciparum/articles/Dynamics.md):
+- [The Force of Infection
+  (FoI)](https://dd-harp.github.io/ramp.falciparum/articles/FoI.md):
+- [Hybrid
+  Models](https://dd-harp.github.io/ramp.falciparum/articles/Hybrid.md):
+- [MoI](https://dd-harp.github.io/ramp.falciparum/articles/MoI.md):
+- [SIPm](https://dd-harp.github.io/ramp.falciparum/articles/SIPmoi.md):
+- [SquIP](https://dd-harp.github.io/ramp.falciparum/articles/SquIP.md):
+- [SquIPz](https://dd-harp.github.io/ramp.falciparum/articles/SquIPz.md):
+- [Superinfection](https://dd-harp.github.io/ramp.falciparum/articles/Superinfection.md):
