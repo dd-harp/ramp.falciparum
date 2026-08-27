@@ -5,6 +5,10 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/articles/FoI.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/articles/Hybrid.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/articles/MoI.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/articles/SIPmoi.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/articles/SquIP.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/articles/SquIPz.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/articles/Superinfection.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/articles/index.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/authors.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/index.html</loc></url>
@@ -14,7 +18,11 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/Fmu.chronic.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/Fmu.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/FoI.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/MMinfinity.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/MoIDistPlot.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/SIPm.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/SquIP.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/SquIPz.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/Wda.delta.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/Wda.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/Wda.none.html</loc></url>
@@ -32,6 +40,9 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dAoYda.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dDensityPaConvolve2.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dMoIda.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dSIPm.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dSquIP.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dSquIPz.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/dYoN.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/d_Omega.beta.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/d_Omega.html</loc></url>
@@ -62,6 +73,7 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/llik_counts_sz.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.static.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/make_Z.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/meanMoI.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/mean_clone_counts.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/mean_parasite_counts.html</loc></url>
@@ -102,6 +114,7 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/par_sinSeason.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/par_type2Age.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/parasite_density.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/parse_SquIP.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/pbeta1.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/q_Omega.beta.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/q_Omega.html</loc></url>
@@ -124,6 +137,9 @@
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.abc.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solveMMinfty.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solve_SIPm.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solve_SquIP.html</loc></url>
+<url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solve_SquIPz.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solve_dAoI.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solve_dAoYda.html</loc></url>
 <url><loc>https://dd-harp.github.io/ramp.falciparum/reference/solve_dm.html</loc></url>
