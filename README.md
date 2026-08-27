@@ -1,4 +1,4 @@
-# `ramp.falciparum` <br><br> A Deep Dive into Malaria Epidemiology
+# `ramp.falciparum` <br><br> Falciparum Malaria Mathematical Epidemiology
 
 ## Install
 
@@ -21,21 +21,24 @@ The health burden of falciparum malaria -- human malaria caused by *Plasmodium f
 so there is a need to understand malaria epidemiology well enough to guide development of policies.
 The epidemiology of falciparum malaria is also complex: the basic features of malaria include: 
 
-+ Simple malaria infections have a complex **time course:** an acute growth phase (lasting up to a month) is followed by a chronic phase that lasts for months (on average). Over the time-course of infection, parasite densities fluctuate enormously. The toolbox for handling infections includes stage-of-infection, age-of-infection, within-host models, and probability theory. 
 
-+ The rate of exposure to malaria often exceeds the slow rate that infections clear, so **superinfection** is common. *Queuing theory* has been the main toolbox: these are compartmental models that sub-divide infection into an infinite number of states -- the multiplicity of infection (MoI) -- and that explore the dynamics of the MoI. Here, we will also develop *hybrid variables* that model MoI distributions. 
++ **Exposure** --- the number of infectious bites, per person, per day varies geographically, seasonally, across years, and within a population by age and other factors. 
 
-+ Infections can be **treated and cured** with anti-malarial drugs, and treatment is often followed by a short period of **chemo-protection.** This raises questions about the adherence to the prescribed drug-regimens, and the evolution of drug resistance. 
++ **Time Course of Infection** --- simple malaria infections have a complex **time course:** an acute growth phase (lasting up to a month) is followed by a chronic phase that lasts for months (on average). Over the time-course of infection, parasite densities fluctuate enormously. The toolbox for handling infections includes stage-of-infection, age-of-infection, within-host models, and probability theory. 
+
++ **Superinfection** --- the rate of exposure to malaria often exceeds the slow rate that infections clear, so **superinfection** is common. *Queuing theory* has been the main toolbox: these are compartmental models that sub-divide infection into an infinite number of states -- the multiplicity of infection (MoI) -- and that explore the dynamics of the MoI. Here, we will also develop *hybrid variables* that model MoI distributions. 
+
++ **Antimalarial Drugs** --- Infections can be **treated and cured** with anti-malarial drugs, and treatment is often followed by a short period of **chemo-protection.** This raises questions about the adherence to the prescribed drug-regimens, and the evolution of drug resistance. 
 
 + **Infectiousness** -- the probability a mosquito becomes infected after blood feeding on a human -- is related to gametocyte densities and development of *transmission-blocking immunity.*  
 
-+ **Disease** and the health burden of malaria is enormous; while there has been an inordinate focus on fever, the primary concerns are **
++ **Disease** --- malaria is a disease of humans with an enormous health burden; while there has been an inordinate focus on fever, the primary concerns are **
 
-+ **Immunity** and its effects on infection, infectiousness, and disease; 
++ **Immunity** --- and its effects on infection, infectiousness, and disease; 
 
-+ To understand malaria in populations, we must measure it. To be useful, it must be possible to relate the *true prevalence* of malaria to the prevalence that would be observed, the probability of **detection** by various **diagnostics.** 
++ **Diagnostics and Detection** --- to understand malaria in populations, we must measure it. To be useful, it must be possible to relate the *true prevalence* of malaria to the prevalence that would be observed, the probability of **detection** by various **diagnostics.** 
 
-+ If these models are to be used for policy, then it is essential to have outputs by **age.** 
++ **Demography** --- If these models are to be used for policy, then it is essential to account for human demography and to consider **age.** 
 
 All these are quantitative phenomena are interrelated, and there is probably no sensible way of describing them that does not involve mathematics.
 Each one of these facets of malaria has been addressed in mathematical models, but it has proven difficult to formulate a synthesis.
@@ -76,7 +79,6 @@ The probabilistic approach is both highly realistic and descriptive, but our goa
 5. We demonstrate that a simple system of ordinary differential equations can be used in place of the random variables for most applications. 
 
 To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology. 
-
 
 
 ## References
