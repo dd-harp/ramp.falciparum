@@ -1,11 +1,11 @@
 # Random numbers for the AoI
 
-Draw random numbers for the AoI from a cohort, \\\hat A\_\tau(a)\\
+Draw random numbers for the AoI from a cohort, \\\hat A\_\bday(a)\\
 
 ## Usage
 
 ``` r
-rAoI(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
+rAoI(N, a, FoI_a, bday = 0, hhat = 1, r = 1/200, alphamin = 0)
 ```
 
 ## Arguments
@@ -16,16 +16,15 @@ rAoI(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 

@@ -5,7 +5,7 @@ Compute the derivatives for MoI using a hybrid model
 ## Usage
 
 ``` r
-dmda(a, M, p, FoIpar)
+dmda(a, M, p, FoI_a)
 ```
 
 ## Arguments
@@ -22,9 +22,9 @@ dmda(a, M, p, FoIpar)
 
   the parameters
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 ## Value
 

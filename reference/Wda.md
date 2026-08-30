@@ -5,7 +5,7 @@ The function dispatches on `class(par)`
 ## Usage
 
 ``` r
-Wda(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_none())
+Wda(a, FoI_a, bday = 0, hhat = 1, par = par_Wda_none())
 ```
 
 ## Arguments
@@ -14,11 +14,11 @@ Wda(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_none())
 
   age of a host cohort
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   cohort birthday
 

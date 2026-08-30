@@ -6,7 +6,7 @@ MoI
 ## Usage
 
 ``` r
-solve_dpda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
+solve_dpda(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1)
 ```
 
 ## Arguments
@@ -15,15 +15,15 @@ solve_dpda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
 
   a scaling factor on the FoI
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 - r:
 
   the clearance rate for a simple infection
 
-- tau:
+- bday:
 
   the cohort birthday
 

@@ -13,8 +13,8 @@ regular intervals dt from age 0 up to Amax (in days).
 ``` r
 solve_SIPm(
   h,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   r = 1/200,
   rho = 0.2,
   sigma = 1/365,
@@ -33,13 +33,11 @@ solve_SIPm(
 
   the force of infection
 
-- FoIpar:
+- FoI_a:
 
-  \\h\_\tau(a)\\, a [list](https://rdrr.io/r/base/list.html) formatted
-  to compute
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

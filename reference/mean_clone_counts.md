@@ -7,10 +7,10 @@ Compute the mean parasite counts in simple infections
 ``` r
 mean_clone_counts(
   a,
-  FoIpar,
+  FoI_a,
   dx = 0.1,
   hhat = 1,
-  tau = 0,
+  bday = 0,
   r = 1/200,
   Fmu_par = par_Fmu_base(),
   Omega_par = par_Omega_beta(),
@@ -25,7 +25,7 @@ mean_clone_counts(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
   parameters that define an FoI function
 
@@ -37,7 +37,7 @@ mean_clone_counts(
 
   a local scaling parameter for the FoI
 
-- tau:
+- bday:
 
   the cohort birthday
 

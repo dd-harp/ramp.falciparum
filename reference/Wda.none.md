@@ -6,7 +6,7 @@ Compute immune tracking variables as a function of host age and exposure
 
 ``` r
 # S3 method for class 'none'
-Wda(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_none())
+Wda(a, FoI_a, bday = 0, hhat = 1, par = par_Wda_none())
 ```
 
 ## Arguments
@@ -15,11 +15,11 @@ Wda(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_none())
 
   age of a host cohort
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   cohort birthday
 

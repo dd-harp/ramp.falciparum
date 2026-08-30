@@ -6,7 +6,7 @@ AoI over time.
 ## Usage
 
 ``` r
-solve_dAoI(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1, N = 3)
+solve_dAoI(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1, N = 3)
 ```
 
 ## Arguments
@@ -15,15 +15,15 @@ solve_dAoI(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1, N = 3)
 
   the force of infection
 
-- FoIpar:
+- FoI_a:
 
-  a FoI trace function
+  a cohort trace function
 
 - r:
 
   the clearance rate for a simple infection
 
-- tau:
+- bday:
 
   the cohort birthday
 

@@ -11,7 +11,7 @@ It also computes the derivatives for the hybrid variables \\m_1\\ and
 ## Usage
 
 ``` r
-dSquIP(a, y, pars, FoIpar)
+dSquIP(a, y, pars, F_a)
 ```
 
 ## Arguments
@@ -28,11 +28,9 @@ dSquIP(a, y, pars, FoIpar)
 
   the parameters
 
-- FoIpar:
+- F_a:
 
-  \\h\_\tau(a)\\, a [list](https://rdrr.io/r/base/list.html) formatted
-  to compute
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  a trace function
 
 ## Value
 

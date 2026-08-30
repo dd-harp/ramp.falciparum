@@ -116,6 +116,30 @@ I \\\[6pt\] \frac{\textstyle{dP}}{\textstyle{da}} &= (h \rho+
 
 ## Parameters
 
+- `r`:
+
+  clearance rate for a simple infection
+
+- `rho`:
+
+  the fraction of incident cases that gets treated
+
+- `sigma`:
+
+  treatment because of prevalent infection
+
+- `xi`:
+
+  background drug taking
+
+- `eta`:
+
+  loss of chemoprotection
+
+- `mu`:
+
+  death rate
+
 ## See also
 
 [SquIPz](https://dd-harp.github.io/ramp.falciparum/reference/SquIPz.md)

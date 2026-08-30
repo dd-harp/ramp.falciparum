@@ -7,11 +7,11 @@ Compute the distribution of parasite counts for simple infections
 ``` r
 p_clone_counts(
   a,
-  FoIpar,
+  FoI_a,
   bins = c(1:5, 13),
   dx = 0.1,
   hhat = 1,
-  tau = 0,
+  bday = 0,
   r = 1/200,
   RBC_par = par_lRBC_static(),
   Fmu_par = par_Fmu_base(),
@@ -27,9 +27,9 @@ p_clone_counts(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 - bins:
 
@@ -43,7 +43,7 @@ p_clone_counts(
 
   a local scaling parameter for the FoI
 
-- tau:
+- bday:
 
   the cohort birthday
 

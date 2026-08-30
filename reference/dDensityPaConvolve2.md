@@ -8,9 +8,9 @@ The density function for the sum of two infections
 dDensityPaConvolve2(
   x,
   a,
-  FoIpar,
+  FoI_a,
   hhat = NULL,
-  tau = 0,
+  bday = 0,
   r = 1/200,
   par_RBC = par_lRBC_static(),
   par_Fmu = par_Fmu_base(),
@@ -29,15 +29,15 @@ dDensityPaConvolve2(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 - hhat:
 
   a local scaling parameter for the FoI
 
-- tau:
+- bday:
 
   the cohort birthday
 

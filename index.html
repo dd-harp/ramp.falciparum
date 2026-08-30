@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>A Deep Dive into falciparum malaria mathematical epidemiology • ramp.falciparum</title>
+<title>Mathematical epidemiology of falciparum malaria • ramp.falciparum</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A Deep Dive into falciparum malaria mathematical epidemiology">
+<script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Mathematical epidemiology of falciparum malaria">
 <meta name="description" content="RAMP is a set of tools developed to support malaria policies. This program -- ramp.falciparum -- takes a deep dive into malaria epidemiology, defined in the narrow sense to include exposure to infectious mosquitoes, infection, and all that follows. We extend some previous work looking at the multiplicity of infection (MoI) developing random variables describing the age of infection (AoI), parasite densities, and detection.">
 <meta property="og:description" content="RAMP is a set of tools developed to support malaria policies. This program -- ramp.falciparum -- takes a deep dive into malaria epidemiology, defined in the narrow sense to include exposure to infectious mosquitoes, infection, and all that follows. We extend some previous work looking at the multiplicity of infection (MoI) developing random variables describing the age of infection (AoI), parasite densities, and detection.">
 </head>
@@ -34,10 +34,27 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="articles/FoI.html">FoI</a></li>
-    <li><a class="dropdown-item" href="articles/Dynamics.html">Infection Dynamics</a></li>
-    <li><a class="dropdown-item" href="articles/MoI.html">MoI</a></li>
-    <li><a class="dropdown-item" href="articles/Hybrid.html">Hybrid</a></li>
+<li><a class="dropdown-item" href="articles/Overview.html">Overview of Malaria Epidemiology</a></li>
+    <li><a class="dropdown-item" href="articles/FoI.html">Exposure</a></li>
+    <li><a class="dropdown-item" href="articles/StateSpace.html">The Malaria State Space</a></li>
+    <li><a class="dropdown-item" href="articles/Superinfection.html">Superinfection &amp; Queuing</a></li>
+    <li><a class="dropdown-item" href="articles/RandomVariables.html">Random Variables</a></li>
+    <li><a class="dropdown-item" href="articles/Hybrid.html">Hybrid Variables</a></li>
+    <li><a class="dropdown-item" href="articles/RobustAnalytics.html">Robust Analytics</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-models" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Models</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-models">
+<li><a class="dropdown-item" href="articles/MoI.html">M/M/∞</a></li>
+    <li><a class="dropdown-item" href="articles/SquIP.html">SquIP</a></li>
+    <li><a class="dropdown-item" href="articles/SquIPz.html">SquIPz</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-hybrid-variables" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Hybrid Variables</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-hybrid-variables">
+<li><a class="dropdown-item" href="articles/Dynamics.html">Infection Dynamics</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Functions</a></li>
@@ -52,63 +69,41 @@
 </nav><div class="container template-home">
 <div class="row">
   <main id="main" class="col-md-9"><div class="section level1">
-<div class="page-header"><h1 id="rampfalciparum----falciparum-malaria-mathematical-epidemiology">
-<code>ramp.falciparum</code> <br><br> Falciparum Malaria Mathematical Epidemiology<a class="anchor" aria-label="anchor" href="#rampfalciparum----falciparum-malaria-mathematical-epidemiology"></a>
+<div class="page-header"><h1 id="rampfalciparum">
+<code>ramp.falciparum</code><a class="anchor" aria-label="anchor" href="#rampfalciparum"></a>
 </h1></div>
 <div class="section level2">
-<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+<h2 id="falciparum-malaria-mathematical-epidemiology">Falciparum Malaria Mathematical Epidemiology<a class="anchor" aria-label="anchor" href="#falciparum-malaria-mathematical-epidemiology"></a>
 </h2>
+<hr>
+<p><strong>INSTALL</strong></p>
 <p>To install the latest version of <code>ramp.falciparum</code> from GitHub, run the following lines of code in an R session. We also recommend loading the supporting package <code>ramp.func</code></p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"dd-harp/ramp.falciparum"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"dd-harp/ramp.func"</span><span class="op">)</span></span></code></pre>
 <p>Then load them:</p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ramp.func</span><span class="op">)</span></span></code></pre>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.func/" class="external-link">ramp.func</a></span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="falciparum-malaria">Falciparum Malaria<a class="anchor" aria-label="anchor" href="#falciparum-malaria"></a>
 </h2>
-<p>The health burden of falciparum malaria – human malaria caused by <em>Plasmodium falciparum</em> – is enormous, so there is a need to understand malaria epidemiology well enough to guide development of policies. The epidemiology of falciparum malaria is also complex: the basic features of malaria include:</p>
-<ul>
-<li><p><strong>Exposure</strong> — the number of infectious bites, per person, per day varies geographically, seasonally, across years, and within a population by age and other factors.</p></li>
-<li><p><strong>Time Course of Infection</strong> — simple malaria infections have a complex <strong>time course:</strong> an acute growth phase (lasting up to a month) is followed by a chronic phase that lasts for months (on average). Over the time-course of infection, parasite densities fluctuate enormously. The toolbox for handling infections includes stage-of-infection, age-of-infection, within-host models, and probability theory.</p></li>
-<li><p><strong>Superinfection</strong> — the rate of exposure to malaria often exceeds the slow rate that infections clear, so <strong>superinfection</strong> is common. <em>Queuing theory</em> has been the main toolbox: these are compartmental models that sub-divide infection into an infinite number of states – the multiplicity of infection (MoI) – and that explore the dynamics of the MoI. Here, we will also develop <em>hybrid variables</em> that model MoI distributions.</p></li>
-<li><p><strong>Antimalarial Drugs</strong> — Infections can be <strong>treated and cured</strong> with anti-malarial drugs, and treatment is often followed by a short period of <strong>chemo-protection.</strong> This raises questions about the adherence to the prescribed drug-regimens, and the evolution of drug resistance.</p></li>
-<li><p><strong>Infectiousness</strong> – the probability a mosquito becomes infected after blood feeding on a human – is related to gametocyte densities and development of <em>transmission-blocking immunity.</em></p></li>
-<li><p><strong>Disease</strong> — malaria is a disease of humans with an enormous health burden; while there has been an inordinate focus on fever, the primary concerns are **</p></li>
-<li><p><strong>Immunity</strong> — and its effects on infection, infectiousness, and disease;</p></li>
-<li><p><strong>Diagnostics and Detection</strong> — to understand malaria in populations, we must measure it. To be useful, it must be possible to relate the <em>true prevalence</em> of malaria to the prevalence that would be observed, the probability of <strong>detection</strong> by various <strong>diagnostics.</strong></p></li>
-<li><p><strong>Demography</strong> — If these models are to be used for policy, then it is essential to account for human demography and to consider <strong>age.</strong></p></li>
-</ul>
-<p>All these are quantitative phenomena are interrelated, and there is probably no sensible way of describing them that does not involve mathematics. Each one of these facets of malaria has been addressed in mathematical models, but it has proven difficult to formulate a synthesis.</p>
-<p>This website holds code that implements mathematical models of malaria epidemiology. The goal is to provide a single repository for mathematical models, and to develop some models of malaria that are useful for research and policy. In some cases, the documentation includes some mathematical derivations.</p>
+<p>The health burden of falciparum malaria – a disease of humans caused by infection with <em>Plasmodium falciparum</em> – is enormous, so there is a need to understand malaria epidemiology well enough to manage it. The epidemiology of falciparum malaria is complex. Exposure is highly variable across locations, outcomes are related to age and cumulative exposure, and malaria programs need to weigh tradeoffs between various forms of malaria control. Mathematical models of malaria can serve an indispensible role in all of this, but the models must be fit for purpose, realistic enough to be compelling, accurate enough to useful, and simple enough to be insightful.</p>
+</div>
+<div class="section level2">
+<h2 id="mathematical-epidemiology">Mathematical Epidemiology<a class="anchor" aria-label="anchor" href="#mathematical-epidemiology"></a>
+</h2>
+<p>Ronald Ross developed the first mathematical model of malaria in 1908.</p>
 </div>
 <div class="section level2">
 <h2 id="robust-analytics">Robust Analytics<a class="anchor" aria-label="anchor" href="#robust-analytics"></a>
 </h2>
-<p>Policy advice should be robust to uncertainty. To build rigor around the idea of robustness in policy, we recognized the need for a bespoke inferential framework designed for malaria analytics, which gave rise to <strong>RAMP</strong> (Robust Analytics for Malaria Policy). An important goal of RAMP was to build an integrated computational environment to support a range of activities, including conventional statistical analysis and methods to characterize, quantify, and propagate uncertainty. As RAMP took shape, RAMP software was being developed to implemented the principles in a stable computational form to facilitate the transformation of data into robust policy advice. Today, core RAMP software includes several R packages (see <a href="https://dd-harp.github.io/ramp.malaria/" class="external-link">ramp.malaria</a>) to deal with malaria epidemiology, transmission dynamics, and control in the broad sense. The <a href="https://dd-harp.github.io/ramp.library/" class="external-link">ramp.library</a> includes reusable code for one of several models of human malaria infection and immuno-epidemiology.</p>
-<p>We recognized that the complex epidemiology of malaria - defined in the narrow sense to include only parasite infection in humans and processes affecting human health or parasite transmission - merits a deeper dive. Given the complexity of malaria, we needed a mathematical framework for malaria epidemiology that could expose to scrutiny the relationship between processes and patterns in human populations exposed to malaria parasites as they age, with different intensities and with different seasonal patterns. This software package, <strong><code>ramp.falciparum,</code></strong> implements a new computational approach to malaria epidemiology (in that narrow sense) using random variables. These methods are highly mimetic, but computationally intensive and difficult to apply. To address these limitations, we use hybrid variables to build a bridge from this probabilistic approach to a set of simpler approximating models.</p>
-<p>The epidemiology of <em>Plasmodium falciparum</em> malaria presents a unique set of challenges due to the complex dynamics of infection, immunity, disease and infectiousness as well as treatment and chemo-protection, diagnostics and detection. Malaria can be measured in a dozen different ways, but it has been difficult to present a simple synthesis of malaria infection and disease in terms of the metrics that are commonly used in research and clinical surveillance. An important metric is the <em>Plasmodium falciparum</em> parasite rate, or <em>Pf</em>PR, defined as the average prevalence of malaria taken from a cross-sectional survey. Another metric, often measured as a covariate in research studies, is a parasite count, the number of parasites in a blood slide field counted by a light microscopist. In an old data set, collected during malariotherapy, parasite counts fluctuated substantially over the time course of an infection, but they were strongly statistically correlated with the <em>age of infection</em> or AoI (Henry JM, <em>et al.</em>, 2022)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Henry JM, Carter A &amp;amp; Smith DL (2022) Infection age as a predictor of epidemiological metrics for malaria. Malar J 21; 117, &lt;a href="https://doi.org/10.1186/s12936-022-04134-5" class="external-link uri"&gt;https://doi.org/10.1186/s12936-022-04134-5&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a>. In malaria, the <em>Pf</em>PR in several old studies had a characteristic shape when plotted against age. Parasite densities have been used in research settings as both a diagnostic criterion and as a correlate of disease. Malaria epidemiology exhibits patterns that differ by diagnostic method, by season, by sex, and by location.</p>
-<p>With so many interacting factors, it has been a challenge to develop model that could deal with everything all at once. One approach to studying malaria infection has been to develop mechanistic models for the dynamics of malaria infection within a single host. The most prominent models of this type are OpenMalaria and eMod, but there have been several others. These computational models made it possible to develope comprehensive individual-based simulation models, or IBMs, for malaria policy. While these approaches have been able to replicate the patterns, the outputs of the models are usually just as complex as the data collected in field studies. A synthesis of malaria epidemiology has proven elusive.</p>
-<p>We present the computational algorithms that support a probabilistic approach to malaria epidemiology. We start with a semi-Markovian model of malaria exposure and infection, whose states are represented by random variables that describe the multiplicity of infection (MoI) in a host and the age of infection (AoI). Assuming that parasite densities can be predicted by the AoI in a statistical sense, we can compute probability distribution functions describing parasite densities, parasite counts, and detection in an individual chosen at random from the population. From this, we present a model for parasite detection and parasite counts. This same approach has been extended to predict disease, immunity, treatment with anti-malarial drugs, and a brief period of chemo-protection.</p>
-<p>The probabilistic approach is both highly realistic and descriptive, but our goal was a synthesis. This synthesis involves a few steps:</p>
-<ol style="list-style-type: decimal">
-<li><p>We develop formula and functions to compute the mean MoI, the mean AoI and all its moments, and the probability of detection.</p></li>
-<li><p>Hybrid models for the mean MoI for malaria superinfection were developed by Nåsell (1985)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Nåsell I (1985). Hybrid Models of Tropical Infections, 1st edition. Springer-Verlag. &lt;a href="https://doi.org/10.1007/978-3-662-01609-1" class="external-link uri"&gt;https://doi.org/10.1007/978-3-662-01609-1&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a>, We extend this approach, developing systems of differential equations that track the mean and higher order moments of the distribution of the AoI.</p></li>
-<li><p>We a new random variable describing the age of the youngest infection (AoY). We show how the variable serves as a basis for computing parasite density distributions in complex infections.</p></li>
-<li><p>We derive a hybrid variable for the mean AoY.</p></li>
-<li><p>We demonstrate that a simple system of ordinary differential equations can be used in place of the random variables for most applications.</p></li>
-</ol>
-<p>To put it another way, we can reduce the behavior of these highly complex probabilistic systems to a simple system of equations that has a high degree of accuracy. The computational and conceptual simplicity of hybrid models have some simplicity over compartmental models and stochastic individual-based models, and with the supporting probabilistic framework, provide a sound basis for a synthesis of observational malaria epidemiology.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 </div>
 </div>
-
-
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">

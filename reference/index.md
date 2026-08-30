@@ -36,8 +36,8 @@ Queuing models for malaria
 Dynamics of MoI, AoI, and the AoY
 
 - [`zda()`](https://dd-harp.github.io/ramp.falciparum/reference/zda.md)
-  : Compute infection density in a cohort of humans, \\z\_\tau(\alpha, a
-  \|h)\\
+  : Compute infection density in a cohort of humans, \\z\_\bday(\alpha,
+  a \|h)\\
 - [`truePR()`](https://dd-harp.github.io/ramp.falciparum/reference/truePR.md)
   : Compute the true PR in a cohort as a function of age and exposure
 
@@ -244,7 +244,7 @@ log10 parasites from AoI (alpha)
 Parasite density distributions by host cohort age
 
 - [`d_clone_density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_clone_density.md)
-  : Compute \\P\_\tau(a \|h)\\
+  : Compute \\P\_\bday(a \|h)\\
 - [`moments_clone_density()`](https://dd-harp.github.io/ramp.falciparum/reference/moments_clone_density.md)
   : Compute the moments of P_density
 
@@ -253,9 +253,9 @@ Parasite density distributions by host cohort age
 Compute parasite density distributions as a function of the AoI
 
 - [`parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/parasite_density.md)
-  : Compute \\B\_\tau(a \| h)\\
+  : Compute \\B\_\bday(a \| h)\\
 - [`d_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_parasite_density.md)
-  : Compute the distribution function for \\B\_\tau(a)\\
+  : Compute the distribution function for \\B\_\bday(a)\\
 - [`p_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/p_parasite_density.md)
   : Call parasite_density and return the density vector
 - [`r_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/r_parasite_density.md)
@@ -361,58 +361,6 @@ Parasite counts
   : Compute the distribution of parasite counts in complex infections
 - [`mean_parasite_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/mean_parasite_counts.md)
   : Compute the mean parasite counts in complex infections
-
-## Force of Infection
-
-Methods to set up FoI trace functions
-
-- [`FoI()`](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
-  : Force of Infection, \\h\_\tau(a)\\
-
-### FoI by Age
-
-Specialized methods modify the FoI by Age
-
-- [`ageFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.md)
-  : Functions to modify the FoI by age
-- [`ageFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.flat.md)
-  : A function that does not modify the FoI by age
-- [`par_flatAge()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatAge.md)
-  : Make a parameter list to dispatch ageFoI.flat
-- [`ageFoI(`*`<type2>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.type2.md)
-  : A function that does not modify the FoI by age
-- [`par_type2Age()`](https://dd-harp.github.io/ramp.falciparum/reference/par_type2Age.md)
-  : Make a parameter list to dispatch ageFoI.type2
-
-### FoI by Season
-
-Specialized methods set the seasonal FoI
-
-- [`seasonalFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.md)
-  : Add a seasonal pattern to the FoI trace function
-- [`seasonalFoI(`*`<exp>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.exp.md)
-  : A generalized sinusoidal seasonal pattern, exponentiated
-- [`par_expSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_expSeason.md)
-  : Return a list to dispatch seasonalFoI.exp
-- [`seasonalFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.flat.md)
-  : The "no seasonality" function
-- [`par_flatSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatSeason.md)
-  : Return a list that dispatches seasonalFoI.flat
-- [`seasonalFoI(`*`<sin>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.sin.md)
-  : A generalized sinusoidal seasonal pattern
-- [`par_sinSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_sinSeason.md)
-  : Return a list to configure and dispatch seasonalFoI.sin
-
-### FoI Trends
-
-Specialized methods to set trends in the FoI
-
-- [`trendFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/trendFoI.md)
-  : Add a trend to the FoI trace function
-- [`trendFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/trendFoI.flat.md)
-  : The "no trend" function
-- [`par_flatTrend()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatTrend.md)
-  : Return a list that dispatches trendFoI.flat
 
 ## Utilities
 

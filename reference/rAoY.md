@@ -6,7 +6,7 @@ The random generation function for the age of the youngest infection
 ## Usage
 
 ``` r
-rAoY(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
+rAoY(N, a, FoI_a, bday = 0, hhat = 1, r = 1/200, alphamin = 0)
 ```
 
 ## Arguments
@@ -17,16 +17,15 @@ rAoY(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 

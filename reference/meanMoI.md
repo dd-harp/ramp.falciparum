@@ -1,28 +1,27 @@
 # The mean MoI in a host cohort of age \\a\\
 
-The mean multiplicity of infection (MoI) is \$\$m\_\tau(a\|h) = \int_0^a
-z\_\tau(\alpha, a\|h) d \alpha\$\$
+The mean multiplicity of infection (MoI) is \$\$m\_\bday(a\|h) =
+\int_0^a z\_\bday(\alpha, a\|h) d \alpha\$\$
 
 ## Usage
 
 ``` r
-meanMoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+meanMoI(a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 ```
 
 ## Arguments
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 

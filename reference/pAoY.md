@@ -5,7 +5,7 @@ The distribution function for the age of the youngest infection (AoY)
 ## Usage
 
 ``` r
-pAoY(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+pAoY(alpha, a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 ```
 
 ## Arguments
@@ -16,21 +16,19 @@ pAoY(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 
-  scaling parameter for
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  scaling parameter for the FoI
 
 - r:
 

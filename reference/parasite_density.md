@@ -1,4 +1,4 @@
-# Compute \\B\_\tau(a \| h)\\
+# Compute \\B\_\bday(a \| h)\\
 
 This function first computes the PDF for simple infections,
 [d_clone_density](https://dd-harp.github.io/ramp.falciparum/reference/d_clone_density.md),
@@ -11,8 +11,8 @@ up to a large number using convolutions.
 parasite_density(
   meshX,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   RBC_par = par_lRBC_static(),
@@ -32,11 +32,11 @@ parasite_density(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

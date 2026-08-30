@@ -5,12 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>The Force of Infection (FoI) • ramp.falciparum</title>
+<title>Exposure Trace Functions • ramp.falciparum</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
 <script src="../deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
-<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="The Force of Infection (FoI)">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Exposure Trace Functions">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
@@ -32,10 +32,27 @@
 <li class="active nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/FoI.html">FoI</a></li>
-    <li><a class="dropdown-item" href="../articles/Dynamics.html">Infection Dynamics</a></li>
-    <li><a class="dropdown-item" href="../articles/MoI.html">MoI</a></li>
-    <li><a class="dropdown-item" href="../articles/Hybrid.html">Hybrid</a></li>
+<li><a class="dropdown-item" href="../articles/Overview.html">Overview of Malaria Epidemiology</a></li>
+    <li><a class="dropdown-item" href="../articles/FoI.html">Exposure</a></li>
+    <li><a class="dropdown-item" href="../articles/StateSpace.html">The Malaria State Space</a></li>
+    <li><a class="dropdown-item" href="../articles/Superinfection.html">Superinfection &amp; Queuing</a></li>
+    <li><a class="dropdown-item" href="../articles/RandomVariables.html">Random Variables</a></li>
+    <li><a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Variables</a></li>
+    <li><a class="dropdown-item" href="../articles/RobustAnalytics.html">Robust Analytics</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-models" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Models</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-models">
+<li><a class="dropdown-item" href="../articles/MoI.html">M/M/∞</a></li>
+    <li><a class="dropdown-item" href="../articles/SquIP.html">SquIP</a></li>
+    <li><a class="dropdown-item" href="../articles/SquIPz.html">SquIPz</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-hybrid-variables" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Hybrid Variables</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-hybrid-variables">
+<li><a class="dropdown-item" href="../articles/Dynamics.html">Infection Dynamics</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Functions</a></li>
@@ -55,9 +72,8 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
 
-      <h1>The Force of Infection (FoI)</h1>
-            <h3 data-toc-skip class="subtitle">Building Trace
-Functions</h3>
+      <h1>Exposure Trace Functions</h1>
+            <h3 data-toc-skip class="subtitle">Trace Functions</h3>
             
       
 
@@ -66,28 +82,164 @@ Functions</h3>
 
     
     
-<p>We want to be able to simulate arbitrary patterns of exposure in
-cohorts as they age, with the ability to compare two cohorts of
-different ages in the same population. We let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(t)</annotation></semantics></math>
-denote the average daily FoI in a population, the hazard rate for
-infection. Notably, knowing the birth day for a cohort,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>τ</mi><mo>,</mo></mrow><annotation encoding="application/x-tex">\tau,</annotation></semantics></math>
-we can convert between age and time using the identity
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>τ</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">t = a + \tau.</annotation></semantics></math>
-We let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\omega(a)</annotation></semantics></math>
-be a function that computes a <em>frailty</em> term associated with age,
-so we can write the FoI for any cohort as:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>ω</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>ω</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">h_\tau(a) = \omega(a) h(a) =  \omega(a) h(t-\tau).</annotation></semantics></math></p>
-<p>We begin by constructing functions,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">h(t),</annotation></semantics></math>
-to pressure test our models. We assume exposure has a seasonal pattern,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">S(t)</annotation></semantics></math>,
-and a temporal trend,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">T(t)</annotation></semantics></math>,
+<blockquote>
+<p>To model exposure, <strong><code>ramp.falciparum</code></strong> uses
+the <a href="https://dd-harp.github.io/ramp.func/articles/TraceFunctions.html" class="external-link">trace
+function</a> library in <a href="https://dd-harp.github.io/ramp.func/" class="external-link"><strong><code>ramp.func</code></strong></a></p>
+</blockquote>
+<p>Exposure to malaria is defined as the number of bites by infective
+mosquitoes, per person, per day, called the daily <strong>entomological
+inoculation rate</strong> (abbreviated <strong>EIR</strong> and denoted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">E(t)</annotation></semantics></math>).
+Since the daily EIR (dEIR) is often seasonal, we also discuss the annual
+EIR (aEIR), average dEIR over a year. The <strong>force of
+infection</strong> is the hazard rate for infection for susceptible
+individuals (abbreviated <strong>FoI</strong> and denoted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(t)</annotation></semantics></math>).</p>
+<p><strong><code>ramp.falciparum</code></strong> is focused on malaria
+epidemiology defined in a narrow sense to include anything happening in
+the human population: exposure, infection, disease, immunity,
+infectiousness, treatment with anti-malarial drugs, vaccines, detection
+(by various diagnostic methods), heterogeneity, and demography. It has
+avoided models of malaria transmission dynamics and control: for that,
+we developed <a href="https://dd-harp.github.io/ramp.xds/" class="external-link"><strong><code>ramp.xds</code></strong></a>
+and <a href="https://faculty.washington.edu/smitdave/simba/" class="external-link"><strong>SimBA</strong></a>.</p>
+<p>Here, we use <strong>trace functions</strong> to model exposure. If
+we model malaria transmission dynamics, the EIR and the FoI would be the
+outcome of parasite transmission among humans and mosquitoes through
+blood feeding. Mosquito ecology and infection dynamics could be
+seasonally forced or highly variable, and the models would output the
+EIR and the FoI as intermediate terms. If we wanted to remain focused on
+malaria epidemiology in the narrow sense, we could take the essential
+information about the EIR and the FoI — the trace — and use it to
+<em>force</em> exposure.</p>
+<div class="section level2">
+<h2 id="composed-time-series-functions">Composed Time Series Functions<a class="anchor" aria-label="anchor" href="#composed-time-series-functions"></a>
+</h2>
+<p>To model complex patterns of exposure, we use <strong>composed time
+series</strong> functions from the <a href="https://dd-harp.github.io/ramp.func/" class="external-link"><strong><code>ramp.func</code></strong></a>
+a function library. Each trace function is the product of four
+components:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mover><mi>E</mi><mo accent="true">‾</mo></mover><mo>×</mo><msub><mi>F</mi><mi>S</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>T</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>K</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+E(t) = \bar E \times F_S(t) \times F_T(t) \times F_K(t)
+</annotation></semantics></math></p>
+<p>where</p>
+<ul>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>E</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar E</annotation></semantics></math>
+is the mean value of an unperturbed system.</p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>S</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F_S(t)&gt;0</annotation></semantics></math>
+is a <strong>seasonal</strong> pattern function, normalized over the
+interval such that
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><msub><mi>t</mi><mn>0</mn></msub><msub><mi>t</mi><mn>1</mn></msub></msubsup><msub><mi>F</mi><mi>S</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>t</mi><mo>=</mo><msub><mi>t</mi><mn>1</mn></msub><mo>−</mo><msub><mi>t</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\int_{t_0}^{t_1} F_S(t) \;dt = t_1 - t_0</annotation></semantics></math></p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>T</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F_T(t)&gt;0</annotation></semantics></math>
+is a <strong>trend</strong> pattern function, normalized over the
+interval such that
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><msub><mi>t</mi><mn>0</mn></msub><msub><mi>t</mi><mn>1</mn></msub></msubsup><msub><mi>F</mi><mi>T</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>t</mi><mo>=</mo><msub><mi>t</mi><mn>1</mn></msub><mo>−</mo><msub><mi>t</mi><mn>0</mn></msub></mrow><annotation encoding="application/x-tex">\int_{t_0}^{t_1} F_T(t) \; dt = t_1 - t_0</annotation></semantics></math></p></li>
+<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>K</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">F_K(t)&gt;0</annotation></semantics></math>
+is a <strong>shock</strong> function, a perturbation to the
+system</p></li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="heterogeneous-exposure">Heterogeneous Exposure<a class="anchor" aria-label="anchor" href="#heterogeneous-exposure"></a>
+</h2>
+<p>The EIR and the FoI are related, under some model for heterogeneous
+exposure and pre-erythrocytic immunity. In developing models of
+heterogeneous exposure, we recognize several kinds of heterogeneity that
+we handle very differently (see Cooper L, <em>et al.</em>, 2019)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Cooper, L., Kang, S.Y., Bisanzio, D. et al. Pareto rules
+for malaria super-spreaders and super-spreading. Nat Commun 10, 3939
+(2019). &lt;a href="https://doi.org/10.1038/s41467-019-11861-y" class="external-link uri"&gt;https://doi.org/10.1038/s41467-019-11861-y&lt;/a&gt;&lt;/p&gt;'><sup>1</sup></a>:
+<em>heterogeneous biting,</em> <em>environmental heterogeneity,</em> and
+<em>complex exposure.</em></p>
+<div class="section level3">
+<h3 id="heterogeneous-biting">Heterogeneous Biting<a class="anchor" aria-label="anchor" href="#heterogeneous-biting"></a>
+</h3>
+<p>By heterogeneous biting, we mean that the expected rate of exposure
+differs for population strata: biting is a kind of <em>frailty:</em> if
+the population average dEIR is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>,
+and if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+is the frailty term for one stratum, then the expected dEIR is
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>w</mi><mi>E</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">wE.</annotation></semantics></math>
+A frailty term is a multiplicative modifier of risk. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>E</mi><annotation encoding="application/x-tex">E</annotation></semantics></math>
+is the population average, and if
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>D</mi><annotation encoding="application/x-tex">D</annotation></semantics></math>
+describes the distribution of frailty over all strata then:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><mi>D</mi><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>w</mi><mo>=</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">\int_0^\infty D(w) dw = 1</annotation></semantics></math>
 and
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mover><mi>h</mi><mo accent="true">‾</mo></mover><mo>⋅</mo><mi>S</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>⋅</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">h(t) = \bar h \cdot S(t) \cdot T(t).</annotation></semantics></math></p>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><mi>w</mi><mi>E</mi><mi>D</mi><mo stretchy="false" form="prefix">(</mo><mi>w</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>w</mi><mo>=</mo><mi>E</mi></mrow><annotation encoding="application/x-tex">\int_0^\infty w E D(w) \; dw = E</annotation></semantics></math>
+In this case,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>w</mi><annotation encoding="application/x-tex">w</annotation></semantics></math>
+is the relative biting rate.</p>
+</div>
+<div class="section level3">
+<h3 id="environmental-heterogeneity">Environmental Heterogeneity<a class="anchor" aria-label="anchor" href="#environmental-heterogeneity"></a>
+</h3>
+<p>Exposure can be heterogeneous in a homogenous population stratum
+(<em>i.e.</em> there are no differences in the <em>expected</em> rate).
+Consider two humans with the same expectation, but on one day, one of
+them happens to spend their time in a house with glass windows and a
+door that closes, while the other one is outside and walks into a swarm
+of mosquitoes. From a mosquito perspective, mosquitoes populations move
+around and aggregate around resources. Those mosquito swarms can be
+moved around by wind.</p>
+<p>To handle environmental heterogeneity, we let the expectation have a
+distribution. If, for example, the expectation is <em>gamma</em>
+distributed, then the number of bites per human is a mixture process: a
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mi>a</mi><mi>m</mi><mi>m</mi><mi>a</mi></mrow><annotation encoding="application/x-tex">gamma</annotation></semantics></math>-Poisson
+gives us a <strong>negative binomial</strong> distribution of bites per
+person. Notably, for most mosquito catch counts data, the variance is
+much higher than the mean, and the distributions can be modeled with
+negative binomial distributions.</p>
+</div>
+<div class="section level3">
+<h3 id="complex-exposure">Complex Exposure<a class="anchor" aria-label="anchor" href="#complex-exposure"></a>
+</h3>
+<p>In models for superinfection, a single infection event can infect a
+human with more than one distinct parasite genotype. The distribution of
+the number of distinct parasite types, per bite, is called the
+<strong>multiplicity of exposure</strong> (MoE).</p>
+</div>
+</div>
+<div class="section level2">
+<h2 id="exposure-and-infection">Exposure and Infection<a class="anchor" aria-label="anchor" href="#exposure-and-infection"></a>
+</h2>
+<p>Exposure is heterogeneous, but so is the risk of infection. In some
+cases, we want to consider models with pre-erythrocytic immunity: the
+risk of infection per infectious bite is denoted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>b</mi><annotation encoding="application/x-tex">b</annotation></semantics></math>.
+To handle this, various mathematical models will represent infection
+states — denoted
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐗</mi><annotation encoding="application/x-tex">\mathbf{X}</annotation></semantics></math>
+— in different ways. Generically, the FoI is related to the EIR by a
+function:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo>=</mo><msub><mi>F</mi><mi>b</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>E</mi><mo>,</mo><mi>𝐗</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h = F_b(E, \mathbf{X})</annotation></semantics></math></p>
+</div>
+<div class="section level2">
+<h2 id="cohort-dynamics">Cohort Dynamics<a class="anchor" aria-label="anchor" href="#cohort-dynamics"></a>
+</h2>
+<p>Since malaria epidemiology is related to age and exposure, all the
+mathematical models developed in
+<strong><code>ramp.falciparum</code></strong> are formulated for cohorts
+as they age. To explore these models, we must simulate arbitrary
+patterns of exposure in cohorts as they age, with the ability to compare
+two cohorts of different ages in the same population. If
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">E(t)</annotation></semantics></math>
+denotes the average daily EIR in a population, we want to model exposure
+in some particular cohort, born on day
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">d.</annotation></semantics></math>
+For every cohort, age and time are related by the identity
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>d</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">t = a + d.</annotation></semantics></math>
+It follows that exposure at age
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
+is</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">E(a|d) = E(t-d).</annotation></semantics></math></p>
+</div>
+<div class="section level2">
+<h2 id="age">Age<a class="anchor" aria-label="anchor" href="#age"></a>
+</h2>
 <p>Motivated by the evidence for age-dependent exposure, the rate of
 exposure in a cohort is assumed to change with age. We use the
 age-weighting function,
@@ -96,79 +248,27 @@ consistent with the available evidence from both anopheline and aedine
 mosquitoes (Port GR, <em>et al.</em>, 1980;<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;G. R. Port, P. F. L. Boreham, J. H. Bryan, The
 relationship of host size to feeding by mosquitoes of the Anopheles
 Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological
-Research 70, 133–144 (1980).&lt;/p&gt;"><sup>1</sup></a>, Carnevale P, <em>et
+Research 70, 133–144 (1980).&lt;/p&gt;"><sup>2</sup></a>, Carnevale P, <em>et
 al.</em>, 1978;<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont,
 J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to
 the age and sex of the human subjects]. Bull. World Health Organ. 56,
-147–154 (1978).&lt;/p&gt;"><sup>2</sup></a>, Liebman KA, <em>et al.</em>, 2014<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;K. A. Liebman, et al., Determinants of Heterogeneous
-Blood Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl.
-Trop. Dis. 8, e2702 (2014).&lt;/p&gt;"><sup>3</sup></a>) . Each
-cohort is indexed by its birth day,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>.
-The FoI at age
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
-for the cohort born on day
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>,
-which is at time
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>t</mi><mo>=</mo><mi>a</mi><mo>+</mo><mi>τ</mi></mrow><annotation encoding="application/x-tex">t=a+\tau</annotation></semantics></math>,
-is defined for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>a</mi><mo>&gt;</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">a&gt;0</annotation></semantics></math>:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>h</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mover><mi>h</mi><mo accent="true">‾</mo></mover><mo>⋅</mo><mi>ω</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>⋅</mo><mi>S</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>+</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>⋅</mo><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>+</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\begin{equation}
-h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau) 
-\end{equation}</annotation></semantics></math></p>
-<p>We can thus compare exposure and infection for cohorts of different
-ages, of the same age at different times. We let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>H</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">H_\tau(a)</annotation></semantics></math>
-denote the size of the cohort of age
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
-born on day
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>,
-and we note that for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(t)</annotation></semantics></math>
-to be the <em>average</em> FoI for the population, it must be true that
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mrow><mi>−</mi><mi>∞</mi></mrow><mi>t</mi></msubsup><msub><mi>h</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>H</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>τ</mi></mrow><annotation encoding="application/x-tex">h(t) = \int_{-\infty}^t h_\tau(a) H_\tau(a) d \tau </annotation></semantics></math>
-In most of our simulations, we compute quantities for single cohorts as
-they age, and we choose functions
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\omega(a)</annotation></semantics></math>
-without worrying about this constraint. When we deal with the whole
-human population, however, we must enforce the constraint.</p>
-<p>The <code>FoI</code> is defined as an <strong>S3</strong> class
-function that returns the FoI at ages <code>a</code> for a cohort with
-birthdate <code>tau</code>, for a function defined by <code>par</code>.
-The optional passed parameter <code>hhat</code> overrides the value of
-<code>hbar</code> set in <code>par</code> when it is not
-<code>null</code>:</p>
-<ul>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>h</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar h</annotation></semantics></math>
-or <code>hbar</code> sets the overall level of exposure</p></li>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>S</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">S(t)</annotation></semantics></math>
-or <code>seasonalFoI</code> defines a seasonal pattern</p></li>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>T</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">T(t)</annotation></semantics></math>
-or <code>trendFoI</code> defines a temporal trend</p></li>
-<li><p><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>ω</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\omega(a)</annotation></semantics></math>
-or <code>ageFoI</code> defines a change in exposure with respect to age
-relative to the mean population FoI</p></li>
-</ul>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">plotFoI</span><span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">h</span>, <span class="va">FoIpar</span>, <span class="va">tau</span><span class="op">=</span><span class="fl">0</span>, <span class="va">Tmax</span><span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span>, <span class="va">clrs</span><span class="op">=</span><span class="cn">NULL</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="va">L</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">h</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">clrs</span><span class="op">)</span><span class="op">)</span> <span class="va">clrs</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="va">L</span><span class="op">)</span></span>
-<span>  <span class="va">tms</span> <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="va">Tmax</span></span>
-<span>  <span class="va">tm</span> <span class="op">=</span> <span class="va">tms</span><span class="op">/</span><span class="fl">365</span> </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tm</span>, <span class="fl">365</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">*</span><span class="fu"><a href="../reference/FoI.html">FoI</a></span><span class="op">(</span><span class="va">tms</span>, <span class="va">FoIpar</span>, <span class="va">tau</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"n"</span>, </span>
-<span>       xlab <span class="op">=</span> <span class="st">"Host Age (Years)"</span>, ylab <span class="op">=</span> <span class="st">"aFoI"</span><span class="op">)</span> </span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">L</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">tm</span>, <span class="fl">365</span><span class="op">*</span><span class="va">h</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">*</span><span class="fu"><a href="../reference/FoI.html">FoI</a></span><span class="op">(</span><span class="va">tms</span>,<span class="va">FoIpar</span>, <span class="va">tau</span><span class="op">)</span>, col <span class="op">=</span> <span class="va">clrs</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="op">}</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">clrs8b</span> <span class="op">&lt;-</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">inferno</a></span><span class="op">(</span><span class="fl">8</span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">FoIfigure</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">hh</span><span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">4</span>, <span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">.5</span>, <span class="fl">.2</span>, <span class="fl">0.1</span><span class="op">)</span><span class="op">/</span><span class="fl">365</span>, </span>
-<span>                     <span class="va">tau</span><span class="op">=</span><span class="fl">0</span>, <span class="va">clrs</span> <span class="op">=</span> <span class="va">clrs8b</span>, <span class="va">Tmax</span><span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfcol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="fu">plotFoI</span><span class="op">(</span><span class="va">hh</span>, <span class="va">foiP4</span>, <span class="va">tau</span>, <span class="va">Tmax</span>, <span class="va">clrs</span><span class="op">)</span> </span>
-<span>  <span class="fu">plotFoI</span><span class="op">(</span><span class="va">hh</span>, <span class="va">foiP3</span>, <span class="va">tau</span>, <span class="va">Tmax</span>, <span class="va">clrs</span><span class="op">)</span> </span>
-<span><span class="op">}</span> </span></code></pre></div>
-<p><img src="FoI_files/figure-html/FoIFigure-1.png" class="r-plt" alt="" width="576"></p>
+147–154 (1978).&lt;/p&gt;"><sup>3</sup></a>, Liebman KA, <em>et al.</em>, 2014<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Liebman KA, Stoddard ST, Reiner RC Jr, Perkins TA,
+Astete H, Sihuincha M, et al. (2014) Determinants of Heterogeneous Blood
+Feeding Patterns by Aedes aegypti in Iquitos, Peru. PLoS Negl Trop Dis
+8(2): e2702. &lt;a href="https://doi.org/10.1371/journal.pntd.0002702" class="external-link uri"&gt;https://doi.org/10.1371/journal.pntd.0002702&lt;/a&gt;&lt;/p&gt;'><sup>4</sup></a>) . Since
+biting varies with age, we let
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>ω</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_\omega(a)</annotation></semantics></math>
+be a function that computes the <em>relative biting rate</em> by age, a
+kind of <em>frailty.</em> The EIR for a cohort is:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>F</mi><mi>ω</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>E</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mover><mi>E</mi><mo accent="true">‾</mo></mover><mo>×</mo><msub><mi>F</mi><mi>ω</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>S</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>T</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>K</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">E(a|d) = F_\omega(a) E(t-d) = \bar E \times F_\omega(a) \times F_S(t-d) \times F_T(t-d) \times F_K(t-d)</annotation></semantics></math>
+We can thus formulate models for exposure in a population and compare
+outcomes for two different cohorts.</p>
+<p>In some cases, we can simply skip the model for pre-erythrocytic
+immunity. We
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>h</mi><mo accent="true">‾</mo></mover><annotation encoding="application/x-tex">\bar h</annotation></semantics></math>
+be a scaling parameter and:</p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="prefix">|</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mover><mi>h</mi><mo accent="true">‾</mo></mover><mo>×</mo><msub><mi>F</mi><mi>ω</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>S</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>T</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>×</mo><msub><mi>F</mi><mi>K</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo>−</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(a|d) = \bar h \times F_\omega(a) \times F_S(t-d) \times F_T(t-d) \times F_K(t-d)</annotation></semantics></math></p>
+</div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>

@@ -24,8 +24,8 @@ values of the dependent variables by name. The wrapper
 ``` r
 solve_SquIP(
   h,
-  FoIpar,
-  tau = 0,
+  F_a,
+  bday = 0,
   r = 1/200,
   rho = 0.2,
   sigma = 1/365,
@@ -45,13 +45,11 @@ solve_SquIP(
 
   the force of infection
 
-- FoIpar:
+- F_a:
 
-  \\h\_\tau(a)\\, a [list](https://rdrr.io/r/base/list.html) formatted
-  to compute
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  a trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

@@ -29,13 +29,30 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="active nav-item dropdown">
+<li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/FoI.html">FoI</a></li>
-    <li><a class="dropdown-item" href="../articles/Dynamics.html">Infection Dynamics</a></li>
-    <li><a class="dropdown-item" href="../articles/MoI.html">MoI</a></li>
-    <li><a class="dropdown-item" href="../articles/Hybrid.html">Hybrid</a></li>
+<li><a class="dropdown-item" href="../articles/Overview.html">Overview of Malaria Epidemiology</a></li>
+    <li><a class="dropdown-item" href="../articles/FoI.html">Exposure</a></li>
+    <li><a class="dropdown-item" href="../articles/StateSpace.html">The Malaria State Space</a></li>
+    <li><a class="dropdown-item" href="../articles/Superinfection.html">Superinfection &amp; Queuing</a></li>
+    <li><a class="dropdown-item" href="../articles/RandomVariables.html">Random Variables</a></li>
+    <li><a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Variables</a></li>
+    <li><a class="dropdown-item" href="../articles/RobustAnalytics.html">Robust Analytics</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-models" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Models</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-models">
+<li><a class="dropdown-item" href="../articles/MoI.html">M/M/∞</a></li>
+    <li><a class="dropdown-item" href="../articles/SquIP.html">SquIP</a></li>
+    <li><a class="dropdown-item" href="../articles/SquIPz.html">SquIPz</a></li>
+  </ul>
+</li>
+<li class="active nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-hybrid-variables" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Hybrid Variables</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-hybrid-variables">
+<li><a class="dropdown-item" href="../articles/Dynamics.html">Infection Dynamics</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Functions</a></li>
@@ -82,13 +99,13 @@ youngest infection (AoY).</p>
 <ol style="list-style-type: decimal">
 <li>
 <p>Let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_\tau(\alpha,a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_d(\alpha,a)</annotation></semantics></math>
 denote the density for infections of age
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 in a host cohort of age
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math>
 born on day
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>τ</mi><annotation encoding="application/x-tex">\tau</annotation></semantics></math>.</p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>.</p>
 <ul>
 <li><p>The dynamics of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>z</mi><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z(\alpha,a)</annotation></semantics></math>
@@ -96,66 +113,66 @@ are described by the following:
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>∂</mi><mi>z</mi></mrow><mrow><mi>∂</mi><mi>a</mi></mrow></mfrac><mo>+</mo><mfrac><mrow><mi>∂</mi><mi>z</mi></mrow><mrow><mi>∂</mi><mi>α</mi></mrow></mfrac><mo>=</mo><mi>−</mi><mi>r</mi><mi>z</mi></mrow><annotation encoding="application/x-tex">
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - r z
 </annotation></semantics></math> with the boundary condition:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>h</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mn>0</mn><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>h</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \begin{equation}
- z_\tau(0,a) = h_\tau(a).
+ z_d(0,a) = h_d(a).
 \end{equation}
 </annotation></semantics></math> Its solutions are given by:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>h</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>−</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>r</mi><mi>α</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
-z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>h</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>−</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><mi>r</mi><mi>α</mi></mrow></msup></mrow><annotation encoding="application/x-tex">
+z_d(\alpha,a) = h_d(a-\alpha) e^{-r \alpha}
 </annotation></semantics></math></p></li>
 <li><p>The function <code>zda</code> computes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">z_\tau(\alpha, a).</annotation></semantics></math></p></li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">z_d(\alpha, a).</annotation></semantics></math></p></li>
 </ul>
 </li>
 <li>
 <p>The mean MoI is given by the formula:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
-m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
+m_d(a) = \int_0^a z_d(\alpha, a) d \alpha
 </annotation></semantics></math></p>
 <ul>
 <li><p>The distribution of the MoI is Poisson (Nåsell I, 1985)<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content='&lt;p&gt;Nåsell I (1985). Hybrid Models of Tropical Infections,
 1st edition. Springer-Verlag. &lt;a href="https://doi.org/10.1007/978-3-662-01609-1" class="external-link uri"&gt;https://doi.org/10.1007/978-3-662-01609-1&lt;/a&gt;&lt;/p&gt;'><sup>2</sup></a> with mean
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">m_\tau(a).</annotation></semantics></math></p></li>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>.</mi></mrow><annotation encoding="application/x-tex">m_d(a).</annotation></semantics></math></p></li>
 <li><p>The function <code>meanMoI</code> computes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_\tau(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_d(a)</annotation></semantics></math>
 using <code>zda</code></p></li>
 </ul>
 </li>
 <li><p>The true prevalence is the
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">
-p_\tau(a) = 1 - e^{-m_\tau(a)} 
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">
+p_d(a) = 1 - e^{-m_d(a)} 
 </annotation></semantics></math> The function <code>truePR</code>
 computes the true prevalence using <code>meanMoI</code></p></li>
 <li><p>The density function for the age of infection (AoI) is
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-A_\tau(a) \sim f_A(\alpha, a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+A_d(a) \sim f_A(\alpha, a, d) = \frac{z_d(\alpha,a)}{m_d(a)}
 </annotation></semantics></math> and its moments are
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
-x_n(a, \tau | h) = \int_0^a  \alpha^n f_A(\alpha, a, \tau) d \alpha
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
+x_n(a, d | h) = \int_0^a  \alpha^n f_A(\alpha, a, d) d \alpha
 </annotation></semantics></math></p></li>
 <li>
 <p>The age of the youngest infection (AoY) is defined as:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi mathvariant="normal">min</mi><mrow><mi>ζ</mi><mo>∼</mo><msub><mi>M</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></munder><msubsup><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>ζ</mi></msubsup><mo>,</mo><msub><mi>α</mi><mi>i</mi></msub><mo>∼</mo><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
-Y_\tau(a) \sim f_Y(\alpha, a, \tau) = \min_{\zeta \sim M_\tau(a)} \left\{ \alpha_i \right\}_{i=1}^\zeta,  \alpha_i \sim A_\tau(a) 
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><munder><mi mathvariant="normal">min</mi><mrow><mi>ζ</mi><mo>∼</mo><msub><mi>M</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></munder><msubsup><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>ζ</mi></msubsup><mo>,</mo><msub><mi>α</mi><mi>i</mi></msub><mo>∼</mo><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+Y_d(a) \sim f_Y(\alpha, a, d) = \min_{\zeta \sim M_d(a)} \left\{ \alpha_i \right\}_{i=1}^\zeta,  \alpha_i \sim A_d(a) 
 </annotation></semantics></math></p>
 <ul>
 <li><p>The density function can be expressed in terms of the density and
 distribution functions of the AoI and MoI.
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mfrac><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>p</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
-f_Y(\alpha; a, \tau) = 
-f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)} \frac{m_\tau(a)}{p_\tau(a)}.
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mfrac><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac><mi>.</mi></mrow><annotation encoding="application/x-tex">
+f_Y(\alpha; a, d) = 
+f_A(\alpha, a,d) e^{-m_d(a) F_A(\alpha, a,d)} \frac{m_d(a)}{p_d(a)}.
 </annotation></semantics></math></p></li>
 <li><p>The distribution function for the AoY is:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><msub><mi>p</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
 F_Y(a) \sim
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} = 
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)} 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{1-e^{-m_d(a)}} = 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{p_d(a)} 
 \label{FY}
 </annotation></semantics></math></p></li>
 <li><p>Its moments are:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="prefix">|</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
-y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha 
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="prefix">|</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="prefix">|</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
+y_n(a, d | h) = \int_0^a  \alpha^n f_Y(\alpha | a, d, h) d \alpha 
 </annotation></semantics></math></p></li>
 </ul>
 </li>
@@ -163,15 +180,15 @@ y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha
 <p>We also developed functions to compute the age of the youngest of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
 infections, called YoN
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><munder><mi mathvariant="normal">min</mi><mi>N</mi></munder><msubsup><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> where </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>α</mi><mi>i</mi></msub><mo>∼</mo><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
-N_\tau(a) \sim
-\min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i \sim A_\tau(a) 
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><munder><mi mathvariant="normal">min</mi><mi>N</mi></munder><msubsup><mrow><mo stretchy="true" form="prefix">{</mo><msub><mi>α</mi><mi>i</mi></msub><mo stretchy="true" form="postfix">}</mo></mrow><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>N</mi></msubsup><mrow><mspace width="0.333em"></mspace><mtext mathvariant="normal"> where </mtext><mspace width="0.333em"></mspace></mrow><msub><mi>α</mi><mi>i</mi></msub><mo>∼</mo><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">
+N_d(a) \sim
+\min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i \sim A_d(a) 
 </annotation></semantics></math></p>
 <ul>
 <li><p>The distribution function for YoN,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N_\tau(a)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N_d(a)</annotation></semantics></math>,
 is
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>N</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mn>1</mn><mo>−</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><msup><mo stretchy="false" form="postfix">)</mo><mi>N</mi></msup></mrow><annotation encoding="application/x-tex">F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a, \tau))^N</annotation></semantics></math>
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>N</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mn>1</mn><mo>−</mo><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><msup><mo stretchy="false" form="postfix">)</mo><mi>N</mi></msup></mrow><annotation encoding="application/x-tex">F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a, d))^N</annotation></semantics></math>
 The following is a summary table of functions to compute the MoI, AoI,
 AoY, and all their moments.</p></li>
 <li><p>The density function for YoN is found by
@@ -179,7 +196,7 @@ differentiating:</p></li>
 </ul>
 </li>
 </ol>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>N</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msup><mfrac><mrow><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">f_N(\alpha, a, t) \sim N (1-F_A(\alpha, a, \tau))^{N-1}\frac{f_A(\alpha, a, \tau)}{m_\tau(a)}</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>N</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mi>N</mi><mo stretchy="false" form="prefix">(</mo><mn>1</mn><mo>−</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><msup><mo stretchy="false" form="postfix">)</mo><mrow><mi>N</mi><mo>−</mo><mn>1</mn></mrow></msup><mfrac><mrow><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">f_N(\alpha, a, t) \sim N (1-F_A(\alpha, a, d))^{N-1}\frac{f_A(\alpha, a, d)}{m_d(a)}</annotation></semantics></math></p>
 </div>
 <div class="section level2">
 <h2 id="quick-reference">Quick Reference<a class="anchor" aria-label="anchor" href="#quick-reference"></a>
@@ -219,10 +236,10 @@ AoI, AoY, YoN, and all their moments.</p>
 </tr>
 <tr class="odd">
 <td>Random Variable</td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_\tau(\zeta, a, h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_\tau(\alpha, a, h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y_\tau(\alpha, a , h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N_\tau(\alpha, a, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_d(\zeta, a, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(\alpha, a, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y_d(\alpha, a , h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>N</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">N_d(\alpha, a, h)</annotation></semantics></math></td>
 </tr>
 <tr class="even">
 <td>Density Function</td>
@@ -254,10 +271,10 @@ AoI, AoY, YoN, and all their moments.</p>
 </tr>
 <tr class="even">
 <td>Random Numbers</td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>M</mi><mo accent="true">̂</mo></mover><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat M_\tau(\zeta, a, h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>A</mi><mo accent="true">̂</mo></mover><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat A_\tau(\alpha, a, h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Y</mi><mo accent="true">̂</mo></mover><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat Y_\tau(\alpha, a , h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>N</mi><mo accent="true">̂</mo></mover><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat N_\tau(\alpha, a , h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>M</mi><mo accent="true">̂</mo></mover><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat M_d(\zeta, a, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>A</mi><mo accent="true">̂</mo></mover><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat A_d(\alpha, a, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>Y</mi><mo accent="true">̂</mo></mover><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat Y_d(\alpha, a , h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mover><mi>N</mi><mo accent="true">̂</mo></mover><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">\hat N_d(\alpha, a , h)</annotation></semantics></math></td>
 </tr>
 <tr class="odd">
 <td><code></code></td>
@@ -268,9 +285,9 @@ AoI, AoY, YoN, and all their moments.</p>
 </tr>
 <tr class="even">
 <td>Moments</td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_\tau(a, h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x_n(a, \tau, h)</annotation></semantics></math></td>
-<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y_n(a, \tau, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_d(a, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">x_n(a, d, h)</annotation></semantics></math></td>
+<td align="center"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>y</mi><mi>n</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo>,</mo><mi>h</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">y_n(a, d, h)</annotation></semantics></math></td>
 <td align="center"></td>
 </tr>
 <tr class="odd">
@@ -290,12 +307,29 @@ AoI, AoY, YoN, and all their moments.</p>
 <div class="section level3">
 <h3 id="force-of-infection-foi">Force of Infection (FoI)<a class="anchor" aria-label="anchor" href="#force-of-infection-foi"></a>
 </h3>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.func/" class="external-link">ramp.func</a></span><span class="op">)</span></span>
+<span><span class="co"># devtools::load_all()</span></span>
+<span><span class="co"># devtools::load_all("~/git/ramp.func")</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">clrs</span> <span class="op">=</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">turbo</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span></span>
+<span><span class="va">Sa</span> <span class="op">=</span> <span class="fu"><a href="https://dd-harp.github.io/ramp.func/reference/makepar_F_type2.html" class="external-link">makepar_F_type2</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">Sp</span> <span class="op">=</span> <span class="fu"><a href="https://dd-harp.github.io/ramp.func/reference/makepar_F_sin.html" class="external-link">makepar_F_sin</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">F_t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dd-harp.github.io/ramp.func/reference/make_ts_function.html" class="external-link">make_ts_function</a></span><span class="op">(</span>scale <span class="op">=</span> <span class="fl">1</span>, season_par<span class="op">=</span><span class="va">Sp</span><span class="op">)</span></span>
+<span><span class="va">FoI_a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://dd-harp.github.io/ramp.func/reference/make_F_a.html" class="external-link">make_F_a</a></span><span class="op">(</span>avg <span class="op">=</span> <span class="fl">3</span><span class="op">/</span><span class="fl">365</span>, age_par<span class="op">=</span><span class="va">Sa</span>, season_par<span class="op">=</span><span class="va">Sp</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3650</span>, by<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
+<span><span class="va">aa</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">365</span><span class="op">*</span><span class="fl">5</span>, by <span class="op">=</span><span class="fl">5</span><span class="op">)</span> </span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tt</span>, <span class="fl">0.05</span><span class="op">*</span><span class="fu">F_t</span><span class="op">(</span><span class="va">tt</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="672"></p>
 <p>To compute anything, we must first set up a function to describe
 exposure (see the <a href="FoI.html">FoI</a> vignette). We define
 functions that plot the FoI for a cohort as it ages (in red), but we can
 also compute the population average FoI (in black). Different cohorts
 would experience different histories of exposure.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="computing-zda">Computing <code>zda</code><a class="anchor" aria-label="anchor" href="#computing-zda"></a>
@@ -308,23 +342,25 @@ cohort of any age without solving a full system of equations. Given a
 function describing the FoI in the population,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(t)</annotation></semantics></math>,
 and the cohort birthday,
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>τ</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">\tau.</annotation></semantics></math></p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">d.</annotation></semantics></math></p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># devtools::load_all()</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">=</span> <span class="fl">60</span></span>
 <span><span class="va">a</span> <span class="op">=</span> <span class="fl">6</span><span class="op">*</span><span class="fl">365</span></span>
-<span><span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">6</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span> </span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.001601196</span></span></code></pre>
+<span><span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">6</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span> </span></code></pre></div>
+<pre><code><span><span class="co">## [1] 0.008962569</span></span></code></pre>
 <p>The following computes the density of infections of every age in a
 cohort of age 3.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">zz</span> <span class="op">=</span> <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">zz</span> <span class="op">=</span> <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>When we plot
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_\tau(\alpha, a)</annotation></semantics></math>,
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_d(\alpha, a)</annotation></semantics></math>,
 we note that as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 grows larger, the parasite cohort gets older. When we plot parasite
 cohorts by age, time is going backwards on the x-axis.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-5-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="576"></p>
 <p>Now, we can imagine what <code>zda</code> would look like for several
 different host cohorts at age three, but who were born at different
 times. In effect, we are taking a snapshot of the cohorts at the same
@@ -334,7 +370,7 @@ months, and they thus experienced different levels of exposure over the
 first two years of life. Here the annual FoI is 5 infections, per
 person, per year
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>h</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>5</mn><mi>/</mi><mn>365</mn></mrow><annotation encoding="application/x-tex">\bar h = 5/365</annotation></semantics></math>):</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
 <div class="section level2">
@@ -344,9 +380,9 @@ person, per year
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math>
 describing the multiplicity of infection (MoI). The distribution of the
 MoI is Poisson (see the <a href="MoI.html">MoI</a> vignette).</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>M</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mtext mathvariant="normal">Pois</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_\tau(a) \sim f_M(\zeta; a, \tau) = \mbox{Pois}(m_\tau(a))</annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>M</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>M</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>ζ</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mtext mathvariant="normal">Pois</mtext><mo stretchy="false" form="prefix">(</mo><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">M_d(a) \sim f_M(\zeta; a, d) = \mbox{Pois}(m_d(a))</annotation></semantics></math></p>
 <p>Since
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_\tau(\alpha, a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_d(\alpha, a)</annotation></semantics></math>
 describes the density of <em>all</em> infections of age
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 in a cohort of age
@@ -354,69 +390,69 @@ in a cohort of age
 the density of all infections must be the MoI. Since
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mn>0</mn><mo>≤</mo><mi>α</mi><mo>&lt;</mo><mi>a</mi></mrow><annotation encoding="application/x-tex">0 \leq \alpha &lt; a</annotation></semantics></math>,
 it must be true that:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">\begin{equation}
 \tag{2}
-m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+m_d(a) = \int_0^a z_d(\alpha, a) d \alpha
 \end{equation}</annotation></semantics></math></p>
 <p>The function that computes
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_\tau(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_d(a)</annotation></semantics></math>
 is called <code>meanMoI.</code></p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mm</span> <span class="op">=</span> <span class="fu"><a href="../reference/meanMoI.html">meanMoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">foiP3</span>, hhat<span class="op">=</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mm</span> <span class="op">=</span> <span class="fu"><a href="../reference/meanMoI.html">meanMoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span>, hhat<span class="op">=</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span></span></code></pre></div>
 <p>Here, we plot the average MoI in the host cohort as it ages:</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="age-of-infection-aoi">Age of Infection (AoI)<a class="anchor" aria-label="anchor" href="#age-of-infection-aoi"></a>
 </h2>
 <p>We define a random variable
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_\tau(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>
 that describes the age of infection (AoI), which is given by the
 formula</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
-A_\tau(a) \sim f_A(\alpha; a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mfrac><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">
+A_d(a) \sim f_A(\alpha; a, d) = \frac{z_d(\alpha,a)}{m_d(a)}
 </annotation></semantics></math></p>
 <div class="section level3">
 <h3 id="the-density-function-daoi">The Density Function, <code>dAoI</code><a class="anchor" aria-label="anchor" href="#the-density-function-daoi"></a>
 </h3>
 <p>We can compute
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_\tau(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>
 using the density function <code>dAoI</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">f_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoI.html">dAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="576"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">f_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoI.html">dAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="576"></p>
 <p>Now, as we plot the distribution of the AoI in cohorts at age two,
 born at different months (as we did above), we notice that the
 distributions have changed shapes:</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="the-distribution-function-paoi">The Distribution Function, <code>pAoI</code><a class="anchor" aria-label="anchor" href="#the-distribution-function-paoi"></a>
 </h3>
 <p>The distribution function for
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_\tau(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>
 is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msubsup><mo>∫</mo><mn>0</mn><mi>α</mi></msubsup><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
-F_A(a) \sim \int_0^\alpha f_A(\alpha; a, \tau) d\alpha
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msubsup><mo>∫</mo><mn>0</mn><mi>α</mi></msubsup><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
+F_A(a) \sim \int_0^\alpha f_A(\alpha; a, d) d\alpha
 </annotation></semantics></math></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">F_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/pAoI.html">pAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">F_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/pAoI.html">pAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>If our functions work correctly, then we should get approximately the
 same answer from computing the cumulative sum of <code>dAoI.</code></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">F_A_alt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">f_A</span><span class="op">)</span></span></code></pre></div>
 <p>We shouldn’t expect the answers to be exactly the same, but they
 should be close, with the <code>pAoI</code> in black.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="st">"Parasite Cohort Age"</span>, </span>
-<span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="cn">F</span><span class="op">[</span><span class="va">X</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span>, <span class="va">tau</span><span class="op">)</span><span class="op">)</span>, lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
+<span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="cn">F</span><span class="op">[</span><span class="va">X</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span>, <span class="va">bday</span><span class="op">)</span><span class="op">)</span>, lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A_alt</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-14-1.png" class="r-plt" alt="" width="576"></p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="random-numbers-raoi">Random Numbers, <code>rAoI</code><a class="anchor" aria-label="anchor" href="#random-numbers-raoi"></a>
@@ -424,21 +460,21 @@ should be close, with the <code>pAoI</code> in black.</p>
 <p>The function <code>rAoI</code> uses <code>pAoI</code> to generate
 random numbers from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_A(\alpha)</annotation></semantics></math></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">rhx</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoI.html">rAoI</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">rhx</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoI.html">rAoI</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>A simple visual check computes the empirical CDF for the random
 variates against
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_A(\alpha)</annotation></semantics></math>
 computed using <code>pAoI</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html" class="external-link">ecdf</a></span><span class="op">(</span><span class="va">rhx</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1095</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.2</span>, main <span class="op">=</span> <span class="st">""</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Parasite Age (in Days)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">F</span><span class="op">[</span><span class="va">A</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"ecdf"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="576"></p>
 <p>We can also plot the distribution functions.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="aoi-moments">AoI Moments<a class="anchor" aria-label="anchor" href="#aoi-moments"></a>
@@ -446,88 +482,88 @@ computed using <code>pAoI</code></p>
 <p>Let
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>x</mi><annotation encoding="application/x-tex">x</annotation></semantics></math>
 denote the first moment of of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_\tau(a)</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">⟨</mo><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><mi>α</mi><mfrac><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_\tau(a) = \left&lt; A_\tau(a) \right&gt; = \int_0^\infty \alpha \frac{z_\tau(\alpha, a)} {m_\tau(a)}</annotation></semantics></math></p>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><mrow><mo stretchy="true" form="prefix">⟨</mo><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><mi>α</mi><mfrac><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_d(a) = \left&lt; A_d(a) \right&gt; = \int_0^\infty \alpha \frac{z_d(\alpha, a)} {m_d(a)}</annotation></semantics></math></p>
 <p>Similarly, we let
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">x_\tau(a)[n]</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo stretchy="false" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">x_d(a)[n]</annotation></semantics></math>
 denote the higher order moments of
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_\tau(a)</annotation></semantics></math>:
-<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo stretchy="false" form="postfix">]</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><mfrac><mrow><msub><mi>z</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_{[n]}(a, \tau) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a)} {m_\tau(a)}</annotation></semantics></math></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">moment1</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">foiP3</span><span class="op">)</span></span>
-<span><span class="va">moment2</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">moment3</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>:
+<math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo stretchy="false" form="postfix">]</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><mfrac><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_{[n]}(a, d) = \int_0^\infty \alpha^n \frac{z_d(\alpha, a)} {m_d(a)}</annotation></semantics></math></p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">moment1</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span><span class="op">)</span></span>
+<span><span class="va">moment2</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">moment3</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p>The first three moments of the AoY plotted over time. In the top
 plot, we’ve also plotted the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math>
 root of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math>
 moment.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
 <div class="section level2">
 <h2 id="age-of-the-youngest-infection-aoy">Age of the Youngest Infection (AoY)<a class="anchor" aria-label="anchor" href="#age-of-the-youngest-infection-aoy"></a>
 </h2>
 <p>We have derived a random variable
-<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y_\tau(a)</annotation></semantics></math>
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">Y_d(a)</annotation></semantics></math>
 describing the age of the youngest infection (AoY). The density function
 for the AoY is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mfrac><mrow><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>p</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">Y_\tau(a) \sim f_Y(\alpha; a, \tau) = f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)} \frac{m_\tau(a)}{p_\tau(a)}</annotation></semantics></math>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>Y</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup><mfrac><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">Y_d(a) \sim f_Y(\alpha; a, d) = f_A(\alpha, a,d) e^{-m_d(a) F_A(\alpha, a,d)} \frac{m_d(a)}{p_d(a)}</annotation></semantics></math>
 The distribution function is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><msub><mi>p</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">F_Y(a) \sim
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} = 
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)} 
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow></mfrac><mo>=</mo><mfrac><mrow><mn>1</mn><mo>−</mo><msup><mi>e</mi><mrow><mi>−</mi><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow></msup></mrow><mrow><msub><mi>p</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">F_Y(a) \sim
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{1-e^{-m_d(a)}} = 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{p_d(a)} 
 </annotation></semantics></math></p>
 <p>The derivations are found in a Suppplement to Henry JM, <em>et
 al.</em> (2024).</p>
 <p>The mean AoY is:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">⟨</mo><msub><mi>Y</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><mi>α</mi><mspace width="0.278em"></mspace><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
-\left&lt; Y_\tau(a) \right&gt; = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha </annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">⟨</mo><msub><mi>Y</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>a</mi></msubsup><mi>α</mi><mspace width="0.278em"></mspace><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
+\left&lt; Y_d(a) \right&gt; = \int_0^a \alpha \; f_Y(\alpha, a, d) \; d\alpha </annotation></semantics></math></p>
 <p>And the higher order moments for the AoY are:</p>
-<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">⟨</mo><msub><mi>Y</mi><mi>τ</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>n</mi></msup><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>n</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><mspace width="0.278em"></mspace><msub><mi>f</mi><mi>y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>τ</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">\left&lt; Y_\tau(a)^n \right&gt; = \int_0^n \alpha^n \; f_y(\alpha, a, \tau) \; d\alpha </annotation></semantics></math></p>
+<p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo stretchy="true" form="prefix">⟨</mo><msub><mi>Y</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><msup><mo stretchy="false" form="postfix">)</mo><mi>n</mi></msup><mo stretchy="true" form="postfix">⟩</mo></mrow><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>n</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><mspace width="0.278em"></mspace><msub><mi>f</mi><mi>y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mspace width="0.278em"></mspace><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">\left&lt; Y_d(a)^n \right&gt; = \int_0^n \alpha^n \; f_y(\alpha, a, d) \; d\alpha </annotation></semantics></math></p>
 <div class="section level3">
 <h3 id="aoy-density-daoy">AoY Density, <code>dAoY</code><a class="anchor" aria-label="anchor" href="#aoy-density-daoy"></a>
 </h3>
 <p>The density function is computed with the function
 <code>dAoY.</code></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">f_Y</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoY.html">dAoY</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">f_Y</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoY.html">dAoY</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>We can compare
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_Y(\alpha)</annotation></semantics></math>
 (in black) to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_A(\alpha)</annotation></semantics></math>
 (in grey).</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="random-variables-raoy">Random Variables, <code>rAoY</code><a class="anchor" aria-label="anchor" href="#random-variables-raoy"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">raoy</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoY.html">rAoY</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">foiP3</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">raoy</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoY.html">rAoY</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">raoy</span>, breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1095</span>, by <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>, </span>
 <span>     right<span class="op">=</span><span class="cn">F</span>, probability<span class="op">=</span><span class="cn">T</span>, main <span class="op">=</span> <span class="st">""</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Parasite Age (in Days)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>     border <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">out</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">f_Y</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-26-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="aoy-moments">AoY Moments<a class="anchor" aria-label="anchor" href="#aoy-moments"></a>
 </h3>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aa</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
-<span><span class="va">moment1y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span><span class="op">)</span></span>
-<span><span class="va">moment2y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
-<span><span class="va">moment3y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">foiP3</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">moment1y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">FoI_a</span><span class="op">)</span></span>
+<span><span class="va">moment2y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">moment3y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
 <p>The first three moments of the AoY plotted over time. In the top
 plot, we’ve also plotted the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math>
 root of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math>
 moment.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-26-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-28-1.png" class="r-plt" alt="" width="576"></p>
 <hr>
 <p><strong>Next:</strong></p>
 <ul>
