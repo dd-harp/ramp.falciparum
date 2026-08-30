@@ -4,16 +4,16 @@
 \alias{solve_dAoI}
 \title{Solve the system of differential equations to compute the moments of the AoI over time.}
 \usage{
-solve_dAoI(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1, N = 3)
+solve_dAoI(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1, N = 3)
 }
 \arguments{
 \item{h}{the force of infection}
 
-\item{FoIpar}{a FoI trace function}
+\item{FoI_a}{a cohort trace function}
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{Amax}{The maximum runtime (in days)}
 

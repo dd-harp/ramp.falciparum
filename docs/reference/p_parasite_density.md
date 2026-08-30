@@ -10,8 +10,8 @@ and return the density vector
 p_parasite_density(
   meshX,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   RBC_par = par_lRBC_static(),
@@ -31,11 +31,11 @@ p_parasite_density(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

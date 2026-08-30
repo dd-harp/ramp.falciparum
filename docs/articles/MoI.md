@@ -3,8 +3,14 @@
 ``` r
 
 library(ramp.falciparum)
+library(ramp.func)
 library(deSolve)
 library(knitr)
+```
+
+``` r
+
+# devtools::load_all()
 ```
 
 In 1950, George Maccdonald published a model of malaria superinfection
@@ -81,15 +87,15 @@ affect the results.
 
 ``` r
 
-MMinf <- solveMMinfty(5/365, foiP3, Amax=1095)
+MMinf <- solveMMinfty(5/365, FoI_a, Amax=1095)
 ```
 
 ``` r
 
-with(MMinf, plot(time, m, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)"))
+with(MMinf, plot(time, m, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)"))
 ```
 
-![](MoI_files/figure-html/unnamed-chunk-5-1.png)
+![](MoI_files/figure-html/unnamed-chunk-6-1.png)
 
 ## The Hybrid Model
 
@@ -107,15 +113,15 @@ would remain Poisson forever.
 
 ``` r
 
-hybrid = solve_dm(5/365, foiP3, Amax=1095)
+hybrid = solve_dm(5/365, FoI_a, Amax=1095)
 ```
 
 ``` r
 
-with(hybrid, plot(time, m, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)"))
+with(hybrid, plot(time, m, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)"))
 ```
 
-![](MoI_files/figure-html/unnamed-chunk-7-1.png)
+![](MoI_files/figure-html/unnamed-chunk-8-1.png)
 
 ## The Random Variables Approach
 
@@ -131,15 +137,15 @@ cohorts with the equation,
 \end{equation}
 ```
 
-with the boundary condition $`z_\tau(a,0)=h_\tau(a).`$ We note that the
-age of the host birth cohort sets an upper limit for the parasite
-cohort, so $`0 < \alpha < a`$. The solution, which describes density of
-infections of age $`\alpha`$ in a host cohort of age $`a`$, is given by
-the formula:
+with the boundary condition $`z_d(a,0)=h_d(a).`$ We note that the age of
+the host birth cohort sets an upper limit for the parasite cohort, so
+$`0 < \alpha < a`$. The solution, which describes density of infections
+of age $`\alpha`$ in a host cohort of age $`a`$, is given by the
+formula:
 
 ``` math
 \begin{equation}
-z_\tau(\alpha, a | h) = h_\tau \left(a-\alpha\right) e^{-r \alpha}.
+z_d(\alpha, a | h) = h_d \left(a-\alpha\right) e^{-r \alpha}.
 \label{zda}
 \end{equation}
 ```
@@ -149,7 +155,7 @@ AoI, and the AoY, noting that the mean MoI is:
 
 ``` math
 \begin{equation}
-m_\tau(a | h) = \int_0^a z_\tau(\alpha, a |h) d \alpha 
+m_d(a | h) = \int_0^a z_d(\alpha, a |h) d \alpha 
 \end{equation}
 ```
 
@@ -157,15 +163,15 @@ In `ramp.falciparum,` this is computed with the function `meanMoI`
 
 ``` r
 
-moi = meanMoI(aa, foiP3, hhat=5/365)
+moi = meanMoI(aa, FoI_a, hhat=5/365)
 ```
 
 ``` r
 
-plot(aa, moi, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)")
+plot(aa, moi, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)")
 ```
 
-![](MoI_files/figure-html/unnamed-chunk-9-1.png)
+![](MoI_files/figure-html/unnamed-chunk-10-1.png)
 
 The three give the same answers, up to slight differences introduced by
 the numerical methods:

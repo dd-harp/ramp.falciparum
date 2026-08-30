@@ -1,5 +1,5 @@
 
-#' Compute \eqn{B_\tau(a | h)}
+#' Compute \eqn{B_\bday(a | h)}
 #'
 #' @description
 #' This function first computes the PDF for simple infections, [d_clone_density], and
@@ -9,8 +9,8 @@
 #'
 #' @param meshX a mesh over parasite densities
 #' @param a host cohort age
-#' @param FoIpar parameters that define an FoI function
-#' @param tau the cohort birthday
+#' @param FoI_a a cohort trace function
+#' @param bday the cohort birthday
 #' @param hhat a local scaling parameter for the FoI
 #' @param r the clearance rate for a simple infection
 #' @param RBC_par parameters to compute [log10RBC]
@@ -22,19 +22,19 @@
 #' @export
 #'
 parasite_density = function(meshX,
-                    a, FoIpar, tau=0,
+                    a, FoI_a, bday=0,
                     hhat=1, r=1/200,
                     RBC_par = par_lRBC_static(),
                     Fmu_par = par_Fmu_base(),
                     Omega_par = par_Omega_beta(),
                     pWda = par_Wda_none()){
-  PDFx = d_clone_density(meshX, a, FoIpar, tau, hhat, r, RBC_par, Fmu_par, Omega_par, pWda)
+  PDFx = d_clone_density(meshX, a, FoI_a, bday, hhat, r, RBC_par, Fmu_par, Omega_par, pWda)
   CDFx = cumsum(PDFx)
   CDFx = CDFx/max(CDFx)
   PDFx = c(CDFx[1], diff(CDFx))
   PDFx = PDFx/sum(PDFx)
 
-  moi = meanMoI(a, FoIpar, tau, hhat, r)
+  moi = meanMoI(a, FoI_a, bday, hhat, r)
   N = max(4*moi, 10)
 
   cdflist = list()
@@ -63,11 +63,11 @@ parasite_density = function(meshX,
 
 
 
-#' Compute the distribution function for \eqn{B_\tau(a)}
+#' Compute the distribution function for \eqn{B_\bday(a)}
 #'
 #' @description
 #' Call [parasite_density] and return the PDF:
-#' \deqn{f_B(\xi; a, \tau |h) = \log_{10} \left( \sum_{M_\tau(a|h)>0} 10^{P_\tau(a |h)}\right)}
+#' \deqn{f_B(\xi; a, \bday |h) = \log_{10} \left( \sum_{M_\bday(a|h)>0} 10^{P_\bday(a |h)}\right)}
 #'
 #' @inheritParams parasite_density
 #'
@@ -75,12 +75,12 @@ parasite_density = function(meshX,
 #' @export
 #'
 d_parasite_density = function(meshX,
-                      a, FoIpar, tau=0, hhat=1, r=1/200,
+                      a, FoI_a, bday=0, hhat=1, r=1/200,
                       RBC_par = par_lRBC_static(),
                       Fmu_par = par_Fmu_base(),
                       Omega_par  = par_Omega_beta(),
                       pWda    = par_Wda_none()){
-  parasite_density(meshX, a, FoIpar, tau, hhat, r, RBC_par, Fmu_par, Omega_par, pWda)$PDFm
+  parasite_density(meshX, a, FoI_a, bday, hhat, r, RBC_par, Fmu_par, Omega_par, pWda)$PDFm
 }
 
 
@@ -91,20 +91,20 @@ d_parasite_density = function(meshX,
 #' @return a numeric vector of length meshX
 #' @export
 #'
-p_parasite_density = function(meshX, a, FoIpar, tau=0, hhat=1, r=1/200,
+p_parasite_density = function(meshX, a, FoI_a, bday=0, hhat=1, r=1/200,
                       RBC_par = par_lRBC_static(),
                       Fmu_par = par_Fmu_base(),
                       Omega_par = par_Omega_beta(),
                       pWda=par_Wda_none()){
-  parasite_density(meshX, a, FoIpar, tau, hhat, r, RBC_par, Fmu_par, Omega_par, pWda)$CDFm
+  parasite_density(meshX, a, FoI_a, bday, hhat, r, RBC_par, Fmu_par, Omega_par, pWda)$CDFm
 }
 
 #' Random generation for parasite densities in a host cohort
 #'
 #' @param N number of observations
 #' @param a host cohort age
-#' @param FoIpar parameters that define an FoI function
-#' @param tau the cohort birthday
+#' @param FoI_a a cohort trace function
+#' @param bday the cohort birthday
 #' @param hhat a local scaling parameter for the FoI
 #' @param r the clearance rate for a simple infection
 #' @param alphamin the minimum value of alpha allowed
@@ -116,18 +116,18 @@ p_parasite_density = function(meshX, a, FoIpar, tau=0, hhat=1, r=1/200,
 #' @return a [numeric] vector of length N
 #' @export
 #'
-r_parasite_density = function(N, a, FoIpar, tau=0,
+r_parasite_density = function(N, a, FoI_a, bday=0,
                       hhat=1, r=1/200, alphamin=7,
                       RBC_par = par_lRBC_static(),
                       Fmu_par= par_Fmu_base(),
                       Omega_par = par_Omega_beta(),
                       pWda=par_Wda_none()){
-  moi = meanMoI(a, FoIpar, tau, hhat, r)
-  W = Wda(a, FoIpar, tau, hhat, pWda)
+  moi = meanMoI(a, FoI_a, bday, hhat, r)
+  W = Wda(a, FoI_a, bday, hhat, pWda)
 
   hatm = nzPois(N, moi)
   Ny = sum(hatm)
-  hatalpha = rAoI(Ny, a, FoIpar, tau, hhat, r, alphamin)
+  hatalpha = rAoI(Ny, a, FoI_a, bday, hhat, r, alphamin)
   # their expected values
   hatmu = Fmu(hatalpha, W, Fmu_par)
   bvm = log10RBC(a, RBC_par)
@@ -143,8 +143,8 @@ r_parasite_density = function(N, a, FoIpar, tau=0,
 #' @param R the number of observations
 #' @param M the MoI
 #' @param a host cohort age
-#' @param FoIpar parameters that define an FoI function
-#' @param tau the cohort birthday
+#' @param FoI_a a cohort trace function
+#' @param bday the cohort birthday
 #' @param hhat a local scaling parameter for the FoI
 #' @param r the clearance rate for a simple infection
 #' @param alphamin the minimum value of alpha allowed
@@ -156,15 +156,15 @@ r_parasite_density = function(N, a, FoIpar, tau=0,
 #' @return a R by M [matrix]
 #' @export
 #'
-rRda = function(M, R, a, FoIpar, tau=0, hhat=1, r=1/200, alphamin=7,
+rRda = function(M, R, a, FoI_a, bday=0, hhat=1, r=1/200, alphamin=7,
                 RBC_par = par_lRBC_static(),
                 Fmu_par = par_Fmu_base(),
                 Omega_par = par_Omega_beta(),
                 pWda=par_Wda_none()){
-  W = Wda(a, FoIpar, tau, hhat, pWda)
+  W = Wda(a, FoI_a, bday, hhat, pWda)
   # MoI, excluding zeros
   Ny = R*M
-  hatalpha = rAoI(Ny, a, FoIpar, tau, hhat, r, alphamin)
+  hatalpha = rAoI(Ny, a, FoI_a, bday, hhat, r, alphamin)
   # their expected values
   hatmu = Fmu(hatalpha, W, Fmu_par)
   bvm = log10RBC(a, RBC_par)
@@ -177,11 +177,11 @@ rRda = function(M, R, a, FoIpar, tau=0, hhat=1, r=1/200, alphamin=7,
 #' Compute the moments of P_density
 #'
 #' @description
-#' Compute \deqn{P_\tau(a| h) \sim f_P(\xi; a, \tau |h ) = \int_0^a \Omega(\xi|F_\mu(\alpha)) \; f_A(\alpha; a, \tau | h) d\alpha}
+#' Compute \deqn{P_\bday(a| h) \sim f_P(\xi; a, \bday |h ) = \int_0^a \Omega(\xi|F_\mu(\alpha)) \; f_A(\alpha; a, \bday | h) d\alpha}
 #'
 #' @param a host cohort age
-#' @param FoIpar parameters that define an FoI function
-#' @param tau the cohort birthday
+#' @param FoI_a a cohort trace function
+#' @param bday the cohort birthday
 #' @param n the moment to compute
 #' @param dt the mesh size over xi
 #' @param hhat a local scaling parameter for the FoI
@@ -193,7 +193,7 @@ rRda = function(M, R, a, FoIpar, tau=0, hhat=1, r=1/200, alphamin=7,
 #'
 #' @return a [numeric] vector of length(x)
 #' @export
-moments_parasite_density = function(a, FoIpar, tau=0, n=1, dt=0.1,
+moments_parasite_density = function(a, FoI_a, bday=0, n=1, dt=0.1,
                            hhat=1, r=1/200,
                            par_RBC = par_lRBC_static(),
                            par_Fmu=par_Fmu_base(),
@@ -202,7 +202,7 @@ moments_parasite_density = function(a, FoIpar, tau=0, n=1, dt=0.1,
 
   lRBC = log10RBC(a, par_RBC)
   xi = seq(0, lRBC, by = dt)
-  Bd = d_parasite_density(xi, a, FoIpar, tau, hhat, r,
+  Bd = d_parasite_density(xi, a, FoI_a, bday, hhat, r,
                   par_RBC, par_Fmu, par_Omega, pWda)
   sum(xi^n*Bd)
 }

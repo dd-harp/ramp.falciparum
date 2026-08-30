@@ -4,18 +4,18 @@
 \alias{pYoN}
 \title{The youngest of N infections, distribution function}
 \usage{
-pYoN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+pYoN(N, a, FoI_a, bday = 0, hhat = NULL, r = 1/200)
 }
 \arguments{
 \item{N}{the MoI}
 
 \item{a}{the age of a cohort}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
+
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
-
-\item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate of a simple infection}
 }

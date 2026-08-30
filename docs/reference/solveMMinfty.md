@@ -11,7 +11,7 @@ regular intervals dt from age 0 up to Amax (in days).
 ## Usage
 
 ``` r
-solveMMinfty(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
+solveMMinfty(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1)
 ```
 
 ## Arguments
@@ -20,17 +20,15 @@ solveMMinfty(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
 
   the force of infection
 
-- FoIpar:
+- FoI_a:
 
-  \\h\_\tau(a)\\, a [list](https://rdrr.io/r/base/list.html) formatted
-  to compute
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  a cohort trace function
 
 - r:
 
   the clearance rate for a simple infection
 
-- tau:
+- bday:
 
   the cohort birthday
 

@@ -5,7 +5,7 @@ The
 ## Usage
 
 ``` r
-dAoIda(a, M, p, FoIpar)
+dAoIda(a, M, p, FoI_a)
 ```
 
 ## Arguments
@@ -22,9 +22,9 @@ dAoIda(a, M, p, FoIpar)
 
   the parameters
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 ## Value
 

@@ -4,7 +4,7 @@
 \alias{dSquIP}
 \title{Derivatives for \link{SquIP}}
 \usage{
-dSquIP(a, y, pars, FoIpar)
+dSquIP(a, y, pars, F_a)
 }
 \arguments{
 \item{a}{the host age}
@@ -13,7 +13,7 @@ dSquIP(a, y, pars, FoIpar)
 
 \item{pars}{the parameters}
 
-\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
+\item{F_a}{a trace function}
 }
 \value{
 the derivatives as a \link{list}

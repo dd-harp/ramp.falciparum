@@ -2,13 +2,13 @@
 % Please edit documentation in R/density_clone.R
 \name{d_clone_density}
 \alias{d_clone_density}
-\title{Compute \eqn{P_\tau(a |h)}}
+\title{Compute \eqn{P_\bday(a |h)}}
 \usage{
 d_clone_density(
   xi,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   par_RBC = par_lRBC_static(),
@@ -22,9 +22,9 @@ d_clone_density(
 
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 
@@ -42,5 +42,5 @@ d_clone_density(
 a \link{numeric} vector of length(x)
 }
 \description{
-Compute \deqn{P_\tau(a| h) \sim f_P(\xi; a, \tau |h ) = \int_0^a \Omega(\xi|F_\mu(\alpha)) \; f_A(\alpha; a, \tau | h) d\alpha}
+Compute \deqn{P_\bday(a| h) \sim f_P(\xi; a, \bday |h ) = \int_0^a \Omega(\xi|F_\mu(\alpha)) \; f_A(\alpha; a, \bday | h) d\alpha}
 }

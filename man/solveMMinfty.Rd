@@ -4,16 +4,16 @@
 \alias{solveMMinfty}
 \title{Solve the queuing model \eqn{M/M/\infty}}
 \usage{
-solveMMinfty(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
+solveMMinfty(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1)
 }
 \arguments{
 \item{h}{the force of infection}
 
-\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
+\item{FoI_a}{a cohort trace function}
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{Amax}{The maximum runtime (in days)}
 

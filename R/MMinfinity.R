@@ -3,14 +3,14 @@
 #' @description
 #' The queuing model \eqn{M/M/\infty} tracks the MoI in a cohort of humans
 #' as it ages. It assumes a time- and age-dependent hazard rate for infection,
-#' called the force of infection (FoI, \eqn{h_\tau(a)}). Infections do not affect
+#' called the force of infection (FoI, \eqn{h_\bday(a)}). Infections do not affect
 #' each other, and each one clears independently at the rate \eqn{r}.
 #'
 #' Let \eqn{\zeta_i} the fraction of the population with
 #' MoI = i, then
-#' \deqn{\frac{d\zeta_0}{da}= -h_\tau(a) \zeta_0 + r \zeta_1}
+#' \deqn{\frac{d\zeta_0}{da}= -h_\bday(a) \zeta_0 + r \zeta_1}
 #' and for \eqn{i\geq 1}
-#' \deqn{\frac{d\zeta_i}{da}= h_\tau(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
+#' \deqn{\frac{d\zeta_i}{da}= h_\bday(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
 #'
 #'@name MMinfinity
 NULL
@@ -22,29 +22,29 @@ NULL
 #'
 #' This queuing model \eqn{M/M/\infty} tracks the MoI in a cohort of humans
 #' as it ages. It assumes a time- and age-dependent hazard rate for infection,
-#' called the force of infection (FoI, \eqn{h_\tau(a)}). Infections do not affect
+#' called the force of infection (FoI, \eqn{h_\bday(a)}). Infections do not affect
 #' each other, and each one clears independently at the rate \eqn{r}.
 #'
 #' Let \eqn{\zeta_i} the fraction of the population with
 #' MoI = i, then
-#' \deqn{\frac{d\zeta_0}{da}= -h_\tau(a) \zeta_0 + r \zeta_1}
+#' \deqn{\frac{d\zeta_0}{da}= -h_\bday(a) \zeta_0 + r \zeta_1}
 #' and for \eqn{i\geq 1}
-#' \deqn{\frac{d\zeta_i}{da}= h_\tau(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
+#' \deqn{\frac{d\zeta_i}{da}= h_\bday(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
 #'
 #' This function computes the derivatives in a form that can be used by [deSolve::ode].
 #'
 #' @param a the host age
 #' @param M the state variables
 #' @param pars the parameters
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param FoI_a a cohort trace function
 #'
 #' @return the derivatives as a [list]
 #' @keywords internal
 #' @seealso [solveMMinfty]
 #' @export
 #'
-dMoIda = function(a, M, pars, FoIpar){with(as.list(c(M,pars)),{
-  foi = h*FoI(a, FoIpar, tau)
+dMoIda = function(a, M, pars, FoI_a){with(as.list(c(M,pars)),{
+  foi = h*FoI_a(a, bday)
   i = 1:N
   m = i-1
   dM = 0*M-(foi + r*m)*M
@@ -64,9 +64,9 @@ dMoIda = function(a, M, pars, FoIpar){with(as.list(c(M,pars)),{
 #' regular intervals dt from age 0 up to Amax (in days).
 #'
 #' @param h the force of infection
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param FoI_a a cohort trace function
 #' @param r the clearance rate for a simple infection
-#' @param tau the cohort birthday
+#' @param bday the cohort birthday
 #' @param Amax The maximum runtime (in days)
 #' @param dt The output frequency (in days)
 #'
@@ -74,13 +74,13 @@ dMoIda = function(a, M, pars, FoIpar){with(as.list(c(M,pars)),{
 #' @seealso [dMoIda]
 #' @export
 #'
-solveMMinfty = function(h, FoIpar, r=1/200, tau=0, Amax=730, dt=1){
+solveMMinfty = function(h, FoI_a, r=1/200, bday=0, Amax=730, dt=1){
   tms = seq(0, Amax, by = dt)
   N = round(max(4*h/r,20))
-  prms = c(h=h,r=r,N=N,tau=tau)
+  prms = c(h=h,r=r,N=N,bday=bday)
   inits = rep(0,N)
   inits[1]=1
-  out = deSolve::ode(inits, times=tms, dMoIda, prms, FoIpar=FoIpar)
+  out = deSolve::ode(inits, times=tms, dMoIda, prms, FoI_a=FoI_a)
   time = out[,1]; moi = out[,-1]
   m = moi %*% c(0:(N-1))
   list(time=time, moi=moi, m=m)
@@ -95,5 +95,5 @@ solveMMinfty = function(h, FoIpar, r=1/200, tau=0, Amax=730, dt=1){
 MoIDistPlot = function(moi, t, clr1 = "red"){
   N = dim(moi)[2]-2
   mm = 1:N -1
-  plot(mm, moi[t,1:N +1], type="h", xlab = "MoI", ylab = expression(M[tau](a)), main = paste ("Age = ", t, "Days"))
+  plot(mm, moi[t,1:N +1], type="h", xlab = "MoI", ylab = expression(M[bday](a)), main = paste ("Age = ", t, "Days"))
 }

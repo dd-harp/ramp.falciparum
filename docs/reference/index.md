@@ -17,10 +17,18 @@ Solve the equations
 
 - [`solveMMinfty()`](https://dd-harp.github.io/ramp.falciparum/reference/solveMMinfty.md)
   : Solve the queuing model \\M/M/\infty\\
+
 - [`solve_SquIP()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_SquIP.md)
-  : Solve SquIP
+  :
+
+  Solve
+  [SquIP](https://dd-harp.github.io/ramp.falciparum/reference/SquIP.html)
+
 - [`solve_SquIPz()`](https://dd-harp.github.io/ramp.falciparum/reference/solve_SquIPz.md)
-  : Solve SquIP
+  :
+
+  Solve
+  [SquIP](https://dd-harp.github.io/ramp.falciparum/reference/SquIP.html)
 
 ## Enhanced Compartmental Models
 
@@ -36,8 +44,8 @@ Queuing models for malaria
 Dynamics of MoI, AoI, and the AoY
 
 - [`zda()`](https://dd-harp.github.io/ramp.falciparum/reference/zda.md)
-  : Compute infection density in a cohort of humans, \\z\_\tau(\alpha, a
-  \|h)\\
+  : Compute infection density in a cohort of humans, \\z\_\bday(\alpha,
+  a \|h)\\
 - [`truePR()`](https://dd-harp.github.io/ramp.falciparum/reference/truePR.md)
   : Compute the true PR in a cohort as a function of age and exposure
 
@@ -47,8 +55,12 @@ Methods to compute the MoI
 
 - [`meanMoI()`](https://dd-harp.github.io/ramp.falciparum/reference/meanMoI.md)
   : The mean MoI in a host cohort of age \\a\\
+
 - [`MoIDistPlot()`](https://dd-harp.github.io/ramp.falciparum/reference/MoIDistPlot.md)
-  : Plot the output of solveMMinfty
+  :
+
+  Plot the output of
+  [solveMMinfty](https://dd-harp.github.io/ramp.falciparum/reference/solveMMinfty.html)
 
 ### Age of Infection (AoI)
 
@@ -149,7 +161,10 @@ A function to compute expected log10 parasites (mu) from the AoI (alpha)
   age of infection `alpha`
 
 - [`par_Fmu_W()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Fmu_W.md)
-  : Set up parameters for Fmu.W
+  :
+
+  Set up parameters for
+  [Fmu.W](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.W.html)
 
 - [`Fmu(`*`<base>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.base.md)
   :
@@ -158,7 +173,10 @@ A function to compute expected log10 parasites (mu) from the AoI (alpha)
   age of infection `alpha`
 
 - [`par_Fmu_base()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Fmu_base.md)
-  : Set up parameters for Fmu.base
+  :
+
+  Set up parameters for
+  [Fmu.base](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.base.html)
 
 - [`Fmu(`*`<chronic>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.chronic.md)
   :
@@ -167,7 +185,10 @@ A function to compute expected log10 parasites (mu) from the AoI (alpha)
   age of infection `alpha`
 
 - [`par_Fmu_chronic()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Fmu_chronic.md)
-  : Set up parameters for Fmu.chronic
+  :
+
+  Set up parameters for
+  [Fmu.chronic](https://dd-harp.github.io/ramp.falciparum/reference/Fmu.chronic.html)
 
 ### Omega defined
 
@@ -193,34 +214,48 @@ A modified beta distribution for log10 parasite distributions
 - [`par_Omega_beta()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Omega_beta.md)
   : The quantile function for parasite densities in a simple malaria
   infection
+
 - [`d_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/d_Omega.beta.md)
   : Modified beta distribution, density function
+
 - [`dbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/dbeta1.md)
   : Density function for the beta distribution, an alternative
   parameterization
+
 - [`p_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/p_Omega.beta.md)
   : Modified beta distribution, distribution function
+
 - [`pbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/pbeta1.md)
   : Disribution function for the beta distribution, an alternative
   parameterization
+
 - [`q_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/q_Omega.beta.md)
   : Modified beta distribution, distribution function
+
 - [`qbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/qbeta1.md)
   : The quantile function for the beta distribution, an alternative
   parameterization
+
 - [`r_Omega(`*`<beta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/r_Omega.beta.md)
   : Modified beta distribution, random numbers
+
 - [`rbeta1()`](https://dd-harp.github.io/ramp.falciparum/reference/rbeta1.md)
   : The random generation function for the beta distribution, an
   alternative parameterization Title
+
 - [`sigma_mu()`](https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.md)
   : A function to compute the variance of the beta distrution as a
   function of the mean.
+
 - [`sigma_mu(`*`<abc>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.abc.md)
   : A function that returns constrained values of the variance for the
   beta distrution as a function of the mean.
+
 - [`par_sigma_abc()`](https://dd-harp.github.io/ramp.falciparum/reference/par_sigma_abc.md)
-  : Parameters to configure sigma_mu.abc
+  :
+
+  Parameters to configure
+  [sigma_mu.abc](https://dd-harp.github.io/ramp.falciparum/reference/sigma_mu.abc.html)
 
 ### Compute Omega(Fmu(alpha))
 
@@ -244,7 +279,7 @@ log10 parasites from AoI (alpha)
 Parasite density distributions by host cohort age
 
 - [`d_clone_density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_clone_density.md)
-  : Compute \\P\_\tau(a \|h)\\
+  : Compute \\P\_\bday(a \|h)\\
 - [`moments_clone_density()`](https://dd-harp.github.io/ramp.falciparum/reference/moments_clone_density.md)
   : Compute the moments of P_density
 
@@ -253,15 +288,24 @@ Parasite density distributions by host cohort age
 Compute parasite density distributions as a function of the AoI
 
 - [`parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/parasite_density.md)
-  : Compute \\B\_\tau(a \| h)\\
+  : Compute \\B\_\bday(a \| h)\\
+
 - [`d_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/d_parasite_density.md)
-  : Compute the distribution function for \\B\_\tau(a)\\
+  : Compute the distribution function for \\B\_\bday(a)\\
+
 - [`p_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/p_parasite_density.md)
-  : Call parasite_density and return the density vector
+  :
+
+  Call
+  [parasite_density](https://dd-harp.github.io/ramp.falciparum/reference/parasite_density.html)
+  and return the density vector
+
 - [`r_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/r_parasite_density.md)
   : Random generation for parasite densities in a host cohort
+
 - [`moments_parasite_density()`](https://dd-harp.github.io/ramp.falciparum/reference/moments_parasite_density.md)
   : Compute the moments of P_density
+
 - [`rRda()`](https://dd-harp.github.io/ramp.falciparum/reference/rRda.md)
   : Random generation for M parasite densities in a host cohort with MoI
 
@@ -362,58 +406,6 @@ Parasite counts
 - [`mean_parasite_counts()`](https://dd-harp.github.io/ramp.falciparum/reference/mean_parasite_counts.md)
   : Compute the mean parasite counts in complex infections
 
-## Force of Infection
-
-Methods to set up FoI trace functions
-
-- [`FoI()`](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
-  : Force of Infection, \\h\_\tau(a)\\
-
-### FoI by Age
-
-Specialized methods modify the FoI by Age
-
-- [`ageFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.md)
-  : Functions to modify the FoI by age
-- [`ageFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.flat.md)
-  : A function that does not modify the FoI by age
-- [`par_flatAge()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatAge.md)
-  : Make a parameter list to dispatch ageFoI.flat
-- [`ageFoI(`*`<type2>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/ageFoI.type2.md)
-  : A function that does not modify the FoI by age
-- [`par_type2Age()`](https://dd-harp.github.io/ramp.falciparum/reference/par_type2Age.md)
-  : Make a parameter list to dispatch ageFoI.type2
-
-### FoI by Season
-
-Specialized methods set the seasonal FoI
-
-- [`seasonalFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.md)
-  : Add a seasonal pattern to the FoI trace function
-- [`seasonalFoI(`*`<exp>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.exp.md)
-  : A generalized sinusoidal seasonal pattern, exponentiated
-- [`par_expSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_expSeason.md)
-  : Return a list to dispatch seasonalFoI.exp
-- [`seasonalFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.flat.md)
-  : The "no seasonality" function
-- [`par_flatSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatSeason.md)
-  : Return a list that dispatches seasonalFoI.flat
-- [`seasonalFoI(`*`<sin>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/seasonalFoI.sin.md)
-  : A generalized sinusoidal seasonal pattern
-- [`par_sinSeason()`](https://dd-harp.github.io/ramp.falciparum/reference/par_sinSeason.md)
-  : Return a list to configure and dispatch seasonalFoI.sin
-
-### FoI Trends
-
-Specialized methods to set trends in the FoI
-
-- [`trendFoI()`](https://dd-harp.github.io/ramp.falciparum/reference/trendFoI.md)
-  : Add a trend to the FoI trace function
-- [`trendFoI(`*`<flat>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/trendFoI.flat.md)
-  : The "no trend" function
-- [`par_flatTrend()`](https://dd-harp.github.io/ramp.falciparum/reference/par_flatTrend.md)
-  : Return a list that dispatches trendFoI.flat
-
 ## Utilities
 
 Other
@@ -429,16 +421,26 @@ Expected densities by AoI
 - [`Wda()`](https://dd-harp.github.io/ramp.falciparum/reference/Wda.md)
   : Compute immune tracking variables as a function of host age and
   exposure
+
 - [`Wda(`*`<none>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Wda.none.md)
   : Compute immune tracking variables as a function of host age and
   exposure
+
 - [`par_Wda_none()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Wda_none.md)
-  : Make a parameter set for Wda.none
+  :
+
+  Make a parameter set for
+  [Wda.none](https://dd-harp.github.io/ramp.falciparum/reference/Wda.none.html)
+
 - [`Wda(`*`<delta>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/Wda.delta.md)
   : Compute immune tracking variables as a function of host age and
   exposure
+
 - [`par_Wda_delta()`](https://dd-harp.github.io/ramp.falciparum/reference/par_Wda_delta.md)
-  : Make a parameter set for Wda.none
+  :
+
+  Make a parameter set for
+  [Wda.none](https://dd-harp.github.io/ramp.falciparum/reference/Wda.none.html)
 
 ### Red Blood Cells
 
@@ -446,10 +448,15 @@ Other
 
 - [`log10RBC()`](https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.md)
   : Compute log10 of the red blood cell population
+
 - [`log10RBC(`*`<static>`*`)`](https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.static.md)
   : Compute log10 of the red blood cell population
+
 - [`par_lRBC_static()`](https://dd-harp.github.io/ramp.falciparum/reference/par_lRBC_static.md)
-  : Set up parameters for log10RBC.static
+  :
+
+  Set up parameters for
+  [log10RBC.static](https://dd-harp.github.io/ramp.falciparum/reference/log10RBC.static.html)
 
 ## MLE
 

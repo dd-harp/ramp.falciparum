@@ -4,18 +4,18 @@
 \alias{dAoY}
 \title{The density function for the age of the youngest infection (AoY)}
 \usage{
-dAoY(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+dAoY(alpha, a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 }
 \arguments{
 \item{alpha}{the age of an infection, \eqn{\alpha}}
 
-\item{a}{host age}
+\item{a}{the age of the cohort}
 
-\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the host cohort's birthday}
+\item{bday}{the cohort birthday}
 
-\item{hhat}{scaling parameter for \link{FoI}}
+\item{hhat}{scaling parameter for the FoI}
 
 \item{r}{the clearance rate for a simple infection}
 }

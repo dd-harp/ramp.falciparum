@@ -4,7 +4,7 @@
 \alias{dpda}
 \title{Compute the derivatives for MoI and true PR}
 \usage{
-dpda(a, M, par, FoIpar)
+dpda(a, M, par, FoI_a)
 }
 \arguments{
 \item{a}{the host age}
@@ -13,7 +13,7 @@ dpda(a, M, par, FoIpar)
 
 \item{par}{the model parameters}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 }
 \value{
 the derivatives, as a \link{list}

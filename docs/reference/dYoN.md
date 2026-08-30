@@ -5,7 +5,7 @@ The youngest of N infections, density function
 ## Usage
 
 ``` r
-dYoN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+dYoN(N, a, FoI_a, hhat = NULL, bday = 0, r = 1/200)
 ```
 
 ## Arguments
@@ -18,15 +18,15 @@ dYoN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 
   the age of a cohort
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 - hhat:
 
-  a local scaling parameter for the FoI
+  a local scaling parameter for the FoIs
 
-- tau:
+- bday:
 
   the cohort birthday
 

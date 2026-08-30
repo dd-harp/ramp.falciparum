@@ -4,14 +4,14 @@
 \alias{truePR}
 \title{Compute the true PR in a cohort as a function of age and exposure}
 \usage{
-truePR(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+truePR(a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 }
 \arguments{
 \item{a}{the host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 
@@ -21,5 +21,5 @@ truePR(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 a \link{numeric} vector of length(a)
 }
 \description{
-The true PR is \deqn{p_\tau(a|h) = 1 - e^{-m_\tau(a|h)}}
+The true PR is \deqn{p_\bday(a|h) = 1 - e^{-m_\bday(a|h)}}
 }

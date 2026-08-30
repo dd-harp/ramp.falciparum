@@ -1,15 +1,15 @@
 # Compute the moments of P_density
 
-Compute \$\$P\_\tau(a\| h) \sim f_P(\xi; a, \tau \|h ) = \int_0^a
-\Omega(\xi\|F\_\mu(\alpha)) \\ f_A(\alpha; a, \tau \| h) d\alpha\$\$
+Compute \$\$P\_\bday(a\| h) \sim f_P(\xi; a, \bday \|h ) = \int_0^a
+\Omega(\xi\|F\_\mu(\alpha)) \\ f_A(\alpha; a, \bday \| h) d\alpha\$\$
 
 ## Usage
 
 ``` r
 moments_clone_density(
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   n = 1,
   dt = 0.1,
   hhat = 1,
@@ -27,11 +27,11 @@ moments_clone_density(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

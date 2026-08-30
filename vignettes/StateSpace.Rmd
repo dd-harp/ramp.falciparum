@@ -1,0 +1,9 @@
+---
+title: "The Malaria State Space"
+subtitle: "Compartmental Models for Malaria"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{The Malaria State Space}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---

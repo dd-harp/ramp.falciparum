@@ -7,9 +7,9 @@
 dDensityPaConvolve2(
   x,
   a,
-  FoIpar,
+  FoI_a,
   hhat = NULL,
-  tau = 0,
+  bday = 0,
   r = 1/200,
   par_RBC = par_lRBC_static(),
   par_Fmu = par_Fmu_base(),
@@ -22,11 +22,11 @@ dDensityPaConvolve2(
 
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
 \item{hhat}{a local scaling parameter for the FoI}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

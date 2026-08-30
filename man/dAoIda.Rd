@@ -4,7 +4,7 @@
 \alias{dAoIda}
 \title{Compute the derivatives of the AoI moments dynamically}
 \usage{
-dAoIda(a, M, p, FoIpar)
+dAoIda(a, M, p, FoI_a)
 }
 \arguments{
 \item{a}{the host age}
@@ -13,7 +13,7 @@ dAoIda(a, M, p, FoIpar)
 
 \item{p}{the parameters}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 }
 \value{
 the derivatives of the MoI and the AoI as a \link{list}

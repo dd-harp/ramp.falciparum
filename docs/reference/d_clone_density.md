@@ -1,7 +1,7 @@
-# Compute \\P\_\tau(a \|h)\\
+# Compute \\P\_\bday(a \|h)\\
 
-Compute \$\$P\_\tau(a\| h) \sim f_P(\xi; a, \tau \|h ) = \int_0^a
-\Omega(\xi\|F\_\mu(\alpha)) \\ f_A(\alpha; a, \tau \| h) d\alpha\$\$
+Compute \$\$P\_\bday(a\| h) \sim f_P(\xi; a, \bday \|h ) = \int_0^a
+\Omega(\xi\|F\_\mu(\alpha)) \\ f_A(\alpha; a, \bday \| h) d\alpha\$\$
 
 ## Usage
 
@@ -9,8 +9,8 @@ Compute \$\$P\_\tau(a\| h) \sim f_P(\xi; a, \tau \|h ) = \int_0^a
 d_clone_density(
   xi,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   par_RBC = par_lRBC_static(),
@@ -30,11 +30,11 @@ d_clone_density(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

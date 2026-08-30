@@ -1,37 +1,38 @@
 ## -----------------------------------------------------------------------------
 library(ramp.falciparum)
+library(ramp.func)
 library(deSolve)
 library(knitr)
 
+## -----------------------------------------------------------------------------
+# devtools::load_all()
+
 ## ----echo=F-------------------------------------------------------------------
 aa = 0:1095
-foiP3 = list(hbar = 5/365, 
-             agePar = par_type2Age(), 
-             seasonPar = par_sinSeason(), 
-             trendPar = par_flatTrend())
+FoI_a = make_F_a(5/365, age_par = makepar_F_type2(), season_par=makepar_F_sin())
 
 ## ----fig.height=4, fig.width=7, echo=F, eval=F--------------------------------
-# plot(aa, FoI(aa, foiP3), type = "l",
-#      xlab = "a - age (in days)", ylab = expression(FoI[tau](a)))
+# plot(aa, FoI_a(aa), type = "l",
+#      xlab = "a - age (in days)", ylab = expression(FoI[d](a)))
 
 ## -----------------------------------------------------------------------------
-MMinf <- solveMMinfty(5/365, foiP3, Amax=1095)
+MMinf <- solveMMinfty(5/365, FoI_a, Amax=1095)
 
 
 ## ----fig.height=4, fig.width=7------------------------------------------------
-with(MMinf, plot(time, m, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)"))
+with(MMinf, plot(time, m, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)"))
 
 ## -----------------------------------------------------------------------------
-hybrid = solve_dm(5/365, foiP3, Amax=1095)
+hybrid = solve_dm(5/365, FoI_a, Amax=1095)
 
 ## ----fig.height=4, fig.width=7------------------------------------------------
-with(hybrid, plot(time, m, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)"))
+with(hybrid, plot(time, m, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)"))
 
 ## -----------------------------------------------------------------------------
-moi = meanMoI(aa, foiP3, hhat=5/365)
+moi = meanMoI(aa, FoI_a, hhat=5/365)
 
 ## ----fig.height=4, fig.width=7------------------------------------------------
-plot(aa, moi, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)")
+plot(aa, moi, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)")
 
 ## -----------------------------------------------------------------------------
 c(mean(abs(moi - hybrid$m)) < 1e-9,

@@ -4,14 +4,14 @@
 #' The function dispatches on `class(par)`
 #'
 #' @param a age of a host cohort
-#' @param FoIpar parameters that define an FoI function
-#' @param tau cohort birthday
+#' @param FoI_a a cohort trace function
+#' @param bday cohort birthday
 #' @param hhat overrides the value of hbar in par
 #' @param par parameters in a [list]
 #'
 #' @return a [numeric] vector of length(a)
 #' @export
-Wda = function(a, FoIpar, tau=0, hhat=1, par=par_Wda_none()){
+Wda = function(a, FoI_a, bday=0, hhat=1, par=par_Wda_none()){
   UseMethod("Wda", par)
 }
 
@@ -21,7 +21,7 @@ Wda = function(a, FoIpar, tau=0, hhat=1, par=par_Wda_none()){
 #'
 #' @return a [numeric] vector of 0's of length(a)
 #' @export
-Wda.none = function(a, FoIpar, tau=0, hhat=1, par=par_Wda_none()){
+Wda.none = function(a, FoI_a, bday=0, hhat=1, par=par_Wda_none()){
   0*a
 }
 
@@ -42,17 +42,17 @@ par_Wda_none = function(){
 #'
 #' @return a [numeric] vector of length(a)
 #' @export
-Wda.delta = function(a, FoIpar, tau=0, hhat=1, par=par_Wda_delta()){with(par,{
-  Wd = function(a,FoIpar,tau,hhat,delta){
-    ff = function(s,a,FoIpar,tau,hhat,delta){
-      hhat*FoI(a-s,FoIpar,tau)*exp(-delta*(a-s))
+Wda.delta = function(a, FoI_a, bday=0, hhat=1, par=par_Wda_delta()){with(par,{
+  Wd = function(a,FoI_a,bday,hhat,delta){
+    ff = function(s,a,FoI_a,bday,hhat,delta){
+      hhat*FoI_a(a-s,bday)*exp(-delta*(a-s))
     }
-    integrate(ff,0,a,a=a,FoIpar=FoIpar,tau=tau,hhat=hhat,delta=delta)$value
+    integrate(ff,0,a,a=a,FoI_a=FoI_a,bday=bday,hhat=hhat,delta=delta)$value
   }
   if(length(a)==1){
-    return(Wd(a,FoIpar,tau,hhat,delta))
+    return(Wd(a,FoI_a,bday,hhat,delta))
   } else {
-    return(sapply(a,Wd,FoIpar=FoIpar,tau=tau,hhat=hhat,delta=delta))
+    return(sapply(a,Wd,FoI_a=FoI_a,bday=bday,hhat=hhat,delta=delta))
   }
 })}
 

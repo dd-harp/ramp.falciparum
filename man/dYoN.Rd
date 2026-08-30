@@ -4,18 +4,18 @@
 \alias{dYoN}
 \title{The youngest of N infections, density function}
 \usage{
-dYoN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+dYoN(N, a, FoI_a, hhat = NULL, bday = 0, r = 1/200)
 }
 \arguments{
 \item{N}{the number of infections}
 
 \item{a}{the age of a cohort}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{hhat}{a local scaling parameter for the FoI}
+\item{hhat}{a local scaling parameter for the FoIs}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{r}{the clearance rate of a simple infection}
 }

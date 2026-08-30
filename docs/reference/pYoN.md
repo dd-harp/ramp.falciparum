@@ -5,7 +5,7 @@ The youngest of N infections, distribution function
 ## Usage
 
 ``` r
-pYoN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
+pYoN(N, a, FoI_a, bday = 0, hhat = NULL, r = 1/200)
 ```
 
 ## Arguments
@@ -18,17 +18,17 @@ pYoN(N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200)
 
   the age of a cohort
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
+
+- bday:
+
+  the cohort birthday
 
 - hhat:
 
   a local scaling parameter for the FoI
-
-- tau:
-
-  the cohort birthday
 
 - r:
 

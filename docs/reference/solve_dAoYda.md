@@ -6,7 +6,7 @@ moments of the AoY over time.
 ## Usage
 
 ``` r
-solve_dAoYda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1, n = 8)
+solve_dAoYda(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1, n = 8)
 ```
 
 ## Arguments
@@ -15,15 +15,15 @@ solve_dAoYda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1, n = 8)
 
   the force of infection
 
-- FoIpar:
+- FoI_a:
 
-  a FoI trace function
+  a cohort trace function
 
 - r:
 
   the clearance rate for a simple infection
 
-- tau:
+- bday:
 
   the cohort birthday
 

@@ -5,7 +5,7 @@ Compute the derivatives for MoI and true PR
 ## Usage
 
 ``` r
-dpda(a, M, par, FoIpar)
+dpda(a, M, par, FoI_a)
 ```
 
 ## Arguments
@@ -22,9 +22,9 @@ dpda(a, M, par, FoIpar)
 
   the model parameters
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 ## Value
 

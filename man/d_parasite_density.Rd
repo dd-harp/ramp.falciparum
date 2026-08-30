@@ -2,13 +2,13 @@
 % Please edit documentation in R/density_parasites.R
 \name{d_parasite_density}
 \alias{d_parasite_density}
-\title{Compute the distribution function for \eqn{B_\tau(a)}}
+\title{Compute the distribution function for \eqn{B_\bday(a)}}
 \usage{
 d_parasite_density(
   meshX,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   RBC_par = par_lRBC_static(),
@@ -22,9 +22,9 @@ d_parasite_density(
 
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 
@@ -43,5 +43,5 @@ a \link{numeric} vector of length meshX
 }
 \description{
 Call \link{parasite_density} and return the PDF:
-\deqn{f_B(\xi; a, \tau |h) = \log_{10} \left( \sum_{M_\tau(a|h)>0} 10^{P_\tau(a |h)}\right)}
+\deqn{f_B(\xi; a, \bday |h) = \log_{10} \left( \sum_{M_\bday(a|h)>0} 10^{P_\bday(a |h)}\right)}
 }

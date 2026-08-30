@@ -1,53 +1,64 @@
 ## ----include=FALSE------------------------------------------------------------
 library(ramp.falciparum)
+library(ramp.func)
 suppressWarnings(library(viridis))
 suppressMessages(library(viridisLite))
 
-## ----echo=F-------------------------------------------------------------------
-foiP3 = list(hbar = 5/365, 
-             agePar = par_type2Age(), 
-             seasonPar = par_sinSeason(), 
-             trendPar = par_flatTrend())
+## -----------------------------------------------------------------------------
+library(ramp.func)
+# devtools::load_all()
+# devtools::load_all("~/git/ramp.func")
 
-foiP3t = list(hbar = 5/365, 
-             agePar = par_flatAge(), 
-             seasonPar = par_sinSeason(), 
-             trendPar = par_flatTrend())
+## ----fig.width=7, fig.height=4------------------------------------------------
+clrs = viridisLite::turbo(7)
+set.seed(234)
+Sa = makepar_F_type2()
+Sp = makepar_F_sin()
+
+F_t <- make_ts_function(scale = 1, season_par=Sp)
+FoI_a <- make_F_a(avg = 3/365, age_par=Sa, season_par=Sp)
+
+tt <- seq(0, 3650, by=5)
+aa <-seq(0, 365*5, by =5) 
+plot(tt, 0.05*F_t(tt), type = "l")
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
 a3years  = 1:1095
-plot(a3years, FoI(a3years, foiP3t), type = "l", 
+plot(a3years, FoI_a(a3years), type = "l", 
      xlab = "Time or Age (in days)", 
-     ylab = expression(z[tau](alpha, a)))
-lines(a3years, FoI(a3years, foiP3), col = "darkred", lwd=2)
+     ylab = expression(z[bday](alpha, a)))
+lines(a3years, FoI_a(a3years), col = "darkred", lwd=2)
 text(270, 0.02, "Population")
 text(100, 0.008, "Cohort", col = "darkred")
+
+## -----------------------------------------------------------------------------
+# devtools::load_all()
 
 ## ----zde eg-------------------------------------------------------------------
 alpha = 60
 a = 6*365
-zda(60, 6*365, foiP3) 
+zda(60, 6*365, FoI_a) 
 
 ## -----------------------------------------------------------------------------
-zz = zda(a3years, max(a3years), foiP3)
+zz = zda(a3years, max(a3years), FoI_a)
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
 plot(a3years, zz, type = "l", 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(z[tau](alpha,a)))
+     ylab = expression(z[bday](alpha,a)))
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
 clrs12a <- viridisLite::turbo(12) 
-zz = zda(a3years, 730, foiP3, tau=90)
-plot(a3years, zz, type = "n",
+zz = zda(a3years, 1095, FoI_a, bday=90)
+plot(a3years, zz, type = "n", ylim = 4 *range(zz), 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(z[tau](alpha,a)))
+     ylab = expression(z[bday](alpha,a)))
 for(i in 1:12){
   birthday =  30*(i-1) +15
-  lines(a3years, zda(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  lines(a3years, zda(a3years, 1095, FoI_a, bday=birthday), col = clrs12a[i]) 
   bp = (0.5 + 2.5*i/12)*365
   points(bp, 0.015, col = clrs12a[i], pch =15)
   text(bp, 0.015, paste(i), col = clrs12a[i], pos=1)
@@ -55,32 +66,32 @@ for(i in 1:12){
   text(650, 0.018, "Birth Month") 
 
 ## -----------------------------------------------------------------------------
-mm = meanMoI(a3years, foiP3, hhat=5/365)
+mm = meanMoI(a3years, FoI_a, hhat=5/365)
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
 plot(a3years, mm, type = "l",
      xlab = expression(list(a, paste("Host Age (in Days)"))), 
-     ylab = expression(m[tau](alpha,a)))
+     ylab = expression(m[bday](alpha,a)))
 
 ## -----------------------------------------------------------------------------
-f_A = dAoI(a3years, max(a3years), foiP3)
+f_A = dAoI(a3years, max(a3years), FoI_a)
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
 plot(a3years, f_A, type ="l", 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(f[A](alpha, a, tau, h)))
+     ylab = expression(f[A](alpha, a, bday, h)))
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
-FA = dAoI(a3years, 1095, foiP3, tau=70)
+FA = dAoI(a3years, 1095, FoI_a, bday=70)
 plot(a3years, FA, type = "n", ylim = range(FA)*1.15,
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(f[A](alpha, tau)))
+     ylab = expression(f[A](alpha, bday)))
 for(i in 1:12){
   birthday =  30*(i-1) +15
-  lines(a3years, dAoI(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  lines(a3years, dAoI(a3years, 1095, FoI_a, bday=birthday), col = clrs12a[i]) 
   bp = (0.5 + 2.5*i/12)*365
   points(bp, 0.01, col = clrs12a[i], pch =15)
   text(bp, 0.01, paste(i), col = clrs12a[i], pos=1)
@@ -88,7 +99,7 @@ for(i in 1:12){
   text(650, 0.0115, "Birth Month") 
 
 ## -----------------------------------------------------------------------------
-F_A = pAoI(a3years, max(a3years), foiP3)
+F_A = pAoI(a3years, max(a3years), FoI_a)
 
 ## -----------------------------------------------------------------------------
 F_A_alt = cumsum(f_A)
@@ -98,19 +109,19 @@ par(mar = c(5,4,1,1))
 
 plot(a3years, F_A, type = "l", 
      xlab = "Parasite Cohort Age", 
-     ylab = expression(1-F[X](alpha, a, tau)), lwd=3)
+     ylab = expression(1-F[X](alpha, a, bday)), lwd=3)
 
 lines(a3years, F_A_alt, col = "red", lwd=2, lty =2)
 
 ## ----fig.height=3.5, fig.width=6, echo=F--------------------------------------
 par(mar = c(5,4,1,1))
-FA = pAoI(a3years, 1095, foiP3, tau=70)
+FA = pAoI(a3years, 1095, FoI_a, bday=70)
 plot(a3years, FA, type = "n", ylim = range(FA)*1.15,
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
      ylab = expression(F[A](alpha)))
 for(i in 1:12){
   birthday =  30*(i-1) +15
-  lines(a3years, pAoI(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  lines(a3years, pAoI(a3years, 1095, FoI_a, bday=birthday), col = clrs12a[i]) 
   bp = (0.5 + 2.5*i/12)*365
   points(bp, 0.2, col = clrs12a[i], pch =15)
   text(bp, 0.2, paste(i), col = clrs12a[i], pos=1)
@@ -118,7 +129,7 @@ for(i in 1:12){
 text(650, 0.3, "Birth Month") 
 
 ## -----------------------------------------------------------------------------
-rhx = rAoI(10000, 3*365, foiP3)
+rhx = rAoI(10000, 3*365, FoI_a)
 
 ## ----fig.height=3.5, fig.width=6----------------------------------------------
 par(mar = c(5,4,1,2))
@@ -136,9 +147,9 @@ hist(rhx, breaks = seq(0, 1095, by=15),
 lines(a3years, f_A, col="red", lwd=2)
 
 ## ----eval=T-------------------------------------------------------------------
-moment1 = momentAoI(a3years, foiP3)
-moment2 = momentAoI(a3years, foiP3, n=2)
-moment3 = momentAoI(a3years, foiP3, n=3)
+moment1 = momentAoI(a3years, FoI_a)
+moment2 = momentAoI(a3years, FoI_a, n=2)
+moment3 = momentAoI(a3years, FoI_a, n=3)
 
 ## ----fig.width=6, fig.height=8, echo=FALSE, eval=T----------------------------
 par(mfrow = c(3,1), mar = c(5, 4, 0.5, 2))
@@ -158,7 +169,7 @@ plot(a3years, moment3, type = "l", xlab = "a - Host Age (in Days)",
      ylab = expression(x[paste("[3]")])) 
 
 ## ----eval=T-------------------------------------------------------------------
-f_Y = dAoY(a3years, 3*365, foiP3)
+f_Y = dAoY(a3years, 3*365, FoI_a)
 
 ## ----fig.height=3.5, fig.width=6, echo=F, eval=T------------------------------
 par(mar = c(5,4,1,1))
@@ -168,7 +179,7 @@ plot(a3years, f_Y, type ="l",
 lines(a3years, f_A, col = grey(0.5))
 
 ## ----eval=T-------------------------------------------------------------------
-raoy = rAoY(10^5, 3*365, foiP3)
+raoy = rAoY(10^5, 3*365, FoI_a)
 
 ## ----fig.height=4, fig.width=7, eval=T----------------------------------------
 hist(raoy, breaks=seq(0, 1095, by = 15), 
@@ -179,9 +190,9 @@ lines(a3years, f_Y, type = "l", col = "red")
 
 ## ----eval=T-------------------------------------------------------------------
 aa = seq(5, 3*365, by = 5) 
-moment1y = momentAoY(aa, foiP3)
-moment2y = momentAoY(aa, foiP3, n=2)
-moment3y = momentAoY(aa, foiP3, n=3)
+moment1y = momentAoY(aa, FoI_a)
+moment2y = momentAoY(aa, FoI_a, n=2)
+moment3y = momentAoY(aa, FoI_a, n=3)
 
 ## ----fig.width=6, fig.height=8, echo=FALSE, eval=T----------------------------
 par(mfrow = c(4,1), mar = c(0.5, 4, 0.5, 2))

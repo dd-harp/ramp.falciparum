@@ -4,7 +4,7 @@
 \alias{dSquIPz}
 \title{Derivatives for \link{SquIP}}
 \usage{
-dSquIPz(a, y, pars, FoIpar, Z)
+dSquIPz(a, y, pars, F_a, Z)
 }
 \arguments{
 \item{a}{the host age}
@@ -13,7 +13,7 @@ dSquIPz(a, y, pars, FoIpar, Z)
 
 \item{pars}{the parameters}
 
-\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
+\item{F_a}{a trace function}
 
 \item{Z}{the MoE matrix}
 }

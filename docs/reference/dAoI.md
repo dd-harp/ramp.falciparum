@@ -1,12 +1,12 @@
 # Compute the density function for AoI
 
-The density of the AoI is given by \$\$f_A(\alpha \| a, \tau, h) =
-\frac{\int_0^a z(\alpha, a)}{m\_\tau(a)}\$\$
+The density of the AoI is given by \$\$f_A(\alpha \| a, \bday, h) =
+\frac{\int_0^a z(\alpha, a)}{m\_\bday(a)}\$\$
 
 ## Usage
 
 ``` r
-dAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+dAoI(alpha, a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 ```
 
 ## Arguments
@@ -17,21 +17,19 @@ dAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 
-  scaling parameter for
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  scaling parameter for the FoI
 
 - r:
 

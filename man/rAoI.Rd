@@ -4,16 +4,16 @@
 \alias{rAoI}
 \title{Random numbers for the AoI}
 \usage{
-rAoI(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
+rAoI(N, a, FoI_a, bday = 0, hhat = 1, r = 1/200, alphamin = 0)
 }
 \arguments{
 \item{N}{the number of observations}
 
-\item{a}{host age}
+\item{a}{cohort age}
 
-\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the host cohort's birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 
@@ -25,5 +25,5 @@ rAoI(N, a, FoIpar, tau = 0, hhat = 1, r = 1/200, alphamin = 0)
 a \link{numeric} vector of length(alpha)
 }
 \description{
-Draw random numbers for the AoI from a cohort, \eqn{\hat A_\tau(a)}
+Draw random numbers for the AoI from a cohort, \eqn{\hat A_\bday(a)}
 }

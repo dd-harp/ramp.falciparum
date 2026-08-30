@@ -5,14 +5,32 @@ navbar:
   left:
   - text: Articles
     menu:
-    - text: FoI
+    - text: Overview of Malaria Epidemiology
+      href: articles/Overview.html
+    - text: Exposure
       href: articles/FoI.html
+    - text: The Malaria State Space
+      href: articles/StateSpace.html
+    - text: Superinfection & Queuing
+      href: articles/Superinfection.html
+    - text: Random Variables
+      href: articles/RandomVariables.html
+    - text: Hybrid Variables
+      href: articles/Hybrid.html
+    - text: Robust Analytics
+      href: articles/RobustAnalytics.html
+  - text: Models
+    menu:
+    - text: M/M/∞
+      href: articles/MoI.html
+    - text: SquIP
+      href: articles/SquIP.html
+    - text: SquIPz
+      href: articles/SquIPz.html
+  - text: Hybrid Variables
+    menu:
     - text: Infection Dynamics
       href: articles/Dynamics.html
-    - text: MoI
-      href: articles/MoI.html
-    - text: Hybrid
-      href: articles/Hybrid.html
   - text: Functions
     href: reference/index.html
   right:
@@ -220,38 +238,6 @@ reference:
   - d_parasite_counts
   - p_parasite_counts
   - mean_parasite_counts
-- title: Force of Infection
-  desc: |
-    Methods to set up FoI trace functions
-  contents:
-  - FoI
-- subtitle: FoI by Age
-  desc: |
-    Specialized methods modify the FoI by Age
-  contents:
-  - ageFoI
-  - ageFoI.flat
-  - par_flatAge
-  - ageFoI.type2
-  - par_type2Age
-- subtitle: FoI by Season
-  desc: |
-    Specialized methods set the seasonal FoI
-  contents:
-  - seasonalFoI
-  - seasonalFoI.exp
-  - par_expSeason
-  - seasonalFoI.flat
-  - par_flatSeason
-  - seasonalFoI.sin
-  - par_sinSeason
-- subtitle: FoI Trends
-  desc: |
-    Specialized methods to set trends in the FoI
-  contents:
-  - trendFoI
-  - trendFoI.flat
-  - par_flatTrend
 - title: Utilities
   desc: |
     Other

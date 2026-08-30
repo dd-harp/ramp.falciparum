@@ -4,7 +4,7 @@
 \alias{dmda}
 \title{Compute the derivatives for MoI using a hybrid model}
 \usage{
-dmda(a, M, p, FoIpar)
+dmda(a, M, p, FoI_a)
 }
 \arguments{
 \item{a}{the host age}
@@ -13,7 +13,7 @@ dmda(a, M, p, FoIpar)
 
 \item{p}{the parameters}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 }
 \value{
 the derivatives as a \link{list}
