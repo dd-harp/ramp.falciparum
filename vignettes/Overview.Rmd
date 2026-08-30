@@ -1,0 +1,69 @@
+---
+title: "Mathematical Malaria Epidemiology"
+subtitle: "An Overview of Concepts and Models" 
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mathematical Malaria Epidemiology}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+Over the past century, mathematical models have been developed to explore various aspects of malaria. 
+Depending on the needs of a study, a model may not need to include every feature of malaria, but it
+should be able to build models that have all of the following features: 
+
++ **Exposure** --- the number of infectious bites, per person, per day varies geographically, seasonally, across years, and within a population by age and other factors. 
+
++ **Time Course of Infection** --- simple malaria infections have a complex **time course:** an acute growth phase (lasting up to a month) is followed by a chronic phase that lasts for months (on average). Over the time-course of infection, parasite densities fluctuate enormously. The toolbox for handling infections includes stage-of-infection, age-of-infection, within-host models, and probability theory. 
+
++ **Superinfection** --- the rate of exposure to malaria often exceeds the slow rate that infections clear, so **superinfection** is common. *Queuing theory* has been the main toolbox: these are compartmental models that sub-divide infection into an infinite number of states -- the multiplicity of infection (MoI) -- and that explore the dynamics of the MoI. Here, we will also develop *hybrid variables* that model MoI distributions. 
+
++ **Antimalarial Drugs** --- Infections can be **treated and cured** with anti-malarial drugs, and treatment is often followed by a short period of **chemo-protection.** This raises questions about the adherence to the prescribed drug-regimens, and the evolution of drug resistance. 
+
++ **Infectiousness** -- the probability a mosquito becomes infected after blood feeding on a human -- is related to gametocyte densities and development of *transmission-blocking immunity.*  
+
++ **Disease** --- malaria is a disease of humans with an enormous health burden; while fever is an important symptom, but the primary concerns are severe disease and anemia
+
++ **Immunity** --- immunity to malaria develops with age and cumulative exposure; it modifies infection, infectiousness, and disease; 
+
++ **Diagnostics and Detection** --- to understand malaria in populations, we must measure it. To be useful, it must be possible to relate the *true prevalence* of malaria to the prevalence that would be observed, the probability of **detection** by various **diagnostics.** 
+
++ **Demography** --- If these models are to be used for policy, then it is essential to account for human demography and to consider **age.** 
+
+All these are quantitative phenomena are interrelated, and there is probably no sensible way of describing them that does not involve mathematics.
+Each one of these facets of malaria has been addressed in mathematical models, but it has proven difficult to formulate a synthesis.
+
+This website is focused on the mathematical epidemiology of malaria. 
+The goal is to provide a single repository for mathematical models, and to develop some models of malaria that are useful for research and policy.
+In some cases, the documentation includes some mathematical derivations. The basic building blocks for malaria include: 
+
++ **Compartmental models** describing disease dynamics, and with states to describe:
+
+    - **stage structured infection** to handle the complex time course; 
+    
+    - superinfection and the multiplicity of infection using **queuing theory;**
+
+    - **stage structured immunity;**
+    
+    - disease states;
+    
+    - chemoprotection after treatment; 
+    
+    - human population **age structure;** 
+    
+    - **parasite population structure;**
+    
+    - states to describe **infectiousness.**
+
++ Formulations that use **random variables** for some part of the process;
+
++ **Hybrid variables** describing the means and higher order moments of the MoI, the *age of infection,* *cumulative exposure,* or *parasite populations;*
+
++ Within-host models and individual-based simulation;
+
++ Functions that describe the *observational process* to translate the state space into observable outputs; 
+
++ Models for **human demography,** including vital dynamics. 
+
++ Ordinary differential equations, delay differential equations, partial differential equations, discrete time systems, and stochastic processes.

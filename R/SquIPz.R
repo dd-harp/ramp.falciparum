@@ -128,7 +128,7 @@ NULL
 #' @param a the host age
 #' @param y a vector of state variables
 #' @param pars the parameters
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param F_a a trace function
 #' @param Z the MoE matrix
 #'
 #' @return the derivatives as a [list]
@@ -136,8 +136,8 @@ NULL
 #' @seealso [solveMMinfty]
 #' @export
 #'
-dSquIPz = function(a, y, pars, FoIpar, Z){with(as.list(c(y,pars)),{
-  foi = h*FoI(a, FoIpar, tau)
+dSquIPz = function(a, y, pars, F_a, Z){with(as.list(c(y,pars)),{
+  foi = h*F_a(a,bday)
   ix = 1:N
   Ii = y[ix]
   H = sum(Ii) + P + S
@@ -201,9 +201,9 @@ dSquIPz = function(a, y, pars, FoIpar, Z){with(as.list(c(y,pars)),{
 #' + `out` --- The matrix returned by `deSolve`
 #'
 #' @param h the force of infection
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param F_a a trace function
 #' @param F_moe a probability moment function for the multiplicity of exposure
-#' @param tau the cohort birthday
+#' @param bday the cohort birthday
 #' @param r the clearance rate for a simple infection
 #' @param rho the fraction of incident cases that gets treted
 #' @param sigma treatment rate for infected individuals
@@ -219,7 +219,7 @@ dSquIPz = function(a, y, pars, FoIpar, Z){with(as.list(c(y,pars)),{
 #'
 #' @seealso [SquIPz]
 #' @export
-solve_SquIPz = function(h, FoIpar, F_moe, tau=0,
+solve_SquIPz = function(h, F_a, F_moe, bday=0,
                        r=1/200,
                        rho=.2,
                        sigma = 1/365,
@@ -230,17 +230,19 @@ solve_SquIPz = function(h, FoIpar, F_moe, tau=0,
                        Amax=730,
                        da=1,
                        N=NULL){
-  N = ifelse(is.null(N), round(max(10*h/r,20)), N)
-  Z = make_Z(F_moe, N)
-  ix = 1:N
+  ix = 1:50
   zi = F_moe(ix)
   z_1 = sum(ix*zi)
   z_2 = sum(ix^2*zi)
+  N = ifelse(is.null(N), round(max(10*h*z_1/r,20)), N)
+  Z = make_Z(F_moe, N)
   ages = seq(0, Amax, by = da)
-  parms = c(h=h,r=r,N=N,tau=tau,rho=rho,sigma=sigma,xi=xi,eta=eta,mu=mu,z_1=z_1,z_2=z_2)
+  parms = c(h=h,r=r,N=N,bday=bday,rho=rho,sigma=sigma,xi=xi,eta=eta,mu=mu,z_1=z_1,z_2=z_2)
   inits = c(rep(0,N), S=H, P=0, m_1=0, m_2=0)
-  out = deSolve::ode(inits, times=ages, dSquIPz, parms, FoIpar=FoIpar, Z=Z)
+  out = deSolve::ode(inits, times=ages, dSquIPz, parms, F_a=F_a, Z=Z)
   parsed_list <- parse_SquIP(parms, out)
+  parsed_list$z_1 = z_1
+  parsed_list$z_2 = z_2
   return(parsed_list)
 }
 

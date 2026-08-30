@@ -32,10 +32,27 @@
 <li class="nav-item dropdown">
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
-<li><a class="dropdown-item" href="../articles/FoI.html">FoI</a></li>
-    <li><a class="dropdown-item" href="../articles/Dynamics.html">Infection Dynamics</a></li>
-    <li><a class="dropdown-item" href="../articles/MoI.html">MoI</a></li>
-    <li><a class="dropdown-item" href="../articles/Hybrid.html">Hybrid</a></li>
+<li><a class="dropdown-item" href="../articles/Overview.html">Overview of Malaria Epidemiology</a></li>
+    <li><a class="dropdown-item" href="../articles/FoI.html">Exposure</a></li>
+    <li><a class="dropdown-item" href="../articles/StateSpace.html">The Malaria State Space</a></li>
+    <li><a class="dropdown-item" href="../articles/Superinfection.html">Superinfection &amp; Queuing</a></li>
+    <li><a class="dropdown-item" href="../articles/RandomVariables.html">Random Variables</a></li>
+    <li><a class="dropdown-item" href="../articles/Hybrid.html">Hybrid Variables</a></li>
+    <li><a class="dropdown-item" href="../articles/RobustAnalytics.html">Robust Analytics</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-models" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Models</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-models">
+<li><a class="dropdown-item" href="../articles/MoI.html">M/M/∞</a></li>
+    <li><a class="dropdown-item" href="../articles/SquIP.html">SquIP</a></li>
+    <li><a class="dropdown-item" href="../articles/SquIPz.html">SquIPz</a></li>
+  </ul>
+</li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-hybrid-variables" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Hybrid Variables</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-hybrid-variables">
+<li><a class="dropdown-item" href="../articles/Dynamics.html">Infection Dynamics</a></li>
   </ul>
 </li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Functions</a></li>
@@ -70,7 +87,8 @@
 <p>see <code>SIP.R</code></p>
 </blockquote>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.func/" class="external-link">ramp.func</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="squip-the-master-equations">SquIP: The Master Equations<a class="anchor" aria-label="anchor" href="#squip-the-master-equations"></a>
 </h2>
@@ -173,7 +191,7 @@ from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>I</mi><annotation encoding="application/x-tex">I</annotation></semantics></math></p></li>
 </ul>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">foiP1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hbar <span class="op">=</span> <span class="fl">1</span>, agePar <span class="op">=</span> <span class="fu"><a href="../reference/par_flatAge.html">par_flatAge</a></span><span class="op">(</span><span class="op">)</span>, seasonPar <span class="op">=</span> <span class="fu"><a href="../reference/par_flatSeason.html">par_flatSeason</a></span><span class="op">(</span><span class="op">)</span>, trendPar <span class="op">=</span> <span class="fu"><a href="../reference/par_flatTrend.html">par_flatTrend</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">foiP1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>hbar <span class="op">=</span> <span class="fl">1</span>, agePar <span class="op">=</span> <span class="fu">par_flatAge</span><span class="op">(</span><span class="op">)</span>, seasonPar <span class="op">=</span> <span class="fu">par_flatSeason</span><span class="op">(</span><span class="op">)</span>, trendPar <span class="op">=</span> <span class="fu">par_flatTrend</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">q_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/solve_SquIP.html">solve_SquIP</a></span><span class="op">(</span><span class="fl">8</span><span class="op">/</span><span class="fl">365</span>, sigma<span class="op">=</span><span class="fl">2</span><span class="op">/</span><span class="fl">365</span>, xi<span class="op">=</span><span class="fl">0</span>, <span class="va">foiP1</span>, Amax<span class="op">=</span><span class="fl">5</span><span class="op">*</span><span class="fl">365</span><span class="op">)</span></span></code></pre></div>
 <p>For verification, the variable
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>m</mi><annotation encoding="application/x-tex">m</annotation></semantics></math>

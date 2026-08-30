@@ -7,8 +7,8 @@ Detection of infection given parasitemia
 ``` r
 d_parasite_detect_moi(
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   par_RBC = par_lRBC_static(),
@@ -25,11 +25,11 @@ d_parasite_detect_moi(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

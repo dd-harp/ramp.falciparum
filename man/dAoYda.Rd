@@ -4,7 +4,7 @@
 \alias{dAoYda}
 \title{Compute the derivatives of the approximate moments of the AoY dynamically}
 \usage{
-dAoYda(a, vars, pars, FoIpar)
+dAoYda(a, vars, pars, FoI_a)
 }
 \arguments{
 \item{a}{the host age}
@@ -13,7 +13,7 @@ dAoYda(a, vars, pars, FoIpar)
 
 \item{pars}{the parameters}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 }
 \value{
 the derivatives of the MoI and the AoI as a \link{list}

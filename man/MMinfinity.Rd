@@ -6,12 +6,12 @@
 \description{
 The queuing model \eqn{M/M/\infty} tracks the MoI in a cohort of humans
 as it ages. It assumes a time- and age-dependent hazard rate for infection,
-called the force of infection (FoI, \eqn{h_\tau(a)}). Infections do not affect
+called the force of infection (FoI, \eqn{h_\bday(a)}). Infections do not affect
 each other, and each one clears independently at the rate \eqn{r}.
 
 Let \eqn{\zeta_i} the fraction of the population with
 MoI = i, then
-\deqn{\frac{d\zeta_0}{da}= -h_\tau(a) \zeta_0 + r \zeta_1}
+\deqn{\frac{d\zeta_0}{da}= -h_\bday(a) \zeta_0 + r \zeta_1}
 and for \eqn{i\geq 1}
-\deqn{\frac{d\zeta_i}{da}= h_\tau(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
+\deqn{\frac{d\zeta_i}{da}= h_\bday(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
 }

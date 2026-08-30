@@ -7,8 +7,8 @@
 p_parasite_density(
   meshX,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   RBC_par = par_lRBC_static(),
@@ -22,9 +22,9 @@ p_parasite_density(
 
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 

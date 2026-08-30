@@ -4,18 +4,18 @@
 \alias{pAoI}
 \title{Compute the distribution function for AoI}
 \usage{
-pAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+pAoI(alpha, a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 }
 \arguments{
 \item{alpha}{the age of an infection, \eqn{\alpha}}
 
-\item{a}{host age}
+\item{a}{cohort age}
 
-\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the host cohort's birthday}
+\item{bday}{the cohort birthday}
 
-\item{hhat}{scaling parameter for \link{FoI}}
+\item{hhat}{scaling parameter for the FoI}
 
 \item{r}{the clearance rate for a simple infection}
 }
@@ -24,5 +24,5 @@ a \link{numeric} vector of length(alpha)
 }
 \description{
 The distribution function for the AoI is given by
-\deqn{F_A(\alpha | a, \tau, h) = \int_0^\alpha f_A(\alpha, a, \tau | h) d \alpha}
+\deqn{F_A(\alpha | a, \bday, h) = \int_0^\alpha f_A(\alpha, a, \bday | h) d \alpha}
 }

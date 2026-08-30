@@ -4,16 +4,16 @@
 \alias{solve_dm}
 \title{Solve the hybrid model for the MoI}
 \usage{
-solve_dm(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
+solve_dm(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1)
 }
 \arguments{
 \item{h}{the average, annual force of infection}
 
-\item{FoIpar}{a FoI trace function}
+\item{FoI_a}{a cohort trace function}
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{Amax}{The maximum runtime (in days)}
 

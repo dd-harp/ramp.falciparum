@@ -4,7 +4,7 @@
 \alias{rYoN}
 \title{The youngest of N infections, random numbers}
 \usage{
-rYoN(R, N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
+rYoN(R, N, a, FoI_a, bday = 0, hhat = NULL, r = 1/200, alphamin = 0)
 }
 \arguments{
 \item{R}{the number of observations}
@@ -13,11 +13,11 @@ rYoN(R, N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
 
 \item{a}{the host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{parameters that define an FoI function}
+
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
-
-\item{tau}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

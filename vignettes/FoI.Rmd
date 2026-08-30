@@ -1,9 +1,9 @@
 ---
-title: "The Force of Infection (FoI)"
-subtitle: "Building Trace Functions"
+title: "Exposure Trace Functions"
+subtitle: "Trace Functions"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{The Force of Infection (FoI)}
+  %\VignetteIndexEntry{Exposure Trace Functions}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -11,69 +11,86 @@ vignette: >
 ```{r, include=FALSE}
 library(knitr) 
 library(ramp.falciparum)
+library(ramp.func)
 suppressWarnings(library(viridis))
 suppressMessages(library(viridisLite))
 ``` 
 
-We want to be able to simulate arbitrary patterns of exposure in cohorts as they age, with the ability to compare two cohorts of different ages in the same population. We let $h(t)$ denote the average daily FoI in a population, the hazard rate for infection. Notably, knowing the birth day for a cohort, $\tau,$ we can convert between age and time using the identity $$t = a + \tau.$$  We let $\omega(a)$ be a function that computes a *frailty* term associated with age, so we can write the FoI for any cohort as:
-$$h_\tau(a) = \omega(a) h(a) =  \omega(a) h(t-\tau).$$ 
-
-We begin by constructing functions, $h(t),$ to pressure test our models. We assume exposure has a seasonal pattern, $S(t)$, and a temporal trend, $T(t)$, and $$h(t) = \bar h \cdot S(t) \cdot T(t).$$ 
-
-Motivated by the evidence for age-dependent exposure, the rate of exposure in a cohort is assumed to change with age. We use the age-weighting function, $\omega(a)$, consistent with the available evidence from both anopheline and aedine mosquitoes (Port GR, *et al.*, 1980;^[G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of host size to feeding by mosquitoes of the Anopheles Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological Research 70, 133–144 (1980).], Carnevale P, *et al.*, 1978;^[P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to the age and sex of the human subjects]. Bull. World Health Organ. 56, 147–154 (1978).], Liebman KA, *et al.*, 2014^[K. A. Liebman, et al., Determinants of Heterogeneous Blood Feeding Patterns by Aedes Aegypti in Iquitos, Peru. PLoS Negl. Trop. Dis. 8, e2702 (2014).]) . Each cohort is indexed by its birth day, $\tau$. The FoI at age $a$ for the cohort born on day $\tau$, which is at time $t=a+\tau$, is defined for $a>0$: 
-
-\begin{equation}
-h_\tau(a) = \bar h \cdot \omega(a) \cdot S(a+\tau) \cdot T(a+\tau) 
-\end{equation}
-
-We can thus compare exposure and infection for cohorts of different ages, of the same age at different times. We let $H_\tau(a)$ denote the size of the cohort of age $a$ born on day $\tau$, and we note that for $h(t)$ to be the *average* FoI for the population, it must be true that 
-$$h(t) = \int_{-\infty}^t h_\tau(a) H_\tau(a) d \tau $$ 
-In most of our simulations, we compute quantities for single cohorts as they age, and we choose functions $\omega(a)$ without worrying about this constraint. When we deal with the whole human population, however, we must enforce the constraint. 
-
-The `FoI` is defined as an **S3** class function that returns the FoI at ages `a` for a cohort with birthdate `tau`, for a function defined by `par`. The optional passed parameter `hhat` overrides the value of `hbar` set in `par` when it is not `null`: 
-
-+ $\bar h$ or `hbar` sets the overall level of exposure
-    
-+ $S(t)$ or `seasonalFoI` defines a seasonal pattern
-    
-+ $T(t)$ or `trendFoI` defines a temporal trend 
-
-+ $\omega(a)$ or `ageFoI` defines a change in exposure with respect to age relative to the mean population FoI
-
-```{r FoI Trace, echo=F, purl=F}
-foiP1 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend()) 
-foiP2 = list(hbar = 5/365, agePar = par_flatAge(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
-foiP3 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_sinSeason(), trendPar = par_flatTrend()) 
-foiP4 = list(hbar = 5/365, agePar = par_type2Age(), seasonPar = par_flatSeason(), trendPar = par_flatTrend()) 
-```
-
-```{r plotFoI functions} 
-plotFoI= function(h, FoIpar, tau=0, Tmax=5*365, clrs=NULL){
-  L = length(h)
-  if(is.null(clrs)) clrs = rep("black", L)
-  tms = 1:Tmax
-  tm = tms/365 
-  plot(tm, 365*h[1]*FoI(tms, FoIpar, tau), type = "n", 
-       xlab = "Host Age (Years)", ylab = "aFoI") 
-  for(i in 1:L) lines(tm, 365*h[i]*FoI(tms,FoIpar, tau), col = clrs[i])
-}
-```
-
-```{r plotFoI} 
-clrs8b <- viridisLite::inferno(8)
-
-FoIfigure = function(hh=c(8, 4, 2, 1, .5, .2, 0.1)/365, 
-                     tau=0, clrs = clrs8b, Tmax=5*365){
-  par(mfcol = c(1,2), mar =c(4,4,1,1))
-  plotFoI(hh, foiP4, tau, Tmax, clrs) 
-  plotFoI(hh, foiP3, tau, Tmax, clrs) 
-} 
-```
+> To model exposure, **`ramp.falciparum`** uses the [trace function](https://dd-harp.github.io/ramp.func/articles/TraceFunctions.html) library in [**`ramp.func`**](https://dd-harp.github.io/ramp.func/) 
 
 
-```{r FoIFigure, fig.height=2.5, fig.width=6, echo=F, purl=FALSE, warning=FALSE}
-FoIfigure() 
-```
+Exposure to malaria is defined as the number of bites by infective mosquitoes, per person, per day, called the daily **entomological inoculation rate** (abbreviated **EIR** and denoted $E(t)$). Since the daily EIR (dEIR) is often seasonal, we also discuss the annual EIR (aEIR), average dEIR over a year. The **force of infection** is the hazard rate for infection for susceptible individuals (abbreviated **FoI** and denoted $h(t)$). 
+
+**`ramp.falciparum`** is focused on malaria epidemiology defined in a narrow sense to include anything happening in the human population: exposure, infection, disease, immunity, infectiousness, treatment with anti-malarial drugs, vaccines, detection (by various diagnostic methods), heterogeneity, and demography. It has avoided models of malaria transmission dynamics and control: for that, we developed [**`ramp.xds`**](https://dd-harp.github.io/ramp.xds/) and [**SimBA**](https://faculty.washington.edu/smitdave/simba/). 
+
+Here, we use **trace functions** to model exposure. If we model malaria transmission dynamics, the EIR and the FoI would be the outcome of parasite transmission among humans and mosquitoes through blood feeding. Mosquito ecology and infection dynamics could be seasonally forced or highly variable, and the models would output the EIR and the FoI as intermediate terms. If we wanted to remain focused on malaria epidemiology in the narrow sense, we could take the essential information about the EIR and the FoI --- the trace --- and use it to *force* exposure. 
+
+## Composed Time Series Functions
+
+To model complex patterns of exposure, we use **composed time series** functions from the [**`ramp.func`**](https://dd-harp.github.io/ramp.func/) a function library. Each trace function is the product of four components: 
+
+$$
+E(t) = \bar E \times F_S(t) \times F_T(t) \times F_K(t)
+$$
+
+where
+
++ $\bar E$ is the mean value of an unperturbed system. 
+
++ $F_S(t)>0$ is a **seasonal** pattern function, normalized over the interval such that  $$\int_{t_0}^{t_1} F_S(t) \;dt = t_1 - t_0$$  
+
++ $F_T(t)>0$ is a **trend** pattern function, normalized over the interval such that $$\int_{t_0}^{t_1} F_T(t) \; dt = t_1 - t_0$$  
+
++ $F_K(t)>0$ is a **shock** function, a perturbation to the system
+
+ 
+
+## Heterogeneous Exposure 
+
+The EIR and the FoI are related, under some model for heterogeneous exposure and pre-erythrocytic immunity.  In developing models of heterogeneous exposure, we recognize several kinds of heterogeneity that we handle very differently (see Cooper L, *et al.*, 2019)^[Cooper, L., Kang, S.Y., Bisanzio, D. et al. Pareto rules for malaria super-spreaders and super-spreading. Nat Commun 10, 3939 (2019). https://doi.org/10.1038/s41467-019-11861-y]: *heterogeneous biting,*  *environmental heterogeneity,* and *complex exposure.* 
+
+### Heterogeneous Biting 
+
+By heterogeneous biting, we mean that the expected rate of exposure differs for population strata: biting is a kind of *frailty:* if the population average dEIR is $E$, and if $w$ is the frailty term for one stratum, then the expected dEIR is $$wE.$$ A frailty term 
+is a multiplicative modifier of risk. If $E$ is the population average, and if $D$ describes the distribution of frailty over all strata then:
+$$\int_0^\infty D(w) dw = 1$$ 
+and
+$$\int_0^\infty w E D(w) \; dw = E$$ 
+In this case, $w$ is the relative biting rate. 
+
+### Environmental Heterogeneity
+
+Exposure can be heterogeneous in a homogenous population stratum (*i.e.* there are no differences in the *expected* rate). Consider two humans with the same expectation, but on one day, one of them happens to spend their time in a house with glass windows and a door that closes, while the other one is outside and walks into a swarm of mosquitoes. From a mosquito perspective, mosquitoes populations move around and aggregate around resources.  Those mosquito swarms can be moved around by wind. 
+
+To handle environmental heterogeneity, we let the expectation have a distribution. If, for example, the expectation is *gamma* distributed, then the number of bites per human is a mixture process: a $gamma$-Poisson gives us a **negative binomial** distribution of bites per person. Notably, for most mosquito catch counts data, the variance is much higher than the mean, and the distributions can be modeled with negative binomial distributions. 
+
+### Complex Exposure
+
+In models for superinfection, a single infection event can infect a human with more than one distinct parasite genotype. The distribution of the number of distinct parasite types, per bite, is called the **multiplicity of exposure** (MoE). 
+
+## Exposure and Infection
+
+Exposure is heterogeneous, but so is the risk of infection. In some cases, we want to consider models with pre-erythrocytic immunity: the risk of infection per infectious bite is denoted $b$. To handle this, various mathematical models will represent infection states --- denoted $\mathbf{X}$ --- in different ways. Generically, the FoI is related to the EIR by a function:
+
+$$h = F_b(E, \mathbf{X})$$
+
+## Cohort Dynamics 
+
+Since malaria epidemiology is related to age and exposure, all the mathematical models developed in **`ramp.falciparum`** are formulated for cohorts as they age. To explore these models, we must simulate arbitrary patterns of exposure in cohorts as they age, with the ability to compare two cohorts of different ages in the same population. If $E(t)$ denotes the average daily EIR in a population, we want to model exposure in some particular cohort, born on day $d.$ For every cohort, age and time are related by the identity $$t = a + d.$$ It follows that exposure at age $a$ is
+
+$$E(a|d) = E(t-d).$$ 
+
+## Age 
+
+Motivated by the evidence for age-dependent exposure, the rate of exposure in a cohort is assumed to change with age. We use the age-weighting function, $\omega(a)$, consistent with the available evidence from both anopheline and aedine mosquitoes (Port GR, *et al.*, 1980;^[G. R. Port, P. F. L. Boreham, J. H. Bryan, The relationship of host size to feeding by mosquitoes of the Anopheles Gambiae Giles complex (Diptera: Culicidae). Bulletin of Entomological Research 70, 133–144 (1980).], Carnevale P, *et al.*, 1978;^[P. Carnevale, J. L. Frézil, M. F. Bosseno, F. Le Pont, J. Lancien, [The aggressiveness of Anopheles gambiae A in relation to the age and sex of the human subjects]. Bull. World Health Organ. 56, 147–154 (1978).], Liebman KA, *et al.*, 2014^[Liebman KA, Stoddard ST, Reiner RC Jr, Perkins TA, Astete H, Sihuincha M, et al. (2014) Determinants of Heterogeneous Blood Feeding Patterns by Aedes aegypti in Iquitos, Peru. PLoS Negl Trop Dis 8(2): e2702. https://doi.org/10.1371/journal.pntd.0002702]) . Since biting varies with age, we let $F_\omega(a)$ be a function that computes the *relative biting rate* by age, a kind of *frailty.* The EIR for a cohort is:
+
+$$E(a|d) = F_\omega(a) E(t-d) = \bar E \times F_\omega(a) \times F_S(t-d) \times F_T(t-d) \times F_K(t-d)$$ 
+We can thus formulate models for exposure in a population and compare outcomes for two different cohorts. 
+
+In some cases, we can simply skip the model for pre-erythrocytic immunity. We $\bar h$ be a scaling parameter and:
+
+$$h(a|d) = \bar h \times F_\omega(a) \times F_S(t-d) \times F_T(t-d) \times F_K(t-d)$$ 
+
 
 ## References
 

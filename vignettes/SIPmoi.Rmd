@@ -15,6 +15,7 @@ This describes a queuing model `SquIP`
 
 ```{r}
 library(ramp.falciparum)
+library(ramp.func)
 ```
 
 ## SquIP: The Master Equations

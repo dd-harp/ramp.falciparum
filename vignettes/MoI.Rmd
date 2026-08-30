@@ -11,8 +11,13 @@ vignette: >
 
 ```{r}
 library(ramp.falciparum)
+library(ramp.func)
 library(deSolve)
 library(knitr)
+```
+
+```{r}
+# devtools::load_all()
 ```
 
 In 1950, George Maccdonald published a model of malaria superinfection (Macdonald G, 1950)^[
@@ -60,27 +65,24 @@ The software in `ramp.falciparum` includes functions to set up and solve the que
 
 ```{r, echo=F}
 aa = 0:1095
-foiP3 = list(hbar = 5/365, 
-             agePar = par_type2Age(), 
-             seasonPar = par_sinSeason(), 
-             trendPar = par_flatTrend())
+FoI_a = make_F_a(5/365, age_par = makepar_F_type2(), season_par=makepar_F_sin())
 ```
 
 
 ```{r, fig.height=4, fig.width=7, echo=F, eval=F}
-plot(aa, FoI(aa, foiP3), type = "l", 
-     xlab = "a - age (in days)", ylab = expression(FoI[tau](a)))
+plot(aa, FoI_a(aa), type = "l", 
+     xlab = "a - age (in days)", ylab = expression(FoI[d](a)))
 ```
 
 While $M/M/\infty$ is an infinite system of differential equations, the function  `solveMMinfinity` solves a finite system of differential equations. The maximum MoI is chosen to be large enough that it doesn't affect the results. 
 
 ```{r}
-MMinf <- solveMMinfty(5/365, foiP3, Amax=1095)
+MMinf <- solveMMinfty(5/365, FoI_a, Amax=1095)
 
 ```
 
 ```{r, fig.height=4, fig.width=7}
-with(MMinf, plot(time, m, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)"))
+with(MMinf, plot(time, m, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)"))
 ```
 
 
@@ -95,11 +97,11 @@ $$
 He also showed that the distribution of the MoI would converge to a Poisson distribution. If the initial distribution was Poisson, then it would remain Poisson forever.  
 
 ```{r}
-hybrid = solve_dm(5/365, foiP3, Amax=1095)
+hybrid = solve_dm(5/365, FoI_a, Amax=1095)
 ```
 
 ```{r, fig.height=4, fig.width=7}
-with(hybrid, plot(time, m, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)"))
+with(hybrid, plot(time, m, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)"))
 ```
 
 ## The Random Variables Approach 
@@ -110,28 +112,28 @@ Let $z(\alpha, a)$ denote the density of parasite cohorts of age $\alpha$ in a h
 \frac{\partial z}{\partial a} + \frac{\partial z}{\partial \alpha} = - rz, 
 \end{equation}
 
-with the boundary condition $z_\tau(a,0)=h_\tau(a).$ We note that the age of the host birth cohort sets an upper limit for the parasite cohort, so $0 < \alpha < a$. The solution, which describes density of infections of age $\alpha$ in a host cohort of age $a$, is given by the formula: 
+with the boundary condition $z_d(a,0)=h_d(a).$ We note that the age of the host birth cohort sets an upper limit for the parasite cohort, so $0 < \alpha < a$. The solution, which describes density of infections of age $\alpha$ in a host cohort of age $a$, is given by the formula: 
 
 \begin{equation}
-z_\tau(\alpha, a | h) = h_\tau \left(a-\alpha\right) e^{-r \alpha}.
+z_d(\alpha, a | h) = h_d \left(a-\alpha\right) e^{-r \alpha}.
 \label{zda}
 \end{equation}
 
 From these equations, we derive random variables describing the MoI, the AoI, and the AoY, noting that the mean MoI is: 
 
 \begin{equation}
-m_\tau(a | h) = \int_0^a z_\tau(\alpha, a |h) d \alpha 
+m_d(a | h) = \int_0^a z_d(\alpha, a |h) d \alpha 
 \end{equation}
 
 In `ramp.falciparum,` this is computed with the function `meanMoI`
 
 
 ```{r}
-moi = meanMoI(aa, foiP3, hhat=5/365)
+moi = meanMoI(aa, FoI_a, hhat=5/365)
 ```
 
 ```{r, fig.height=4, fig.width=7}
-plot(aa, moi, type = "l", ylab = expression(m[tau](a)), xlab = "a - cohort age (in days)")
+plot(aa, moi, type = "l", ylab = expression(m[d](a)), xlab = "a - cohort age (in days)")
 ```
 
 The three give the same answers, up to slight differences introduced by the numerical methods: 

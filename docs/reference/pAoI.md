@@ -1,12 +1,12 @@
 # Compute the distribution function for AoI
 
 The distribution function for the AoI is given by \$\$F_A(\alpha \| a,
-\tau, h) = \int_0^\alpha f_A(\alpha, a, \tau \| h) d \alpha\$\$
+\bday, h) = \int_0^\alpha f_A(\alpha, a, \bday \| h) d \alpha\$\$
 
 ## Usage
 
 ``` r
-pAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+pAoI(alpha, a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 ```
 
 ## Arguments
@@ -17,21 +17,19 @@ pAoI(alpha, a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 
-  scaling parameter for
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  scaling parameter for the FoI
 
 - r:
 

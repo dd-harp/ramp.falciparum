@@ -1,5 +1,6 @@
 ## -----------------------------------------------------------------------------
 library(ramp.falciparum)
+library(ramp.func)
 
 ## ----fig.width=7, eval=F------------------------------------------------------
 # foiP1 = list(hbar = 1, agePar = par_flatAge(), seasonPar = par_flatSeason(), trendPar = par_flatTrend())

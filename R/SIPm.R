@@ -100,6 +100,14 @@
 #' \end{array}}
 #'
 #' @section Parameters:
+#' \describe{
+#'   \item{`r`}{clearance rate for a simple infection}
+#'   \item{`rho`}{the fraction of incident cases that gets treated}
+#'   \item{`sigma`}{treatment because of prevalent infection}
+#'   \item{`xi`}{background drug taking}
+#'   \item{`eta`}{loss of chemoprotection}
+#'   \item{`mu`}{death rate}
+#' }
 #'
 #' @seealso [SquIPz] and [SIPm]
 #'
@@ -117,28 +125,28 @@ NULL
 #' but adds clearance through treatment and chemoprotection.
 #' The model tracks the MoI in a cohort of humans
 #' as it ages. It assumes a time- and age-dependent hazard rate for infection,
-#' called the force of infection (FoI, \eqn{h_\tau(a)}). Infections do not affect
+#' called the force of infection (FoI, \eqn{h_\bday(a)}). Infections do not affect
 #' each other, and each one clears independently at the rate \eqn{r}.
 #'
 #' Let \eqn{\zeta_i} the fraction of the population with
 #' MoI = i, then
-#' \deqn{\frac{d\zeta_0}{da}= -h_\tau(a) \zeta_0 + r \zeta_1}
+#' \deqn{\frac{d\zeta_0}{da}= -h_\bday(a) \zeta_0 + r \zeta_1}
 #' and for \eqn{i\geq 1}
-#' \deqn{\frac{d\zeta_i}{da}= h_\tau(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
+#' \deqn{\frac{d\zeta_i}{da}= h_\bday(a) \left( \zeta_{i-1} - \zeta_i \right)  - ri \zeta_i + r(i+1)\zeta_{i+1}}
 #'
 #' This function computes the derivatives in a form that can be used by [deSolve::ode].
 #'
 #' @param a the host age
 #' @param y the state variables
 #' @param pars the parameters
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param FoI_a a cohort trace function
 #'
 #' @return the derivatives as a [list]
 #' @keywords internal
 #' @seealso [solveMMinfty]
 #' @export
-dSIPm = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
-  foi = h*FoI(a, FoIpar, tau)
+dSIPm = function(a, y, pars, FoI_a){with(as.list(c(y,pars)),{
+  foi = h*FoI_a(a, bday)
   #S = H - II - P
   H = S + II + P
 
@@ -177,7 +185,7 @@ dSIPm = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #' regular intervals dt from age 0 up to Amax (in days).
 #'
 #' @param h the force of infection
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param FoI_a a cohort trace function
 #' @param r the clearance rate for a simple infection
 #' @param rho the fraction of incident cases that gets treted
 #' @param sigma treatment rate for infected individuals
@@ -185,23 +193,23 @@ dSIPm = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #' @param eta loss of chemoprotection
 #' @param mu population death rate
 #' @param H population size
-#' @param tau the cohort birthday
+#' @param bday the cohort birthday
 #' @param Amax The maximum runtime (in days)
 #' @param dt The output frequency (in days)
 #'
 #' @return a [list] with the orbits by name
 #' @seealso [dMoIda]
 #' @export
-solve_SIPm = function(h, FoIpar, tau=0,
+solve_SIPm = function(h, FoI_a, bday=0,
                          r=1/200, rho=.2,
                          sigma = 1/365, xi=1/365,
                          eta = 1/25,
                          mu = 0, H=1000,
                          Amax=730, dt=1){
   tms = seq(0, Amax, by = dt)
-  prms = c(h=h,tau=tau,r=r,rho=rho,sigma=sigma,xi=xi,eta=eta,mu=mu)
+  prms = c(h=h,bday=bday,r=r,rho=rho,sigma=sigma,xi=xi,eta=eta,mu=mu)
   inits = c(S=H, P=0, II=0, m=0, m2=0, dFr=0)
-  out = deSolve::ode(inits, times=tms, dSIPm, prms, FoIpar=FoIpar)
+  out = deSolve::ode(inits, times=tms, dSIPm, prms, FoI_a=FoI_a)
   age = out[,1]; out = out[,-1]
   S = out[,1]
   P = out[,2]
@@ -222,6 +230,6 @@ solve_SIPm = function(h, FoIpar, tau=0,
 MoIDistPlot = function(moi, t, clr1 = "red"){
   N = dim(moi)[2]-2
   mm = 1:N -1
-  plot(mm, moi[t,1:N +1], type="h", xlab = "MoI", ylab = expression(M[tau](a)), main = paste ("Age = ", t, "Days"))
+  plot(mm, moi[t,1:N +1], type="h", xlab = "MoI", ylab = expression(M[bday](a)), main = paste ("Age = ", t, "Days"))
 }
 

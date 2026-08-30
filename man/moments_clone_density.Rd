@@ -6,8 +6,8 @@
 \usage{
 moments_clone_density(
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   n = 1,
   dt = 0.1,
   hhat = 1,
@@ -21,9 +21,9 @@ moments_clone_density(
 \arguments{
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{n}{the moment to compute}
 
@@ -45,5 +45,5 @@ moments_clone_density(
 a \link{numeric} vector of length(x)
 }
 \description{
-Compute \deqn{P_\tau(a| h) \sim f_P(\xi; a, \tau |h ) = \int_0^a \Omega(\xi|F_\mu(\alpha)) \; f_A(\alpha; a, \tau | h) d\alpha}
+Compute \deqn{P_\bday(a| h) \sim f_P(\xi; a, \bday |h ) = \int_0^a \Omega(\xi|F_\mu(\alpha)) \; f_A(\alpha; a, \bday | h) d\alpha}
 }

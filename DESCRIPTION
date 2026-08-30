@@ -1,6 +1,6 @@
 Package: ramp.falciparum
 Type: Package
-Title: A Deep Dive into falciparum malaria mathematical epidemiology
+Title: Mathematical epidemiology of falciparum malaria
 Version: 0.1.0
 Authors@R: c(
       person("John M.", "Henry", email = "jmhenry2206@gmail.com", role = c("aut"), comment = c(ORCID = "0000-0001-8684-2003")),
@@ -12,13 +12,16 @@ Encoding: UTF-8
 RoxygenNote: 7.3.3
 Roxygen: list(markdown = TRUE)
 LazyData: true
-Imports: 
+Imports:
   stats,
   deSolve
-Suggests: 
+Suggests:
+  ramp.func,
   knitr,
   graphics,
   viridis,
   viridisLite
+Remotes:
+    dd-harp/ramp.func
 VignetteBuilder: knitr
 URL: https://dd-harp.github.io/ramp.falciparum/

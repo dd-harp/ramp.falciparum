@@ -6,9 +6,9 @@
 \usage{
 solve_SquIPz(
   h,
-  FoIpar,
+  F_a,
   F_moe,
-  tau = 0,
+  bday = 0,
   r = 1/200,
   rho = 0.2,
   sigma = 1/365,
@@ -24,11 +24,11 @@ solve_SquIPz(
 \arguments{
 \item{h}{the force of infection}
 
-\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
+\item{F_a}{a trace function}
 
 \item{F_moe}{a probability moment function for the multiplicity of exposure}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

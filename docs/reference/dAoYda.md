@@ -5,7 +5,7 @@ The
 ## Usage
 
 ``` r
-dAoYda(a, vars, pars, FoIpar)
+dAoYda(a, vars, pars, FoI_a)
 ```
 
 ## Arguments
@@ -22,9 +22,9 @@ dAoYda(a, vars, pars, FoIpar)
 
   the parameters
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
 ## Value
 

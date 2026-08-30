@@ -4,16 +4,16 @@
 \alias{solve_dpda}
 \title{Solve a system of differential equations to compute the true PR and the MoI}
 \usage{
-solve_dpda(h, FoIpar, r = 1/200, tau = 0, Amax = 730, dt = 1)
+solve_dpda(h, FoI_a, r = 1/200, bday = 0, Amax = 730, dt = 1)
 }
 \arguments{
 \item{h}{a scaling factor on the FoI}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
 \item{r}{the clearance rate for a simple infection}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{Amax}{The maximum runtime (in days)}
 

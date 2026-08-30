@@ -6,8 +6,8 @@
 \usage{
 solve_SIPm(
   h,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   r = 1/200,
   rho = 0.2,
   sigma = 1/365,
@@ -22,9 +22,9 @@ solve_SIPm(
 \arguments{
 \item{h}{the force of infection}
 
-\item{FoIpar}{\eqn{h_\tau(a)}, a \link{list} formatted to compute \link{FoI}}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

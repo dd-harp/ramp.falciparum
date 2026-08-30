@@ -3,8 +3,14 @@
 ``` r
 
 library(ramp.falciparum)
+library(ramp.func)
 library(deSolve)
 library(knitr)
+```
+
+``` r
+
+# devtools::load_all()
 ```
 
 ## Introduction
@@ -27,8 +33,8 @@ Elsewhere, the dynamics of MoI have be described using the queuing model
 $`M/M/\infty`$. The MoI increases with the FoI, and each parasite can
 clear at some rate, $`r`$. The following is a diagram for the changes in
 the fraction of the population with MoI $`=i`$, denoted $`\zeta_i`$,
-change in a host cohort with the force of infection $`h_\tau(a),`$ and
-with clearance.
+change in a host cohort with the force of infection $`h_d(a),`$ and with
+clearance.
 
 ------------------------------------------------------------------------
 
@@ -45,8 +51,8 @@ The master equations for $`M/M/\infty`$ are:\
 ``` math
 \begin{equation}
 \begin{array}{rl}
-\frac{d\zeta_0}{da} &= -h_\tau(a) \zeta_0 + r \zeta_1   \\ 
-\frac{d\zeta_i}{da} &= -\left( h_\tau\left(a\right) + r i \right) \zeta_i + h_\tau\left(a\right) \zeta_{i-1} + r\left(i+1\right) \zeta_{i+1}   \\ 
+\frac{d\zeta_0}{da} &= -h_d(a) \zeta_0 + r \zeta_1   \\ 
+\frac{d\zeta_i}{da} &= -\left( h_d\left(a\right) + r i \right) \zeta_i + h_d\left(a\right) \zeta_{i-1} + r\left(i+1\right) \zeta_{i+1}   \\ 
 \end{array}
 \end{equation}
 ```
@@ -66,23 +72,23 @@ N = pmax(24, 4*m)
 plot(m, ppois(N,m), type = "l", ylim = c(1-1e-07,1+1e-07))
 ```
 
-![](Hybrid_files/figure-html/unnamed-chunk-2-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-3-1.png)
 
 We must define a trace FoI function.
 
-![](Hybrid_files/figure-html/unnamed-chunk-3-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-4-1.png)
 
 To verify it works, we compute the MoI each day for the first three
 years of life.
 
 ``` r
 
-solveMMinfty(3/365, foiP3) -> out
+solveMMinfty(3/365, FoI_a) -> out
 ```
 
 We peek at the distribution of MoI = $`1, \ldots, 5`$ on day 500:
 
-![](Hybrid_files/figure-html/unnamed-chunk-5-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-6-1.png)
 
 ### Nåsell’s Hybrid Model
 
@@ -98,22 +104,22 @@ equation using `solve_dm` and plot the output:
 
 ``` r
 
-solve_dm(3/365, foiP3) -> mt 
+solve_dm(3/365, FoI_a) -> mt 
 plot(mt$time, mt$m, type = "l", 
-     xlab = "Age (in Days)", ylab = expression(m[tau](a)))
+     xlab = "Age (in Days)", ylab = expression(m[d](a)))
 ```
 
-![](Hybrid_files/figure-html/unnamed-chunk-6-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-7-1.png)
 
 ### Numerical Verification
 
 We have presented three ways of computing the mean MoI using in a cohort
-as it ages for an arbitrary function $`h_\tau(a)`$:
+as it ages for an arbitrary function $`h_d(a)`$:
 
 1.  Using `meanMoI` which integrates `zda`:
 
 ``` math
-\int_0^a z_\tau(\alpha, a) d\alpha
+\int_0^a z_d(\alpha, a) d\alpha
 ```
 
 2.  By solving the queuing model $`M/M/\infty`$, a compartmental model
@@ -125,9 +131,9 @@ as it ages for an arbitrary function $`h_\tau(a)`$:
 ``` r
 
 aa = 0:1825
-v1 = meanMoI(aa, foiP3, hhat=5/365)
-v2 = solveMMinfty(5/365, foiP3, Amax=1825)$m
-v3 = solve_dm(5/365, foiP3, Amax=1825)[,2]
+v1 = meanMoI(aa, FoI_a, hhat=5/365)
+v2 = solveMMinfty(5/365, FoI_a, Amax=1825)$m
+v3 = solve_dm(5/365, FoI_a, Amax=1825)[,2]
 ```
 
 The following plots all three on the same graph using different colors
@@ -139,29 +145,29 @@ par(mfrow = c(2,2))
 
 plot(aa, v1, type = "l", col = "red", lwd=4, 
      xlab = "Age (in Days)", 
-     ylab = expression(m[tau](a)), 
+     ylab = expression(m[d](a)), 
      main = "meanMoI")
 
 plot(aa, v2, type = "l", lwd=2, 
      xlab = "Age (in Days)", 
-     ylab = expression(m[tau](a)), 
+     ylab = expression(m[d](a)), 
      main = "solveMMinfty")
 lines(aa, v2, type = "l", col = "yellow", lwd=2, lty=2)
 
 plot(aa, v3, type = "l", col = "darkblue", lwd=1, 
      xlab = "Age (in Days)", 
-     ylab = expression(m[tau](a)), 
+     ylab = expression(m[d](a)), 
      main = "solve_dm")
 
 plot(aa, v1, type = "l", col = "red", lwd=4, 
      xlab = "Age (in Days)", 
-     ylab = expression(m[tau](a)), 
+     ylab = expression(m[d](a)), 
      main = "All Three")
 lines(aa, v2, type = "l", col = "yellow", lwd = 2)
 lines(aa, v3, type = "l", col = "darkblue", lwd = 2, lty =2)
 ```
 
-![](Hybrid_files/figure-html/unnamed-chunk-7-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-8-1.png)
 
 the maximum errors are on the order of $`1e-07`$
 
@@ -170,7 +176,7 @@ the maximum errors are on the order of $`1e-07`$
 c(max(abs(v1-v2)), max(abs(v2-v3)), max(abs(v1-v3)))
 ```
 
-    ## [1] 2.511903e-09 1.776634e-13 2.511903e-09
+    ## [1] 9.200345e-10 1.369981e-13 9.200345e-10
 
 We have developed a hybrid model that we can use to compute the mean and
 higher order moments for the age of infection (AoI). In a related
@@ -235,7 +241,7 @@ Code exists in `ramp.falciparum` to compute prevalence in three ways:
 
 - From the hybrid model `solve_dm` and $`p(t)= 1 - exp(-m(t))`$
 
-![](Hybrid_files/figure-html/unnamed-chunk-8-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-9-1.png)
 
 ## AoI - Hybrid Variables
 
@@ -243,7 +249,7 @@ Let $`x = \left< A\right>;`$ x is the first moment of the AoI in a
 cohort at age $`a`$, conditioned on a history of exposure, given by a
 function $`h`$. In longer form:
 ``` math
-x_\tau(a; h) = \left< A_\tau(a; h) \right> = \int_0^\infty \alpha \frac{z_\tau(\alpha, a; h_\tau(a))} {m_\tau(a;h_\tau(a))}
+x_d(a; h) = \left< A_d(a; h) \right> = \int_0^\infty \alpha \frac{z_d(\alpha, a; h_d(a))} {m_d(a;h_d(a))}
 ```
 Here, we show that:
 
@@ -255,7 +261,7 @@ Here, we show that:
 Similarly, we let $`x_{[n]} = \left< A^n \right>`$ denote the higher
 order moments of the random variable $`A`$. In longer form:
 ``` math
-x_{n}(a, \tau; h) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a; h_\tau(a))} {m_\tau(a;h_\tau(a))}
+x_{n}(a, d; h) = \int_0^\infty \alpha^n \frac{z_d(\alpha, a; h_d(a))} {m_d(a;h_d(a))}
 ```
 We show that higher order moments can be computed recursively:
 
@@ -275,22 +281,22 @@ default. Here we plot the $`n^{th}`$ root of the first three moments.
 ``` r
 
 par(mar = c(7, 4, 2, 2))
-solve_dAoI(5/365, foiP3) -> mt 
+solve_dAoI(5/365, FoI_a) -> mt 
 plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(list(x, sqrt(x[paste("[2]")]), sqrt(x[paste("[3]")], 3))), ylim = range(mt$xn3^(1/3))) 
 lines(mt$time, mt$xn2^(1/2), col = "purple")
 lines(mt$time, mt$xn3^(1/3), col = "darkgreen") 
 ```
 
-![](Hybrid_files/figure-html/unnamed-chunk-9-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-10-1.png)
 
 ### Numerical Verification
 
 ``` r
 
 aa = seq(5, 5*365, by = 5) 
-moment1 = momentAoI(aa, foiP3)
-moment2 = momentAoI(aa, foiP3, n=2)
-moment3 = momentAoI(aa, foiP3, n=3)
+moment1 = momentAoI(aa, FoI_a)
+moment2 = momentAoI(aa, FoI_a, n=2)
+moment3 = momentAoI(aa, FoI_a, n=3)
 ```
 
 2.  By solving a hybrid model with variables that track the moments,
@@ -298,7 +304,7 @@ moment3 = momentAoI(aa, foiP3, n=3)
 
 ``` r
 
-solve_dAoI(5/365, foiP3, Amax = 5*365, dt=5) -> mt 
+solve_dAoI(5/365, FoI_a, Amax = 5*365, dt=5) -> mt 
 ```
 
 ``` r
@@ -314,7 +320,7 @@ plot(mt$time, mt$xn3, type = "l", lwd=3, col = "darkgreen",
      xlab = "Age (in Days)", ylab = expression(x[paste("[3]")]))
 lines(aa, moment3, col = "yellow", lwd=2, lty=2)
 par(mar = c(7, 4, 2, 2))
-solve_dAoI(5/365, foiP3) -> mt 
+solve_dAoI(5/365, FoI_a) -> mt 
 plot(mt$time, mt$xn1, type = "l", xlab = "Age (in Days)", ylab = expression(list(x, sqrt(x[paste("[2]")]), sqrt(x[paste("[3]")], 3))), lwd=3, ylim = range(mt$xn3^(1/3))) 
 lines(mt$time, mt$xn2^(1/2), col = "purple", lwd=3)
 lines(mt$time, mt$xn3^(1/3), col = "darkgreen", lwd=3) 
@@ -323,17 +329,17 @@ lines(aa, moment2^(1/2), col = "yellow", lwd=2, lty=2)
 lines(aa, moment3^(1/3), col = "yellow", lwd=2, lty=2)
 ```
 
-![](Hybrid_files/figure-html/unnamed-chunk-12-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-13-1.png)
 
 ## AoY - Hybrid Variables
 
 Let $`y`$ denote the first moment of the AoY.
 
 ``` math
-y_\tau(a) = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha 
+y_d(a) = \int_0^a \alpha \; f_Y(\alpha, a, d) \; d\alpha 
 ```
 
-A differential equation for $`y_\tau(a)`$ is:
+A differential equation for $`y_d(a)`$ is:
 
 ``` math
 \frac{dy}{da} = 1 - \frac{h}{p} y + \phi(r,m) x 
@@ -347,19 +353,19 @@ To verify, we can compute the moment directly. The function
 
 ``` r
 
-solve_dAoYda(5/365, foiP3, Amax=5*365, dt=5, n=9) -> mt
+solve_dAoYda(5/365, FoI_a, Amax=5*365, dt=5, n=9) -> mt
 ```
 
 The moments can be computed directly using `momentAoY`
 
 ``` r
 
-moment1y = momentAoY(aa, foiP3, hhat=5/365)
+moment1y = momentAoY(aa, FoI_a, hhat=5/365)
 ```
 
 The following plots the first moment computed both ways:
 
-![](Hybrid_files/figure-html/unnamed-chunk-15-1.png)
+![](Hybrid_files/figure-html/unnamed-chunk-16-1.png)
 
 ## References
 

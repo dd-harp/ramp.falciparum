@@ -5,23 +5,22 @@ Compute the moments for the AoI density function for a cohort of age a
 ## Usage
 
 ``` r
-momentAoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200, n = 1)
+momentAoI(a, FoI_a, bday = 0, hhat = 1, r = 1/200, n = 1)
 ```
 
 ## Arguments
 
 - a:
 
-  host age
+  cohort age
 
-- FoIpar:
+- FoI_a:
 
-  a compound [list](https://rdrr.io/r/base/list.html) to compute
-  \\h\_\tau(a)\\
+  a cohort trace function
 
-- tau:
+- bday:
 
-  the host cohort's birthday
+  the cohort birthday
 
 - hhat:
 

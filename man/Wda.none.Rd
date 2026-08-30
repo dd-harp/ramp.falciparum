@@ -4,14 +4,14 @@
 \alias{Wda.none}
 \title{Compute immune tracking variables as a function of host age and exposure}
 \usage{
-\method{Wda}{none}(a, FoIpar, tau = 0, hhat = 1, par = par_Wda_none())
+\method{Wda}{none}(a, FoI_a, bday = 0, hhat = 1, par = par_Wda_none())
 }
 \arguments{
 \item{a}{age of a host cohort}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{cohort birthday}
+\item{bday}{cohort birthday}
 
 \item{hhat}{overrides the value of hbar in par}
 

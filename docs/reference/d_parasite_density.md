@@ -1,9 +1,9 @@
-# Compute the distribution function for \\B\_\tau(a)\\
+# Compute the distribution function for \\B\_\bday(a)\\
 
 Call
 [parasite_density](https://dd-harp.github.io/ramp.falciparum/reference/parasite_density.md)
-and return the PDF: \$\$f_B(\xi; a, \tau \|h) = \log\_{10} \left(
-\sum\_{M\_\tau(a\|h)\>0} 10^{P\_\tau(a \|h)}\right)\$\$
+and return the PDF: \$\$f_B(\xi; a, \bday \|h) = \log\_{10} \left(
+\sum\_{M\_\bday(a\|h)\>0} 10^{P\_\bday(a \|h)}\right)\$\$
 
 ## Usage
 
@@ -11,8 +11,8 @@ and return the PDF: \$\$f_B(\xi; a, \tau \|h) = \log\_{10} \left(
 d_parasite_density(
   meshX,
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   RBC_par = par_lRBC_static(),
@@ -32,11 +32,11 @@ d_parasite_density(
 
   host cohort age
 
-- FoIpar:
+- FoI_a:
 
-  parameters that define an FoI function
+  a cohort trace function
 
-- tau:
+- bday:
 
   the cohort birthday
 

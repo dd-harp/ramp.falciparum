@@ -4,14 +4,14 @@
 \alias{meanMoI}
 \title{The mean MoI in a host cohort of age \eqn{a}}
 \usage{
-meanMoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
+meanMoI(a, FoI_a, bday = 0, hhat = 1, r = 1/200)
 }
 \arguments{
-\item{a}{host age}
+\item{a}{cohort age}
 
-\item{FoIpar}{a compound \link{list} to compute \eqn{h_\tau(a)}}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the host cohort's birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 
@@ -21,5 +21,5 @@ meanMoI(a, FoIpar, tau = 0, hhat = 1, r = 1/200)
 a \link{numeric} vector of length(a)
 }
 \description{
-The mean multiplicity of infection (MoI) is \deqn{m_\tau(a|h) = \int_0^a z_\tau(\alpha, a|h) d \alpha}
+The mean multiplicity of infection (MoI) is \deqn{m_\bday(a|h) = \int_0^a z_\bday(\alpha, a|h) d \alpha}
 }

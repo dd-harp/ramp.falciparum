@@ -7,7 +7,7 @@ It also computes the hybrid variables \\I, m_1\\ and \\m_2\\
 ## Usage
 
 ``` r
-dSquIPz(a, y, pars, FoIpar, Z)
+dSquIPz(a, y, pars, F_a, Z)
 ```
 
 ## Arguments
@@ -24,11 +24,9 @@ dSquIPz(a, y, pars, FoIpar, Z)
 
   the parameters
 
-- FoIpar:
+- F_a:
 
-  \\h\_\tau(a)\\, a [list](https://rdrr.io/r/base/list.html) formatted
-  to compute
-  [FoI](https://dd-harp.github.io/ramp.falciparum/reference/FoI.md)
+  a trace function
 
 - Z:
 

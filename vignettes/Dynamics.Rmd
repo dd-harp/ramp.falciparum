@@ -10,6 +10,7 @@ vignette: >
 
 ```{r, include=FALSE}
 library(ramp.falciparum)
+library(ramp.func)
 suppressWarnings(library(viridis))
 suppressMessages(library(viridisLite))
 ``` 
@@ -21,7 +22,7 @@ In the following, we review the mathematical formulas and the functions in `ramp
 
 ## Formulas and Computation
 
-1. Let $z_\tau(\alpha,a)$ denote the density for infections of age $\alpha$ in a host cohort of age $a$ born on day $\tau$. 
+1. Let $z_d(\alpha,a)$ denote the density for infections of age $\alpha$ in a host cohort of age $a$ born on day $d$. 
 
     + The dynamics of $z(\alpha,a)$ are described by the following:
 $$
@@ -30,73 +31,73 @@ $$
 with the boundary condition:
 $$
 \begin{equation}
-    z_\tau(0,a) = h_\tau(a).
+    z_d(0,a) = h_d(a).
 \end{equation}
 $$
 Its solutions are given by: 
 $$
-z_\tau(\alpha,a) = h_\tau(a-\alpha) e^{-r \alpha}
+z_d(\alpha,a) = h_d(a-\alpha) e^{-r \alpha}
 $$
 
-    + The function `zda` computes $z_\tau(\alpha, a).$ 
+    + The function `zda` computes $z_d(\alpha, a).$ 
 
 2. The mean MoI is given by the formula: 
 $$
-m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+m_d(a) = \int_0^a z_d(\alpha, a) d \alpha
 $$
-    + The distribution of the MoI is Poisson (Nåsell I, 1985)^[Nåsell I (1985). Hybrid Models of Tropical Infections, 1st edition. Springer-Verlag. https://doi.org/10.1007/978-3-662-01609-1] with mean $m_\tau(a).$ 
+    + The distribution of the MoI is Poisson (Nåsell I, 1985)^[Nåsell I (1985). Hybrid Models of Tropical Infections, 1st edition. Springer-Verlag. https://doi.org/10.1007/978-3-662-01609-1] with mean $m_d(a).$ 
     
-    +  The function `meanMoI` computes $m_\tau(a)$ using `zda`
+    +  The function `meanMoI` computes $m_d(a)$ using `zda`
 
 3. The true prevalence is the 
 $$
-p_\tau(a) = 1 - e^{-m_\tau(a)} 
+p_d(a) = 1 - e^{-m_d(a)} 
 $$
 The function `truePR` computes the true prevalence using `meanMoI` 
 
 4. The density function for the age of infection (AoI) is
 $$
-A_\tau(a) \sim f_A(\alpha, a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+A_d(a) \sim f_A(\alpha, a, d) = \frac{z_d(\alpha,a)}{m_d(a)}
 $$
 and its moments are
 $$
-x_n(a, \tau | h) = \int_0^a  \alpha^n f_A(\alpha, a, \tau) d \alpha
+x_n(a, d | h) = \int_0^a  \alpha^n f_A(\alpha, a, d) d \alpha
 $$
 
 5. The age of the youngest infection (AoY) is defined as: 
 $$
-Y_\tau(a) \sim f_Y(\alpha, a, \tau) = \min_{\zeta \sim M_\tau(a)} \left\{ \alpha_i \right\}_{i=1}^\zeta,  \alpha_i \sim A_\tau(a) 
+Y_d(a) \sim f_Y(\alpha, a, d) = \min_{\zeta \sim M_d(a)} \left\{ \alpha_i \right\}_{i=1}^\zeta,  \alpha_i \sim A_d(a) 
 $$
 
     + The density function can be expressed in terms of the density and distribution functions of the AoI and MoI. 
 $$
-f_Y(\alpha; a, \tau) = 
-f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)} \frac{m_\tau(a)}{p_\tau(a)}.
+f_Y(\alpha; a, d) = 
+f_A(\alpha, a,d) e^{-m_d(a) F_A(\alpha, a,d)} \frac{m_d(a)}{p_d(a)}.
 $$ 
     + The distribution function for the AoY is:
 $$
 F_Y(a) \sim
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} = 
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)} 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{1-e^{-m_d(a)}} = 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{p_d(a)} 
 \label{FY}
 $$
 
     + Its moments are:
 $$
-y_n(a, \tau | h) = \int_0^a  \alpha^n f_Y(\alpha | a, \tau, h) d \alpha 
+y_n(a, d | h) = \int_0^a  \alpha^n f_Y(\alpha | a, d, h) d \alpha 
 $$
 5. We also developed functions to compute the age of the youngest of $N$ infections, called YoN 
 $$
-N_\tau(a) \sim
-\min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i \sim A_\tau(a) 
+N_d(a) \sim
+\min_{N} \left\{ \alpha_i \right\}_{i=1}^N \mbox { where }  \alpha_i \sim A_d(a) 
 $$
-    + The distribution function for YoN, $N_\tau(a)$, is 
-$$F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a, \tau))^N$$
+    + The distribution function for YoN, $N_d(a)$, is 
+$$F_N(\alpha, a, t) \sim 1- (1-F_A(\alpha, a, d))^N$$
 The following is a summary table of functions to compute the MoI, AoI, AoY, and all their moments.
     
     + The density function for YoN is found by differentiating:
     
-$$f_N(\alpha, a, t) \sim N (1-F_A(\alpha, a, \tau))^{N-1}\frac{f_A(\alpha, a, \tau)}{m_\tau(a)}$$
+$$f_N(\alpha, a, t) \sim N (1-F_A(\alpha, a, d))^{N-1}\frac{f_A(\alpha, a, d)}{m_d(a)}$$
 
 
 ## Quick Reference 
@@ -108,14 +109,14 @@ The following is a summary table of functions to compute the MoI, AoI, AoY, YoN,
 | ------ | :---: | :---: | :---: | :---: |
 ` `  | $\zeta$ |  $\alpha$ | $\alpha$ | $\alpha$ | 
 ` ` | $\zeta \geq 0$ |  $0 \leq \alpha \leq a$ | $0 \leq \alpha \leq a$ | $0 \leq \alpha \leq a$ | 
-Random Variable | $M_\tau(\zeta, a, h)$ |  $A_\tau(\alpha, a, h)$ | $Y_\tau(\alpha, a , h)$ | $N_\tau(\alpha, a, h)$| 
+Random Variable | $M_d(\zeta, a, h)$ |  $A_d(\alpha, a, h)$ | $Y_d(\alpha, a , h)$ | $N_d(\alpha, a, h)$| 
 Density Function | $f_M(\zeta, a, h)$ | $f_A(\zeta, a, h)$  | $f_Y(\zeta, a, h)$ |  $f_N(\zeta, a, h)$ | 
 ` ` | dpois | dAoI | dAoY | dYoN |  
 Distribution Function | $F_M(\zeta, a, h)$ | $F_A(\zeta, a, h)$  | $F_Y(\zeta, a, h)$ | $F_N(\zeta, a, h)$ | 
 ` ` | ppois | pAoI | pAoY | pYoN | 
-Random Numbers  | $\hat M_\tau(\zeta, a, h)$| $\hat A_\tau(\alpha, a, h)$ | $\hat Y_\tau(\alpha, a , h)$ | $\hat N_\tau(\alpha, a , h)$ | 
+Random Numbers  | $\hat M_d(\zeta, a, h)$| $\hat A_d(\alpha, a, h)$ | $\hat Y_d(\alpha, a , h)$ | $\hat N_d(\alpha, a , h)$ | 
 ` ` | rpois | rAoI | rAoY | rYoN | 
-Moments | $m_\tau(a, h)$ |  $x_n(a, \tau, h)$ | $y_n(a, \tau, h)$ |
+Moments | $m_d(a, h)$ |  $x_n(a, d, h)$ | $y_n(a, d, h)$ |
 ` ` | meanMoI | momentAoI | momentAoY | 
 </center>
 
@@ -125,16 +126,25 @@ Moments | $m_\tau(a, h)$ |  $x_n(a, \tau, h)$ | $y_n(a, \tau, h)$ |
 
 ### Force of Infection (FoI)
 
-```{r, echo=F}
-foiP3 = list(hbar = 5/365, 
-             agePar = par_type2Age(), 
-             seasonPar = par_sinSeason(), 
-             trendPar = par_flatTrend())
+```{r}
+library(ramp.func)
+# devtools::load_all()
+# devtools::load_all("~/git/ramp.func")
+```
 
-foiP3t = list(hbar = 5/365, 
-             agePar = par_flatAge(), 
-             seasonPar = par_sinSeason(), 
-             trendPar = par_flatTrend())
+
+```{r, fig.width=7, fig.height=4}
+clrs = viridisLite::turbo(7)
+set.seed(234)
+Sa = makepar_F_type2()
+Sp = makepar_F_sin()
+
+F_t <- make_ts_function(scale = 1, season_par=Sp)
+FoI_a <- make_F_a(avg = 3/365, age_par=Sa, season_par=Sp)
+
+tt <- seq(0, 3650, by=5)
+aa <-seq(0, 365*5, by =5) 
+plot(tt, 0.05*F_t(tt), type = "l")
 ```
 
 To compute anything, we must first set up a function to describe exposure (see the [FoI](FoI.html) vignette). We define functions that plot the FoI for a cohort as it ages (in red), but we can also compute the population average FoI (in black). Different cohorts would experience different histories of exposure. 
@@ -142,10 +152,10 @@ To compute anything, we must first set up a function to describe exposure (see t
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
 a3years  = 1:1095
-plot(a3years, FoI(a3years, foiP3t), type = "l", 
+plot(a3years, FoI_a(a3years), type = "l", 
      xlab = "Time or Age (in days)", 
-     ylab = expression(z[tau](alpha, a)))
-lines(a3years, FoI(a3years, foiP3), col = "darkred", lwd=2)
+     ylab = expression(z[bday](alpha, a)))
+lines(a3years, FoI_a(a3years), col = "darkred", lwd=2)
 text(270, 0.02, "Population")
 text(100, 0.008, "Cohort", col = "darkred")
 ```
@@ -155,27 +165,31 @@ text(100, 0.008, "Cohort", col = "darkred")
 
 The function `ramp.falciparum::zda(alpha, a, FoIpar, ...)` uses the formula in Eq. 1 to compute the density of parasite infections in a cohort of humans as it ages.
 
-Using `zda,` we can compute the density of parasites in a cohort of any age without solving a full system of equations. Given a function describing the FoI in the population, $h(t)$, and the cohort birthday, $\tau.$
+Using `zda,` we can compute the density of parasites in a cohort of any age without solving a full system of equations. Given a function describing the FoI in the population, $h(t)$, and the cohort birthday, $d.$
+
+```{r}
+# devtools::load_all()
+```
 
 ```{r zde eg}
 alpha = 60
 a = 6*365
-zda(60, 6*365, foiP3) 
+zda(60, 6*365, FoI_a) 
 ```
 
 The following computes the density of infections of every age in a cohort of age 3. 
 
 ```{r}
-zz = zda(a3years, max(a3years), foiP3)
+zz = zda(a3years, max(a3years), FoI_a)
 ```
 
-When we plot $z_\tau(\alpha, a)$, we note that as $\alpha$ grows larger, the parasite cohort gets older. When we plot parasite cohorts by age, time is going backwards on the x-axis. 
+When we plot $z_d(\alpha, a)$, we note that as $\alpha$ grows larger, the parasite cohort gets older. When we plot parasite cohorts by age, time is going backwards on the x-axis. 
 
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
 plot(a3years, zz, type = "l", 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(z[tau](alpha,a)))
+     ylab = expression(z[bday](alpha,a)))
 ```
 
 
@@ -186,13 +200,13 @@ The curves are different because the hosts were born at different months, and th
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
 clrs12a <- viridisLite::turbo(12) 
-zz = zda(a3years, 730, foiP3, tau=90)
-plot(a3years, zz, type = "n",
+zz = zda(a3years, 1095, FoI_a, bday=90)
+plot(a3years, zz, type = "n", ylim = 4 *range(zz), 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(z[tau](alpha,a)))
+     ylab = expression(z[bday](alpha,a)))
 for(i in 1:12){
   birthday =  30*(i-1) +15
-  lines(a3years, zda(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  lines(a3years, zda(a3years, 1095, FoI_a, bday=birthday), col = clrs12a[i]) 
   bp = (0.5 + 2.5*i/12)*365
   points(bp, 0.015, col = clrs12a[i], pch =15)
   text(bp, 0.015, paste(i), col = clrs12a[i], pos=1)
@@ -205,19 +219,19 @@ for(i in 1:12){
 
 We define a random variable $M$ describing the multiplicity of infection (MoI). The distribution of the MoI is Poisson (see the [MoI](MoI.html) vignette).
 
-$$M_\tau(a) \sim f_M(\zeta; a, \tau) = \mbox{Pois}(m_\tau(a))$$
+$$M_d(a) \sim f_M(\zeta; a, d) = \mbox{Pois}(m_d(a))$$
 
-Since $z_\tau(\alpha, a)$ describes the density of _all_ infections of age $\alpha$ in a cohort of age $a$, the density of all infections must be the MoI. Since $0 \leq \alpha < a$, it must be true that:
+Since $z_d(\alpha, a)$ describes the density of _all_ infections of age $\alpha$ in a cohort of age $a$, the density of all infections must be the MoI. Since $0 \leq \alpha < a$, it must be true that:
 
 \begin{equation}
 \tag{2}
-m_\tau(a) = \int_0^a z_\tau(\alpha, a) d \alpha
+m_d(a) = \int_0^a z_d(\alpha, a) d \alpha
 \end{equation}
 
-The function that computes $m_\tau(a)$ is called `meanMoI.` 
+The function that computes $m_d(a)$ is called `meanMoI.` 
 
 ```{r}
-mm = meanMoI(a3years, foiP3, hhat=5/365)
+mm = meanMoI(a3years, FoI_a, hhat=5/365)
 ```
 
 Here, we plot the average MoI in the host cohort as it ages:
@@ -227,45 +241,45 @@ Here, we plot the average MoI in the host cohort as it ages:
 par(mar = c(5,4,1,1))
 plot(a3years, mm, type = "l",
      xlab = expression(list(a, paste("Host Age (in Days)"))), 
-     ylab = expression(m[tau](alpha,a)))
+     ylab = expression(m[bday](alpha,a)))
 ```
 
 
 ## Age of Infection (AoI)
 
-We define a random variable $A_\tau(a)$ that describes the age of infection (AoI), which is given by the formula 
+We define a random variable $A_d(a)$ that describes the age of infection (AoI), which is given by the formula 
 
 $$
-A_\tau(a) \sim f_A(\alpha; a, \tau) = \frac{z_\tau(\alpha,a)}{m_\tau(a)}
+A_d(a) \sim f_A(\alpha; a, d) = \frac{z_d(\alpha,a)}{m_d(a)}
 $$
 
 
 ### The Density Function, `dAoI` 
 
-We can compute $A_\tau(a)$ using the density function `dAoI`:
+We can compute $A_d(a)$ using the density function `dAoI`:
 
 ```{r}
-f_A = dAoI(a3years, max(a3years), foiP3)
+f_A = dAoI(a3years, max(a3years), FoI_a)
 ```
 
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
 plot(a3years, f_A, type ="l", 
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(f[A](alpha, a, tau, h)))
+     ylab = expression(f[A](alpha, a, bday, h)))
 ```
 
 Now, as we plot the distribution of the AoI in cohorts at age two, born at different months (as we did above), we notice that the distributions have changed shapes:
 
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
-FA = dAoI(a3years, 1095, foiP3, tau=70)
+FA = dAoI(a3years, 1095, FoI_a, bday=70)
 plot(a3years, FA, type = "n", ylim = range(FA)*1.15,
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
-     ylab = expression(f[A](alpha, tau)))
+     ylab = expression(f[A](alpha, bday)))
 for(i in 1:12){
   birthday =  30*(i-1) +15
-  lines(a3years, dAoI(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  lines(a3years, dAoI(a3years, 1095, FoI_a, bday=birthday), col = clrs12a[i]) 
   bp = (0.5 + 2.5*i/12)*365
   points(bp, 0.01, col = clrs12a[i], pch =15)
   text(bp, 0.01, paste(i), col = clrs12a[i], pos=1)
@@ -276,13 +290,13 @@ for(i in 1:12){
 
 ### The Distribution Function, `pAoI` 
 
-The distribution function for $A_\tau(a)$ is:
+The distribution function for $A_d(a)$ is:
 
 $$
-F_A(a) \sim \int_0^\alpha f_A(\alpha; a, \tau) d\alpha
+F_A(a) \sim \int_0^\alpha f_A(\alpha; a, d) d\alpha
 $$
 ```{r}
-F_A = pAoI(a3years, max(a3years), foiP3)
+F_A = pAoI(a3years, max(a3years), FoI_a)
 ```
 
 If our functions work correctly, then we should get approximately the same answer from computing the cumulative sum of `dAoI.` 
@@ -298,7 +312,7 @@ par(mar = c(5,4,1,1))
 
 plot(a3years, F_A, type = "l", 
      xlab = "Parasite Cohort Age", 
-     ylab = expression(1-F[X](alpha, a, tau)), lwd=3)
+     ylab = expression(1-F[X](alpha, a, bday)), lwd=3)
 
 lines(a3years, F_A_alt, col = "red", lwd=2, lty =2)
 ```
@@ -306,13 +320,13 @@ lines(a3years, F_A_alt, col = "red", lwd=2, lty =2)
 
 ```{r, fig.height=3.5, fig.width=6, echo=F}
 par(mar = c(5,4,1,1))
-FA = pAoI(a3years, 1095, foiP3, tau=70)
+FA = pAoI(a3years, 1095, FoI_a, bday=70)
 plot(a3years, FA, type = "n", ylim = range(FA)*1.15,
      xlab = expression(list(alpha, paste("Parasite Age (in Days)"))), 
      ylab = expression(F[A](alpha)))
 for(i in 1:12){
   birthday =  30*(i-1) +15
-  lines(a3years, pAoI(a3years, 730, foiP3, tau=birthday), col = clrs12a[i]) 
+  lines(a3years, pAoI(a3years, 1095, FoI_a, bday=birthday), col = clrs12a[i]) 
   bp = (0.5 + 2.5*i/12)*365
   points(bp, 0.2, col = clrs12a[i], pch =15)
   text(bp, 0.2, paste(i), col = clrs12a[i], pos=1)
@@ -326,7 +340,7 @@ text(650, 0.3, "Birth Month")
 The function `rAoI` uses `pAoI` to generate random numbers from $F_A(\alpha)$
 
 ```{r}
-rhx = rAoI(10000, 3*365, foiP3)
+rhx = rAoI(10000, 3*365, FoI_a)
 ```
 
 A simple visual check computes the empirical CDF for the random variates against $F_A(\alpha)$ computed using `pAoI`
@@ -353,15 +367,15 @@ lines(a3years, f_A, col="red", lwd=2)
 
 ### AoI Moments 
 
-Let $x$ denote the first moment of of $A_\tau(a)$: $$x_\tau(a) = \left< A_\tau(a) \right> = \int_0^\infty \alpha \frac{z_\tau(\alpha, a)} {m_\tau(a)}$$
+Let $x$ denote the first moment of of $A_d(a)$: $$x_d(a) = \left< A_d(a) \right> = \int_0^\infty \alpha \frac{z_d(\alpha, a)} {m_d(a)}$$
 
-Similarly, we let $x_\tau(a)[n]$ denote the higher order moments of $A_\tau(a)$: 
-$$x_{[n]}(a, \tau) = \int_0^\infty \alpha^n \frac{z_\tau(\alpha, a)} {m_\tau(a)}$$
+Similarly, we let $x_d(a)[n]$ denote the higher order moments of $A_d(a)$: 
+$$x_{[n]}(a, d) = \int_0^\infty \alpha^n \frac{z_d(\alpha, a)} {m_d(a)}$$
 
 ```{r, eval=T}
-moment1 = momentAoI(a3years, foiP3)
-moment2 = momentAoI(a3years, foiP3, n=2)
-moment3 = momentAoI(a3years, foiP3, n=3)
+moment1 = momentAoI(a3years, FoI_a)
+moment2 = momentAoI(a3years, FoI_a, n=2)
+moment3 = momentAoI(a3years, FoI_a, n=3)
 ```
 
 The first three moments of the AoY plotted over time. In the top plot, we've also plotted the $n^{th}$ root of the $n^{th}$ moment.
@@ -387,14 +401,14 @@ plot(a3years, moment3, type = "l", xlab = "a - Host Age (in Days)",
 
 ## Age of the Youngest Infection (AoY)
 
-We have derived a random variable $Y_\tau(a)$ describing the age of the youngest infection (AoY). The density function for the AoY is: 
+We have derived a random variable $Y_d(a)$ describing the age of the youngest infection (AoY). The density function for the AoY is: 
 
-$$Y_\tau(a) \sim f_Y(\alpha; a, \tau) = f_A(\alpha, a,\tau) e^{-m_\tau(a) F_A(\alpha, a,\tau)} \frac{m_\tau(a)}{p_\tau(a)}$$ 
+$$Y_d(a) \sim f_Y(\alpha; a, d) = f_A(\alpha, a,d) e^{-m_d(a) F_A(\alpha, a,d)} \frac{m_d(a)}{p_d(a)}$$ 
 The distribution function is: 
 
 $$F_Y(a) \sim
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{1-e^{-m_\tau(a)}} = 
-\frac{1-e^{-m_\tau(a)F_A(\alpha, a,\tau)}}{p_\tau(a)} 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{1-e^{-m_d(a)}} = 
+\frac{1-e^{-m_d(a)F_A(\alpha, a,d)}}{p_d(a)} 
 $$
 
 The derivations are found in a Suppplement to Henry JM, *et al.* (2024).
@@ -402,11 +416,11 @@ The derivations are found in a Suppplement to Henry JM, *et al.* (2024).
 The mean AoY is: 
 
 $$
-\left< Y_\tau(a) \right> = \int_0^a \alpha \; f_Y(\alpha, a, \tau) \; d\alpha $$ 
+\left< Y_d(a) \right> = \int_0^a \alpha \; f_Y(\alpha, a, d) \; d\alpha $$ 
 
 And the higher order moments for the AoY are: 
 
-$$\left< Y_\tau(a)^n \right> = \int_0^n \alpha^n \; f_y(\alpha, a, \tau) \; d\alpha $$ 
+$$\left< Y_d(a)^n \right> = \int_0^n \alpha^n \; f_y(\alpha, a, d) \; d\alpha $$ 
 
 
 
@@ -415,7 +429,7 @@ $$\left< Y_\tau(a)^n \right> = \int_0^n \alpha^n \; f_y(\alpha, a, \tau) \; d\al
 The density function is computed with the function `dAoY.`
 
 ```{r, eval=T}
-f_Y = dAoY(a3years, 3*365, foiP3)
+f_Y = dAoY(a3years, 3*365, FoI_a)
 ```
 
 We can compare $f_Y(\alpha)$ (in black) to $f_A(\alpha)$ (in grey). 
@@ -432,7 +446,7 @@ lines(a3years, f_A, col = grey(0.5))
 ### Random Variables, `rAoY`  
 
 ```{r, eval=T}
-raoy = rAoY(10^5, 3*365, foiP3)
+raoy = rAoY(10^5, 3*365, FoI_a)
 ```
 
 ```{r, fig.height=4, fig.width=7, eval=T} 
@@ -447,9 +461,9 @@ lines(a3years, f_Y, type = "l", col = "red")
 
 ```{r, eval=T}
 aa = seq(5, 3*365, by = 5) 
-moment1y = momentAoY(aa, foiP3)
-moment2y = momentAoY(aa, foiP3, n=2)
-moment3y = momentAoY(aa, foiP3, n=3)
+moment1y = momentAoY(aa, FoI_a)
+moment2y = momentAoY(aa, FoI_a, n=2)
+moment3y = momentAoY(aa, FoI_a, n=3)
 ```
 
 The first three moments of the AoY plotted over time. In the top plot, we've also plotted the $n^{th}$ root of the $n^{th}$ moment.

@@ -186,14 +186,13 @@ their values.
 ``` r
 
 library(ramp.falciparum)
+library(ramp.func)
 ```
 
 ``` r
 
-foiP1 = list(hbar = 1, agePar = par_flatAge(), 
-             seasonPar = par_flatSeason(), 
-             trendPar = par_flatTrend())
-q_out <- solve_SquIP(8/365, sigma=2/365, xi=0, foiP1, Amax=3*365)
+F_a = make_F_a(1)
+q_out <- solve_SquIP(8/365, F_a, sigma=2/365, xi=0, Amax=3*365)
 ```
 
 For verification, the variable $`m_1`$ is computed two ways, and we\
@@ -246,14 +245,84 @@ moments diverge:
 
 ``` r
 
-q1_out <- solve_SquIP(8/365, sigma=2/365, xi=0, foiP1, Amax=3*365, N=4)
+q1_out <- solve_SquIP(8/365, F_a, sigma=2/365, xi=0, Amax=3*365, N=4)
 with(q1_out, plot(age, m_1, type = "l", 
                   ylab = expression(m[1]), 
                   main = "First Moment of the MoI, N=4"))
 with(q1_out, lines(age, m1, lty=2, col = "yellow"))
 ```
 
-![](SquIP_files/figure-html/unnamed-chunk-7-1.png)
+![](SquIP_files/figure-html/unnamed-chunk-7-1.png) \# Example
+
+``` r
+
+clrs = viridisLite::turbo(7)
+set.seed(234)
+Sa = makepar_F_type2()
+Sp = makepar_F_sin()
+Tp = makepar_F_spline(seq(0, 3650, length.out=11), 1+runif(11, -1, 1), X=2)
+Kp = makepar_F_sharkbite(D=730, L=365)
+F_t <- make_ts_function(scale = 0.05, season_par=Sp, trend_par=Tp, shock_par=Kp)
+F_a <- make_F_a(avg = 3/365, age_par=Sa, season_par=Sp, trend_par=Tp, shock_par=Kp)
+
+tt <- seq(0, 3650, by=5)
+aa <-seq(0, 365*5, by =5) 
+plot(tt, 0.05*F_t(tt), type = "l")
+```
+
+![](SquIP_files/figure-html/unnamed-chunk-8-1.png)
+
+``` r
+
+plot(tt, 0.1*F_t(tt), type = "l", lwd=2, ylim = c(0,0.04))
+lines(aa, F_a(aa), type = "l", col = clrs[2])
+lines(aa+365, F_a(aa, 365), type = "l", col = clrs[3])
+lines(aa+730, F_a(aa, 730), type = "l", col = clrs[4])
+lines(aa+1095, F_a(aa, 1095), type = "l", col = clrs[5])
+lines(aa+1460, F_a(aa, 1460), type = "l", col = clrs[6])
+```
+
+![](SquIP_files/figure-html/unnamed-chunk-9-1.png)
+
+``` r
+
+plot(aa, F_a(aa), type = "n", lwd=2, ylim = c(0,0.04))
+lines(aa, F_a(aa), type = "l", col = clrs[2])
+lines(aa, F_a(aa, 365), type = "l", col = clrs[3])
+lines(aa, F_a(aa, 730), type = "l", col = clrs[4])
+lines(aa, F_a(aa, 1095), type = "l", col = clrs[5])
+lines(aa, F_a(aa, 1460), type = "l", col = clrs[6])
+```
+
+![](SquIP_files/figure-html/unnamed-chunk-10-1.png)
+
+``` r
+
+plot(aa, cumsum(F_a(aa)), ylab = "Age", xlab = "Cumulative Exposure", type = "n", ylim = c(0,3))
+lines(aa, cumsum(F_a(aa)), type = "l", col = clrs[2])
+lines(aa, cumsum(F_a(aa, 365)), type = "l", col = clrs[3])
+lines(aa, cumsum(F_a(aa, 730)), type = "l", col = clrs[4])
+lines(aa, cumsum(F_a(aa, 1095)), type = "l", col = clrs[5])
+lines(aa, cumsum(F_a(aa, 1460)), type = "l", col = clrs[6])
+```
+
+![](SquIP_files/figure-html/unnamed-chunk-11-1.png)
+
+``` r
+
+q3_out1 <- solve_SquIP(5/365, F_a, sigma=2/365, xi=0, Amax=5*365)
+q3_out2 <- solve_SquIP(5/365, bday=365, F_a, sigma=2/365, xi=0, Amax=5*365)
+q3_out3 <- solve_SquIP(5/365, bday=730, F_a, sigma=2/365, xi=0, Amax=5*365)
+q3_out4 <- solve_SquIP(5/365, bday=365*3, F_a, sigma=2/365, xi=0, Amax=5*365)
+q3_out5 <- solve_SquIP(5/365, bday=365*4, F_a, sigma=2/365, xi=0, Amax=5*365)
+with(q3_out1, plot(age, m_1/x, col = clrs[2], ylab = "mean MoI", type ="l", ylim = c(1, 1.02)))
+with(q3_out2, lines(age, m_1/x, col = clrs[3]))
+with(q3_out3, lines(age, m_1/x, col = clrs[4]))
+with(q3_out4, lines(age, m_1/x, col = clrs[5]))
+with(q3_out5, lines(age, m_1/x, col = clrs[6]))
+```
+
+![](SquIP_files/figure-html/unnamed-chunk-12-1.png)
 
 ## Derivations
 

@@ -135,15 +135,15 @@ NULL
 #' @param a the host age
 #' @param y a vector of state variables
 #' @param pars the parameters
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
+#' @param F_a a trace function
 #'
 #' @return the derivatives as a [list]
 #' @keywords internal
 #' @seealso [solveMMinfty]
 #' @export
 #'
-dSquIP = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
-  foi = h*FoI(a, FoIpar, tau)
+dSquIP = function(a, y, pars, F_a){with(as.list(c(y,pars)),{
+  foi = h*F_a(a,bday)
   ix = 1:N
   Ii = y[ix]
   H = sum(Ii) + P + S
@@ -207,8 +207,8 @@ dSquIP = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #' + `out` --- The matrix returned by `deSolve`
 #'
 #' @param h the force of infection
-#' @param FoIpar \eqn{h_\tau(a)}, a [list] formatted to compute [FoI]
-#' @param tau the cohort birthday
+#' @param F_a a trace function
+#' @param bday the cohort birthday
 #' @param r the clearance rate for a simple infection
 #' @param rho the fraction of incident cases that gets treted
 #' @param sigma treatment rate for infected individuals
@@ -224,7 +224,7 @@ dSquIP = function(a, y, pars, FoIpar){with(as.list(c(y,pars)),{
 #'
 #' @seealso [SquIP]
 #' @export
-solve_SquIP = function(h,  FoIpar, tau=0,
+solve_SquIP = function(h, F_a, bday=0,
                        r=1/200,
                        rho=.2,
                        sigma = 1/365,
@@ -237,9 +237,9 @@ solve_SquIP = function(h,  FoIpar, tau=0,
                        N=NULL){
   N = ifelse(is.null(N), round(max(10*h/r,20)), N)
   ages = seq(0, Amax, by = da)
-  parms = c(h=h,r=r,N=N,tau=tau,rho=rho,sigma=sigma,xi=xi,eta=eta,mu=mu)
+  parms = c(h=h,r=r,N=N,bday=bday,rho=rho,sigma=sigma,xi=xi,eta=eta,mu=mu)
   inits = c(rep(0,N), S=H, P=0, m_1=0, m_2=0)
-  out = deSolve::ode(inits, times=ages, dSquIP, parms, FoIpar=FoIpar)
+  out = deSolve::ode(inits, times=ages, dSquIP, parms, F_a=F_a)
   parsed_list <- parse_SquIP(parms, out)
 
   return(parsed_list)

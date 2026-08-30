@@ -6,8 +6,8 @@
 \usage{
 d_parasite_detect_moi(
   a,
-  FoIpar,
-  tau = 0,
+  FoI_a,
+  bday = 0,
   hhat = 1,
   r = 1/200,
   par_RBC = par_lRBC_static(),
@@ -20,9 +20,9 @@ d_parasite_detect_moi(
 \arguments{
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{a cohort trace function}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{hhat}{a local scaling parameter for the FoI}
 

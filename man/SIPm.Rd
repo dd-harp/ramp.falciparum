@@ -116,6 +116,14 @@ The infinite infection states in the family of queuing models specified by \link
 
 \section{Parameters}{
 
+\describe{
+\item{\code{r}}{clearance rate for a simple infection}
+\item{\code{rho}}{the fraction of incident cases that gets treated}
+\item{\code{sigma}}{treatment because of prevalent infection}
+\item{\code{xi}}{background drug taking}
+\item{\code{eta}}{loss of chemoprotection}
+\item{\code{mu}}{death rate}
+}
 }
 
 \seealso{

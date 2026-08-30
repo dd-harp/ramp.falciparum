@@ -3,9 +3,9 @@
 #'
 #' @param x host cohort age
 #' @param a host cohort age
-#' @param FoIpar parameters that define an FoI function
+#' @param FoI_a a cohort trace function
 #' @param hhat a local scaling parameter for the FoI
-#' @param tau the cohort birthday
+#' @param bday the cohort birthday
 #' @param r the clearance rate for a simple infection
 #' @param par_RBC parameters to compute [log10RBC]
 #' @param par_Fmu parameters to compute [Fmu]
@@ -15,18 +15,18 @@
 #' @return a [numeric] value
 #' @export
 #'
-dDensityPaConvolve2 = function(x, a, FoIpar,
-                               hhat=NULL, tau=0,  r=1/200,
+dDensityPaConvolve2 = function(x, a, FoI_a,
+                               hhat=NULL, bday=0,  r=1/200,
                                par_RBC = par_lRBC_static(),
                                par_Fmu=par_Fmu_base(),
                                par_Omega = par_Omega_beta(),
                                pWda=par_Wda_none()){
-  px = function(x, log10B, a, FoIpar, hhat, tau, r,
+  px = function(x, log10B, a, FoI_a, hhat, bday, r,
                 par_RBC, par_Fmu, par_Omega, pWda){
     lB2 = log10(10^log10B - 10^x)
-    d_clone_density(x,a,FoIpar, hhat, tau, r, par_RBC, par_Fmu, par_Omega, pWda)*d_clone_density(lB2,a, FoIpar, hhat, tau, r, par_RBC, par_Fmu, par_Omega, pWda)
+    d_clone_density(x,a,FoI_a, hhat, bday, r, par_RBC, par_Fmu, par_Omega, pWda)*d_clone_density(lB2,a, FoI_a, hhat, bday, r, par_RBC, par_Fmu, par_Omega, pWda)
   }
-  stats::integrate(px, 0, x, log10B=x, a=a, FoIpar=FoIpar, hhat=hhat, tau=tau, r=r, par_RBC=par_RBC, par_Fmu=par_Fmu, par_Omega=par_Omega, pWda=pWda)$value
+  stats::integrate(px, 0, x, log10B=x, a=a, FoI_a=FoI_a, hhat=hhat, bday=bday, r=r, par_RBC=par_RBC, par_Fmu=par_Fmu, par_Omega=par_Omega, pWda=pWda)$value
 }
 
 

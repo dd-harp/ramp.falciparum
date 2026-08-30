@@ -6,11 +6,11 @@
 \usage{
 d_parasite_counts(
   a,
-  FoIpar,
+  FoI_a,
   bins = 1,
   dx = 0.1,
   hhat = 1,
-  tau = 0,
+  bday = 0,
   r = 1/200,
   RBC_par = par_lRBC_static(),
   Fmu_par = par_Fmu_base(),
@@ -22,7 +22,7 @@ d_parasite_counts(
 \arguments{
 \item{a}{host cohort age}
 
-\item{FoIpar}{parameters that define an FoI function}
+\item{FoI_a}{parameters that define an FoI function}
 
 \item{bins}{a set of break points for computing counts}
 
@@ -30,7 +30,7 @@ d_parasite_counts(
 
 \item{hhat}{a local scaling parameter for the FoI}
 
-\item{tau}{the cohort birthday}
+\item{bday}{the cohort birthday}
 
 \item{r}{the clearance rate for a simple infection}
 

@@ -5,7 +5,7 @@ The youngest of N infections, random numbers
 ## Usage
 
 ``` r
-rYoN(R, N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
+rYoN(R, N, a, FoI_a, bday = 0, hhat = NULL, r = 1/200, alphamin = 0)
 ```
 
 ## Arguments
@@ -22,17 +22,17 @@ rYoN(R, N, a, FoIpar, hhat = NULL, tau = 0, r = 1/200, alphamin = 0)
 
   the host cohort age
 
-- FoIpar:
+- FoI_a:
 
   parameters that define an FoI function
+
+- bday:
+
+  the cohort birthday
 
 - hhat:
 
   a local scaling parameter for the FoI
-
-- tau:
-
-  the cohort birthday
 
 - r:
 
