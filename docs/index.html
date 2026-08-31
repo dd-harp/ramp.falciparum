@@ -35,6 +35,8 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="articles/Overview.html">Overview of Malaria Epidemiology</a></li>
+    <li><a class="dropdown-item" href="articles/Cohorts.html">Cohort Dynamics</a></li>
+    <li><a class="dropdown-item" href="articles/SimBA.html">SimBA</a></li>
     <li><a class="dropdown-item" href="articles/FoI.html">Exposure</a></li>
     <li><a class="dropdown-item" href="articles/StateSpace.html">The Malaria State Space</a></li>
     <li><a class="dropdown-item" href="articles/Superinfection.html">Superinfection &amp; Queuing</a></li>
@@ -75,29 +77,60 @@
 <div class="section level2">
 <h2 id="falciparum-malaria-mathematical-epidemiology">Falciparum Malaria Mathematical Epidemiology<a class="anchor" aria-label="anchor" href="#falciparum-malaria-mathematical-epidemiology"></a>
 </h2>
-<hr>
-<p><strong>INSTALL</strong></p>
+</div>
+<div class="section level2">
+<h2 id="install">Install<a class="anchor" aria-label="anchor" href="#install"></a>
+</h2>
 <p>To install the latest version of <code>ramp.falciparum</code> from GitHub, run the following lines of code in an R session. We also recommend loading the supporting package <code>ramp.func</code></p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://devtools.r-lib.org/" class="external-link">devtools</a></span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dd-harp/ramp.falciparum"</span><span class="op">)</span></span>
 <span><span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"dd-harp/ramp.func"</span><span class="op">)</span></span></code></pre>
-<p>Then load them:</p>
+<p>The packages can then be loaded in the normal way:</p>
 <pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.falciparum/">ramp.falciparum</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.func/" class="external-link">ramp.func</a></span><span class="op">)</span></span></code></pre>
 </div>
 <div class="section level2">
-<h2 id="falciparum-malaria">Falciparum Malaria<a class="anchor" aria-label="anchor" href="#falciparum-malaria"></a>
+<h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>The health burden of falciparum malaria – a disease of humans caused by infection with <em>Plasmodium falciparum</em> – is enormous, so there is a need to understand malaria epidemiology well enough to manage it. The epidemiology of falciparum malaria is complex. Exposure is highly variable across locations, outcomes are related to age and cumulative exposure, and malaria programs need to weigh tradeoffs between various forms of malaria control. Mathematical models of malaria can serve an indispensible role in all of this, but the models must be fit for purpose, realistic enough to be compelling, accurate enough to useful, and simple enough to be insightful.</p>
+<p>The burden of falciparum malaria – human disease caused by infection with <em>Plasmodium falciparum</em> – on human health and health systems is enormous. In countries where malaria is endemic, the prevalence of malaria varies, reflecting differences in exposure. In some places, most people test positive and more than half of all outpatients get diagnosed with malaria. Severe malaria is uncommon, but it can result in death. Mild disease – subjective fever or malaise – is quite common.</p>
+<p>There is a need to understand malaria epidemiology well enough to manage it, but the epidemiology of falciparum malaria is complex, and a synthesis has proven elusive. The management of malaria has two main goals: there is a need to implement policies that <strong>reduce the burden</strong> of disease; and most countries have the long term goal of <strong>eliminating malaria.</strong> To manage malaria, we must measure it. Mathematical models are one useful way of dealing with the complexity.</p>
+<p><strong><code>ramp.falciparum</code></strong> is a software project focused on the mathematical epidemiology of falciparum malaria. The software has taken a computational approach — the models have been encoded, and wrapper functions were written to make it easy to solve them using <a href="https://cran.r-project.org/web/packages/deSolve/index.html" class="external-link"><strong><code>deSolve</code></strong></a>. Each model has been described in a vignette, which also has any mathematical derivations (<em>e.g.</em> for hybrid variables).</p>
+<p>The software was written to make the mathematical epidemiology of malaria more accessible to everyone, and to explain some recent innovations. In describing the complexity of malaria without resorting to individual-based simulation, we use <strong>random variables.</strong> In forging a synthesis, we make extensive use of <strong>hybrid variables</strong> describing the distributions of the age of infection (AoI), the multiplicity of infection (MoI), and cumulative exposure. The hybrid variables are used in <strong>enhanced compartmental models:</strong> a traditional compartmental model is enhanced with hybrid variables.</p>
 </div>
 <div class="section level2">
-<h2 id="mathematical-epidemiology">Mathematical Epidemiology<a class="anchor" aria-label="anchor" href="#mathematical-epidemiology"></a>
+<h2 id="malaria-epidemiology-as-ontogeny">Malaria Epidemiology as Ontogeny<a class="anchor" aria-label="anchor" href="#malaria-epidemiology-as-ontogeny"></a>
 </h2>
-<p>Ronald Ross developed the first mathematical model of malaria in 1908.</p>
+<p>In developing this approach to malaria, we consider the developing of immunity to malaria in a cohort as it ages over a lifetime The mathematical formulations can be reduced to a simple question:</p>
+<blockquote>
+<p><strong>Given a history of exposure to malaria in a person of some age, what are the factors that determine the outcomes of the next infection?</strong></p>
+</blockquote>
+<p>With this narrow focus, all the models track <a href="articles/Cohorts.html"><strong>cohort dynamics:</strong></a>. the models examine malaria in a cohort of humans as it ages. the independent variable is thus <em>age</em> and not time. The force of infection in these models (denoted <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>h</mi><annotation encoding="application/x-tex">h</annotation></semantics></math>) is a <a href="articles/Exposure.html"><strong>trace function</strong></a>.</p>
+<p>Generically, let <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi mathvariant="bold-italic">𝑿</mi><annotation encoding="application/x-tex">\mathbf{X}</annotation></semantics></math> denote a state space. Dynamical systems describing malaria dynamics in a cohort are forced by a trace function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(a,d)</annotation></semantics></math>, the force of infection for a cohort at age <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>a</mi><annotation encoding="application/x-tex">a</annotation></semantics></math> born on day <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>d</mi><annotation encoding="application/x-tex">d</annotation></semantics></math>. The models in <strong><code>ramp.falciparum</code></strong> take the form: <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mfrac><mrow><mi>d</mi><mrow><mi mathvariant="bold-italic">𝑿</mi><mo stretchy="false" form="prefix" mathvariant="bold">(</mo><mi mathvariant="bold-italic">𝒂</mi><mo stretchy="false" form="postfix" mathvariant="bold">)</mo></mrow></mrow><mrow><mi>d</mi><mi>a</mi></mrow></mfrac><mo>=</mo><msub><mi>F</mi><mtext mathvariant="bold">𝐗</mtext></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>h</mi><mo>,</mo><mtext mathvariant="bold">𝐗</mtext><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+\frac{\textstyle{d \mathbf{X(a)}}}{\textstyle{da}} =  F_{\textbf{X}}\left(h, \textbf{X}\right)
+</annotation></semantics></math> In malaria analytics, the focus is on the outcomes in populations. Models for malaria analytics are found in a suite of related software packages, collectively known as <a href="https://faculty.washington.edu/smitdave/simba/" class="external-link"><strong>SimBA.</strong></a> In SimBA, models track the temporal dynamics of malaria with age-structure (see the <a href="articles/Cohorts.html">Cohort Dynamics</a> vignette).</p>
 </div>
 <div class="section level2">
-<h2 id="robust-analytics">Robust Analytics<a class="anchor" aria-label="anchor" href="#robust-analytics"></a>
+<h2 id="related-software">Related Software<a class="anchor" aria-label="anchor" href="#related-software"></a>
 </h2>
+<p><strong><code>ramp.falciparum</code></strong> is focused malaria epidemiology defined narrowly to include exposure, infection, infectiousness, disease, immunity, and diagnostics and detection.</p>
+<p>It does not include malaria transmission dynamics and control or mosquito ecology. Those topics are covered in related projects:</p>
+<ul>
+<li>
+<p>Software developed to support malaria analytics, including malaria transmission dynamics and control, has been developed around <a href="https://dd-harp.github.io/ramp.xds/" class="external-link"><strong><code>ramp.xds</code></strong></a> and its satellite packages, collectively called <a href="https://faculty.washington.edu/smitdave/simba/" class="external-link"><strong>SimBA</strong></a>. Of these, two are worth mentioning:</p>
+<ul>
+<li><p><strong><code>ramp.library</code></strong> holds a library of malaria models that can be used by <strong><code>ramp.xds</code></strong></p></li>
+<li><p><strong><code>ramp.demog</code></strong> has utilities to develop age-structured models.</p></li>
+</ul>
+</li>
+<li><p>A website devoted to <a href="https://faculty.washington.edu/smitdave/malaria_theory/" class="external-link"><strong>Malaria Theory</strong></a> makes extensive use of this software.</p></li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="towards-a-synthesis">Towards a Synthesis<a class="anchor" aria-label="anchor" href="#towards-a-synthesis"></a>
+</h2>
+<p>To be useful in policy the models must be fit for purpose, realistic enough to be compelling, accurate enough to useful, and simple enough to be insightful. The software to support malaria analytics should support <strong>nimble model building:</strong> it should be easy to build models, modify the models as policy discussions evolve, and then run most analyses without a supercomputing cluster.</p>
+<p>Published models of malaria tend to focus on isolated aspects of malaria. Models that include all the required features tend to be within-host models, which are neither nimble nor simple enough to be insightful. Using enhanced compartmental models, we can achieve a new synthesis.</p>
+<p>If we want to use models effectively in malaria policy, we will need to go one step further and show that are models are realistic and accurate enough for the task at hand. These issues fall under the category of <a href="articles/RobustAnalytics.html"><strong>robust analytics for malaria policy.</strong></a></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>

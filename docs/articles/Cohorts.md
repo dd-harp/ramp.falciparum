@@ -1,0 +1,35 @@
+# Cohort Dynamics
+
+Generically, let $`\mathbf{X}`$ denote a state space. Dynamical systems
+describing malaria dynamics in a cohort are forced by a trace function
+$`h(a,d)`$, the force of infection for a cohort at age $`a`$ born on day
+$`d`$. These models take the form:
+``` math
+\frac{\textstyle{d \mathbf{X(a)}}}{\textstyle{da}} =  F_{\textbf{X}}\left(h, \textbf{X}\right)
+```
+If we wanted to consider the whole population, and not just a cohort, we
+could use partial differential equations (PDEs) that track all cohorts
+as they age over time. Once again, the models are forced by a trace
+function, with the form
+``` math
+h(a,t) = F_h(b, \omega(a) E(t)).
+```
+In this form, the parameter $`b`$ handles pre-erythrocytic immunity, and
+$`\omega`$ is the relative biting rate for a person
+``` math
+\frac{\textstyle{\partial \mathbf{X(a,t)}}}{\textstyle{da}} + \frac{\textstyle{\partial \mathbf{X(a,t)}}}{\textstyle{dt}} =  F_{\textbf{X}}\left(h, \textbf{X}\right)
+```
+with boundary conditions
+``` math
+\mathbf{X}(a,t) = B(t),
+```
+where $`B(t)`$ is the population birth rate.
+
+To approximate the PDEs, we develop age-structured ordinary differential
+equation models. The state variables are replicated for each stratum,
+and Gallerkin methods are used to construct an aging matrix
+$`\mathbf{D}.`$ Now the dynamics are with respect to time:
+``` math
+\frac{\textstyle{d \mathbf{X}}}{\textstyle{dt}} = B(t) + F_{\textbf{X}}\left(h, \textbf{X} \right) + \textbf{D} \cdot \textbf{X}
+```
+where the term $`B(t)`$ is zero for all but the birth state.
