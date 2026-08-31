@@ -126,13 +126,6 @@ AoY, YoN, and all their moments.
 
 ``` r
 
-library(ramp.func)
-# devtools::load_all()
-# devtools::load_all("~/git/ramp.func")
-```
-
-``` r
-
 clrs = viridisLite::turbo(7)
 set.seed(234)
 Sa = makepar_F_type2()
@@ -146,7 +139,7 @@ aa <-seq(0, 365*5, by =5)
 plot(tt, 0.05*F_t(tt), type = "l")
 ```
 
-![](Dynamics_files/figure-html/unnamed-chunk-3-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-2-1.png)
 
 To compute anything, we must first set up a function to describe
 exposure (see the
@@ -155,7 +148,7 @@ vignette). We define functions that plot the FoI for a cohort as it ages
 (in red), but we can also compute the population average FoI (in black).
 Different cohorts would experience different histories of exposure.
 
-![](Dynamics_files/figure-html/unnamed-chunk-4-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-3-1.png)
 
 ### Computing `zda`
 
@@ -194,7 +187,7 @@ When we plot $`z_d(\alpha, a)`$, we note that as $`\alpha`$ grows
 larger, the parasite cohort gets older. When we plot parasite cohorts by
 age, time is going backwards on the x-axis.
 
-![](Dynamics_files/figure-html/unnamed-chunk-7-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-6-1.png)
 
 Now, we can imagine what `zda` would look like for several different
 host cohorts at age three, but who were born at different times. In
@@ -206,7 +199,7 @@ months, and they thus experienced different levels of exposure over the
 first two years of life. Here the annual FoI is 5 infections, per
 person, per year ($`\bar h = 5/365`$):
 
-![](Dynamics_files/figure-html/unnamed-chunk-8-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-7-1.png)
 
 ## Multiplicity of Infection (MoI)
 
@@ -239,7 +232,7 @@ mm = meanMoI(a3years, FoI_a, hhat=5/365)
 
 Here, we plot the average MoI in the host cohort as it ages:
 
-![](Dynamics_files/figure-html/unnamed-chunk-10-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-9-1.png)
 
 ## Age of Infection (AoI)
 
@@ -259,13 +252,13 @@ We can compute $`A_d(a)`$ using the density function `dAoI`:
 f_A = dAoI(a3years, max(a3years), FoI_a)
 ```
 
-![](Dynamics_files/figure-html/unnamed-chunk-12-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-11-1.png)
 
 Now, as we plot the distribution of the AoI in cohorts at age two, born
 at different months (as we did above), we notice that the distributions
 have changed shapes:
 
-![](Dynamics_files/figure-html/unnamed-chunk-13-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-12-1.png)
 
 ### The Distribution Function, `pAoI`
 
@@ -302,9 +295,9 @@ plot(a3years, F_A, type = "l",
 lines(a3years, F_A_alt, col = "red", lwd=2, lty =2)
 ```
 
-![](Dynamics_files/figure-html/unnamed-chunk-16-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-15-1.png)
 
-![](Dynamics_files/figure-html/unnamed-chunk-17-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-16-1.png)
 
 ### Random Numbers, `rAoI`
 
@@ -328,11 +321,11 @@ plot(stats::ecdf(rhx), xlim = c(0,1095), cex=0.2, main = "",
 lines(a3years, F_A, col = "red", lty = 2, lwd=2)
 ```
 
-![](Dynamics_files/figure-html/unnamed-chunk-19-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-18-1.png)
 
 We can also plot the distribution functions.
 
-![](Dynamics_files/figure-html/unnamed-chunk-20-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-19-1.png)
 
 ### AoI Moments
 
@@ -357,7 +350,7 @@ moment3 = momentAoI(a3years, FoI_a, n=3)
 The first three moments of the AoY plotted over time. In the top plot,
 we’ve also plotted the $`n^{th}`$ root of the $`n^{th}`$ moment.
 
-![](Dynamics_files/figure-html/unnamed-chunk-22-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-21-1.png)
 
 ## Age of the Youngest Infection (AoY)
 
@@ -400,7 +393,7 @@ f_Y = dAoY(a3years, 3*365, FoI_a)
 
 We can compare $`f_Y(\alpha)`$ (in black) to $`f_A(\alpha)`$ (in grey).
 
-![](Dynamics_files/figure-html/unnamed-chunk-24-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-23-1.png)
 
 ### Random Variables, `rAoY`
 
@@ -418,7 +411,7 @@ hist(raoy, breaks=seq(0, 1095, by = 15),
 lines(a3years, f_Y, type = "l", col = "red") 
 ```
 
-![](Dynamics_files/figure-html/unnamed-chunk-26-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-25-1.png)
 
 ### AoY Moments
 
@@ -433,7 +426,7 @@ moment3y = momentAoY(aa, FoI_a, n=3)
 The first three moments of the AoY plotted over time. In the top plot,
 we’ve also plotted the $`n^{th}`$ root of the $`n^{th}`$ moment.
 
-![](Dynamics_files/figure-html/unnamed-chunk-28-1.png)
+![](Dynamics_files/figure-html/unnamed-chunk-27-1.png)
 
 ------------------------------------------------------------------------
 

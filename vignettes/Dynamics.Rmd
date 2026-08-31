@@ -126,12 +126,6 @@ Moments | $m_d(a, h)$ |  $x_n(a, d, h)$ | $y_n(a, d, h)$ |
 
 ### Force of Infection (FoI)
 
-```{r}
-library(ramp.func)
-# devtools::load_all()
-# devtools::load_all("~/git/ramp.func")
-```
-
 
 ```{r, fig.width=7, fig.height=4}
 clrs = viridisLite::turbo(7)

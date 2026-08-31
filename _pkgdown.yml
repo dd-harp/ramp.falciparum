@@ -7,6 +7,10 @@ navbar:
     menu:
     - text: Overview of Malaria Epidemiology
       href: articles/Overview.html
+    - text: Cohort Dynamics
+      href: articles/Cohorts.html
+    - text: SimBA
+      href: articles/SimBA.html
     - text: Exposure
       href: articles/FoI.html
     - text: The Malaria State Space
