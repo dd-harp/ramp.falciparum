@@ -1,0 +1,9 @@
+---
+title: "SimBA"
+subtitle: "Robust, Simulation-based Analytics for Malaria"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SimBA}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
