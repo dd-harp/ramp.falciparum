@@ -2,6 +2,7 @@ pandoc: 3.8.3
 pkgdown: 2.2.1
 pkgdown_sha: ~
 articles:
+  Cohorts: Cohorts.html
   Dynamics: Dynamics.html
   FoI: FoI.html
   Hybrid: Hybrid.html
@@ -9,12 +10,13 @@ articles:
   Overview: Overview.html
   RandomVariables: RandomVariables.html
   RobustAnalytics: RobustAnalytics.html
+  SimBA: SimBA.html
   SIPmoi: SIPmoi.html
   SquIP: SquIP.html
   SquIPz: SquIPz.html
   StateSpace: StateSpace.html
   Superinfection: Superinfection.html
-last_built: 2026-08-30T04:24Z
+last_built: 2026-08-31T20:05Z
 urls:
   reference: https://dd-harp.github.io/ramp.falciparum/reference
   article: https://dd-harp.github.io/ramp.falciparum/articles

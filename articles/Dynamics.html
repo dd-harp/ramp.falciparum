@@ -33,6 +33,8 @@
   <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
   <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
 <li><a class="dropdown-item" href="../articles/Overview.html">Overview of Malaria Epidemiology</a></li>
+    <li><a class="dropdown-item" href="../articles/Cohorts.html">Cohort Dynamics</a></li>
+    <li><a class="dropdown-item" href="../articles/SimBA.html">SimBA</a></li>
     <li><a class="dropdown-item" href="../articles/FoI.html">Exposure</a></li>
     <li><a class="dropdown-item" href="../articles/StateSpace.html">The Malaria State Space</a></li>
     <li><a class="dropdown-item" href="../articles/Superinfection.html">Superinfection &amp; Queuing</a></li>
@@ -308,10 +310,6 @@ AoI, AoY, YoN, and all their moments.</p>
 <h3 id="force-of-infection-foi">Force of Infection (FoI)<a class="anchor" aria-label="anchor" href="#force-of-infection-foi"></a>
 </h3>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dd-harp.github.io/ramp.func/" class="external-link">ramp.func</a></span><span class="op">)</span></span>
-<span><span class="co"># devtools::load_all()</span></span>
-<span><span class="co"># devtools::load_all("~/git/ramp.func")</span></span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">clrs</span> <span class="op">=</span> <span class="fu">viridisLite</span><span class="fu">::</span><span class="fu"><a href="https://sjmgarnier.github.io/viridisLite/reference/viridis.html" class="external-link">turbo</a></span><span class="op">(</span><span class="fl">7</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">234</span><span class="op">)</span></span>
 <span><span class="va">Sa</span> <span class="op">=</span> <span class="fu"><a href="https://dd-harp.github.io/ramp.func/reference/makepar_F_type2.html" class="external-link">makepar_F_type2</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -323,13 +321,13 @@ AoI, AoY, YoN, and all their moments.</p>
 <span><span class="va">tt</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">3650</span>, by<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
 <span><span class="va">aa</span> <span class="op">&lt;-</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">365</span><span class="op">*</span><span class="fl">5</span>, by <span class="op">=</span><span class="fl">5</span><span class="op">)</span> </span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">tt</span>, <span class="fl">0.05</span><span class="op">*</span><span class="fu">F_t</span><span class="op">(</span><span class="va">tt</span><span class="op">)</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-2-1.png" class="r-plt" alt="" width="672"></p>
 <p>To compute anything, we must first set up a function to describe
 exposure (see the <a href="FoI.html">FoI</a> vignette). We define
 functions that plot the FoI for a cohort as it ages (in red), but we can
 also compute the population average FoI (in black). Different cohorts
 would experience different histories of exposure.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-4-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="computing-zda">Computing <code>zda</code><a class="anchor" aria-label="anchor" href="#computing-zda"></a>
@@ -343,16 +341,16 @@ function describing the FoI in the population,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>h</mi><mo stretchy="false" form="prefix">(</mo><mi>t</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">h(t)</annotation></semantics></math>,
 and the cohort birthday,
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>d</mi><mi>.</mi></mrow><annotation encoding="application/x-tex">d.</annotation></semantics></math></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># devtools::load_all()</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">alpha</span> <span class="op">=</span> <span class="fl">60</span></span>
 <span><span class="va">a</span> <span class="op">=</span> <span class="fl">6</span><span class="op">*</span><span class="fl">365</span></span>
 <span><span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="fl">60</span>, <span class="fl">6</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span> </span></code></pre></div>
 <pre><code><span><span class="co">## [1] 0.008962569</span></span></code></pre>
 <p>The following computes the density of infections of every age in a
 cohort of age 3.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">zz</span> <span class="op">=</span> <span class="fu"><a href="../reference/zda.html">zda</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>When we plot
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">z_d(\alpha, a)</annotation></semantics></math>,
@@ -360,7 +358,7 @@ we note that as
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math>
 grows larger, the parasite cohort gets older. When we plot parasite
 cohorts by age, time is going backwards on the x-axis.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-6-1.png" class="r-plt" alt="" width="576"></p>
 <p>Now, we can imagine what <code>zda</code> would look like for several
 different host cohorts at age three, but who were born at different
 times. In effect, we are taking a snapshot of the cohorts at the same
@@ -370,7 +368,7 @@ months, and they thus experienced different levels of exposure over the
 first two years of life. Here the annual FoI is 5 infections, per
 person, per year
 (<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>h</mi><mo accent="true">‾</mo></mover><mo>=</mo><mn>5</mn><mi>/</mi><mn>365</mn></mrow><annotation encoding="application/x-tex">\bar h = 5/365</annotation></semantics></math>):</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-8-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-7-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
 <div class="section level2">
@@ -397,10 +395,10 @@ m_d(a) = \int_0^a z_d(\alpha, a) d \alpha
 <p>The function that computes
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">m_d(a)</annotation></semantics></math>
 is called <code>meanMoI.</code></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mm</span> <span class="op">=</span> <span class="fu"><a href="../reference/meanMoI.html">meanMoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span>, hhat<span class="op">=</span><span class="fl">5</span><span class="op">/</span><span class="fl">365</span><span class="op">)</span></span></code></pre></div>
 <p>Here, we plot the average MoI in the host cohort as it ages:</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-10-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-9-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level2">
 <h2 id="age-of-infection-aoi">Age of Infection (AoI)<a class="anchor" aria-label="anchor" href="#age-of-infection-aoi"></a>
@@ -418,13 +416,13 @@ A_d(a) \sim f_A(\alpha; a, d) = \frac{z_d(\alpha,a)}{m_d(a)}
 <p>We can compute
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>
 using the density function <code>dAoI</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoI.html">dAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-11-1.png" class="r-plt" alt="" width="576"></p>
 <p>Now, as we plot the distribution of the AoI in cohorts at age two,
 born at different months (as we did above), we notice that the
 distributions have changed shapes:</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-13-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-12-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="the-distribution-function-paoi">The Distribution Function, <code>pAoI</code><a class="anchor" aria-label="anchor" href="#the-distribution-function-paoi"></a>
@@ -435,15 +433,15 @@ is:</p>
 <p><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo><mo>∼</mo><msubsup><mo>∫</mo><mn>0</mn><mi>α</mi></msubsup><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>;</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mi>d</mi><mi>α</mi></mrow><annotation encoding="application/x-tex">
 F_A(a) \sim \int_0^\alpha f_A(\alpha; a, d) d\alpha
 </annotation></semantics></math></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">F_A</span> <span class="op">=</span> <span class="fu"><a href="../reference/pAoI.html">pAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="va">a3years</span><span class="op">)</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>If our functions work correctly, then we should get approximately the
 same answer from computing the cumulative sum of <code>dAoI.</code></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">F_A_alt</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cumsum.html" class="external-link">cumsum</a></span><span class="op">(</span><span class="va">f_A</span><span class="op">)</span></span></code></pre></div>
 <p>We shouldn’t expect the answers to be exactly the same, but they
 should be close, with the <code>pAoI</code> in black.</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
@@ -451,8 +449,8 @@ should be close, with the <code>pAoI</code> in black.</p>
 <span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="cn">F</span><span class="op">[</span><span class="va">X</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span>, <span class="va">a</span>, <span class="va">bday</span><span class="op">)</span><span class="op">)</span>, lwd<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A_alt</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd<span class="op">=</span><span class="fl">2</span>, lty <span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-15-1.png" class="r-plt" alt="" width="576"></p>
 <p><img src="Dynamics_files/figure-html/unnamed-chunk-16-1.png" class="r-plt" alt="" width="576"></p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-17-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="random-numbers-raoi">Random Numbers, <code>rAoI</code><a class="anchor" aria-label="anchor" href="#random-numbers-raoi"></a>
@@ -460,21 +458,21 @@ should be close, with the <code>pAoI</code> in black.</p>
 <p>The function <code>rAoI</code> uses <code>pAoI</code> to generate
 random numbers from
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_A(\alpha)</annotation></semantics></math></p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rhx</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoI.html">rAoI</a></span><span class="op">(</span><span class="fl">10000</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>A simple visual check computes the empirical CDF for the random
 variates against
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>F</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">F_A(\alpha)</annotation></semantics></math>
 computed using <code>pAoI</code></p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu">stats</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/r/stats/ecdf.html" class="external-link">ecdf</a></span><span class="op">(</span><span class="va">rhx</span><span class="op">)</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1095</span><span class="op">)</span>, cex<span class="op">=</span><span class="fl">0.2</span>, main <span class="op">=</span> <span class="st">""</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Parasite Age (in Days)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>     ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="cn">F</span><span class="op">[</span><span class="va">A</span><span class="op">]</span><span class="op">(</span><span class="va">alpha</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"ecdf"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">F_A</span>, col <span class="op">=</span> <span class="st">"red"</span>, lty <span class="op">=</span> <span class="fl">2</span>, lwd<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-18-1.png" class="r-plt" alt="" width="576"></p>
 <p>We can also plot the distribution functions.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-20-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-19-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="aoi-moments">AoI Moments<a class="anchor" aria-label="anchor" href="#aoi-moments"></a>
@@ -489,7 +487,7 @@ denote the first moment of of
 denote the higher order moments of
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>A</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">A_d(a)</annotation></semantics></math>:
 <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>x</mi><mrow><mo stretchy="false" form="prefix">[</mo><mi>n</mi><mo stretchy="false" form="postfix">]</mo></mrow></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo>,</mo><mi>d</mi><mo stretchy="false" form="postfix">)</mo><mo>=</mo><msubsup><mo>∫</mo><mn>0</mn><mi>∞</mi></msubsup><msup><mi>α</mi><mi>n</mi></msup><mfrac><mrow><msub><mi>z</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo>,</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow><mrow><msub><mi>m</mi><mi>d</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>a</mi><mo stretchy="false" form="postfix">)</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">x_{[n]}(a, d) = \int_0^\infty \alpha^n \frac{z_d(\alpha, a)} {m_d(a)}</annotation></semantics></math></p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">moment1</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span><span class="op">)</span></span>
 <span><span class="va">moment2</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="va">moment3</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoI.html">momentAoI</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">3</span><span class="op">)</span></span></code></pre></div>
@@ -499,7 +497,7 @@ plot, we’ve also plotted the
 root of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math>
 moment.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-22-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-21-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 </div>
 <div class="section level2">
@@ -527,32 +525,32 @@ al.</em> (2024).</p>
 </h3>
 <p>The density function is computed with the function
 <code>dAoY.</code></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">f_Y</span> <span class="op">=</span> <span class="fu"><a href="../reference/dAoY.html">dAoY</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
 <p>We can compare
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>Y</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_Y(\alpha)</annotation></semantics></math>
 (in black) to
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>A</mi></msub><mo stretchy="false" form="prefix">(</mo><mi>α</mi><mo stretchy="false" form="postfix">)</mo></mrow><annotation encoding="application/x-tex">f_A(\alpha)</annotation></semantics></math>
 (in grey).</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-24-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-23-1.png" class="r-plt" alt="" width="576"></p>
 </div>
 <div class="section level3">
 <h3 id="random-variables-raoy">Random Variables, <code>rAoY</code><a class="anchor" aria-label="anchor" href="#random-variables-raoy"></a>
 </h3>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">raoy</span> <span class="op">=</span> <span class="fu"><a href="../reference/rAoY.html">rAoY</a></span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, <span class="va">FoI_a</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">raoy</span>, breaks<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1095</span>, by <span class="op">=</span> <span class="fl">15</span><span class="op">)</span>, </span>
 <span>     right<span class="op">=</span><span class="cn">F</span>, probability<span class="op">=</span><span class="cn">T</span>, main <span class="op">=</span> <span class="st">""</span>, </span>
 <span>     xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html" class="external-link">expression</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">alpha</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="st">"Parasite Age (in Days)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>, </span>
 <span>     border <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/gray.html" class="external-link">grey</a></span><span class="op">(</span><span class="fl">0.5</span><span class="op">)</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">out</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html" class="external-link">lines</a></span><span class="op">(</span><span class="va">a3years</span>, <span class="va">f_Y</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span> </span></code></pre></div>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-26-1.png" class="r-plt" alt="" width="672"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-25-1.png" class="r-plt" alt="" width="672"></p>
 </div>
 <div class="section level3">
 <h3 id="aoy-moments">AoY Moments<a class="anchor" aria-label="anchor" href="#aoy-moments"></a>
 </h3>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">aa</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">3</span><span class="op">*</span><span class="fl">365</span>, by <span class="op">=</span> <span class="fl">5</span><span class="op">)</span> </span>
 <span><span class="va">moment1y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">FoI_a</span><span class="op">)</span></span>
 <span><span class="va">moment2y</span> <span class="op">=</span> <span class="fu"><a href="../reference/momentAoY.html">momentAoY</a></span><span class="op">(</span><span class="va">aa</span>, <span class="va">FoI_a</span>, n<span class="op">=</span><span class="fl">2</span><span class="op">)</span></span>
@@ -563,7 +561,7 @@ plot, we’ve also plotted the
 root of the
 <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>n</mi><mrow><mi>t</mi><mi>h</mi></mrow></msup><annotation encoding="application/x-tex">n^{th}</annotation></semantics></math>
 moment.</p>
-<p><img src="Dynamics_files/figure-html/unnamed-chunk-28-1.png" class="r-plt" alt="" width="576"></p>
+<p><img src="Dynamics_files/figure-html/unnamed-chunk-27-1.png" class="r-plt" alt="" width="576"></p>
 <hr>
 <p><strong>Next:</strong></p>
 <ul>

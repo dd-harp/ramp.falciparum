@@ -2,6 +2,8 @@
 
 ### All vignettes
 
+- [Cohort
+  Dynamics](https://dd-harp.github.io/ramp.falciparum/articles/Cohorts.md):
 - [Random Variables for Parasite Infection
   Dynamics](https://dd-harp.github.io/ramp.falciparum/articles/Dynamics.md):
 - [Exposure Trace
@@ -15,6 +17,7 @@
   Models](https://dd-harp.github.io/ramp.falciparum/articles/RandomVariables.md):
 - [Robust
   Analytics](https://dd-harp.github.io/ramp.falciparum/articles/RobustAnalytics.md):
+- [SimBA](https://dd-harp.github.io/ramp.falciparum/articles/SimBA.md):
 - [SIPm](https://dd-harp.github.io/ramp.falciparum/articles/SIPmoi.md):
 - [SquIP](https://dd-harp.github.io/ramp.falciparum/articles/SquIP.md):
 - [SquIPz](https://dd-harp.github.io/ramp.falciparum/articles/SquIPz.md):
